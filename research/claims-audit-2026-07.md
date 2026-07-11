@@ -55,6 +55,33 @@ own figure, labeled as such), `own-run` (our captured measurement, raw artifact 
 | 41 | 36 | MSE 0.0030 / 0.0370 = open-loop action-prediction error, n=2 | https://github.com/NVIDIA/Isaac-GR00T/blob/main/getting_started/policy.md | 2026-07-11 | primary + own-run | corrected | Was labeled "accuracy"; ~75/s relabeled generated-step throughput |
 | 42 | 20 | GR00T inference VRAM floor 16 GB / fine-tune 40 GB | https://github.com/NVIDIA/Isaac-GR00T | 2026-07 | primary | confirmed | |
 
+## ROS 2 deep-dive claims (added 2026-07-12 — for `research/ros2-deep-dive-2026-07.md`)
+
+Second audited batch: 14 headline claims, re-fetched from primary sources by an
+independent audit pass on 2026-07-12. Result: **13 confirmed · 1 corrected**.
+
+| # | Claim (as now stated) | Source (exact URL) | Status | Notes |
+|---|---|---|---|---|
+| R1 | Lyrical Luth released May 22 2026, LTS, EOL May 2031, newest ROS 2 | https://raw.githubusercontent.com/ros2/ros2_documentation/rolling/source/Releases/Release-Lyrical-Luth.rst | confirmed | |
+| R2 | Kilted Kaiju non-LTS, EOL **November 2026** | https://raw.githubusercontent.com/ros-infrastructure/rep/master/rep-2000.rst | **corrected** | Research pass said December 2026; REP 2000 says November |
+| R3 | ROS 1 Noetic EOL May 31 2025 | https://discourse.openrobotics.org/t/ros-noetic-end-of-life-may-31-2025/43160 | confirmed | |
+| R4 | First ROS 2 release Ardent Apalone, December 2017 | https://raw.githubusercontent.com/ros-infrastructure/rep/master/rep-2000.rst | confirmed | |
+| R5 | OSRA announced 2024-03-18; Platinum = Intrinsic, NVIDIA, Qualcomm | https://www.openrobotics.org/blog/2024/3/18/announcing-the-open-source-robotics-alliance-osra | confirmed | |
+| R6 | Intrinsic acquired OSRC 2022-12-15; OSRF stayed independent | https://www.openrobotics.org/blog/2022/12/15/intrinsic-acquires-osrc-and-osrc-sg | confirmed | |
+| R7 | 2025 Metrics Report: ~1B downloads 2025, 1.3M unique IPs Oct 2025, ROS 2 = 91.2% | https://discourse.openrobotics.org/t/2025-ros-metrics-report/52575 | confirmed | Self-reported by Open Robotics |
+| R8 | rmw_zenoh Tier-1 from Kilted; Jazzy default RMW = Fast DDS | https://raw.githubusercontent.com/ros2/ros2_documentation/jazzy/source/Installation/RMW-Implementations.rst · https://github.com/ros2/rmw_zenoh/issues/265 | confirmed | |
+| R9 | rosbag2 default storage = MCAP since Iron | https://discourse.openrobotics.org/t/psa-default-ros-2-bag-storage-format-is-changing-to-mcap-in-iron/28489 | confirmed | |
+| R10 | REP 2000 Jazzy Tier-1: Ubuntu 24.04 amd64/arm64 + Windows 10 | https://raw.githubusercontent.com/ros-infrastructure/rep/master/rep-2000.rst | confirmed | |
+| R11 | MoveIt 2.10 LTS Jazzy binaries; panda demo.launch.py documented usage | https://picknik.ai/release/jazzy/rolling/2024/06/30/New-MoveIt-LTS-release-for-ROS-2-Jazzy.html | confirmed | |
+| R12 | ros_gz_sim_demos diff_drive demo, model vehicle_blue, /model/vehicle_blue/cmd_vel; Jazzy pairs Gazebo Harmonic | https://raw.githubusercontent.com/gazebosim/ros_gz/ros2/ros_gz_sim_demos/config/diff_drive.yaml · https://www.openrobotics.org/blog/2024/5/ros-jazzy-jalisco-released | confirmed | Own-run addendum: the Jazzy **binary** ships `diff_drive.launch.py`, not the `.launch.xml` seen on the ros2 branch |
+| R13 | ros2_control_demos: example_1 RRBot / example_2 DiffBot, Jazzy docs on control.ros.org | https://github.com/ros-controls/ros2_control_demos · https://control.ros.org/jazzy/doc/ros2_control_demos/example_2/doc/userdoc.html | confirmed | |
+| R14 | ROSCon 2026 Toronto Sept 22–24; ROSCon 2025 Singapore | https://roscon.ros.org/2026/ | confirmed | |
+
+Own-run artifacts for the deep-dive: `docs/img/ros2_gz_diffdrive.png` (Gazebo Harmonic
+diff-drive, before/after 14 s Twist) and `docs/img/ros2_moveit_panda.png` (MoveIt 2
+Panda demo in RViz) — captured 2026-07 in the repo's pinned Jazzy container +
+`ros-jazzy-ros-gz` / `ros-jazzy-moveit`, Xvfb + software rendering.
+
 ## Reproducibility gaps still open (honest list)
 
 - No local `cyclictest` capture yet — the ~50 µs jitter figure stays secondary until
