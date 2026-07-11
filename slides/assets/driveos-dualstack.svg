@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+    <marker id="arrL" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M9,0 L0,3 L9,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="44" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">DriveOS 7 — how automotive splits the software</text>
+
+  <!-- ===================== Safety VM (left) ===================== -->
+  <rect x="30" y="80" width="333" height="290" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="197" y="101" text-anchor="middle" font-size="13" font-weight="700" fill="#2d5a2d">Safety VM — QNX OS for Safety</text>
+  <text x="197" y="117" text-anchor="middle" font-size="13" font-weight="700" fill="#2d5a2d">(pre-certified ASIL-D)</text>
+
+  <rect x="42" y="170" width="309" height="52" rx="6" fill="#ffffff" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="197" y="201" text-anchor="middle" font-size="12" fill="#333">safety monitors · watchdogs</text>
+
+  <rect x="42" y="232" width="309" height="52" rx="6" fill="#ffffff" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="197" y="263" text-anchor="middle" font-size="12" fill="#333">vehicle I/O: CAN, mode mgmt</text>
+
+  <rect x="42" y="294" width="309" height="52" rx="6" fill="#ffffff" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="197" y="325" text-anchor="middle" font-size="12" fill="#333">fail-operational fallback</text>
+
+  <!-- ===================== AI VM (right) ===================== -->
+  <rect x="453" y="80" width="272" height="290" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="589" y="109" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">AI VM — Linux</text>
+
+  <rect x="465" y="170" width="248" height="52" rx="6" fill="#ffffff" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="589" y="201" text-anchor="middle" font-size="12" fill="#333">CUDA + TensorRT</text>
+
+  <rect x="465" y="232" width="248" height="52" rx="6" fill="#ffffff" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="589" y="263" text-anchor="middle" font-size="12" fill="#333">DriveWorks pipelines</text>
+
+  <rect x="465" y="294" width="248" height="52" rx="6" fill="#ffffff" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="589" y="318" text-anchor="middle" font-size="12" fill="#333">AV dual-stack: classical +</text>
+  <text x="589" y="334" text-anchor="middle" font-size="12" fill="#333">Alpamayo end-to-end</text>
+
+  <!-- ===================== Bidirectional supervision arrow ===================== -->
+  <text x="408" y="133" text-anchor="middle" font-size="13" font-style="italic" fill="#2E5FAC">AI proposes — certified side supervises</text>
+  <line x1="373" y1="150" x2="443" y2="150" stroke="#444" stroke-width="2" marker-start="url(#arrL)" marker-end="url(#arr)"/>
+
+  <!-- ===================== Down arrows into hypervisor ===================== -->
+  <line x1="197" y1="372" x2="197" y2="388" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="589" y1="372" x2="589" y2="388" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Hypervisor band ===================== -->
+  <rect x="30" y="390" width="900" height="55" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="480" y="422" text-anchor="middle" font-size="14" fill="#234">NV Hypervisor (Type-1) — hardware-enforced partitions</text>
+
+  <line x1="480" y1="447" x2="480" y2="463" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== DRIVE AGX Thor band ===================== -->
+  <rect x="30" y="465" width="900" height="55" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="480" y="497" text-anchor="middle" font-size="14" fill="#333">DRIVE AGX Thor — same Blackwell silicon as Jetson Thor</text>
+
+  <!-- ===================== Comparison callout ===================== -->
+  <rect x="740" y="125" width="190" height="200" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="835" y="152" text-anchor="middle" font-size="14" font-weight="700" fill="#6B4A2B">vs robotics:</text>
+  <text x="835" y="180" text-anchor="middle" font-size="12.5" fill="#6B4A2B">one Ubuntu OS</text>
+  <text x="835" y="204" text-anchor="middle" font-size="12.5" fill="#6B4A2B">PREEMPT_RT scheduling</text>
+  <text x="835" y="228" text-anchor="middle" font-size="12.5" fill="#6B4A2B">no certified partition</text>
+  <text x="835" y="252" text-anchor="middle" font-size="12.5" fill="#6B4A2B">iteration in days,</text>
+  <text x="835" y="270" text-anchor="middle" font-size="12.5" fill="#6B4A2B">not quarters</text>
+
+  <!-- ===================== Footnote ===================== -->
+  <text x="480" y="545" text-anchor="middle" font-size="13" fill="#667">ASIL-D = highest Automotive Safety Integrity Level (ISO 26262) · QNX = safety-certified RTOS (BlackBerry) · VM = virtual machine</text>
+  <text x="480" y="563" text-anchor="middle" font-size="13" fill="#667">note: DriveOS 6.0's ASIL-D cert was achieved on Orin — Thor cert still in progress (July 2026)</text>
+</svg>

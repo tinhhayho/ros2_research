@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="480" y="42" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">DRIVE Hyperion 10 — one certified sensor set for every robotaxi</text>
+
+  <!-- ===================== 360 deg lidar coverage ring ===================== -->
+  <ellipse cx="480" cy="310" rx="220" ry="215" fill="none" stroke="#8a63c9" stroke-width="2" stroke-dasharray="7 6" opacity="0.8"/>
+
+  <!-- ===================== front camera wedge ===================== -->
+  <polygon points="480,130 350,62 610,62" fill="#2E5FAC" fill-opacity="0.22" stroke="#2E5FAC" stroke-width="1" stroke-opacity="0.5"/>
+
+  <!-- ===================== radar corner/side wedges ===================== -->
+  <g fill="#FCE8D5" fill-opacity="0.55" stroke="#C98A45" stroke-width="1" stroke-opacity="0.7">
+    <polygon points="394,190 300,110 330,225"/>
+    <polygon points="566,190 660,110 630,225"/>
+    <polygon points="394,430 300,510 330,395"/>
+    <polygon points="566,430 660,510 630,395"/>
+    <polygon points="390,310 275,270 275,350"/>
+    <polygon points="570,310 685,270 685,350"/>
+  </g>
+
+  <!-- ===================== ultrasonic near-field arcs ===================== -->
+  <g fill="none" stroke="#8a8a8a" stroke-width="1.5">
+    <path d="M413,135 a7,7 0 0 1 14,0"/>
+    <path d="M443,131 a7,7 0 0 1 14,0"/>
+    <path d="M473,129 a7,7 0 0 1 14,0"/>
+    <path d="M503,131 a7,7 0 0 1 14,0"/>
+    <path d="M533,135 a7,7 0 0 1 14,0"/>
+    <path d="M413,485 a7,7 0 0 0 14,0"/>
+    <path d="M443,489 a7,7 0 0 0 14,0"/>
+    <path d="M473,491 a7,7 0 0 0 14,0"/>
+    <path d="M503,489 a7,7 0 0 0 14,0"/>
+    <path d="M533,485 a7,7 0 0 0 14,0"/>
+  </g>
+
+  <!-- ===================== top-down car pictogram ===================== -->
+  <g>
+    <!-- wheel stubs (drawn first, tucked under body edges) -->
+    <rect x="376" y="190" width="20" height="55" rx="6" fill="#ECECEC" stroke="#2E5FAC" stroke-width="2"/>
+    <rect x="564" y="190" width="20" height="55" rx="6" fill="#ECECEC" stroke="#2E5FAC" stroke-width="2"/>
+    <rect x="376" y="385" width="20" height="55" rx="6" fill="#ECECEC" stroke="#2E5FAC" stroke-width="2"/>
+    <rect x="564" y="385" width="20" height="55" rx="6" fill="#ECECEC" stroke="#2E5FAC" stroke-width="2"/>
+
+    <!-- body: rounded capsule, front (top) points up -->
+    <path d="M480,130 C560,130 570,142 570,182 L570,438 C570,478 560,490 480,490 C400,490 390,478 390,438 L390,182 C390,142 400,130 480,130 Z"
+          fill="#EAF1FB" stroke="#2E5FAC" stroke-width="3"/>
+
+    <!-- roof/cabin outline -->
+    <rect x="415" y="218" width="130" height="184" rx="12" fill="none" stroke="#2E5FAC" stroke-width="1.2" stroke-opacity="0.5"/>
+
+    <!-- windshield (front) -->
+    <path d="M435,175 L525,175 L540,215 L420,215 Z" fill="#DCE9F7" stroke="#2E5FAC" stroke-width="2"/>
+    <!-- rear window -->
+    <path d="M435,445 L525,445 L540,405 L420,405 Z" fill="#DCE9F7" stroke="#2E5FAC" stroke-width="2"/>
+
+    <!-- roof lidar puck -->
+    <circle cx="480" cy="248" r="15" fill="#DFF0D8" stroke="#4a8f4a" stroke-width="2"/>
+
+    <!-- onboard compute module -->
+    <rect x="450" y="330" width="60" height="34" rx="6" fill="#ffffff" stroke="#2E5FAC" stroke-width="1.5"/>
+    <text x="480" y="351" text-anchor="middle" font-size="10.5" fill="#234">2x Thor</text>
+  </g>
+
+  <!-- ===================== callout chips ===================== -->
+  <!-- Cameras -->
+  <line x1="640" y1="92" x2="558" y2="112" stroke="#2E5FAC" stroke-width="1.5"/>
+  <rect x="638" y="72" width="262" height="40" rx="8" fill="#ffffff" stroke="#2E5FAC" stroke-width="1.5"/>
+  <text x="769" y="97" text-anchor="middle" font-size="15" fill="#234">14 cameras — 360&#176; vision</text>
+
+  <!-- Radars -->
+  <line x1="278" y1="202" x2="335" y2="185" stroke="#b06a2a" stroke-width="1.5"/>
+  <rect x="26" y="182" width="252" height="40" rx="8" fill="#ffffff" stroke="#b06a2a" stroke-width="1.5"/>
+  <text x="152" y="207" text-anchor="middle" font-size="13.5" fill="#6B4A2B">9 radars — velocity + weather-proof</text>
+
+  <!-- Lidar -->
+  <line x1="278" y1="367" x2="270" y2="360" stroke="#4a8f4a" stroke-width="1.5"/>
+  <rect x="26" y="347" width="252" height="40" rx="8" fill="#ffffff" stroke="#4a8f4a" stroke-width="1.5"/>
+  <text x="152" y="372" text-anchor="middle" font-size="14" fill="#2d5a2d">1 lidar — roof, long-range 3D</text>
+
+  <!-- Ultrasonics -->
+  <line x1="682" y1="367" x2="620" y2="470" stroke="#8a8a8a" stroke-width="1.5"/>
+  <rect x="672" y="347" width="262" height="40" rx="8" fill="#ffffff" stroke="#999999" stroke-width="1.5"/>
+  <text x="803" y="372" text-anchor="middle" font-size="13.5" fill="#444444">12 ultrasonics — near-field parking</text>
+
+  <!-- Compute -->
+  <line x1="480" y1="520" x2="480" y2="366" stroke="#2E5FAC" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <rect x="320" y="520" width="320" height="36" rx="8" fill="#ffffff" stroke="#2E5FAC" stroke-width="1.5"/>
+  <text x="480" y="543" text-anchor="middle" font-size="14" fill="#234">2&#215; DRIVE AGX Thor — compute, inside</text>
+
+  <!-- Footnote -->
+  <text x="480" y="570" text-anchor="middle" font-size="13" fill="#667">Real NVIDIA reference architecture — sensor set as published at nvidia.com &#8594; DRIVE Hyperion; the car drawing itself is illustrative.</text>
+  <text x="480" y="587" text-anchor="middle" font-size="13" fill="#667">One sensor spec reused fleet-wide (Uber target: 100,000 vehicles) &#183; in robotics every robot picks its own &#183; L4 = driverless, bounded domain (SAE)</text>
+</svg>

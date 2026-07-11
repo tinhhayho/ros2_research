@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="42" text-anchor="middle" font-size="27" font-weight="700" fill="#1b2b4a">The robot software stack — 2026</text>
+
+  <!-- ===================== Row 7: Fleet layer (top) ===================== -->
+  <rect x="150" y="72" width="620" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="460" y="105" text-anchor="middle" font-size="15" fill="#2d5a2d">Fleet layer — Open-RMF / FMS (many robots, one building)</text>
+
+  <line x1="460" y1="130" x2="460" y2="144" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 6: Wheeled / Humanoid (side by side) ===================== -->
+  <rect x="150" y="146" width="300" height="60" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="300" y="171" text-anchor="middle" font-size="13" fill="#6B4A2B">Wheeled: Nav2 / Autoware</text>
+  <text x="300" y="190" text-anchor="middle" font-size="13" fill="#6B4A2B">(planners, costmaps)</text>
+
+  <rect x="470" y="146" width="300" height="60" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="620" y="171" text-anchor="middle" font-size="13" fill="#6B4A2B">Humanoid: RL policy ~50 Hz →</text>
+  <text x="620" y="190" text-anchor="middle" font-size="13" fill="#6B4A2B">VLA 1–10 Hz (GR00T, Helix, π0)</text>
+
+  <line x1="460" y1="208" x2="460" y2="222" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 5: ROS 2 graph ===================== -->
+  <rect x="150" y="224" width="620" height="56" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="460" y="257" text-anchor="middle" font-size="15" fill="#223344">ROS 2 graph — perception · SLAM · state estimation</text>
+
+  <!-- ===================== ROS 2 boundary (dashed divider) ===================== -->
+  <text x="460" y="293" text-anchor="middle" font-size="13" font-style="italic" fill="#2E5FAC">ROS 2 boundary (DDS / Zenoh)</text>
+  <line x1="150" y1="300" x2="770" y2="300" stroke="#2E5FAC" stroke-width="2" stroke-dasharray="7,5"/>
+  <line x1="460" y1="304" x2="460" y2="318" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 3: RT control ===================== -->
+  <rect x="150" y="320" width="620" height="52" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="460" y="351" text-anchor="middle" font-size="15" fill="#234">RT control — ros2_control ~1 kHz · PREEMPT_RT Linux</text>
+
+  <line x1="460" y1="374" x2="460" y2="388" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 2: Fieldbus ===================== -->
+  <rect x="150" y="390" width="620" height="48" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="460" y="419" text-anchor="middle" font-size="15" fill="#333">Fieldbus — EtherCAT / CAN-FD · 1–10 kHz</text>
+
+  <line x1="460" y1="440" x2="460" y2="454" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 1: MCU firmware (bottom) ===================== -->
+  <rect x="150" y="456" width="620" height="64" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="460" y="480" text-anchor="middle" font-size="14" fill="#333">MCU firmware — FOC motor loops 8–32 kHz</text>
+  <text x="460" y="500" text-anchor="middle" font-size="14" fill="#333">RTOS · safety/E-stop</text>
+
+  <!-- ===================== Right side bracket: embedded-team territory (rows 1-3) ===================== -->
+  <path d="M 786,320 L 800,320 L 800,520 L 786,520" fill="none" stroke="#2E5FAC" stroke-width="2"/>
+  <text x="814" y="415" text-anchor="middle" font-size="12" font-style="italic" fill="#2E5FAC" transform="rotate(-90 814 415)">embedded-team territory</text>
+  <text x="834" y="415" text-anchor="middle" font-size="12" font-style="italic" fill="#2E5FAC" transform="rotate(-90 834 415)">unchanged by the ML wave</text>
+
+  <!-- Footnote -->
+  <text x="480" y="558" text-anchor="middle" font-size="13" font-style="italic" fill="#666">The ROS 2 boundary is the one line that moved since 2020 — everything below it is still classic embedded/RTOS work.</text>
+</svg>

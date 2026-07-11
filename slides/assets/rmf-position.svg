@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="42" text-anchor="middle" font-size="27" font-weight="700" fill="#1b2b4a">Open-RMF — air-traffic control for a building of robots</text>
+
+  <!-- ===================== Row 1: rmf-web dashboard ===================== -->
+  <rect x="330" y="64" width="300" height="40" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="480" y="89" text-anchor="middle" font-size="14" fill="#234">rmf-web dashboard — REST / WebSocket</text>
+
+  <!-- Arrow: dashboard -> core -->
+  <line x1="480" y1="104" x2="480" y2="130" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 2: Open-RMF core ===================== -->
+  <rect x="160" y="130" width="640" height="64" rx="8" fill="#DCE9F7" stroke="#6F9BD1" stroke-width="1.5"/>
+  <text x="480" y="167" text-anchor="middle" font-size="15" font-weight="600" fill="#234">Open-RMF core — traffic schedule &#183; negotiation &#183; task dispatch (ROS 2)</text>
+
+  <!-- Arrows: core -> three adapters -->
+  <line x1="260" y1="194" x2="260" y2="230" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="480" y1="194" x2="480" y2="230" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="700" y1="194" x2="700" y2="230" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 3: adapters ===================== -->
+  <rect x="160" y="230" width="200" height="50" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="260" y="260" text-anchor="middle" font-size="15" fill="#6B4A2B">Fleet adapter A</text>
+
+  <rect x="380" y="230" width="200" height="50" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="480" y="260" text-anchor="middle" font-size="15" fill="#6B4A2B">Fleet adapter B</text>
+
+  <rect x="600" y="230" width="200" height="50" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="700" y="260" text-anchor="middle" font-size="15" fill="#6B4A2B">Door / lift adapter</text>
+
+  <!-- Arrows: adapters -> robots/PLC -->
+  <line x1="260" y1="280" x2="260" y2="320" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="480" y1="280" x2="480" y2="320" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="700" y1="280" x2="700" y2="320" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 4: robots / PLC ===================== -->
+  <rect x="160" y="320" width="200" height="70" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="260" y="349" text-anchor="middle" font-size="13" fill="#234">Robot A — its own</text>
+  <text x="260" y="367" text-anchor="middle" font-size="13" fill="#234">ROS 2 graph + Nav2</text>
+
+  <rect x="380" y="320" width="200" height="70" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="480" y="349" text-anchor="middle" font-size="13" fill="#333">Robot B — vendor</text>
+  <text x="480" y="367" text-anchor="middle" font-size="13" fill="#333">FMS / VDA 5050</text>
+
+  <rect x="600" y="320" width="200" height="70" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="700" y="349" text-anchor="middle" font-size="13" fill="#333">Building PLC</text>
+  <text x="700" y="367" text-anchor="middle" font-size="13" fill="#333">(doors, lifts, chargers)</text>
+
+  <!-- ===================== Callout: robots keep their own stack ===================== -->
+  <rect x="50" y="450" width="380" height="70" rx="8" fill="#DFF0D8" stroke="#6Fae6f" stroke-width="1.5"/>
+  <text x="240" y="480" text-anchor="middle" font-size="14" font-style="italic" fill="#2d5a2d">Each robot keeps its own stack &#8212;</text>
+  <text x="240" y="500" text-anchor="middle" font-size="14" font-style="italic" fill="#2d5a2d">RMF never replaces Nav2</text>
+
+  <!-- ===================== Status badge ===================== -->
+  <rect x="560" y="460" width="350" height="56" rx="8" fill="#DFF0D8" stroke="#6Fae6f" stroke-width="1.5"/>
+  <text x="735" y="482" text-anchor="middle" font-size="13" font-weight="600" fill="#2d5a2d">2026: alive under OSRA</text>
+  <text x="735" y="500" text-anchor="middle" font-size="13" fill="#2d5a2d">flagship: Singapore hospitals/airport</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="44" text-anchor="middle" font-size="27" font-weight="700" fill="#1b2b4a">NVIDIA Physical AI — the three-computer loop</text>
+
+  <!-- ===================== Column 1: TRAIN ===================== -->
+  <rect x="30" y="90" width="240" height="330" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="150" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#234">TRAIN — DGX / cloud</text>
+
+  <rect x="38" y="190" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="150" y="212" text-anchor="middle" font-size="14" fill="#333">Cosmos 3 — world model</text>
+  <text x="150" y="228" text-anchor="middle" font-size="14" fill="#333">(MoT, 16B/64B)</text>
+
+  <rect x="38" y="252" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="150" y="274" text-anchor="middle" font-size="14" fill="#333">GR00T N1.7 —</text>
+  <text x="150" y="290" text-anchor="middle" font-size="14" fill="#333">VLA policy (3B)</text>
+
+  <rect x="38" y="314" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="150" y="336" text-anchor="middle" font-size="14" fill="#333">post-training on your</text>
+  <text x="150" y="352" text-anchor="middle" font-size="14" fill="#333">robot data</text>
+
+  <!-- ===================== Column 2: SIMULATE ===================== -->
+  <rect x="360" y="90" width="240" height="330" rx="8" fill="#DCE9F7" stroke="#6F9BD1" stroke-width="1.5"/>
+  <text x="480" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#234">SIMULATE — OVX / RTX</text>
+
+  <rect x="368" y="159" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="480" y="189" text-anchor="middle" font-size="14" fill="#333">Isaac Sim 6 (Omniverse)</text>
+
+  <rect x="368" y="221" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="480" y="243" text-anchor="middle" font-size="14" fill="#333">Isaac Lab + Lab-Arena</text>
+  <text x="480" y="259" text-anchor="middle" font-size="14" fill="#333">(RL + eval, alpha)</text>
+
+  <rect x="368" y="283" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="480" y="313" text-anchor="middle" font-size="14" fill="#333">Cosmos synthetic data</text>
+
+  <rect x="368" y="345" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="480" y="375" text-anchor="middle" font-size="14" fill="#333">Isaac Teleop — human demos</text>
+
+  <!-- ===================== Column 3: DEPLOY ===================== -->
+  <rect x="690" y="90" width="240" height="330" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="810" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#6B4A2B">DEPLOY — Jetson Thor</text>
+
+  <rect x="698" y="190" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="810" y="212" text-anchor="middle" font-size="14" fill="#333">TensorRT engine</text>
+  <text x="810" y="228" text-anchor="middle" font-size="14" fill="#333">(per-GPU build)</text>
+
+  <rect x="698" y="252" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="810" y="274" text-anchor="middle" font-size="14" fill="#333">Isaac ROS 4.5 —</text>
+  <text x="810" y="290" text-anchor="middle" font-size="14" fill="#333">ROS 2 Jazzy</text>
+
+  <rect x="698" y="314" width="224" height="50" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="810" y="336" text-anchor="middle" font-size="14" fill="#333">128 GB · 40–130 W ·</text>
+  <text x="810" y="352" text-anchor="middle" font-size="14" fill="#333">2-way MIG</text>
+
+  <!-- ===================== Forward arrows between columns ===================== -->
+  <line x1="278" y1="255" x2="352" y2="255" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="315" y="245" text-anchor="middle" font-size="12" fill="#555">checkpoints</text>
+
+  <line x1="608" y1="255" x2="682" y2="255" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="645" y="214" text-anchor="middle" font-size="12" fill="#555">optimized</text>
+  <text x="645" y="228" text-anchor="middle" font-size="12" fill="#555">policy +</text>
+  <text x="645" y="242" text-anchor="middle" font-size="12" fill="#555">sim-tested</text>
+
+  <!-- ===================== Return arrow: DEPLOY -> TRAIN (the flywheel) ===================== -->
+  <path d="M810,420 L810,470 L150,470 L150,420" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="480" y="488" text-anchor="middle" font-size="13" fill="#555">field data (MCAP) — the data flywheel</text>
+
+  <!-- ===================== Footnote ===================== -->
+  <text x="480" y="585" text-anchor="middle" font-size="12" fill="#1b2b4a">weights + code open · CUDA/TensorRT-only underneath — no CPU path</text>
+</svg>

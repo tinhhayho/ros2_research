@@ -1,0 +1,627 @@
+# Robot Software Stacks 2026 — from firmware to foundation models
+
+**Wheeled · Humanoid · Fleet (Open-RMF) · NVIDIA Physical AI vs Automotive**
+
+> This post is the long-form version of our July 2026 research deck. Every external claim is
+> source-backed (full list at the end) and went through an **independent audit pass** (each
+> load-bearing claim re-verified against its primary source). Every demo number was
+> **measured on our own machine** — nothing copied from marketing material.
+>
+> **How to read this.** This is a *deep-dive* — written for readers who already know what a
+> ROS node is. **New to robotics? Start with the companion primer instead** (*How Robot
+> Software Actually Works — a 10-minute primer*, `docs/blog-robot-software-primer.md`),
+> then come back here — good first stops: §1 (the map), §2.3 (real code), §8 (the demo),
+> §10 (takeaways). The middle sections (Open-RMF, NVIDIA, certification) are reference
+> material — read them when the topic lands on your desk.
+>
+> **Images:** all figures live in the repo folder `slides/assets/` (same-named `.png`
+> files) — attach them to the Confluence page when publishing.
+
+---
+
+## Contents
+
+1. [The map: every robot converges on one stack shape](#1-the-map)
+2. [ROS 2 up close: two worlds, key repos, real code](#2-ros-2-up-close)
+3. [Reality check: wheels, humanoids, and where ROS 2 actually stands](#3-reality-check)
+4. [The fleet layer: Open-RMF and the Fleet Adapter](#4-the-fleet-layer-open-rmf)
+5. [NVIDIA Physical AI: Cosmos, GR00T, Isaac, and inside the Thor chip](#5-nvidia-physical-ai)
+6. [Physical AI vs Automotive: same silicon, different rules](#6-physical-ai-vs-automotive)
+7. [Trust, but audit](#7-trust-but-audit)
+8. [The real demo: GR00T N1.7 on one desktop GPU](#8-the-real-demo)
+9. [What this means for an embedded team + roadmap](#9-what-this-means-for-an-embedded-team)
+10. [Key takeaways](#10-key-takeaways)
+11. [References](#11-references)
+
+---
+
+## 1. The map
+
+The single most useful finding of this research: **wheeled robots, humanoids, and autonomous
+vehicles all converge on the same layered software shape** — and the bottom half of that
+shape has not been touched by the AI wave.
+
+![The unified robot software stack](stack-unified.png)
+
+Bottom-up:
+
+| Layer | Contents | Typical rate |
+|---|---|---|
+| MCU firmware | motor current loops using FOC (Field-Oriented Control — vector control of the motor's magnetic field), an RTOS (Real-Time Operating System), the E-stop safety path | 8–32 kHz |
+| Fieldbus | EtherCAT / CAN-FD linking joint MCUs to the main computer | 1–10 kHz cycles |
+| RT control | `ros2_control` on PREEMPT_RT Linux (the real-time kernel option, mainline since kernel 6.12) | ~1 kHz |
+| **— the ROS 2 boundary (DDS) —** | | |
+| ROS 2 graph | perception, SLAM (Simultaneous Localization and Mapping — building a map while locating yourself in it), sensor fusion | 5–200 Hz |
+| Autonomy | Nav2/Autoware for wheels; RL policies (policies trained by Reinforcement Learning — trial-and-error learning in simulation) for humanoids | 1–50 Hz |
+| Fleet | Open-RMF — coordinating many robots in one building | seconds–minutes |
+
+### Which task lives on which layer?
+
+![Task placement by layer](layer-tasks.png)
+
+Rule #1: **the loop rate picks the layer.** Faster and must-run-on-time → lower (MCU/RTOS);
+heavier math and latency-tolerant → higher (Linux/GPU). Three corollaries that are commonly
+misunderstood:
+
+1. **Motor control is three nested loops living on two layers.** The current/FOC loop
+   (8–32 kHz) always lives on the MCU. The ~1 kHz position loop has two real-world homes:
+   inside a smart servo drive (the industrial pattern) or inside `ros2_control` on
+   PREEMPT_RT (the humanoid pattern). Choosing between those two architectures is the
+   biggest call a robot-firmware team makes.
+2. **Kinematics exists twice.** FK/IK (Forward/Inverse Kinematics — computing pose from
+   joint angles and vice versa) in *control mode* — whole-body QP (Quadratic Programming —
+   a fast convex optimizer), the Pinocchio library, allocation-free C++ — runs at 1 kHz
+   inside the RT loop. *Planning mode* — MoveIt 2, collision-aware search taking hundreds
+   of milliseconds — lives up in the ROS 2 graph.
+3. **SLAM and path planning are never real-time.** When SLAM stalls for a few hundred ms on
+   a loop closure, navigation pauses — torque is unaffected, because the layers below keep
+   the robot safe on their own.
+
+> This rate-layering is engineering canon, not our invention: cascade control (inner loop
+> ~10× faster — Åström/Hägglund), rate-monotonic scheduling (Liu & Layland, 1973), Albus's
+> RCS reference architecture (NIST, 1980s — each level ~10× slower), and Gat's three-layer
+> architecture (1998).
+
+One addendum: rate is the *first* sorting axis, **criticality is the second** — the E-stop
+almost never runs, yet it must sit on the lowest layer, because what earns that placement is
+provable simplicity, not speed.
+
+---
+
+## 2. ROS 2 up close
+
+### 2.1. "Real-time ≠ fast" — the two worlds inside ROS 2
+
+The words "ROS 2" on our map actually cover **two different execution worlds**:
+
+- **The DDS graph** — the pub/sub world: every message is serialized through DDS (Data
+  Distribution Service — the standard distributed middleware), with ms-class, best-effort
+  latency. SLAM, Nav2, and perception live here.
+- **`ros2_control`** — *configured* by ROS 2, but its hot loop **bypasses DDS entirely**:
+  the real-time thread of `controller_manager` runs `read() → update() → write()` as direct
+  C++ function calls between plugins. Topics only touch the non-real-time side (publishing
+  `/joint_states`, switching controllers).
+
+And **real-time means a guaranteed worst-case deadline — not speed**:
+
+| Loop | Period | Worst-case jitter | Verdict |
+|---|---|---|---|
+| FOC on the MCU | 31–125 µs (8–32 kHz) | ns–µs (hardware timers) | hard real-time |
+| ros2_control on PREEMPT_RT | 1,000 µs (1 kHz) | ~50 µs ≈ 5% of the period | firm real-time — fine |
+| The same Linux pushed to 10 kHz | 100 µs | ~50 µs ≈ 50% of the period | impossible — the OS ceiling |
+| One hop over a DDS topic | — | ms-class, unbounded | not real-time at all |
+
+1 kHz is where two limits meet: **Linux's practical ceiling** (~50 µs worst-case jitter,
+measured with cyclictest) and **the point where physics stops caring** (mechanical time
+constants are ms-scale; the µs world belongs to motor electronics on the MCU).
+
+*Terminology note: "firm" real-time = deadline misses are rare but not provably impossible;
+provable hard real-time — backed by WCET analysis (Worst-Case Execution Time) — is the
+domain of MCUs, RTOSes, and QNX.*
+
+### 2.2. The ROS 2 ecosystem — which repo, and when
+
+| Repo (github.com/…) | What it is | Reach for it when |
+|---|---|---|
+| `ros2/*` — rclcpp, rclpy, rcl, rmw_* | the core: client libraries → `rcl` → `rmw` (the middleware abstraction that lets you swap DDS vendors) | always — this *is* ROS 2 |
+| `ros-controls/ros2_control` + ros2_controllers | the RT control framework + stock controllers (diff-drive, joint-trajectory, PID) | the robot has real actuators |
+| `ros-navigation/navigation2` | Nav2 — behavior-tree-driven mobile navigation | wheeled autonomy |
+| `moveit/moveit2` | manipulation planning (IK, collision-aware) | robot arms |
+| `SteveMacenski/slam_toolbox` | 2D lifelong SLAM | mapping + localization |
+| `ros2/rosbag2` | recording / replay (MCAP format) | data capture, debugging |
+| `micro-ROS/*` | the MCU-side client (FreeRTOS/Zephyr/NuttX) | the MCU must be a first-class node |
+| `gazebosim` + ros_gz | simulation (the Harmonic release pairs with Jazzy) | simulation & CI |
+| `open-rmf/*` | multi-fleet coordination | many vendors, one building |
+
+Docs: **docs.ros.org** · package index: **index.ros.org** · the distro we use:
+**Jazzy (LTS, supported to 2029)** · licensing: Apache-2.0/BSD throughout — no gates anywhere.
+
+### 2.3. What calling the framework looks like — a complete node in 20 lines
+
+```python
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+class Talker(Node):
+    def __init__(self):
+        super().__init__('talker')                               # name on the graph
+        self.pub = self.create_publisher(String, 'chatter', 10)  # topic + QoS depth
+        self.timer = self.create_timer(0.5, self.tick)           # 2 Hz callback
+
+    def tick(self):
+        self.pub.publish(String(data='Hello ROS 2'))
+
+def main():
+    rclpy.init()
+    rclpy.spin(Talker())    # hand the thread to the executor — callbacks run here
+```
+
+Poke it from any shell — discovery is automatic, there is no master to configure:
+
+```bash
+ros2 node list
+ros2 topic echo /chatter
+ros2 topic hz /chatter
+ros2 topic info /chatter -v
+```
+
+*(QoS — Quality of Service: the ROS 2/DDS delivery-quality parameter set; depth 10 = a
+keep-last buffer of the ten most recent messages.)*
+
+### 2.4. Where firmware plugs in — `hardware_interface`
+
+```cpp
+class MyRobot : public hardware_interface::SystemInterface {
+  CallbackReturn on_init(const HardwareInfo & info) override {
+    // parse the <ros2_control> tags from the URDF; open your CAN / EtherCAT device here
+  }
+  return_type read(const rclcpp::Time &, const rclcpp::Duration &) override {
+    pos_[0] = can_.encoder(0);        // fieldbus → state, every cycle
+    return return_type::OK;
+  }
+  return_type write(const rclcpp::Time &, const rclcpp::Duration &) override {
+    can_.torque(0, cmd_[0]);          // command → fieldbus, every cycle
+    return return_type::OK;
+  }
+};
+PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
+```
+
+- `read()/write()` run **inside the 1 kHz RT thread** — no malloc, no locks, no DDS.
+- Controllers (PID, diff-drive…) are sibling plugins wired to the driver through shared
+  handles and chosen in YAML — you can swap the control law without touching the driver.
+- **This class is the front door for a CAN/EtherCAT firmware engineer** — the
+  `ros2_canopen` and `ethercat_driver_ros2` packages are exactly this class, prebuilt.
+
+### 2.5. The graph, live — a real screenshot
+
+![rqt_graph captured from the running system](rqt-graph-real.png)
+
+A real screenshot of `rqt_graph` attached to our repo's Demo 1: a Python `/talker` and a
+C++ `/talker_cpp` publish the same `/chatter` topic into `/listener` — the subscriber cannot
+tell the languages apart; the service/action servers idle until called. Nobody configured
+any master: pure DDS discovery.
+
+---
+
+## 3. Reality check
+
+### 3.1. Wheeled robots (AMRs & autonomous vehicles)
+
+*(AMR — Autonomous Mobile Robot: the self-driving carts of warehouses, hospitals, factories.)*
+
+**Indoor AMRs — the de-facto standard stack in 2026, not displaced by ML:**
+
+- `ros2_control` → EKF fusion (Extended Kalman Filter — merging wheel odometry with the
+  IMU) → `slam_toolbox` + AMCL (particle-filter localization on a saved map) → **Nav2**
+  (behavior trees; the modern local controller is MPPI — Model Predictive Path Integral, a
+  sampling-based predictive controller) → the product's task layer.
+- Cartographer is effectively legacy. No evidence of learned planners displacing Nav2 in
+  production.
+
+**On-road autonomous driving — a split world:**
+
+- **Autoware** (on ROS 2): the open reference stack — ~500 participating companies; its
+  first public-road L4 target (SAE Level 4 — fully driverless within a bounded domain) is
+  shuttles and buses.
+- Robotaxis and consumer vehicles (Waymo, Tesla): proprietary stacks, increasingly
+  **end-to-end learned** (one network from camera to steering) — no ROS anywhere.
+
+### 3.2. Where ROS 2 actually stands
+
+![ROS 2 by segment](ros2-reality.png)
+
+| Segment | Verdict | Detail |
+|---|---|---|
+| AMR / industrial | **De-facto standard** | Nav2 + ros2_control + slam_toolbox; 100+ companies in production |
+| Autonomous vehicles | **Open reference only** | Autoware for shuttles/L4 pilots; commercial robotaxis don't use ROS |
+| Humanoids | **Mostly absent** | Unitree offers an optional ROS 2 wrapper; Tesla/Figure/1X/Atlas run proprietary stacks |
+
+**Learning ROS 2 = learning the industrial mainstream** — and the ≤1 kHz firmware layers
+are the same everywhere anyway.
+
+### 3.3. Humanoids: RL won the locomotion war (2024→2026)
+
+- The classical school — **MPC + whole-body QP** (MPC — Model Predictive Control; the
+  Atlas/DRC lineage) — has retreated to the *low-level layer*.
+- New platforms ship **RL policies trained in simulation** (Isaac Lab / MuJoCo), deployed
+  on-robot at **~50 Hz** — even the new electric Atlas moved to RL "large behavior models".
+- The task layer has converged on **dual-system VLA** (VLA — Vision-Language-Action: a
+  model that takes camera images plus a language instruction and outputs motion): a slow
+  reasoning half at 1–10 Hz plus a fast action head at 50–200 Hz. GR00T (NVIDIA), Helix
+  (Figure), and π0.5 (Physical Intelligence) all share this shape.
+- The joint-level firmware underneath (FOC at 8–32 kHz, EtherCAT/CAN-FD at 1–10 kHz) —
+  **unchanged**.
+
+---
+
+## 4. The fleet layer: Open-RMF
+
+### 4.1. What it is and where it sits
+
+![Where Open-RMF sits](rmf-position.png)
+
+**Mental model: air-traffic control for a building full of robots.** Open-RMF (Robotics
+Middleware Framework) is not part of any robot and never replaces Nav2. Every robot (or
+every vendor's fleet) keeps its own stack; a **Fleet Adapter** wraps each fleet; the RMF
+Core coordinates *across* adapters: traffic scheduling, task auctioning, and shared
+infrastructure (lifts, doors, chargers).
+
+Status in 2026: alive and maintained under OSRA (the Open Source Robotics Alliance — the
+body governing the Open Robotics projects since 2024, backed by Intrinsic among others),
+with active Jazzy branches. The flagship deployments remain Singapore's healthcare/airport
+program (CGH hospital, Changi airport) — *niche, but real*.
+
+**When to use it:** multi-vendor fleet + shared building resources → exactly its job. One
+robot or a single-vendor fleet → skip it; Nav2 plus the vendor's fleet manager is enough.
+VDA 5050 (the German intralogistics MQTT protocol standard between AGVs and a master
+controller) is a *wire protocol*, not a coordinator — it can run **underneath** RMF rather
+than competing with it.
+
+### 4.2. Who does what: robot vs RMF Core
+
+| Job | Owner | Note |
+|---|---|---|
+| Local path planning, obstacle avoidance | **the robot** (its own Nav2 / vendor stack) | RMF never touches sensors |
+| Global **space-time** scheduling | **RMF Core** | reserves lanes *over time*, not just in space |
+| Task allocation | **RMF Core** | an auction — fleets bid, the best offer wins |
+| Conflict resolution between fleets | **RMF Core** | negotiation: schedules adjust *before* robots meet |
+| Translating RMF ↔ vendor API | **Fleet Adapter** | where the real integration work lives |
+| Doors, lifts, chargers | **RMF Core + infrastructure adapters** | the robot never talks to the lift directly |
+
+> Coordination is *logically* centralized (one shared schedule), but conflict resolution is
+> **negotiated among the fleet adapters** — closer to air-traffic control than to a joystick.
+
+### 4.3. The Fleet Adapter — where ~80% of the integration effort goes
+
+Data flow: `RMF Core ↔ rmf_fleet_msgs (standard) ↔ Fleet Adapter ↔ vendor API (proprietary)`
+
+The adapter's jobs: report state (pose, battery, mode) · translate commands · bid for
+tasks · transform coordinate frames · handle docking/charging · pause/resume when
+negotiation says so.
+
+| Integration level | You get | Effort |
+|---|---|---|
+| **Full Control** | RMF sends paths and adjusts speeds — full coordination | high — what most real deployments use |
+| Easy Full Control | same idea, simplified API | medium |
+| Read Only (+ Blockade) | observe only (Blockade = can still veto motion) — no control | low |
+
+**Build path:** clone `open-rmf/fleet_adapter_template` → fill in `config.yaml` (speeds,
+battery model, supported tasks) → implement `RobotClientAPI` (position / battery /
+navigate / stop) — the template already speaks RMF. Robots running Nav2 can use
+**`free_fleet`** directly. Existing adapters: MiR, Clearpath/OTTO, Gaussian Ecobot… (see
+`open-rmf/awesome_adapters`).
+
+Try it on a workstation: `rmf_demos` (jazzy branch) simulates an entire hotel/office with
+multiple fleets — requires Ubuntu 24.04 + ROS 2 Jazzy + Gazebo Harmonic.
+
+---
+
+## 5. NVIDIA Physical AI
+
+### 5.1. The three-computer loop
+
+![NVIDIA's three computers](nvidia-three-computers.png)
+
+NVIDIA frames robotics as three computers: **TRAIN** (DGX/cloud — pretraining Cosmos and
+GR00T) → **SIMULATE** (RTX/OVX workstations — Isaac Sim, Isaac Lab, Cosmos synthetic data,
+demonstration capture via Isaac Teleop) → **DEPLOY** (Jetson Thor on the robot — a TensorRT
+engine inside an Isaac ROS graph). Field data (MCAP recordings) flows back to training —
+the "data flywheel".
+
+### 5.2. The pieces — what is real as of July 2026 (audited)
+
+| Piece | Status |
+|---|---|
+| **Cosmos 3** — world foundation model (a generative model of how the physical world evolves) | Real — launched May 31, 2026; MoT architecture (Mixture-of-Transformers: one reasoning tower + one generation tower in a single model); Nano 16B / Super 64B; OpenMDW-1.1 license (Linux Foundation) |
+| **GR00T N1.7** — the robot VLA | Real — Early Access April 17, 2026; its backbone *is* Cosmos-Reason2-2B; "Action Cascade" architecture; commercial use allowed |
+| **Isaac Sim 6 / Isaac Lab** | Apache-2.0 core / BSD-3; **Isaac Lab-Arena** (the policy-evaluation framework) is alpha — unstable APIs |
+| **Isaac Teleop** | Demonstration capture via Apple Vision Pro / Quest 3; a browser demo needs no headset at all |
+| **Isaac ROS 4.5** | GPU-accelerated ROS 2 Jazzy packages: cuVSLAM (replaces slam_toolbox), nvblox (replaces costmaps), cuMotion (replaces MoveIt planning) — NVIDIA GPUs only, no CPU path |
+| **Jetson Thor** | 128 GB unified RAM, 40–130 W, $3,499 devkit; MIG (Multi-Instance GPU — hardware partitioning of the GPU) = **2** partitions |
+
+Openness is layered: **weights and code are open; everything is locked to CUDA/TensorRT
+underneath.**
+
+### 5.3. Inside the Thor chip
+
+![Thor SoC block diagram (our drawing)](thor-soc.png)
+
+![NVIDIA's official block diagram](thor-official-block.png)
+
+The second figure is **NVIDIA's own** ("Components of NVIDIA Jetson Thor modules",
+developer blog, 2025). It answers "what connects the CPU and the GPU": *nothing
+point-to-point* — the 14-core Arm Neoverse-V3AE CPU and the Blackwell GPU (2,560 CUDA
+cores, 96 Tensor Cores) both hang off the **Memory Control Fabric**, sharing a 16 MB system
+cache and 128 GB of unified DRAM.
+
+**Honesty note:** this official figure shows an "SPE/RTOS" block — which NVIDIA staff later
+disavowed on the forums: *"there is no SPE R5 core in Thor SoC."* Even vendor diagrams
+deserve an audit.
+
+**The hidden MCUs inside Thor** (verified from the public TRM — Technical Reference
+Manual — and NVIDIA staff answers):
+
+| Engine | Role | Thor status | Firmware |
+|---|---|---|---|
+| BPMP (Boot & Power Management Processor) | boot, clocks, power, thermal | present (in the boot chain) | closed, signed blob |
+| PSC (Platform Security Controller) | security root of trust | present | closed |
+| RCE / DCE | camera / display engines | present | closed, signed |
+| SPE (Sensor Processing Engine) | always-on sensor MCU — *Orin's public FreeRTOS door* | **removed on Thor** — no replacement SDK | gone |
+| FSI (Functional Safety Island) | lockstep safety cluster | **DRIVE / IGX SKUs only — not on Jetson T5000** | closed |
+
+The consequence for firmware engineers: **there is no user-programmable RTOS core inside
+Jetson Thor anymore** — your real-time code lives on PREEMPT_RT or on an external MCU over
+the fieldbus (the cascade pattern from section 1).
+
+### 5.4. From foundation model to motor
+
+![The GR00T control cascade](groot-cascade.png)
+
+Camera + language instruction → GR00T N1.7 (~94 ms per inference on Thor, emitting a
+*chunk* of several actions per call) → whole-body policy at ~50 Hz → `ros2_control` at
+1 kHz → EtherCAT/CAN-FD → MCU FOC at 8–32 kHz. **NVIDIA's stack ends above the 1 kHz
+line — the bottom half is classical embedded engineering.**
+
+---
+
+## 6. Physical AI vs Automotive
+
+### 6.1. One silicon, two worlds
+
+![Robot vs Car](robot-vs-car.png)
+
+The two product lines share **the same Thor die** and **the same Cosmos bloodline** (the
+backbone of GR00T *and* of Alpamayo). What splits them into two product lines is not
+technology — it is **the liability and certification regime**:
+
+| | Robotics (Isaac/Jetson) | Automotive (DRIVE) |
+|---|---|---|
+| OS | Ubuntu 24.04 + PREEMPT_RT (JetPack 7) | DriveOS 7: hypervisor → **QNX** (a commercial safety-certified RTOS by BlackBerry) for safety + Linux for AI |
+| Middleware | **ROS 2** — shared by the whole industry | DriveWorks SDK — every OEM (vehicle manufacturer) builds its own layer on top |
+| AI model | GR00T N1.7, 3B, open + commercial OK | Alpamayo-R1 10.5B / Alpamayo 2 Super 34B — weights not freely commercial |
+| Safety certification | none — safety lives on a PLC next to the computer | ASIL-D (see 6.2) |
+| Real-time approach | scheduling (PREEMPT_RT) + 2-way MIG | architectural isolation: a certified RTOS in its own VM |
+| Developer access | $249–$3,499 retail, everything on GitHub | gated developer program, no public price |
+| Release cadence | **days** | **quarters/years** (a safety case per release) |
+
+### 6.2. The automotive software architecture, and how it earns certification
+
+![DriveOS architecture](driveos-dualstack.png)
+
+**DriveOS 7** splits the software with a Type-1 hypervisor (a virtual-machine monitor
+running directly on the hardware): a **QNX VM** (pre-certified ASIL-D) holds the safety
+functions — watchdogs, vehicle I/O, fail-operational logic — hardware-isolated from a
+**Linux VM** carrying CUDA/TensorRT/DriveWorks and the AI stacks.
+
+*ASIL — Automotive Safety Integrity Level, ISO 26262's safety scale for road vehicles;
+A is the lowest, D the highest. QM — Quality Managed: below A; requires quality process
+only, no safety claim.*
+
+**How each part earns its level:**
+
+- **FSI**: a cluster of 4× Cortex-R52 in **DCLS** (Dual-Core LockStep — two cores execute
+  identical code cycle-by-cycle; any mismatch flags a fault), with ~3 MB of private SRAM
+  and ~10,000 ASIL-D MIPS — a physically isolated "referee" watching the rest of the SoC
+  (public DriveOS 7.0.3 documentation).
+- **SoC-wide diagnostics**: more than 22,000 fault-detection mechanisms — BIST (Built-In
+  Self-Test), watchdogs, NoC firewalls (NoC — Network-on-Chip, the chip's internal
+  interconnect), voltage/clock/thermal monitors *(secondary source — treat the exact count
+  with care)*.
+- **ASIL decomposition** (splitting one ASIL-D requirement across redundant lower-rated
+  elements): the AI driving stack stays QM; a certified classical stack supervises it — the
+  *system* reaches ASIL-D through redundancy, not by certifying a neural network.
+- **The board-level referee**: a separate safety MCU (Thor-generation evidence: Renesas
+  **RH850**; the Orin era used Infineon AURIX) holds final watchdog/power authority
+  *outside* the SoC.
+
+### 6.3. The certification table — who certified what, exactly
+
+*TÜV — Technischer Überwachungsverein ("Technical Inspection Association"): Germany's
+independent technical-certification bodies. TÜV SÜD (Munich) and TÜV Rheinland (Cologne)
+are rival companies, not branches. An ASIL certificate only counts when an accredited body
+like these signs it — self-declared "ASIL-D capable" means nothing.*
+
+**Completed, third-party certifications:**
+
+| Product + version | Standard · level | Body | When |
+|---|---|---|---|
+| DriveOS 5.2 (scope incl. CUDA + TensorRT) | ISO 26262 · **ASIL-B** | TÜV SÜD | Dec 2022 |
+| DriveOS 6.0 | ISO 26262 · **ASIL-D** | TÜV SÜD | Jan 2025 — **on Orin, not Thor** |
+| DRIVE core development **process** | ISO 26262 · ASIL-D (process) | TÜV SÜD | Jan 2025 |
+| SoC/platform/SW engineering **process** | ISO/SAE 21434 (automotive cybersecurity) | TÜV SÜD | Jan 2025 |
+| DRIVE AV / Hyperion platform | UNECE safety assessment (UNECE — the UN body that issues international vehicle regulations) | TÜV Rheinland | Jan 2025 |
+| QNX OS for Safety 8.0 (in the Thor devkit) | ASIL-D · IEC 61508 SIL 3, as an SEooC (Safety Element out of Context — a pre-certified component awaiting integration) | BlackBerry/QNX's own cert | 2025 |
+
+**"Assessed / capable" — NVIDIA's deliberate wording, weaker than "certified":**
+
+- Orin SoC: ASIL-D *systematic* / ASIL-B *random* — an assessment (systematic = design-
+  process faults; random = physical hardware faults such as bit flips).
+- DRIVE **Thor-X: "assessed as ASIL-D conformant"** — as of July 2026 there is **no
+  completed Thor product certification**.
+- IGX Thor safety island: "SIL 3 **capable**" (IEC 61508 — the industrial functional-safety
+  standard; SIL = Safety Integrity Level).
+- **The robotics side (Jetson, Isaac ROS, GR00T): zero certifications.**
+
+### 6.4. Alpamayo — GR00T's driving sibling
+
+NVIDIA frames AV software evolution as: **AV 1.0** modular pipeline → **AV 2.0** end-to-end
+networks → **AV 3.0** reasoning VLA — Alpamayo (launched at CES, January 2026) is the 3.0
+bet. *(AV — Autonomous Vehicle.)*
+
+| | GR00T N1.7 (robot) | Alpamayo (car) |
+|---|---|---|
+| Backbone | Cosmos-Reason2, 2B | Cosmos-Reason, **8.2B** — same bloodline |
+| Action head | a 32-layer DiT (Diffusion Transformer — generates actions by iterative denoising) → joint/hand chunks | a 2.3B diffusion decoder → **driving trajectories** |
+| Size / license | 3B — open, commercial OK | R1 = **10.5B**, non-commercial · 2 Super = **34B** (robotaxis) |
+| Training data | 20,854 h of human egocentric video | **80,000 h** of multi-camera driving + ~700K reasoning traces |
+| Trust model | the policy drives the robot directly | **never alone** — a certified classical stack supervises it |
+
+The tooling mirrors robotics: AlpaSim (open simulator) · AlpaGym ("the Isaac Lab of
+driving") · OmniDreams (world-model scenario generation).
+
+### 6.5. Reference hardware, and shipping proof
+
+![DRIVE Hyperion 10](hyperion-sensors.png)
+
+**DRIVE Hyperion 10** is NVIDIA's **real** published reference architecture (source: the
+DRIVE Hyperion page on nvidia.com; *the car drawing in our figure is illustrative*): 2×
+DRIVE AGX Thor, 14 cameras, 9 radars, 1 lidar, 12 ultrasonics — one fixed, certifiable
+sensor configuration reused across a fleet of hundreds of thousands of vehicles.
+
+![DRIVE AGX Thor Developer Kit — official photo](drive-devkit-photo.png)
+
+**Market proof (audited):** the Mercedes-Benz CLA has been **in production since Q1 2026**
+(the first MB.OS car, dual-stack, sold as L2++); Uber × NVIDIA robotaxis — LA/SF in
+H1 2027 → **28 cities by 2028, targeting 100,000 L4 vehicles**; queuing behind: Lucid, JLR,
+BYD, XPeng, Zeekr, Li Auto. NVIDIA's automotive revenue in FY2026: **$2.3B** (+39% YoY) —
+only ~1% of NVIDIA's total, but design wins lock in for a decade.
+
+> The contrast in one line: robotics ships **experiments weekly**; automotive ships
+> **certified products yearly** — on the same silicon.
+
+---
+
+## 7. Trust, but audit
+
+The entire research ran through an independent audit pass: extract the load-bearing claims,
+re-open the primary sources, rule CONFIRMED / INCORRECT / UNVERIFIABLE. The catches were
+worth it:
+
+| Claim as first reported | Audited reality |
+|---|---|
+| "Thor's MIG splits into up to 7 GPU instances" | Wrong — **2** instances (JetPack 7.2) |
+| "GR00T TensorRT benchmark: Thor 117→92 ms, vs an RTX 5090" | Wrong — **144.9→93.8 ms** full-pipeline, vs RTX Pro 5000 / H100 |
+| "Alpamayo-R1 is 10.3B parameters" | 10.5B |
+| "Automotive revenue $2.35B" | **$2.3B** |
+
+The lesson for the team: **secondhand Physical-AI numbers drift fast — re-fetch the primary
+source before any number goes on a slide.** (That rule is how this document was written.)
+
+---
+
+## 8. The real demo
+
+We ran **NVIDIA Isaac GR00T N1.7-3B** zero-shot (no fine-tuning) on the sample data that
+ships with the public `github.com/NVIDIA/Isaac-GR00T` repo, measured on a desktop
+RTX 5070 Ti with 16 GB of VRAM (July 2026):
+
+| Measured | Value |
+|---|---|
+| Peak VRAM | **7.5 GB / 16 GB** — no out-of-memory, right at the documented 16 GB floor |
+| Latency per policy call | **106.4 ms** average (P90 108.4 ms) |
+| Action throughput | 8-action chunks per call → **~75 robot actions/s** |
+| Accuracy (2 sample trajectories) | MSE 0.0030 / 0.0370 (MSE — Mean Squared Error vs the recorded reference actions) |
+| Model load time | 20.5 s from local cache (first run ~95 s, including the 4.6 GB backbone download) |
+
+![Real screenshot of the GR00T run](groot-run-screenshot.png)
+
+Everything involved is public: the weights on Hugging Face (`nvidia/GR00T-N1.7-3B`; the
+gated `Cosmos-Reason2-2B` backbone needs a one-click license acceptance), the inference
+script in the GitHub repo. The technical point to remember: **action chunking** (one
+inference emits several future action steps) is what turns ~9 calls/s into a usable command
+rate for a real robot.
+
+---
+
+## 9. What this means for an embedded team
+
+1. **The layers below 1 kHz never changed**: FOC loops, fieldbus, RT Linux, the safety
+   path — that territory is ours, and every stack surveyed (wheeled, humanoid, NVIDIA)
+   still needs it.
+2. The fastest route to relevance in robotics for an embedded engineer:
+   **`ros2_control` + EtherCAT/CANopen + PREEMPT_RT** — not learning to train policies.
+3. Learn the **interfaces** of the ML layer (what a policy consumes and emits, at what
+   rate) — its internals can wait.
+4. Safety always sits **beside** the compute: a safety PLC or safety-rated MCU holds the
+   kill switch — no ROS 2 stack and no robotics Jetson is certified (only the industrial
+   IGX Thor carries a safety island).
+5. **Which side to bet on?** Learn on Physical AI (open, cheap, fast — GR00T already runs
+   on our desk) while keeping ISO 26262 literacy. When robotics gets its own rulebook — and
+   the signals are visible: IGX Thor, Halos expanding into robotics — the engineer fluent
+   in both worlds gets paid the most.
+
+**Next demos for our repo (in order of value):**
+
+1. A `ros2_control` demo (simulated hardware_interface → diff-drive)
+2. Gazebo Harmonic (Jazzy's official simulation pairing)
+3. micro-ROS (Zephyr/FreeRTOS) + `ros2_canopen` on vcan
+4. PREEMPT_RT + a captured cyclictest run
+5. Open-RMF `rmf_demos`
+6. The NVIDIA track: Isaac Sim 6 + a cuVSLAM vs slam_toolbox comparison
+
+---
+
+## 10. Key takeaways
+
+1. **Every robot type converges on one stack shape** — the bottom half is firmware, and it
+   didn't move.
+2. **ROS 2 = the industrial mainstream**: the standard for AMRs, a reference for AVs,
+   absent from commercial humanoids.
+3. **Real-time means a guaranteed deadline, not speed** — 1 kHz is the practical ceiling of
+   PREEMPT_RT Linux; anything faster belongs to an MCU.
+4. **Open-RMF is a fleet-layer tool** — worth adopting only for multi-vendor buildings; the
+   Fleet Adapter is where the integration effort goes.
+5. **NVIDIA ships the most complete platform and the deepest hardware lock-in** — open
+   weights and code, closed CUDA underneath, no CPU path.
+6. **Robots and cars share one brain (Cosmos)** — what splits the two worlds is
+   certification, not technology; "certified" and "assessed" are a world apart.
+7. **Foundation-model robotics already runs on our desk** — ~106 ms per call, 7.5 GB of
+   VRAM, everything from public sources.
+
+---
+
+## 11. References
+
+**Open stacks**
+
+- Nav2 — docs.nav2.org · slam_toolbox — github.com/SteveMacenski/slam_toolbox
+- ros2_control — control.ros.org · Autoware — autoware.org
+- ROS 2 core — docs.ros.org · index.ros.org · github.com/ros2, ros-controls, ros-navigation, moveit
+- Open-RMF — open-rmf.org · github.com/open-rmf (rmf_demos jazzy branch, fleet_adapter_template, free_fleet, awesome_adapters) · OSRA — osralliance.org
+- Singapore deployment — cgh.com.sg/chart · micro-ROS — micro.ros.org
+- PREEMPT_RT — wiki.linuxfoundation.org/realtime · Gazebo — gazebosim.org
+- Humanoid RL/VLA — research.nvidia.com/labs/gear (GR00T) · pi.website (π0.5) · figure.ai (Helix)
+
+**NVIDIA Physical AI**
+
+- Cosmos 3 — nvidianews.nvidia.com (May 31, 2026) · arXiv:2606.02800 · huggingface.co/nvidia/Cosmos3-Nano
+- GR00T N1.7 — huggingface.co/blog/nvidia/gr00t-n1-7 · github.com/NVIDIA/Isaac-GR00T
+- Isaac Sim/Lab/Arena — github.com/isaac-sim · Isaac Teleop — github.com/NVIDIA/IsaacTeleop
+- Jetson Thor — developer.nvidia.com blog "Introducing NVIDIA Jetson Thor" · the JetPack 7.2 (MIG) blog
+- Thor TRM DP-11881-002 — developer.nvidia.com download center · FSI — DriveOS 7.0.3 docs, "Functional Safety Island"
+- Isaac ROS 4.5 — nvidia-isaac-ros.github.io/releases · LeRobot × NVIDIA — blogs.nvidia.com (Jul 6, 2026)
+
+**NVIDIA Automotive**
+
+- DRIVE AGX Thor devkit — developer.nvidia.com blog (GA, Sept 2025)
+- DriveOS 5.2 ASIL-B — blogs.nvidia.com, TÜV SÜD (Dec 2022) · DriveOS 6.0 ASIL-D on Orin — eenewseurope.com (Jan 2025)
+- QNX × NVIDIA — qnx.software/en/blog/2026 · automotiveworld.com
+- DRIVE Hyperion — nvidia.com → solutions → drive-hyperion · Halos — blogs.nvidia.com (GTC 2025)
+- Alpamayo — huggingface.co/nvidia/Alpamayo-R1-10B · nvidianews (Alpamayo 2 Super, May 2026)
+- Mercedes CLA — blogs.nvidia.com (drive-av-software-mercedes-benz-cla) · Uber robotaxi — investor.uber.com (Mar 2026)
+- NVIDIA Q4 FY26 financial results (automotive $2.3B) — nvidianews.nvidia.com
+
+*Demo numbers (the GR00T inference, the QoS/RMW matrices) are our own captured runs,
+July 2026. Per-claim citations plus the audit trail live in the repo's `research/` folder.*

@@ -1,0 +1,24 @@
+# GR00T N1.7-3B zero-shot inference — captured 2026-07-11 on this machine (RTX 5070 Ti 16GB, driver 595.71.05)
+# command: uv run python scripts/deployment/standalone_inference_script.py --model-path nvidia/GR00T-N1.7-3B --dataset-path demo_data/droid_sample --embodiment-tag OXE_DROID_RELATIVE_EEF_RELATIVE_JOINT --traj-ids 1 2 --inference-mode pytorch --execution-horizon 8
+INFO:root:Model Path: nvidia/GR00T-N1.7-3B
+INFO:root:Embodiment Tag: EmbodimentTag.OXE_DROID_RELATIVE_EEF_RELATIVE_JOINT
+INFO:root:Execution Horizon: 8
+INFO:root:Model loading time: 94.5847 seconds
+Running 25 inference steps...
+INFO:root:All inference steps completed for current trajectory-id 1
+INFO:root:MSE for trajectory 1: 0.0030431871275659445, MAE: 0.03548294376511288
+Running 25 inference steps...
+INFO:root:All inference steps completed for current trajectory-id 2
+INFO:root:MSE for trajectory 2: 0.03703610211424926, MAE: 0.1174788673218534
+INFO:root:  Average MSE across all trajs: 0.020040
+INFO:root:  Average MAE across all trajs: 0.076481
+INFO:root:  Model loading time:          94.5847s
+INFO:root:  Total inference:             5.1709s  (avg: 0.1077s per step)
+INFO:root:  Total inference steps:       48
+INFO:root:  Avg inference time per step: 0.1077s
+INFO:root:  Min inference time:          0.1045s
+INFO:root:  Max inference time:          0.1109s
+INFO:root:  P90 inference time:          0.1098s
+INFO:root:Done
+# peak VRAM (nvidia-smi sampled 2s):
+7530

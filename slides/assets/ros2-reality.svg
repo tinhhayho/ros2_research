@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="46" text-anchor="middle" font-size="27" font-weight="700" fill="#1b2b4a">Where ROS 2 actually stands — 2026</text>
+
+  <!-- ===================== Column 1: AMR / industrial ===================== -->
+  <rect x="40" y="86" width="280" height="380" rx="8" fill="#DFF0D8" stroke="#6FAE7C" stroke-width="1.5"/>
+  <text x="180" y="126" text-anchor="middle" font-size="18" font-weight="700" fill="#1b2b4a">AMR / industrial</text>
+  <line x1="54" y1="142" x2="306" y2="142" stroke="#6FAE7C" stroke-width="1.2"/>
+  <text x="180" y="216" text-anchor="middle" font-size="19" font-weight="800" fill="#2f7d32">DE-FACTO STANDARD</text>
+
+  <text x="180" y="290" text-anchor="middle" font-size="14" fill="#333333">Nav2 + ros2_control +</text>
+  <text x="180" y="316" text-anchor="middle" font-size="14" fill="#333333">slam_toolbox</text>
+  <text x="180" y="356" text-anchor="middle" font-size="14" fill="#333333">100+ companies in production</text>
+
+  <!-- ===================== Column 2: Autonomous vehicles ===================== -->
+  <rect x="340" y="86" width="280" height="380" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="480" y="126" text-anchor="middle" font-size="18" font-weight="700" fill="#1b2b4a">Autonomous vehicles</text>
+  <line x1="354" y1="142" x2="606" y2="142" stroke="#E0A96D" stroke-width="1.2"/>
+  <text x="480" y="216" text-anchor="middle" font-size="19" font-weight="800" fill="#B35900">OPEN REFERENCE ONLY</text>
+
+  <text x="480" y="290" text-anchor="middle" font-size="14" fill="#333333">Autoware: shuttles/buses,</text>
+  <text x="480" y="316" text-anchor="middle" font-size="14" fill="#333333">L4 pilots</text>
+  <text x="480" y="356" text-anchor="middle" font-size="14" fill="#333333">robotaxi/consumer: proprietary</text>
+  <text x="480" y="382" text-anchor="middle" font-size="14" fill="#333333">end-to-end (no ROS)</text>
+
+  <!-- ===================== Column 3: Humanoids ===================== -->
+  <rect x="640" y="86" width="280" height="380" rx="8" fill="#F8D7DA" stroke="#C0392B" stroke-width="1.5"/>
+  <text x="780" y="126" text-anchor="middle" font-size="18" font-weight="700" fill="#1b2b4a">Humanoids</text>
+  <line x1="654" y1="142" x2="906" y2="142" stroke="#C0392B" stroke-width="1.2"/>
+  <text x="780" y="216" text-anchor="middle" font-size="19" font-weight="800" fill="#8a2b32">MOSTLY ABSENT</text>
+
+  <text x="780" y="290" text-anchor="middle" font-size="14" fill="#333333">Unitree: optional ROS 2 wrapper</text>
+  <text x="780" y="330" text-anchor="middle" font-size="14" fill="#333333">Tesla · Figure · 1X · Atlas:</text>
+  <text x="780" y="356" text-anchor="middle" font-size="14" fill="#333333">proprietary stacks</text>
+
+  <!-- ===================== Bottom strip ===================== -->
+  <rect x="40" y="486" width="880" height="94" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="480" y="524" text-anchor="middle" font-size="17" font-weight="600" fill="#1b2b4a">Learning ROS 2 = learning the industrial mainstream —</text>
+  <text x="480" y="550" text-anchor="middle" font-size="17" font-weight="600" fill="#1b2b4a">and the ≤1 kHz firmware layers are the same everywhere</text>
+</svg>
