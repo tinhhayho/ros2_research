@@ -1,0 +1,111 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" /><mxCell id="1" parent="0" />
+
+    <mxCell id="stack-title" value="The robot software stack &#8212; 2026" style="text;html=1;align=center;verticalAlign=middle;fontSize=27;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="250" y="23" width="460" height="38" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-fleet-box" value="Fleet layer &#8212; Open-RMF / FMS (many robots, one building)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=15;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="72" width="620" height="56" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-arrow1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="130" as="sourcePoint" />
+        <mxPoint x="460" y="144" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="stack-wheeled-box" value="Wheeled: Nav2 / Autoware&lt;br&gt;(planners, costmaps)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="146" width="300" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="stack-humanoid-box" value="Humanoid: RL policy ~50 Hz &#8594;&lt;br&gt;VLA 1&#8211;10 Hz (GR00T, Helix, &#960;0)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="470" y="146" width="300" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-arrow2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="208" as="sourcePoint" />
+        <mxPoint x="460" y="222" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="stack-ros2-box" value="ROS 2 graph &#8212; perception &#183; SLAM &#183; state estimation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=15;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="224" width="620" height="56" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-boundary-label" value="ROS 2 boundary (DDS / Zenoh)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="360" y="284" width="200" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="stack-divider" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=2;dashed=1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="150" y="300" as="sourcePoint" />
+        <mxPoint x="770" y="300" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="stack-arrow3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="304" as="sourcePoint" />
+        <mxPoint x="460" y="318" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="stack-rt-box" value="RT control &#8212; ros2_control ~1 kHz &#183; PREEMPT_RT Linux" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=15;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="320" width="620" height="52" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-arrow4" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="374" as="sourcePoint" />
+        <mxPoint x="460" y="388" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="stack-fieldbus-box" value="Fieldbus &#8212; EtherCAT / CAN-FD &#183; 1&#8211;10 kHz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=15;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="390" width="620" height="48" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-arrow5" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="440" as="sourcePoint" />
+        <mxPoint x="460" y="454" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="stack-mcu-box" value="MCU firmware &#8212; FOC motor loops 8&#8211;32 kHz&lt;br&gt;RTOS &#183; safety/E-stop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="456" width="620" height="64" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-bracket-1" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="786" y="320" as="sourcePoint" />
+        <mxPoint x="800" y="320" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="stack-bracket-2" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="800" y="320" as="sourcePoint" />
+        <mxPoint x="800" y="520" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="stack-bracket-3" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="800" y="520" as="sourcePoint" />
+        <mxPoint x="786" y="520" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="stack-rot-label1" value="embedded-team territory" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#2E5FAC;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="738" y="407" width="152" height="17" as="geometry" />
+    </mxCell>
+    <mxCell id="stack-rot-label2" value="unchanged by the ML wave" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#2E5FAC;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="755" y="407" width="158" height="17" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-footnote" value="The ROS 2 boundary is the one line that moved since 2020 &#8212; everything below it is still classic embedded/RTOS work." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="69" y="549" width="822" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

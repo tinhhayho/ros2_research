@@ -1,0 +1,125 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="thor-title" value="Inside Jetson Thor (T5000) — the flagship robot chip" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1B2B4A;" vertex="1" parent="1">
+      <mxGeometry x="94" y="24" width="772" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- Power/price badge -->
+    <mxCell id="thor-badge" value="40–130 W&lt;br&gt;$3,499 devkit" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#D9A56A;strokeWidth=1.5;fontSize=12.5;fontStyle=1;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="785" y="56" width="155" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Die outline -->
+    <mxCell id="thor-die" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#444444;strokeWidth=2.5;" vertex="1" parent="1">
+      <mxGeometry x="230" y="105" width="520" height="340" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-die-label" value="Thor SoC — Blackwell architecture" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="359" y="118" width="262" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-divider" value="" style="endArrow=none;html=1;strokeColor=#CCCCCC;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="242" y="140" as="sourcePoint" />
+        <mxPoint x="738" y="140" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- GPU block -->
+    <mxCell id="thor-gpu" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="245" y="155" width="286" height="275" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-gpu-heading" value="GPU — Blackwell" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="326.5" y="167" width="123" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-gpu-mig" value="MIG: 2 isolated partitions" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="309.5" y="187.5" width="157" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-mig-divider" value="" style="endArrow=none;html=1;strokeColor=#6F9BD1;strokeWidth=1.5;dashed=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="434" y="205" as="sourcePoint" />
+        <mxPoint x="434" y="422" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- GPU spec chips -->
+    <mxCell id="thor-gpu-chip1" value="2,560 CUDA cores" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=12.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="255" y="212" width="169" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-gpu-chip2" value="96 Tensor Cores&lt;br&gt;(gen 5)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=12.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="255" y="274" width="169" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-gpu-chip3" value="2,070 TFLOPS&lt;br&gt;sparse FP4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=12.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="255" y="336" width="169" height="52" as="geometry" />
+    </mxCell>
+
+    <!-- CPU block -->
+    <mxCell id="thor-cpu" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#7F9DC9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="545" y="155" width="190" height="275" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-cpu-heading" value="CPU — 14× Arm&lt;br&gt;Neoverse-V3AE&lt;br&gt;@ 2.6 GHz" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="590" y="228.5" width="100" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-cpu-cache" value="1 MB L2/core ·&lt;br&gt;16 MB shared L3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=12;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="555" y="292" width="170" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Memory block -->
+    <mxCell id="thor-mem" value="128 GB LPDDR5X&lt;br&gt;256-bit · 273 GB/s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#D9A56A;strokeWidth=1.5;fontSize=13;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="20" y="220" width="165" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-mem-arrow" value="" style="startArrow=classic;endArrow=classic;html=1;strokeColor=#444444;strokeWidth=6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="188" y="275" as="sourcePoint" />
+        <mxPoint x="227" y="275" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="thor-mem-text" value="unified memory —&lt;br&gt;CPU+GPU share it" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="155.5" y="194.5" width="103" height="31" as="geometry" />
+    </mxCell>
+
+    <!-- I/O block -->
+    <mxCell id="thor-io" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="780" y="220" width="150" height="110" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-io-heading" value="I/O" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="835" y="227" width="40" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-io-chip1" value="100 GbE (QSFP28)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="790" y="244" width="130" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-io-chip2" value="PCIe Gen 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="790" y="272" width="130" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-io-chip3" value="Holoscan Sensor Bridge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="790" y="300" width="130" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-io-arrow" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="777" y="275" as="sourcePoint" />
+        <mxPoint x="753" y="275" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Software band -->
+    <mxCell id="thor-sw-arrow" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="490" y="447" as="sourcePoint" />
+        <mxPoint x="490" y="457" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="thor-sw" value="JetPack 7 — Ubuntu 24.04 · kernel 6.8 · PREEMPT_RT option · CUDA 13" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=13;fontColor=#2D5A2D;" vertex="1" parent="1">
+      <mxGeometry x="20" y="460" width="920" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="thor-foot1" value="Same silicon family as DRIVE AGX Thor (automotive) — differences are qualification + I/O + memory config, not the die" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#666677;" vertex="1" parent="1">
+      <mxGeometry x="90.5" y="539.5" width="779" height="17" as="geometry" />
+    </mxCell>
+    <mxCell id="thor-foot2" value="Source: developer.nvidia.com &quot;Introducing NVIDIA Jetson Thor&quot; + Jetson Thor product page · MIG = Multi-Instance GPU · FP4 = 4-bit floating point" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#666677;" vertex="1" parent="1">
+      <mxGeometry x="10" y="556.5" width="940" height="17" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

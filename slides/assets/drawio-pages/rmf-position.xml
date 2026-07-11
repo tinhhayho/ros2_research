@@ -1,0 +1,101 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="rp-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="0" width="960" height="600" as="geometry" />
+    </mxCell>
+
+    <mxCell id="rp-title" value="Open-RMF &#8212; air-traffic control for a building of robots" style="text;html=1;align=center;verticalAlign=middle;fontSize=27;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="56.7" y="23.1" width="846.5" height="37.8" as="geometry" />
+    </mxCell>
+
+    <!-- Row 1: rmf-web dashboard -->
+    <mxCell id="rp-dashboard" value="rmf-web dashboard &#8212; REST / WebSocket" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=14;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="330" y="64" width="300" height="40" as="geometry" />
+    </mxCell>
+
+    <mxCell id="rp-arrow-dashboard-core" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="104" as="sourcePoint" />
+        <mxPoint x="480" y="130" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 2: Open-RMF core -->
+    <mxCell id="rp-core" value="Open-RMF core &#8212; traffic schedule &#183; negotiation &#183; task dispatch (ROS 2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=15;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="160" y="130" width="640" height="64" as="geometry" />
+    </mxCell>
+
+    <mxCell id="rp-arrow-core-a" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="260" y="194" as="sourcePoint" />
+        <mxPoint x="260" y="230" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rp-arrow-core-b" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="194" as="sourcePoint" />
+        <mxPoint x="480" y="230" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rp-arrow-core-c" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="700" y="194" as="sourcePoint" />
+        <mxPoint x="700" y="230" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 3: adapters -->
+    <mxCell id="rp-adapter-a" value="Fleet adapter A" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=15;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="160" y="230" width="200" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="rp-adapter-b" value="Fleet adapter B" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=15;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="380" y="230" width="200" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="rp-adapter-doorlift" value="Door / lift adapter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=15;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="600" y="230" width="200" height="50" as="geometry" />
+    </mxCell>
+
+    <mxCell id="rp-arrow-adapter-a" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="260" y="280" as="sourcePoint" />
+        <mxPoint x="260" y="320" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rp-arrow-adapter-b" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="280" as="sourcePoint" />
+        <mxPoint x="480" y="320" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rp-arrow-adapter-c" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="700" y="280" as="sourcePoint" />
+        <mxPoint x="700" y="320" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 4: robots / PLC -->
+    <mxCell id="rp-robot-a" value="Robot A &#8212; its own&lt;br&gt;ROS 2 graph + Nav2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="160" y="320" width="200" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="rp-robot-b" value="Robot B &#8212; vendor&lt;br&gt;FMS / VDA 5050" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="380" y="320" width="200" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="rp-plc" value="Building PLC&lt;br&gt;(doors, lifts, chargers)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="600" y="320" width="200" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- Callout: robots keep their own stack -->
+    <mxCell id="rp-callout" value="Each robot keeps its own stack &#8212;&lt;br&gt;RMF never replaces Nav2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#6Fae6f;strokeWidth=1.5;fontSize=14;fontStyle=2;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="50" y="450" width="380" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- Status badge -->
+    <mxCell id="rp-badge" value="&lt;b&gt;2026: alive under OSRA&lt;/b&gt;&lt;br&gt;flagship: Singapore hospitals/airport" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#6Fae6f;strokeWidth=1.5;fontSize=13;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="560" y="460" width="350" height="56" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

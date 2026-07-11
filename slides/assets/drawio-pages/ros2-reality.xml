@@ -1,0 +1,88 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="rr-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="0" width="960" height="600" as="geometry" />
+    </mxCell>
+
+    <mxCell id="rr-title" value="Where ROS 2 actually stands &#8212; 2026" style="text;html=1;align=center;verticalAlign=middle;fontSize=27;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="212.7" y="27.1" width="534.6" height="37.8" as="geometry" />
+    </mxCell>
+
+    <!-- Column 1: AMR / industrial -->
+    <mxCell id="rr-col1-card" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#6FAE7C;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="40" y="86" width="280" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col1-heading" value="AMR / industrial" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="70" y="107" width="220" height="25.2" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col1-divider" style="endArrow=none;html=1;strokeColor=#6FAE7C;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="54" y="142" as="sourcePoint" />
+        <mxPoint x="306" y="142" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rr-col1-status" value="DE-FACTO STANDARD" style="text;html=1;align=center;verticalAlign=middle;fontSize=19;fontStyle=1;fontColor=#2f7d32;" vertex="1" parent="1">
+      <mxGeometry x="55" y="197.1" width="250" height="26.6" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col1-body1" value="Nav2 + ros2_control +&lt;br&gt;slam_toolbox" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="95.3" y="283.4" width="169.4" height="39.2" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col1-body2" value="100+ companies in production" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="68.35" y="346.2" width="223.3" height="19.6" as="geometry" />
+    </mxCell>
+
+    <!-- Column 2: Autonomous vehicles -->
+    <mxCell id="rr-col2-card" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="340" y="86" width="280" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col2-heading" value="Autonomous vehicles" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="370" y="107" width="220" height="25.2" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col2-divider" style="endArrow=none;html=1;strokeColor=#E0A96D;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="354" y="142" as="sourcePoint" />
+        <mxPoint x="606" y="142" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rr-col2-status" value="OPEN REFERENCE ONLY" style="text;html=1;align=center;verticalAlign=middle;fontSize=19;fontStyle=1;fontColor=#B35900;" vertex="1" parent="1">
+      <mxGeometry x="355" y="197.1" width="250" height="26.6" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col2-body1" value="Autoware: shuttles/buses,&lt;br&gt;L4 pilots" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="383.75" y="283.4" width="192.5" height="39.2" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col2-body2" value="robotaxi/consumer: proprietary&lt;br&gt;end-to-end (no ROS)" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="360.65" y="349.4" width="238.7" height="39.2" as="geometry" />
+    </mxCell>
+
+    <!-- Column 3: Humanoids -->
+    <mxCell id="rr-col3-card" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8D7DA;strokeColor=#C0392B;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="640" y="86" width="280" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col3-heading" value="Humanoids" style="text;html=1;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="670" y="107" width="220" height="25.2" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col3-divider" style="endArrow=none;html=1;strokeColor=#C0392B;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="654" y="142" as="sourcePoint" />
+        <mxPoint x="906" y="142" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rr-col3-status" value="MOSTLY ABSENT" style="text;html=1;align=center;verticalAlign=middle;fontSize=19;fontStyle=1;fontColor=#8a2b32;" vertex="1" parent="1">
+      <mxGeometry x="655" y="197.1" width="250" height="26.6" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col3-body1" value="Unitree: optional ROS 2 wrapper" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="661.75" y="280.2" width="236.5" height="19.6" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-col3-body2" value="Tesla &#183; Figure &#183; 1X &#183; Atlas:&lt;br&gt;proprietary stacks" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="674.75" y="323.4" width="210.5" height="39.2" as="geometry" />
+    </mxCell>
+
+    <!-- Bottom strip -->
+    <mxCell id="rr-strip" value="Learning ROS 2 = learning the industrial mainstream &#8212;&lt;br&gt;and the &#8804;1 kHz firmware layers are the same everywhere" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=17;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="40" y="486" width="880" height="94" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

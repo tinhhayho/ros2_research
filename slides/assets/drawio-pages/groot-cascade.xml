@@ -1,0 +1,120 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="gc-title" value="From foundation model to motor: the control cascade" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="116" y="24" width="728" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- 1: Camera + language instruction -->
+    <mxCell id="gc-box1" value="Camera + language instruction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=16;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="64" width="600" height="42" as="geometry" />
+    </mxCell>
+
+    <mxCell id="gc-arrow1" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="106" as="sourcePoint" />
+        <mxPoint x="480" y="128" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 2: GR00T N1.7 -->
+    <mxCell id="gc-box2" value="&lt;b&gt;GR00T N1.7 (3B VLA)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:13px&quot;&gt;Cosmos-Reason2 backbone &#8594; DiT action head&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=16;fontColor=#6B4A2B;align=left;verticalAlign=top;spacingLeft=20;spacingTop=10;" vertex="1" parent="1">
+      <mxGeometry x="180" y="128" width="600" height="78" as="geometry" />
+    </mxCell>
+    <mxCell id="gc-box2-badge" value="&#8776;94 ms/inference on Thor" style="text;html=1;align=right;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="575" y="158" width="185" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- 3: side note attached to box 2 -->
+    <mxCell id="gc-tick" value="" style="endArrow=none;html=1;strokeColor=#999999;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="780" y="150" as="sourcePoint" />
+        <mxPoint x="788" y="150" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gc-sidenote" value="action chunking:&lt;br&gt;1 inference &#8594; N&lt;br&gt;action steps" style="text;html=1;align=left;verticalAlign=top;fontSize=13;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="792" y="133" width="122" height="49" as="geometry" />
+    </mxCell>
+
+    <mxCell id="gc-arrow2" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="206" as="sourcePoint" />
+        <mxPoint x="480" y="230" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 4: Whole-body policy -->
+    <mxCell id="gc-box4" value="Whole-body policy (SONIC / RL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=16;fontColor=#223344;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+      <mxGeometry x="180" y="230" width="600" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="gc-box4-badge" value="~50 Hz" style="text;html=1;align=right;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="714" y="247" width="46" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- arrow crossing the GPU / firmware divider -->
+    <mxCell id="gc-arrow3" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="276" as="sourcePoint" />
+        <mxPoint x="480" y="326" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- dashed divider -->
+    <mxCell id="gc-divider" value="" style="endArrow=none;html=1;strokeColor=#999999;strokeWidth=1.5;dashed=1;dashPattern=6 5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="100" y="306" as="sourcePoint" />
+        <mxPoint x="860" y="306" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gc-divider-label" value="GPU above &#183; classical firmware below" style="text;html=1;align=right;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="573" y="291" width="257" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- 5: ros2_control -->
+    <mxCell id="gc-box5" value="ros2_control &#8212; torque/impedance loop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=15;fontColor=#223344;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+      <mxGeometry x="180" y="326" width="600" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="gc-box5-badge" value="~1 kHz" style="text;html=1;align=right;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="714" y="343" width="46" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="gc-arrow4" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="372" as="sourcePoint" />
+        <mxPoint x="480" y="396" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 6: EtherCAT / CAN-FD -->
+    <mxCell id="gc-box6" value="EtherCAT / CAN-FD fieldbus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=16;fontColor=#333333;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+      <mxGeometry x="180" y="396" width="600" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="gc-box6-badge" value="1&#8211;10 kHz" style="text;html=1;align=right;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="700" y="413" width="60" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="gc-arrow5" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="480" y="442" as="sourcePoint" />
+        <mxPoint x="480" y="466" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 7: Joint MCU -->
+    <mxCell id="gc-box7" value="Joint MCU &#8212; FOC current loop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=15;fontColor=#333333;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+      <mxGeometry x="180" y="466" width="600" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="gc-box7-badge" value="8&#8211;32 kHz" style="text;html=1;align=right;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="700" y="483" width="60" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="gc-footnote" value="NVIDIA's stack ends above the 1 kHz line &#8212; the bottom half is classical embedded engineering" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="151" y="539" width="658" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

@@ -1,0 +1,119 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="lt-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="0" width="960" height="600" as="geometry" />
+    </mxCell>
+
+    <mxCell id="lt-title" value="Who does what &#8212; task placement by layer" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="186.85" y="23.8" width="586.3" height="36.4" as="geometry" />
+    </mxCell>
+
+    <!-- Band: Autonomy -->
+    <mxCell id="lt-band-autonomy" value="Autonomy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=15;fontStyle=1;fontColor=#6B4A2B;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="40" y="68" width="760" height="78" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-autonomy-1" value="global path &#8212; Nav2 planner &#183; ~1 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="171.7" y="81" width="230.3" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-autonomy-2" value="local controller &#8212; MPPI &#183; 20&#8211;50 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="412.0" y="81" width="226.3" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-autonomy-3" value="RL / VLA policy &#8212; GR00T &#183; 10&#8211;50 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="54.0" y="111" width="241.5" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- Band: ROS 2 graph (Linux, non-RT) -->
+    <mxCell id="lt-band-ros2graph" value="ROS 2 graph (Linux, non-RT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=15;fontStyle=1;fontColor=#223344;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="40" y="156" width="760" height="78" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-ros2graph-1" value="LiDAR / camera drivers &#183; 10&#8211;30 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="323.2" y="169" width="224.8" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-ros2graph-2" value="EKF sensor fusion &#183; 50&#8211;200 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="558.0" y="169" width="203.9" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-ros2graph-3" value="SLAM &#8212; slam_toolbox &#183; 5&#8211;30 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="54.0" y="199" width="215.5" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-ros2graph-4" value="planning FK/IK &#8212; MoveIt 2 &#183; on demand" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="279.5" y="199" width="255.2" height="22" as="geometry" />
+    </mxCell>
+
+    <mxCell id="lt-boundary-text" value="ROS 2 boundary" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="369.95" y="246.9" width="100.1" height="18.2" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-boundary-line" style="endArrow=none;html=1;dashed=1;strokeColor=#2E5FAC;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="40" y="264" as="sourcePoint" />
+        <mxPoint x="800" y="264" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Band: RT control -->
+    <mxCell id="lt-band-rt" value="RT control &#8212; ros2_control (PREEMPT_RT)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=15;fontStyle=1;fontColor=#1d3f66;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="40" y="274" width="760" height="78" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-rt-1" value="joint position loop &#183; ~1 kHz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9BBCE0;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="434.3" y="287" width="176.1" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-rt-2" value="control-mode FK/IK &#8212; QP, Pinocchio &#183; 1 kHz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9BBCE0;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="54.0" y="317" width="282.6" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- Band: Fieldbus -->
+    <mxCell id="lt-band-fieldbus" value="Fieldbus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=15;fontStyle=1;fontColor=#333333;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+      <mxGeometry x="40" y="362" width="760" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-fieldbus-1" value="EtherCAT PDO / CAN-FD &#8212; state up, setpoints down &#183; 1 kHz cycle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="158.9" y="372" width="410.5" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- Band: MCU firmware -->
+    <mxCell id="lt-band-mcu" value="MCU firmware" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=15;fontStyle=1;fontColor=#333333;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="40" y="414" width="760" height="78" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-mcu-1" value="FOC current loop &#183; 8&#8211;32 kHz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="205.1" y="427" width="189.5" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-mcu-2" value="velocity / torque loop &#183; 1&#8211;10 kHz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="404.5" y="427" width="209.0" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-mcu-3" value="raw encoder + IMU read" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="54.0" y="457" width="163.8" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-chip-mcu-4" value="E-stop / safety path" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=13;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="227.8" y="457" width="136.0" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- Speed / latency annotation (right edge) -->
+    <mxCell id="lt-tri-top" value="" style="triangle;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;direction=north;" vertex="1" parent="1">
+      <mxGeometry x="838" y="74" width="14" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-shaft" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="842" y="86" width="6" height="388" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-tri-bottom" value="" style="triangle;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;direction=south;" vertex="1" parent="1">
+      <mxGeometry x="838" y="474" width="14" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-1hz" value="1 Hz" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="830.7" y="54.9" width="28.6" height="18.2" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-32khz" value="32 kHz" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="823.55" y="498.9" width="42.9" height="18.2" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-rot-smarter" value="smarter &#183; latency-tolerant" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#2E5FAC;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="779.9" y="168.6" width="178.2" height="16.8" as="geometry" />
+    </mxCell>
+    <mxCell id="lt-rot-faster" value="faster &#183; deterministic" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#2E5FAC;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="796.4" y="374.6" width="145.2" height="16.8" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="lt-footnote" value="The loop rate picks the layer &#8212; misplace a task and you get either jitter or wasted silicon." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="161.8" y="568.9" width="636.35" height="18.2" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

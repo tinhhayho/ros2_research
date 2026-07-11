@@ -1,0 +1,96 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="ntc-title" value="NVIDIA Physical AI &#8212; the three-computer loop" style="text;html=1;align=center;verticalAlign=middle;fontSize=27;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="153" y="25" width="654" height="38" as="geometry" />
+    </mxCell>
+
+    <!-- Column 1: TRAIN -->
+    <mxCell id="ntc-col1" value="TRAIN &#8212; DGX / cloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=16;fontStyle=1;fontColor=#223344;verticalAlign=top;align=center;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="30" y="90" width="240" height="330" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col1-item1" value="Cosmos 3 &#8212; world model&lt;br&gt;(MoT, 16B/64B)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="38" y="190" width="224" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col1-item2" value="GR00T N1.7 &#8212;&lt;br&gt;VLA policy (3B)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="38" y="252" width="224" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col1-item3" value="post-training on your&lt;br&gt;robot data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="38" y="314" width="224" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Column 2: SIMULATE -->
+    <mxCell id="ntc-col2" value="SIMULATE &#8212; OVX / RTX" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=16;fontStyle=1;fontColor=#223344;verticalAlign=top;align=center;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="360" y="90" width="240" height="330" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col2-item1" value="Isaac Sim 6 (Omniverse)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="368" y="159" width="224" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col2-item2" value="Isaac Lab + Lab-Arena&lt;br&gt;(RL + eval, alpha)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="368" y="221" width="224" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col2-item3" value="Cosmos synthetic data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="368" y="283" width="224" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col2-item4" value="Isaac Teleop &#8212; human demos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="368" y="345" width="224" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Column 3: DEPLOY -->
+    <mxCell id="ntc-col3" value="DEPLOY &#8212; Jetson Thor" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=16;fontStyle=1;fontColor=#6B4A2B;verticalAlign=top;align=center;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="690" y="90" width="240" height="330" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col3-item1" value="TensorRT engine&lt;br&gt;(per-GPU build)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="698" y="190" width="224" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col3-item2" value="Isaac ROS 4.5 &#8212;&lt;br&gt;ROS 2 Jazzy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="698" y="252" width="224" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="ntc-col3-item3" value="128 GB &#183; 40&#8211;130 W &#183;&lt;br&gt;2-way MIG" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=14;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="698" y="314" width="224" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Forward arrow: TRAIN -> SIMULATE -->
+    <mxCell id="ntc-edge1" value="checkpoints" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;fontSize=12;fontColor=#555555;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="278" y="255" as="sourcePoint" />
+        <mxPoint x="352" y="255" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Forward arrow: SIMULATE -> DEPLOY -->
+    <mxCell id="ntc-edge2" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="608" y="255" as="sourcePoint" />
+        <mxPoint x="682" y="255" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="ntc-edge2-label" value="optimized&lt;br&gt;policy +&lt;br&gt;sim-tested" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="612" y="203" width="66" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Return arrow: DEPLOY -> TRAIN (data flywheel) -->
+    <mxCell id="ntc-edge3" value="" style="endArrow=classic;html=1;strokeColor=#444444;strokeWidth=2;rounded=0;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="810" y="420" as="sourcePoint" />
+        <mxPoint x="150" y="420" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="810" y="470" />
+          <mxPoint x="150" y="470" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="ntc-edge3-label" value="field data (MCAP) &#8212; the data flywheel" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="348" y="479" width="265" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="ntc-footnote" value="weights + code open &#183; CUDA/TensorRT-only underneath &#8212; no CPU path" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="266" y="577" width="429" height="17" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

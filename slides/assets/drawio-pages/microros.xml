@@ -1,0 +1,99 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="microros-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="0" width="960" height="600" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-title" value="micro-ROS: ROS 2 down to the MCU" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="244" y="28" width="472" height="36" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-zone-mcu" value="ON THE MCU" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+      <mxGeometry x="115" y="90" width="61" height="15" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-zone-host" value="ON THE LINUX HOST" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+      <mxGeometry x="621" y="91" width="109" height="15" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-divider" style="endArrow=none;html=1;rounded=0;strokeColor=#cccccc;strokeWidth=1.5;dashed=1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="340" y="112" as="sourcePoint"/>
+        <mxPoint x="340" y="350" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="microros-mcu-group" value="MCU&lt;br&gt;&lt;span style=&quot;font-size:11px;font-style:italic;font-weight:normal;color:#666666;&quot;&gt;FreeRTOS / Zephyr / bare-metal&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;fontSize=16;fontStyle=1;fontColor=#333333;align=center;verticalAlign=top;spacingTop=16;" vertex="1" parent="1">
+      <mxGeometry x="30" y="130" width="230" height="210" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-firmware" value="your firmware + rclc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;fontSize=14;fontStyle=1;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="45" y="190" width="200" height="54" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-xrce-client" value="Micro XRCE-DDS Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=14;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="45" y="256" width="200" height="54" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-rclc-note" value="rclc = ROS 2 client lib for MCUs" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#888888;" vertex="1" parent="1">
+      <mxGeometry x="45" y="353" width="200" height="15" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-arrow1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="260" y="235" as="sourcePoint"/>
+        <mxPoint x="416" y="235" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="microros-arrow1-label" value="UDP / TCP / Serial&lt;br&gt;(UART, USB-CDC)" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="278" y="199" width="125" height="34" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-canfd-note" value="[CAN FD = custom]" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#888888;" vertex="1" parent="1">
+      <mxGeometry x="286" y="251" width="109" height="15" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-agent" value="micro_ros_agent&lt;br&gt;&lt;span style=&quot;font-size:12px;font-weight:normal;&quot;&gt;(Linux host)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=15;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="420" y="190" width="160" height="90" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-agent-note" value="bridges XRCE-DDS to DDS" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#888888;" vertex="1" parent="1">
+      <mxGeometry x="428" y="293" width="145" height="15" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-arrow2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="580" y="235" as="sourcePoint"/>
+        <mxPoint x="706" y="235" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="microros-arrow2-label" value="DDS / RTPS" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="612" y="217" width="66" height="17" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-graph" value="ROS 2 graph&lt;br&gt;&lt;span style=&quot;font-size:12px;font-weight:normal;&quot;&gt;(Fast DDS / Cyclone)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;fontSize=16;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="710" y="190" width="220" height="90" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-arrow3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="820" y="280" as="sourcePoint"/>
+        <mxPoint x="820" y="396" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="microros-nodelist" value="ros2 node list / topic echo&lt;br&gt;&lt;span style=&quot;font-size:11px;font-style:italic;font-weight:normal;color:#666666;&quot;&gt;MCU shows up as an ordinary node&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;fontSize=13;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="710" y="400" width="220" height="80" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="microros-footprint" value="Footprint &amp;lt; 75 KB flash, ~3 KB RAM (middleware). Start on ESP32 or RP2040." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="209" y="531" width="543" height="18" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

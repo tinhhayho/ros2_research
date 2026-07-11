@@ -1,0 +1,136 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="cp-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="0" width="960" height="600" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cp-title" value="Three ways nodes talk" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="323" y="28" width="315" height="36" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cp-panel1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCFCFD;strokeColor=#EEEEEE;" vertex="1" parent="1">
+      <mxGeometry x="36" y="66" width="288" height="476" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-panel2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCFCFD;strokeColor=#EEEEEE;" vertex="1" parent="1">
+      <mxGeometry x="336" y="66" width="288" height="476" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-panel3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCFCFD;strokeColor=#EEEEEE;" vertex="1" parent="1">
+      <mxGeometry x="636" y="66" width="288" height="476" as="geometry" />
+    </mxCell>
+
+    <mxCell id="cp-head1" value="Topic (stream)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;fontSize=17;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+      <mxGeometry x="56" y="80" width="248" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-head2" value="Service (request / reply)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;fontSize=15;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+      <mxGeometry x="356" y="80" width="248" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-head3" value="Action (long task)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;fontSize=16;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+      <mxGeometry x="656" y="80" width="248" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Column 1: Topic -->
+    <mxCell id="cp-publisher" value="Publisher" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;fontSize=15;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="120" y="160" width="120" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-sub1" value="Subscriber" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=15;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="40" y="400" width="110" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-sub2" value="Subscriber" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=15;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="210" y="400" width="110" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-arrow-pub1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="180" y="208" as="sourcePoint" />
+        <mxPoint x="98" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="cp-arrow-pub2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="180" y="208" as="sourcePoint" />
+        <mxPoint x="262" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="cp-cap1a" value="fire-and-forget broadcast &#8212;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="84" y="488" width="193" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-cap1b" value="like sensor frames on a bus" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="84" y="506" width="193" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Column 2: Service -->
+    <mxCell id="cp-client" value="Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;fontSize=15;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="420" y="160" width="120" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-server" value="Server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=15;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="420" y="400" width="120" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-arrow-req" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="208" as="sourcePoint" />
+        <mxPoint x="460" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="cp-arrow-resp" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="500" y="398" as="sourcePoint" />
+        <mxPoint x="500" y="208" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="cp-lbl-request" value="request" style="text;html=1;align=right;verticalAlign=middle;fontSize=13;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="402" y="296" width="50" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-lbl-response" value="response" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="508" y="296" width="57" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-cap2a" value="synchronous RPC &#8212;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="419" y="488" width="122" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-cap2b" value="like a register read/write" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="387" y="506" width="186" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Column 3: Action -->
+    <mxCell id="cp-client2" value="Client" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;fontSize=15;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="715" y="160" width="130" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-server2" value="Server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=15;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="715" y="400" width="130" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-arrow-goal" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="735" y="208" as="sourcePoint" />
+        <mxPoint x="735" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="cp-lbl-goal" value="goal" style="text;html=1;align=right;verticalAlign=middle;fontSize=13;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="699" y="243" width="29" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-arrow-feedback" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;dashed=1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="780" y="398" as="sourcePoint" />
+        <mxPoint x="780" y="208" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="cp-lbl-feedback" value="feedback &#215;N" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FCFCFD;strokeColor=none;fontSize=13;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="743" y="296" width="74" height="17" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-arrow-result" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="825" y="398" as="sourcePoint" />
+        <mxPoint x="825" y="208" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="cp-lbl-result" value="result" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="833" y="243" width="43" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-cap3a" value="long-running goal w/ progress + cancel &#8212;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="637" y="488" width="286" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="cp-cap3b" value="like a DMA/motor move" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="705" y="506" width="150" height="18" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

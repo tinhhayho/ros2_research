@@ -1,0 +1,185 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="rvc-title" value="One silicon, two worlds" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1B2B4A;" vertex="1" parent="1">
+      <mxGeometry x="309" y="24" width="343" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- Panels -->
+    <mxCell id="rvc-panel-left" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="20" y="78" width="360" height="480" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-panel-center" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="395" y="78" width="170" height="480" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-panel-right" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="580" y="78" width="360" height="480" as="geometry" />
+    </mxCell>
+
+    <!-- Panel headings -->
+    <mxCell id="rvc-head-left" value="PHYSICAL AI — robots" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="112" y="95" width="176" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-head-center" value="SHARED" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#2D5A2D;" vertex="1" parent="1">
+      <mxGeometry x="453" y="95" width="53" height="22" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-head-right" value="AUTOMOTIVE — DRIVE" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="681" y="95" width="158" height="22" as="geometry" />
+    </mxCell>
+
+    <!-- Left column chips -->
+    <mxCell id="rvc-chip-l1" value="ROS 2 + Isaac ROS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=1.5;fontSize=14;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="40" y="300" width="320" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-l2" value="Ubuntu 24.04 + PREEMPT_RT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=1.5;fontSize=14;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="40" y="354" width="320" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-l3" value="GR00T — 3B VLA, open" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=1.5;fontSize=14;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="40" y="408" width="320" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-l4" value="Jetson Thor · 128 GB · $3,499" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=1.5;fontSize=14;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="40" y="462" width="320" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Center column chips -->
+    <mxCell id="rvc-chip-c1" value="Thor SoC&lt;br&gt;(Blackwell)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2D5A2D;strokeWidth=1.5;fontSize=12;fontColor=#2D5A2D;" vertex="1" parent="1">
+      <mxGeometry x="403" y="300" width="154" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-c2" value="Cosmos world model" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2D5A2D;strokeWidth=1.5;fontSize=12.5;fontColor=#2D5A2D;" vertex="1" parent="1">
+      <mxGeometry x="403" y="354" width="154" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-c3" value="TensorRT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2D5A2D;strokeWidth=1.5;fontSize=13;fontColor=#2D5A2D;" vertex="1" parent="1">
+      <mxGeometry x="403" y="408" width="154" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-c4" value="3-computer loop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2D5A2D;strokeWidth=1.5;fontSize=12.5;fontColor=#2D5A2D;" vertex="1" parent="1">
+      <mxGeometry x="403" y="462" width="154" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Right column chips -->
+    <mxCell id="rvc-chip-r1" value="DriveWorks SDK (no &quot;ROS of cars&quot;)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B06A2A;strokeWidth=1.5;fontSize=13.5;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="600" y="300" width="320" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-r2" value="DriveOS 7: QNX + Linux VMs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B06A2A;strokeWidth=1.5;fontSize=14;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="600" y="354" width="320" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-r3" value="Alpamayo — 10.5B VLA, gated" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B06A2A;strokeWidth=1.5;fontSize=14;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="600" y="408" width="320" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-chip-r4" value="DRIVE Thor · 64 GB · GMSL cameras" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B06A2A;strokeWidth=1.5;fontSize=14;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="600" y="462" width="320" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Connecting arrows -->
+    <mxCell id="rvc-arrow1" value="" style="endArrow=classic;html=1;strokeColor=#2E5FAC;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="393" y="398" as="sourcePoint" />
+        <mxPoint x="382" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rvc-arrow2" value="" style="endArrow=classic;html=1;strokeColor=#2E5FAC;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="567" y="398" as="sourcePoint" />
+        <mxPoint x="578" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Robot pictogram -->
+    <mxCell id="rvc-r-antenna" value="" style="endArrow=none;html=1;strokeColor=#2E5FAC;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="200" y="120" as="sourcePoint" />
+        <mxPoint x="200" y="132" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rvc-r-antennaBall" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="196.5" y="114.5" width="7" height="7" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-legL" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;arcSize=40;" vertex="1" parent="1">
+      <mxGeometry x="180" y="236" width="12" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-legR" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;arcSize=40;" vertex="1" parent="1">
+      <mxGeometry x="208" y="236" width="12" height="38" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-footL" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#2E5FAC;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="171" y="268" width="20" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-footR" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#2E5FAC;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="209" y="268" width="20" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-armL" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;arcSize=30;" vertex="1" parent="1">
+      <mxGeometry x="146" y="186" width="24" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-armR" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;arcSize=30;" vertex="1" parent="1">
+      <mxGeometry x="230" y="186" width="24" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-handL" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#2E5FAC;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="145" y="229" width="14" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-handR" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#2E5FAC;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="241" y="229" width="14" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-torso" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#2E5FAC;strokeWidth=3;arcSize=20;" vertex="1" parent="1">
+      <mxGeometry x="170" y="176" width="60" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-chest" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="191" y="196" width="18" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-neck" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="194" y="170" width="12" height="8" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-head" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=3;" vertex="1" parent="1">
+      <mxGeometry x="180" y="132" width="40" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-eyeL" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="190" y="147" width="6" height="6" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-r-eyeR" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="204" y="147" width="6" height="6" as="geometry" />
+    </mxCell>
+
+    <!-- Car pictogram -->
+    <mxCell id="rvc-c-body" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=3;arcSize=40;" vertex="1" parent="1">
+      <mxGeometry x="630" y="214" width="260" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-c-cabin" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#2E5FAC;strokeWidth=3;arcSize=25;" vertex="1" parent="1">
+      <mxGeometry x="690" y="156" width="140" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-c-pillar" value="" style="endArrow=none;html=1;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="760" y="156" as="sourcePoint" />
+        <mxPoint x="760" y="214" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rvc-c-door" value="" style="endArrow=none;html=1;strokeColor=#2E5FAC;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="760" y="214" as="sourcePoint" />
+        <mxPoint x="760" y="258" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rvc-c-headlight" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#2E5FAC;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="875.5" y="231.5" width="9" height="9" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-c-taillight" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8D7DA;strokeColor=#2E5FAC;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="636" y="230" width="7" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-c-wheelL" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#2E5FAC;strokeWidth=3;" vertex="1" parent="1">
+      <mxGeometry x="649" y="232" width="52" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-c-hubL" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="666" y="249" width="18" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-c-wheelR" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#2E5FAC;strokeWidth=3;" vertex="1" parent="1">
+      <mxGeometry x="819" y="232" width="52" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="rvc-c-hubR" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E5FAC;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="836" y="249" width="18" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="rvc-footnote" value="VLA = Vision-Language-Action model (camera + text in, motion out) · GMSL = automotive camera serial link · QNX = safety-certified real-time OS" style="text;html=1;align=center;verticalAlign=middle;fontSize=12.5;fontColor=#666677;" vertex="1" parent="1">
+      <mxGeometry x="20" y="570" width="920" height="20" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>

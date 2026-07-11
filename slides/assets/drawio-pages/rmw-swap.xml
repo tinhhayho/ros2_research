@@ -1,0 +1,139 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="rmw-swap-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="0" width="960" height="600" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-title" value="One codebase, swappable middleware" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="230" y="28" width="501" height="36" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-nodebin" value="Same node binaries (talker / listener)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E5FAC;strokeColor=#234a8a;fontSize=16;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="290" y="72" width="380" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-arrow-down" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="122" as="sourcePoint"/>
+        <mxPoint x="480" y="145" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-rmw-iface" value="rmw interface&lt;br&gt;&lt;span style=&quot;font-size:13px;font-weight:normal;&quot;&gt;RMW_IMPLEMENTATION = rmw_fastrtps_cpp | rmw_cyclonedds_cpp | rmw_zenoh_cpp&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=16;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="120" y="148" width="720" height="58" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-fanout-1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="170" y="206" as="sourcePoint"/>
+        <mxPoint x="170" y="247" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-fanout-2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="206" as="sourcePoint"/>
+        <mxPoint x="480" y="247" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-fanout-3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="790" y="206" as="sourcePoint"/>
+        <mxPoint x="790" y="247" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-fastdds" value="Fast DDS&lt;br&gt;&lt;span style=&quot;font-size:13px;font-weight:600;color:#2f7d32;&quot;&gt;(Tier 1)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;fontSize=16;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="250" width="260" height="70" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-cyclonedds" value="Cyclone DDS&lt;br&gt;&lt;span style=&quot;font-size:13px;font-weight:600;color:#2f7d32;&quot;&gt;(Tier 1)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;fontSize=16;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="350" y="250" width="260" height="70" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-zenoh" value="Zenoh&lt;br&gt;&lt;span style=&quot;font-size:12.5px;font-weight:normal;color:#223344;&quot;&gt;(add-on; needs rmw_zenohd router)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;fontSize=16;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="660" y="250" width="260" height="70" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-strip-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFBFD;strokeColor=#DDE3EC;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="30" y="346" width="900" height="120" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-strip-label" value="interop strip" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#999999;" vertex="1" parent="1">
+      <mxGeometry x="42" y="354" width="86" height="17" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-drop-1" style="endArrow=none;html=1;rounded=0;strokeColor=#A9B6C7;strokeWidth=1.5;dashed=1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="170" y="320" as="sourcePoint"/>
+        <mxPoint x="170" y="400" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-drop-2" style="endArrow=none;html=1;rounded=0;strokeColor=#A9B6C7;strokeWidth=1.5;dashed=1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="320" as="sourcePoint"/>
+        <mxPoint x="480" y="435" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-drop-3" style="endArrow=none;html=1;rounded=0;strokeColor=#A9B6C7;strokeWidth=1.5;dashed=1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="790" y="320" as="sourcePoint"/>
+        <mxPoint x="790" y="435" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-interop-caption" value="interoperate (shared DDSI-RTPS wire)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="193" y="379" width="265" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-interop-line" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeColor=#4a9e4a;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="178" y="400" as="sourcePoint"/>
+        <mxPoint x="472" y="400" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-no-interop-caption" value="no native interop (different wire) — needs a bridge" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#8a2b32;" vertex="1" parent="1">
+      <mxGeometry x="446" y="414" width="379" height="18" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="rmw-swap-broken-line-1" style="endArrow=classic;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2.5;dashed=1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="620" y="435" as="sourcePoint"/>
+        <mxPoint x="480" y="435" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-broken-line-2" style="endArrow=classic;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2.5;dashed=1;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="650" y="435" as="sourcePoint"/>
+        <mxPoint x="790" y="435" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-break-mark-1" style="endArrow=none;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="628" y="427" as="sourcePoint"/>
+        <mxPoint x="636" y="443" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-break-mark-2" style="endArrow=none;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="638" y="427" as="sourcePoint"/>
+        <mxPoint x="646" y="443" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="rmw-swap-caption" value="Swap the whole transport with one env var, no recompile —&lt;br&gt;like retargeting firmware UART &#8594; SPI &#8594; CAN by changing the HAL." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="244" y="504" width="472" height="36" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>

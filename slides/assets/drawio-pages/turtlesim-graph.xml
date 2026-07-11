@@ -1,0 +1,156 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" /><mxCell id="1" parent="0" />
+
+    <mxCell id="turtlesim-title" value="What you'll see: turtlesim live" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="259" y="26" width="443" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-subtitle" value="Live node graph (rqt_graph view) of the running demo" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="294" y="59" width="372" height="18" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-panel-left" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFBFD;strokeColor=#E8EBF0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="36" y="82" width="586" height="450" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-panel-right" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFBFD;strokeColor=#E8EBF0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="640" y="118" width="296" height="346" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-services-label" value="services (request / reply)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="364" y="84" width="186" height="18" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-conn1" style="endArrow=none;html=1;rounded=0;strokeColor=#B0B0B0;strokeWidth=1.3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="378" y="130" as="sourcePoint" />
+        <mxPoint x="427" y="181" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="turtlesim-conn2" style="endArrow=none;html=1;rounded=0;strokeColor=#B0B0B0;strokeWidth=1.3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="449" y="130" as="sourcePoint" />
+        <mxPoint x="450" y="178" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="turtlesim-conn3" style="endArrow=none;html=1;rounded=0;strokeColor=#B0B0B0;strokeWidth=1.3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="528" y="130" as="sourcePoint" />
+        <mxPoint x="476" y="183" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="turtlesim-spawn-tag" value="/spawn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=14;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="345" y="100" width="66" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-clear-tag" value="/clear" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=14;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="419" y="100" width="60" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-setpen-tag" value="/set_pen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=14;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="487" y="100" width="82" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-teleop-node" value="/teleop_turtle" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;strokeWidth=2;fontSize=16;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="48" y="182" width="164" height="76" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-turtlesim-node" value="/turtlesim" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;strokeWidth=2;fontSize=17;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="366" y="178" width="168" height="84" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-cmdvel-edge" value="/turtle1/cmd_vel&lt;br&gt;&lt;font style=&quot;font-size:12px;font-style:italic;color:#666666;&quot;&gt;(geometry_msgs/Twist)&lt;/font&gt;" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;fontSize=14;fontColor=#223344;verticalAlign=bottom;align=center;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="212" y="220" as="sourcePoint" />
+        <mxPoint x="362" y="220" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="turtlesim-pose-edge" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="450" y="263" as="sourcePoint" />
+        <mxPoint x="450" y="426" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="turtlesim-pose-label1" value="/turtle1/pose" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="466" y="324" width="100" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-pose-label2" value="(turtlesim/Pose)" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="466" y="342" width="106" height="17" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-echo-box" value="(echo / plot)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=16;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="370" y="430" width="160" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-echo-caption" value="subscriber: ros2 topic echo / rqt_plot" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="325" y="499" width="251" height="17" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-render-link" value="renders the window" style="endArrow=none;html=1;rounded=0;strokeColor=#9BBCE0;strokeWidth=1.5;dashed=1;fontSize=12;fontStyle=2;fontColor=#666666;verticalAlign=bottom;align=center;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="536" y="210" as="sourcePoint" />
+        <mxPoint x="648" y="210" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="turtlesim-window-title" value="turtlesim window" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="723" y="130" width="131" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-window-box" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="652" y="150" width="272" height="272" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-pen-trail" style="curved=1;endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="688" y="392" as="sourcePoint" />
+        <mxPoint x="838" y="268" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="720" y="320" />
+          <mxPoint x="760" y="380" />
+          <mxPoint x="770" y="320" />
+          <mxPoint x="820" y="250" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="turtlesim-turtle-body" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7CB342;strokeColor=#558B2F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="814" y="251" width="48" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-turtle-head" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7CB342;strokeColor=#558B2F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="830" y="238" width="16" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-turtle-leg1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7CB342;strokeColor=#558B2F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="811" y="250" width="12" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-turtle-leg2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7CB342;strokeColor=#558B2F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="853" y="250" width="12" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-turtle-leg3" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7CB342;strokeColor=#558B2F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="811" y="281" width="12" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-turtle-leg4" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7CB342;strokeColor=#558B2F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="853" y="281" width="12" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="turtlesim-turtle-vline" style="endArrow=none;html=1;rounded=0;strokeColor=#558B2F;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="838" y="251" as="sourcePoint" />
+        <mxPoint x="838" y="291" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="turtlesim-turtle-hline" style="endArrow=none;html=1;rounded=0;strokeColor=#558B2F;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="814" y="271" as="sourcePoint" />
+        <mxPoint x="862" y="271" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="turtlesim-turtle-tail" style="triangle;whiteSpace=wrap;html=1;fillColor=#7CB342;strokeColor=none;direction=south;" vertex="1" parent="1">
+      <mxGeometry x="833" y="289" width="10" height="11" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-drive-caption" value="drive it with the arrow keys" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="688" y="433" width="200" height="18" as="geometry" />
+    </mxCell>
+
+    <mxCell id="turtlesim-bottom-caption" value="Press arrow keys &#8594; Twist on /turtle1/cmd_vel &#8594; turtle moves &#8594; Pose streams back. Topics + services, visible." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="94" y="559" width="772" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

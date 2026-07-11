@@ -1,0 +1,125 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <mxCell id="qos-rxo-bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="0" y="0" width="960" height="600" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-title" value="QoS compatibility — Request vs Offered (RxO)" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="151" y="24" width="658" height="36" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-rule-banner" value="A connection forms only if OFFERED &#8805; REQUESTED, for every policy (AND)." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=17;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="80" y="62" width="800" height="48" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-rowA-bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d98b91;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="30" y="158" width="6" height="84" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-rowA-label" value="ROW A" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="46" y="182" width="39" height="20" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-rowA-sub" value="incompatible" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#8a2b32;" vertex="1" parent="1">
+      <mxGeometry x="46" y="204" width="79" height="17" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-pubA" value="PUBLISHER offers&lt;br&gt;&lt;span style=&quot;font-size:17px;font-weight:700;&quot;&gt;best_effort&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="158" width="195" height="84" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-arrowA" style="endArrow=classic;html=1;rounded=0;strokeColor=#c0392b;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="345" y="200" as="sourcePoint"/>
+        <mxPoint x="460" y="200" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="qos-rxo-arrowA-circle" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c0392b;strokeWidth=2;" vertex="1" parent="1">
+      <mxGeometry x="387" y="185" width="30" height="30" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-arrowA-x1" style="endArrow=none;html=1;rounded=0;strokeColor=#c0392b;strokeWidth=3.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="394" y="192" as="sourcePoint"/>
+        <mxPoint x="410" y="208" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="qos-rxo-arrowA-x2" style="endArrow=none;html=1;rounded=0;strokeColor=#c0392b;strokeWidth=3.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="410" y="192" as="sourcePoint"/>
+        <mxPoint x="394" y="208" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="qos-rxo-arrowA-caption" value="best_effort &amp;lt; reliable" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#8a2b32;" vertex="1" parent="1">
+      <mxGeometry x="330" y="228" width="145" height="17" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-subA" value="SUBSCRIBER requests&lt;br&gt;&lt;span style=&quot;font-size:17px;font-weight:700;&quot;&gt;reliable&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="465" y="158" width="195" height="84" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-connA" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="660" y="200" as="sourcePoint"/>
+        <mxPoint x="696" y="200" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="qos-rxo-resultA" value="0 messages delivered&lt;br&gt;&lt;span style=&quot;font-size:12px;font-style:italic;font-weight:normal;&quot;&gt;(incompatible)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8D7DA;strokeColor=#d98b91;fontSize=14;fontStyle=1;fontColor=#8a2b32;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="700" y="170" width="220" height="60" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-rowB-bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6Fae6f;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="30" y="300" width="6" height="84" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-rowB-label" value="ROW B" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="46" y="324" width="39" height="20" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-rowB-sub" value="compatible" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="46" y="346" width="66" height="17" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-pubB" value="PUBLISHER offers&lt;br&gt;&lt;span style=&quot;font-size:17px;font-weight:700;&quot;&gt;reliable&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="300" width="195" height="84" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-arrowB" style="endArrow=classic;html=1;rounded=0;strokeColor=#4a8f4a;strokeWidth=2.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="345" y="342" as="sourcePoint"/>
+        <mxPoint x="460" y="342" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="qos-rxo-arrowB-caption" value="reliable &#8805; best_effort" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="330" y="370" width="145" height="17" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-subB" value="SUBSCRIBER requests&lt;br&gt;&lt;span style=&quot;font-size:17px;font-weight:700;&quot;&gt;best_effort&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#6F9BD1;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="465" y="300" width="195" height="84" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-connB" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="660" y="342" as="sourcePoint"/>
+        <mxPoint x="696" y="342" as="targetPoint"/>
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="qos-rxo-resultB" value="messages flow&lt;br&gt;&lt;span style=&quot;font-size:12px;font-style:italic;font-weight:normal;&quot;&gt;(offered &amp;gt; requested)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#6Fae6f;fontSize=14;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="700" y="312" width="220" height="60" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="qos-rxo-notes" value="Notes&lt;br&gt;&lt;span style=&quot;font-size:13px;font-style:italic;font-weight:normal;color:#666666;&quot;&gt;Only reliability, durability, deadline, and liveliness participate in RxO matching.&lt;br&gt;History / Depth / Lifespan do NOT affect compatibility.&lt;br&gt;An incompatible match logs a warning — it is not silent.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;fontSize=14;fontStyle=1;fontColor=#333333;align=left;verticalAlign=top;spacingLeft=20;spacingTop=16;" vertex="1" parent="1">
+      <mxGeometry x="80" y="436" width="800" height="132" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
