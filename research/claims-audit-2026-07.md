@@ -1,0 +1,64 @@
+# Claims audit manifest — research deck (July 2026)
+
+Per-claim audit trail for `slides/research.html` / `slides/research-deck.md`.
+Two audit passes: the original 14-headline-claim recheck (early July 2026) and a second
+independent recheck (2026-07-11) that triggered the wording corrections recorded here.
+
+Legend — **status**: `confirmed` (primary source matches), `corrected` (deck was fixed),
+`scoped` (claim reworded from absolute fact to bounded observation), `conflicting`
+(sources disagree; deck now footnotes the conflict), `self-reported` (vendor/project's
+own figure, labeled as such), `own-run` (our captured measurement, raw artifact in repo),
+`unverified` (kept only as an explicitly-flagged secondary claim).
+
+| # | Slide | Claim (as now stated) | Source (exact URL) | Accessed | Type | Status | Notes |
+|---|---|---|---|---|---|---|---|
+| 1 | 8 | ROS 2 Jazzy is LTS, EOL May 2029 | https://docs.ros.org/en/jazzy/Releases.html | 2026-07 | primary | confirmed | |
+| 2 | 8 | rosbag2 default storage is MCAP | https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html | 2026-07 | primary | confirmed | |
+| 3 | 12 | Cartographer no longer actively maintained | https://github.com/cartographer-project/cartographer | 2026-07 | primary | confirmed | README maintenance notice |
+| 4 | 12 | Nav2 "100+ companies" | https://docs.nav2.org/ | 2026-07 | vendor self-report | self-reported | Labeled "the project's own count" on the slide |
+| 5 | 12 | Autoware "~500 companies" | https://autoware.org/about/why-autoware/ | 2026-07 | vendor self-report | self-reported | Labeled "foundation's own figure" |
+| 6 | 12, 14 | No ROS exposed in Waymo/Tesla/commercial-humanoid production stacks | (public materials reviewed; proprietary internals not observable) | 2026-07 | inference | scoped | Reworded from "no ROS / ROS 2 mostly absent" to "public materials expose no ROS 2" |
+| 7 | 7 | ROS 2 default graph is not by itself a hard-RT boundary; intra-process can bypass serialization; DDS can be configured for deterministic use | https://design.ros2.org/articles/intraprocess_communications.html · https://design.ros2.org/articles/realtime_proposal.html | 2026-07-11 | primary | corrected | Replaced absolute "every message serialized / DDS not RT at all / 10 kHz impossible" |
+| 8 | 7 | ~50 µs PREEMPT_RT jitter | https://wiki.linuxfoundation.org/realtime/preempt_rt_versions | 2026-07 | secondary | unverified | Explicitly labeled illustrative, not a constant; own cyclictest capture is roadmap step 4 |
+| 9 | 7 | Firm RT = late result worthless, rare misses tolerable | https://docs.kernel.org/core-api/real-time/theory.html | 2026-07-11 | primary | corrected | Definition fixed (was "misses are rare") |
+| 10 | 10 | ros2_control loop = read→update→write direct plugin calls at a configured rate | https://control.ros.org/jazzy/doc/getting_started/getting_started.html | 2026-07 | primary | confirmed | 1 kHz stated as common choice, not default; no-malloc/no-locks stated as design obligation |
+| 11 | 14 | Figure Helix: S2 7–9 Hz + S1 200 Hz; Helix 02 adds 1 kHz S0 | https://www.figure.ai/news/helix · https://www.figure.ai/news/helix-02 | 2026-07-11 | primary | confirmed | Dual-system rates now per-model, not a universal range |
+| 12 | 14 | π0.5 = VLM + flow-matching action expert | https://www.physicalintelligence.company/download/pi05.pdf | 2026-07 | primary | confirmed | Shares the motif, not necessarily Helix's scheduling |
+| 13 | 16–18 | Open-RMF architecture: fleet adapters, negotiation, space-time scheduling | https://github.com/open-rmf/rmf · https://github.com/open-rmf/free_fleet | 2026-07 | primary | confirmed | |
+| 14 | 20 | Cosmos 3: May 31 2026, MoT 16B/64B, open license | https://nvidianews.nvidia.com (Cosmos 3 announcement) | 2026-07 | primary | confirmed | |
+| 15 | 20 | GR00T N1.7: Apr 17 2026, Cosmos-Reason2-2B backbone, commercial OK | https://huggingface.co/blog/nvidia/gr00t-n1-7 · https://github.com/NVIDIA/Isaac-GR00T | 2026-07 | primary | confirmed | |
+| 16 | 20 | Isaac ROS 4.5 targets ROS 2 Jazzy | https://nvidia-isaac-ros.github.io/releases/ | 2026-07 | primary | confirmed | 3.x = Humble/Orin |
+| 17 | 20 | Jetson Thor: 128 GB, 40–130 W, 2070 sparse-FP4 TFLOPS, $3,499 devkit | https://developer.nvidia.com/blog/introducing-nvidia-jetson-thor-the-ultimate-platform-for-physical-ai/ | 2026-07 | primary | confirmed | |
+| 18 | 20 | Thor MIG = 2 instances, technology preview | https://developer.nvidia.com/embedded/jetpack/downloads (JetPack 7.2) | 2026-07-11 | primary | corrected | Was "up to 7" in first research pass; preview caveat added 07-11 |
+| 19 | 22–23 | SPE removed on Thor; official block diagram's SPE block disavowed | https://forums.developer.nvidia.com (NVIDIA staff answers) | 2026-07 | primary (staff) | confirmed | |
+| 20 | 23 | FSI only on DRIVE/IGX SKUs, not Jetson T5000 | https://forums.developer.nvidia.com/t/functional-safety-island-in-jetson-thor-t5000-module/360033 | 2026-07-11 | primary (staff) | confirmed | |
+| 21 | 26, 30, 39 | Jetson Thor and DRIVE Thor = same Thor architecture/SoC family | (NVIDIA marketing materials) | 2026-07-11 | secondary | scoped | Not claimed to be same die/bin/qualification |
+| 22 | 26, 30 | GR00T (Cosmos-Reason2-2B) and Alpamayo (Cosmos-Reason 8.2B) share lineage, not one brain | https://huggingface.co/nvidia/Alpamayo-R1-10B | 2026-07-11 | primary | corrected | "One brain" phrasing removed |
+| 23 | 26, 30 | Alpamayo 2 Super parameter count | https://nvidianews.nvidia.com/news/nvidia-alpamayo-2-super-robotaxis (34B) vs https://www.nvidia.com/en-us/solutions/autonomous-vehicles/alpamayo/ (32B) | 2026-07-11 | primary | conflicting | NVIDIA's own sources disagree; deck footnotes both |
+| 24 | 28 | DriveOS 5.2 ASIL-B (TÜV SÜD, Dec 2022) | https://blogs.nvidia.com/blog/nvidia-drive-os-tuv-sud-safety-certification/ | 2026-07 | primary | confirmed | |
+| 25 | 28 | DriveOS 6.0 ASIL-D (Jan 2025) — on Orin, not Thor | https://www.nvidia.com/en-us/ai-trust-center/halos/autonomous-vehicles/ | 2026-07 | primary | confirmed | Audit pass 1 correction, held up in pass 2 |
+| 26 | 28 | DRIVE Thor-X "assessed as ASIL-D conformant" (not certified) | https://www.nvidia.com/en-us/ai-trust-center/halos/autonomous-vehicles/ | 2026-07-11 | primary | confirmed | |
+| 27 | 28 | QNX OS for Safety 8.0 = ASIL-D / SIL 3 as SEooC, supported on DRIVE AGX Thor | https://qnx.software/en/software/products-and-solutions/qnx-os-and-os-for-safety | 2026-07-11 | primary | corrected | "In the Thor devkit" → "supported on"; OS cert ≠ devkit/vehicle cert |
+| 28 | 28–29 | Component/OS certs feed but do not replace the OEM item-level safety case | ISO 26262 structure (SEooC concept) | 2026-07-11 | primary | corrected | Boundary sentence added to both cert slides |
+| 29 | 28, 38 | Robotics side: no *completed* product certs; Halos for Robotics announced 2026 | https://www.nvidia.com/en-us/ai-trust-center/halos/robotics/ | 2026-07-11 | primary | corrected | Was "zero certifications" unscoped |
+| 30 | 29 | FSI = 4× lockstep Cortex-R52, ~10,000 ASIL-D MIPS | DriveOS 7.0.3 docs "Functional Safety Island" (developer.nvidia.com) | 2026-07 | primary | confirmed | |
+| 31 | 29 | >22,000 fault-detection mechanisms | (press/secondary coverage) | 2026-07 | secondary | unverified | Flagged on-slide: "treat the exact count with care" |
+| 32 | 29 | Board safety MCU: RH850 (Thor gen), AURIX (Orin gen) | https://forums.developer.nvidia.com (RH850 flashing threads) | 2026-07 | primary (staff) | confirmed | Board-level, outside the SoC |
+| 33 | 31 | Hyperion 10: 2× Thor, 14 cam, 9 radar, 1 lidar, 12 USS | https://www.nvidia.com/en-eu/solutions/autonomous-vehicles/drive-hyperion/ | 2026-07-11 | primary | confirmed | |
+| 34 | 33 | Mercedes CLA series production since June 4, 2025 (first MB.OS car) | https://group.mercedes-benz.com/innovations/digitalisation/industry-4-0/article.html | 2026-07-11 | primary | corrected | Deck said "in production since Q1 2026" — conflated with driving-stack rollout |
+| 35 | 33 | NVIDIA enhanced-L2 for CLA: US rollout expected by end of 2026 | https://blogs.nvidia.com/blog/drive-av-software-mercedes-benz-cla/ | 2026-07-11 | primary | corrected | |
+| 36 | 33 | Uber×NVIDIA: 28 cities by 2028; 100k L4 "over time, starting 2027" | https://investor.uber.com/news-events/news/press-release-details/2026/NVIDIA-to-Launch-L4-Software-Driven-Robotaxis-on-Uber-Across-28-Cities-by-2028/default.aspx · https://nvidianews.nvidia.com/news/nvidia-uber-robotaxi | 2026-07-11 | primary | corrected | 100k was previously implied "by 2028" |
+| 37 | 33 | NVIDIA automotive revenue $2.3B FY26 (+39% YoY) | https://nvidianews.nvidia.com (Q4 FY26 results) | 2026-07 | primary | confirmed | |
+| 38 | 35 | GR00T TensorRT on Thor: 144.9→93.8 ms (vs RTX Pro 5000 / H100) | https://huggingface.co/blog/nvidia/gr00t-n1-7 | 2026-07 | primary | confirmed | Audit pass 1 correction (was misquoted 117→92 vs RTX 5090) |
+| 39 | 36 | GR00T run A: load 94.6 s, 107.7 ms avg, P90 109.8 | `docs/img/groot_n17_inference.txt` (this repo) | 2026-07 | own-run | own-run | First-ever run, cold cache |
+| 40 | 36–37 | GR00T run B: load 20.5 s, 106.4 ms avg, P90 108.4, peak VRAM 7.5 GB | `slides/assets/groot-run-screenshot.png` (this repo) | 2026-07 | own-run | own-run | Warm cache; VRAM sampled every 2 s (may miss short peaks) |
+| 41 | 36 | MSE 0.0030 / 0.0370 = open-loop action-prediction error, n=2 | https://github.com/NVIDIA/Isaac-GR00T/blob/main/getting_started/policy.md | 2026-07-11 | primary + own-run | corrected | Was labeled "accuracy"; ~75/s relabeled generated-step throughput |
+| 42 | 20 | GR00T inference VRAM floor 16 GB / fine-tune 40 GB | https://github.com/NVIDIA/Isaac-GR00T | 2026-07 | primary | confirmed | |
+
+## Reproducibility gaps still open (honest list)
+
+- No local `cyclictest` capture yet — the ~50 µs jitter figure stays secondary until
+  roadmap step 4 lands.
+- GR00T runs lack a pinned model revision + package lock + seed in the repo; the raw
+  log and screenshot are committed, the environment bootstrap is not.
+- The ">22,000 diagnostic mechanisms" count has no primary NVIDIA document behind it.

@@ -74,7 +74,8 @@ EtherCAT/CAN-FD 1–10 kHz → torque/impedance ~1 kHz on PREEMPT_RT/RTOS → st
 50–200 Hz. **Dual-system VLA is the convergent architecture** (NVIDIA GR00T N1.6, Figure
 Helix, Physical Intelligence π0.5).
 
-**ROS 2 reality check for humanoids:** mostly absent from production stacks.
+**ROS 2 reality check for humanoids:** not exposed in the public materials of commercial
+production stacks (proprietary internals are not observable from outside).
 | Player | Stack | ROS 2 role |
 |---|---|---|
 | Unitree G1/H1 | unitree_sdk2 (CycloneDDS) | optional `unitree_ros2` wrapper only |

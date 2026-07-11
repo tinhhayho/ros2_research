@@ -129,7 +129,8 @@ Two consequences worth internalizing:
    command plots any signal.
 5. **A foundation model fits on a desktop.** We ran NVIDIA's GR00T N1.7 robot model
    (3 billion parameters) zero-shot on a single RTX GPU with 16 GB of memory: ~106 ms per
-   inference, ~75 robot actions/second. The frontier is closer than it looks.
+   inference, and each inference emits 8 future action steps (~75 generated steps/second
+   of compute throughput). The frontier is closer than it looks.
 
 ---
 

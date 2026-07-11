@@ -2,9 +2,10 @@
 
 **Wheeled · Humanoid · Fleet (Open-RMF) · NVIDIA Physical AI vs Automotive**
 
-> This post is the long-form version of our July 2026 research deck. Every external claim is
-> source-backed (full list at the end) and went through an **independent audit pass** (each
-> load-bearing claim re-verified against its primary source). Every demo number was
+> This post is the long-form version of our July 2026 research deck. External claims are
+> source-backed (full list at the end); the **14 headline claims** additionally went through
+> an **independent audit pass** (re-verified against their primary sources) — the remaining
+> claims are sourced but not exhaustively audited. Every demo number was
 > **measured on our own machine** — nothing copied from marketing material.
 >
 > **How to read this.** This is a *deep-dive* — written for readers who already know what a
@@ -59,12 +60,15 @@ Bottom-up:
 
 ![Task placement by layer](layer-tasks.png)
 
-Rule #1: **the loop rate picks the layer.** Faster and must-run-on-time → lower (MCU/RTOS);
-heavier math and latency-tolerant → higher (Linux/GPU). Three corollaries that are commonly
-misunderstood:
+Rule #1: **the loop rate picks the layer** — the strongest *first* heuristic, though not
+the only axis (real placement also weighs WCET — Worst-Case Execution Time — fault
+containment, certification, and bus latency). Faster and must-run-on-time → lower
+(MCU/RTOS); heavier math and latency-tolerant → higher (Linux/GPU). Three corollaries that
+are commonly misunderstood:
 
-1. **Motor control is three nested loops living on two layers.** The current/FOC loop
-   (8–32 kHz) always lives on the MCU. The ~1 kHz position loop has two real-world homes:
+1. **Motor control is three nested loops living on two layers** *(the common pattern)*.
+   The current/FOC loop (8–32 kHz) lives on dedicated silicon — an MCU, DSP, FPGA, or
+   inside a smart drive. The ~1 kHz position loop has two common homes:
    inside a smart servo drive (the industrial pattern) or inside `ros2_control` on
    PREEMPT_RT (the humanoid pattern). Choosing between those two architectures is the
    biggest call a robot-firmware team makes.
@@ -73,9 +77,10 @@ misunderstood:
    a fast convex optimizer), the Pinocchio library, allocation-free C++ — runs at 1 kHz
    inside the RT loop. *Planning mode* — MoveIt 2, collision-aware search taking hundreds
    of milliseconds — lives up in the ROS 2 graph.
-3. **SLAM and path planning are never real-time.** When SLAM stalls for a few hundred ms on
-   a loop closure, navigation pauses — torque is unaffected, because the layers below keep
-   the robot safe on their own.
+3. **SLAM and global path planning stay out of the torque/safety loop.** When SLAM stalls
+   for a few hundred ms on a loop closure, navigation pauses — torque is unaffected,
+   *provided* the layers below carry independent safety functions. That is a design
+   requirement to engineer in, not something a layered architecture grants for free.
 
 > This rate-layering is engineering canon, not our invention: cascade control (inner loop
 > ~10× faster — Åström/Hägglund), rate-monotonic scheduling (Liu & Layland, 1973), Albus's
@@ -94,30 +99,41 @@ provable simplicity, not speed.
 
 The words "ROS 2" on our map actually cover **two different execution worlds**:
 
-- **The DDS graph** — the pub/sub world: every message is serialized through DDS (Data
-  Distribution Service — the standard distributed middleware), with ms-class, best-effort
-  latency. SLAM, Nav2, and perception live here.
-- **`ros2_control`** — *configured* by ROS 2, but its hot loop **bypasses DDS entirely**:
-  the real-time thread of `controller_manager` runs `read() → update() → write()` as direct
-  C++ function calls between plugins. Topics only touch the non-real-time side (publishing
-  `/joint_states`, switching controllers).
+- **The DDS graph** — the pub/sub world: messages cross the middleware by default (DDS —
+  Data Distribution Service, the standard distributed middleware; intra-process C++
+  communication can bypass serialization entirely), with latency that is typically ms-class
+  and **configuration-dependent**. The default graph is not by itself a hard-real-time
+  boundary — DDS *can* be configured for deterministic operation, but whether a loop meets
+  its deadline must be measured on the target kernel, RMW, hardware, and workload. SLAM,
+  Nav2, and perception live here.
+- **`ros2_control`** — *configured* by ROS 2, but its hot loop **bypasses DDS**: the
+  real-time thread of `controller_manager` runs `read() → update() → write()` as direct
+  C++ function calls between plugins, at a **configured rate** (1 kHz is the common
+  choice, not a fixed default). Topic data reaches the loop through realtime-safe buffers
+  filled on the non-real-time side.
 
-And **real-time means a guaranteed worst-case deadline — not speed**:
+And **real-time means a deadline you can prove (WCET + jitter) — not speed**. The budget
+below is illustrative: the ~50 µs jitter figure is a typical tuned-PREEMPT_RT result, *not
+a constant* — it depends on the kernel, CPU isolation, IRQ placement, and workload, and
+must be measured on your own target (a cyclictest capture is on our repo roadmap):
 
-| Loop | Period | Worst-case jitter | Verdict |
+| Loop | Period | Jitter budget vs period | Verdict |
 |---|---|---|---|
 | FOC on the MCU | 31–125 µs (8–32 kHz) | ns–µs (hardware timers) | hard real-time |
-| ros2_control on PREEMPT_RT | 1,000 µs (1 kHz) | ~50 µs ≈ 5% of the period | firm real-time — fine |
-| The same Linux pushed to 10 kHz | 100 µs | ~50 µs ≈ 50% of the period | impossible — the OS ceiling |
-| One hop over a DDS topic | — | ms-class, unbounded | not real-time at all |
+| ros2_control on PREEMPT_RT | 1,000 µs (1 kHz) | ~50 µs ≈ 5% of the period | comfortable |
+| The same loop pushed to 10 kHz | 100 µs | ~50 µs ≈ 50% of the period | budget gone — prove it on target, or use dedicated silicon |
+| One hop over a DDS topic (defaults) | — | typically ms-class, config-dependent | keep it out of the torque path |
 
-1 kHz is where two limits meet: **Linux's practical ceiling** (~50 µs worst-case jitter,
-measured with cyclictest) and **the point where physics stops caring** (mechanical time
-constants are ms-scale; the µs world belongs to motor electronics on the MCU).
+1 kHz is where two limits meet: **well-tuned Linux gets comfortable** and **physics stops
+caring** (mechanical time constants are ms-scale; the µs world belongs to motor
+electronics on the MCU).
 
-*Terminology note: "firm" real-time = deadline misses are rare but not provably impossible;
-provable hard real-time — backed by WCET analysis (Worst-Case Execution Time) — is the
-domain of MCUs, RTOSes, and QNX.*
+*Terminology note: "hard" real-time = a missed deadline is a system failure; "firm" = a
+late result is worthless but rare misses are tolerable; "soft" = a late result merely
+loses value. Provable hard real-time — backed by WCET analysis — is the domain of MCUs,
+RTOSes, and QNX. DDS itself powers deterministic distributed systems when configured for
+it (see the real-time and intra-process design articles on design.ros2.org) — the caution
+here is about ROS graph defaults, not about DDS the standard.*
 
 ### 2.2. The ROS 2 ecosystem — which repo, and when
 
@@ -222,11 +238,13 @@ any master: pure DDS discovery.
 
 **On-road autonomous driving — a split world:**
 
-- **Autoware** (on ROS 2): the open reference stack — ~500 participating companies; its
+- **Autoware** (on ROS 2): the open reference stack — ~500 participating companies
+  *(the foundation's own figure)*; its
   first public-road L4 target (SAE Level 4 — fully driverless within a bounded domain) is
   shuttles and buses.
-- Robotaxis and consumer vehicles (Waymo, Tesla): proprietary stacks, increasingly
-  **end-to-end learned** (one network from camera to steering) — no ROS anywhere.
+- Robotaxis and consumer vehicles (Waymo, Tesla): proprietary stacks; public materials
+  show **end-to-end learned** architectures (one network from camera to steering) and
+  expose no ROS — proprietary internals are not observable from outside.
 
 ### 3.2. Where ROS 2 actually stands
 
@@ -234,23 +252,25 @@ any master: pure DDS discovery.
 
 | Segment | Verdict | Detail |
 |---|---|---|
-| AMR / industrial | **De-facto standard** | Nav2 + ros2_control + slam_toolbox; 100+ companies in production |
-| Autonomous vehicles | **Open reference only** | Autoware for shuttles/L4 pilots; commercial robotaxis don't use ROS |
-| Humanoids | **Mostly absent** | Unitree offers an optional ROS 2 wrapper; Tesla/Figure/1X/Atlas run proprietary stacks |
+| AMR / industrial | **De-facto standard** | Nav2 + ros2_control + slam_toolbox; "100+ companies" (the project's own count) |
+| Autonomous vehicles | **Open reference only** | Autoware for shuttles/L4 pilots; commercial robotaxis expose no ROS publicly |
+| Humanoids | **Not exposed publicly** | Unitree offers an optional ROS 2 wrapper; Tesla/Figure/1X/Atlas run proprietary stacks whose internals aren't observable |
 
 **Learning ROS 2 = learning the industrial mainstream** — and the ≤1 kHz firmware layers
 are the same everywhere anyway.
 
-### 3.3. Humanoids: RL won the locomotion war (2024→2026)
+### 3.3. Humanoids: locomotion moved to RL (2024→2026)
 
 - The classical school — **MPC + whole-body QP** (MPC — Model Predictive Control; the
   Atlas/DRC lineage) — has retreated to the *low-level layer*.
-- New platforms ship **RL policies trained in simulation** (Isaac Lab / MuJoCo), deployed
-  on-robot at **~50 Hz** — even the new electric Atlas moved to RL "large behavior models".
-- The task layer has converged on **dual-system VLA** (VLA — Vision-Language-Action: a
-  model that takes camera images plus a language instruction and outputs motion): a slow
-  reasoning half at 1–10 Hz plus a fast action head at 50–200 Hz. GR00T (NVIDIA), Helix
-  (Figure), and π0.5 (Physical Intelligence) all share this shape.
+- Every new platform we reviewed ships **RL policies trained in simulation** (Isaac Lab /
+  MuJoCo), deployed on-robot at **~50 Hz** — even the new electric Atlas moved to RL
+  "large behavior models".
+- The task layer has converged on a **dual-system VLA motif** (VLA — Vision-Language-Action:
+  a model that takes camera images plus a language instruction and outputs motion): a slow
+  reasoning half plus a fast action head. The rates differ per model — Figure's Helix runs
+  S2 at 7–9 Hz and S1 at 200 Hz (Helix 02 adds a 1 kHz S0 reflex layer); GR00T (NVIDIA)
+  and π0.5 (Physical Intelligence) share the shape, not the exact rates.
 - The joint-level firmware underneath (FOC at 8–32 kHz, EtherCAT/CAN-FD at 1–10 kHz) —
   **unchanged**.
 
@@ -339,7 +359,7 @@ the "data flywheel".
 | **Isaac Sim 6 / Isaac Lab** | Apache-2.0 core / BSD-3; **Isaac Lab-Arena** (the policy-evaluation framework) is alpha — unstable APIs |
 | **Isaac Teleop** | Demonstration capture via Apple Vision Pro / Quest 3; a browser demo needs no headset at all |
 | **Isaac ROS 4.5** | GPU-accelerated ROS 2 Jazzy packages: cuVSLAM (replaces slam_toolbox), nvblox (replaces costmaps), cuMotion (replaces MoveIt planning) — NVIDIA GPUs only, no CPU path |
-| **Jetson Thor** | 128 GB unified RAM, 40–130 W, $3,499 devkit; MIG (Multi-Instance GPU — hardware partitioning of the GPU) = **2** partitions |
+| **Jetson Thor** | 128 GB unified RAM, 40–130 W, $3,499 devkit; MIG (Multi-Instance GPU — hardware partitioning of the GPU) = **2** partitions, a technology preview in JetPack 7.2 |
 
 Openness is layered: **weights and code are open; everything is locked to CUDA/TensorRT
 underneath.**
@@ -430,8 +450,11 @@ only, no safety claim.*
   interconnect), voltage/clock/thermal monitors *(secondary source — treat the exact count
   with care)*.
 - **ASIL decomposition** (splitting one ASIL-D requirement across redundant lower-rated
-  elements): the AI driving stack stays QM; a certified classical stack supervises it — the
-  *system* reaches ASIL-D through redundancy, not by certifying a neural network.
+  elements): the AI driving stack stays QM; a certified classical stack supervises it.
+  This is the architecture that lets the OEM *argue* system-level ASIL-D in its item
+  safety case — redundancy instead of certifying a neural network — but the system-level
+  claim belongs to the OEM's safety case, hazard analysis, and validation; it is never
+  automatic.
 - **The board-level referee**: a separate safety MCU (Thor-generation evidence: Renesas
   **RH850**; the Orin era used Infineon AURIX) holds final watchdog/power authority
   *outside* the SoC.
@@ -452,7 +475,7 @@ like these signs it — self-declared "ASIL-D capable" means nothing.*
 | DRIVE core development **process** | ISO 26262 · ASIL-D (process) | TÜV SÜD | Jan 2025 |
 | SoC/platform/SW engineering **process** | ISO/SAE 21434 (automotive cybersecurity) | TÜV SÜD | Jan 2025 |
 | DRIVE AV / Hyperion platform | UNECE safety assessment (UNECE — the UN body that issues international vehicle regulations) | TÜV Rheinland | Jan 2025 |
-| QNX OS for Safety 8.0 (in the Thor devkit) | ASIL-D · IEC 61508 SIL 3, as an SEooC (Safety Element out of Context — a pre-certified component awaiting integration) | BlackBerry/QNX's own cert | 2025 |
+| QNX OS for Safety 8.0 (supported on DRIVE AGX Thor) | ASIL-D · IEC 61508 SIL 3, as an SEooC (Safety Element out of Context — a pre-certified component awaiting integration) | BlackBerry/QNX's own cert | 2025 |
 
 **"Assessed / capable" — NVIDIA's deliberate wording, weaker than "certified":**
 
@@ -462,7 +485,14 @@ like these signs it — self-declared "ASIL-D capable" means nothing.*
   completed Thor product certification**.
 - IGX Thor safety island: "SIL 3 **capable**" (IEC 61508 — the industrial functional-safety
   standard; SIL = Safety Integrity Level).
-- **The robotics side (Jetson, Isaac ROS, GR00T): zero certifications.**
+- **The robotics side (Jetson, Isaac ROS, GR00T): no completed product certifications** as
+  of July 2026 — NVIDIA announced Halos for Robotics and an IGX Thor / QNX safety
+  foundation in 2026, with certifications still pending.
+
+One boundary worth spelling out: everything in this section is a *component, OS, or
+process* certificate (SEooC). The **vehicle's** ASIL-D is established by the OEM's
+item-level safety case — hazard analysis, integration evidence, validation. Chip and OS
+certificates feed that case; they do not replace it.
 
 ### 6.4. Alpamayo — GR00T's driving sibling
 
@@ -472,9 +502,9 @@ bet. *(AV — Autonomous Vehicle.)*
 
 | | GR00T N1.7 (robot) | Alpamayo (car) |
 |---|---|---|
-| Backbone | Cosmos-Reason2, 2B | Cosmos-Reason, **8.2B** — same bloodline |
+| Backbone | Cosmos-Reason2, 2B | Cosmos-Reason, **8.2B** — same model lineage, not one shared brain |
 | Action head | a 32-layer DiT (Diffusion Transformer — generates actions by iterative denoising) → joint/hand chunks | a 2.3B diffusion decoder → **driving trajectories** |
-| Size / license | 3B — open, commercial OK | R1 = **10.5B**, non-commercial · 2 Super = **34B** (robotaxis) |
+| Size / license | 3B — open, commercial OK | R1 = **10.5B**, non-commercial · 2 Super = **34B** (robotaxis; NVIDIA's newsroom says 34B while its product page says 32B — the sources conflict as of 07/2026) |
 | Training data | 20,854 h of human egocentric video | **80,000 h** of multi-camera driving + ~700K reasoning traces |
 | Trust model | the policy drives the robot directly | **never alone** — a certified classical stack supervises it |
 
@@ -492,9 +522,12 @@ sensor configuration reused across a fleet of hundreds of thousands of vehicles.
 
 ![DRIVE AGX Thor Developer Kit — official photo](drive-devkit-photo.png)
 
-**Market proof (audited):** the Mercedes-Benz CLA has been **in production since Q1 2026**
-(the first MB.OS car, dual-stack, sold as L2++); Uber × NVIDIA robotaxis — LA/SF in
-H1 2027 → **28 cities by 2028, targeting 100,000 L4 vehicles**; queuing behind: Lucid, JLR,
+**Market proof (audited):** the Mercedes-Benz CLA has been in **series production since
+June 2025** — the first MB.OS car — and the NVIDIA-powered enhanced Level 2 driving stack
+(marketed as "L2++", an industry term rather than an SAE level) is slated for **US rollout
+by the end of 2026**, as a dual-stack of AI plus a certified classical supervisor.
+Uber × NVIDIA robotaxis — LA/SF in H1 2027 → **28 cities by 2028**, scaling toward
+**100,000 L4 vehicles "over time, starting in 2027"**; queuing behind: Lucid, JLR,
 BYD, XPeng, Zeekr, Li Auto. NVIDIA's automotive revenue in FY2026: **$2.3B** (+39% YoY) —
 only ~1% of NVIDIA's total, but design wins lock in for a decade.
 
@@ -519,29 +552,38 @@ worth it:
 The lesson for the team: **secondhand Physical-AI numbers drift fast — re-fetch the primary
 source before any number goes on a slide.** (That rule is how this document was written.)
 
+Scope, honestly stated: the audit covered the headline claims above and the 14 headline
+claims of the deck — the rest of this document is source-linked but not exhaustively
+re-verified. The full claim-by-claim trail lives in `research/claims-audit-2026-07.md`.
+
 ---
 
 ## 8. The real demo
 
 We ran **NVIDIA Isaac GR00T N1.7-3B** zero-shot (no fine-tuning) on the sample data that
-ships with the public `github.com/NVIDIA/Isaac-GR00T` repo, measured on a desktop
-RTX 5070 Ti with 16 GB of VRAM (July 2026):
+ships with the public `github.com/NVIDIA/Isaac-GR00T` repo, on a desktop RTX 5070 Ti with
+16 GB of VRAM (July 2026). Two separate runs: **run A** = the first-ever run (cold cache;
+raw log: `docs/img/groot_n17_inference.txt`), **run B** = a warm-cache rerun (the
+screenshot below):
 
 | Measured | Value |
 |---|---|
-| Peak VRAM | **7.5 GB / 16 GB** — no out-of-memory, right at the documented 16 GB floor |
-| Latency per policy call | **106.4 ms** average (P90 108.4 ms) |
-| Action throughput | 8-action chunks per call → **~75 robot actions/s** |
-| Accuracy (2 sample trajectories) | MSE 0.0030 / 0.0370 (MSE — Mean Squared Error vs the recorded reference actions) |
-| Model load time | 20.5 s from local cache (first run ~95 s, including the 4.6 GB backbone download) |
+| Latency per policy call (open-loop) | run A: **107.7 ms** average (P90 109.8 ms) · run B: **106.4 ms** average (P90 108.4 ms) |
+| Model load time | run A (first run, cold cache): **94.6 s** · run B (warm local cache): **20.5 s** |
+| Peak VRAM (sampled every 2 s) | **7.5 GB / 16 GB** — no out-of-memory, right at the documented 16 GB floor |
+| Output per call | 8 future action steps → ~**75 generated action steps/s** — a compute-throughput figure, *not* an executed robot control rate |
+| Open-loop prediction error (n=2) | MSE 0.0030 / 0.0370 (MSE — Mean Squared Error vs the recorded reference actions) — **not** task-success accuracy |
 
 ![Real screenshot of the GR00T run](groot-run-screenshot.png)
 
 Everything involved is public: the weights on Hugging Face (`nvidia/GR00T-N1.7-3B`; the
 gated `Cosmos-Reason2-2B` backbone needs a one-click license acceptance), the inference
-script in the GitHub repo. The technical point to remember: **action chunking** (one
-inference emits several future action steps) is what turns ~9 calls/s into a usable command
-rate for a real robot.
+script in the GitHub repo. Two honest caveats on the numbers: "open-loop" means the
+predictions were scored against a recorded trajectory with no robot in the loop — it says
+nothing about closed-loop task success; and an 8-step action chunk does not mean all
+8 steps get executed before the next replan — that is a deployment choice. What action
+chunking *does* buy you: one ~107 ms inference produces several future steps, which is
+what turns ~9 calls/s into a usable command rate.
 
 ---
 
@@ -555,8 +597,9 @@ rate for a real robot.
 3. Learn the **interfaces** of the ML layer (what a policy consumes and emits, at what
    rate) — its internals can wait.
 4. Safety always sits **beside** the compute: a safety PLC or safety-rated MCU holds the
-   kill switch — no ROS 2 stack and no robotics Jetson is certified (only the industrial
-   IGX Thor carries a safety island).
+   kill switch — as of July 2026 no ROS 2 stack and no robotics Jetson has a completed
+   safety certification (the industrial IGX Thor carries a safety island, and Halos for
+   Robotics was announced in 2026).
 5. **Which side to bet on?** Learn on Physical AI (open, cheap, fast — GR00T already runs
    on our desk) while keeping ISO 26262 literacy. When robotics gets its own rulebook — and
    the signals are visible: IGX Thor, Halos expanding into robotics — the engineer fluent
@@ -577,16 +620,17 @@ rate for a real robot.
 
 1. **Every robot type converges on one stack shape** — the bottom half is firmware, and it
    didn't move.
-2. **ROS 2 = the industrial mainstream**: the standard for AMRs, a reference for AVs,
-   absent from commercial humanoids.
-3. **Real-time means a guaranteed deadline, not speed** — 1 kHz is the practical ceiling of
-   PREEMPT_RT Linux; anything faster belongs to an MCU.
+2. **ROS 2 = the industrial mainstream**: the standard for AMRs, a reference for AVs;
+   commercial humanoids do not expose it publicly.
+3. **Real-time means a deadline you can prove, not speed** — 1 kHz is where a well-tuned
+   PREEMPT_RT Linux is comfortable; loops much faster than that need proof on the target,
+   or dedicated silicon (MCU/DSP/FPGA).
 4. **Open-RMF is a fleet-layer tool** — worth adopting only for multi-vendor buildings; the
    Fleet Adapter is where the integration effort goes.
 5. **NVIDIA ships the most complete platform and the deepest hardware lock-in** — open
    weights and code, closed CUDA underneath, no CPU path.
-6. **Robots and cars share one brain (Cosmos)** — what splits the two worlds is
-   certification, not technology; "certified" and "assessed" are a world apart.
+6. **Robots and cars share one model lineage (Cosmos-Reason)** — what splits the two
+   worlds is certification, not technology; "certified" and "assessed" are a world apart.
 7. **Foundation-model robotics already runs on our desk** — ~106 ms per call, 7.5 GB of
    VRAM, everything from public sources.
 
@@ -602,6 +646,7 @@ rate for a real robot.
 - Open-RMF — open-rmf.org · github.com/open-rmf (rmf_demos jazzy branch, fleet_adapter_template, free_fleet, awesome_adapters) · OSRA — osralliance.org
 - Singapore deployment — cgh.com.sg/chart · micro-ROS — micro.ros.org
 - PREEMPT_RT — wiki.linuxfoundation.org/realtime · Gazebo — gazebosim.org
+- ROS 2 real-time & intra-process design — design.ros2.org (realtime_proposal, intraprocess_communications)
 - Humanoid RL/VLA — research.nvidia.com/labs/gear (GR00T) · pi.website (π0.5) · figure.ai (Helix)
 
 **NVIDIA Physical AI**
@@ -620,8 +665,10 @@ rate for a real robot.
 - QNX × NVIDIA — qnx.software/en/blog/2026 · automotiveworld.com
 - DRIVE Hyperion — nvidia.com → solutions → drive-hyperion · Halos — blogs.nvidia.com (GTC 2025)
 - Alpamayo — huggingface.co/nvidia/Alpamayo-R1-10B · nvidianews (Alpamayo 2 Super, May 2026)
-- Mercedes CLA — blogs.nvidia.com (drive-av-software-mercedes-benz-cla) · Uber robotaxi — investor.uber.com (Mar 2026)
+- Mercedes CLA — group.mercedes-benz.com (series production, Jun 2025) · blogs.nvidia.com (drive-av-software-mercedes-benz-cla) · Uber robotaxi — investor.uber.com (Mar 2026)
+- Halos for Robotics — nvidia.com/en-us/ai-trust-center/halos/robotics
 - NVIDIA Q4 FY26 financial results (automotive $2.3B) — nvidianews.nvidia.com
 
 *Demo numbers (the GR00T inference, the QoS/RMW matrices) are our own captured runs,
-July 2026. Per-claim citations plus the audit trail live in the repo's `research/` folder.*
+July 2026. Per-claim citations plus the audit trail: `research/claims-audit-2026-07.md`
+and the repo's `research/` folder.*

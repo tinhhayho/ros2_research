@@ -118,8 +118,11 @@ Khác biệt nằm ở tầng giữa và dữ liệu:
   (Foretellix Foretify + Cosmos Transfer sinh corner case thời tiết/ánh sáng); RL =
   AlpaGym (tương đương Isaac Lab bên xe); validation là ngành công nghiệp riêng; vòng lặp
   release tính bằng **quý/năm** vì mỗi bản phải qua safety case.
-- Mercedes CLA (production Q1/2026, L2++) là hiện thân của workflow xe: stack AI học từ
-  fleet + stack cổ điển trên Halos đỡ phía dưới.
+- Mercedes CLA (sản xuất hàng loạt từ 6/2025 — xe MB.OS đầu tiên; stack lái enhanced-L2
+  của NVIDIA dự kiến rollout ở Mỹ trước cuối 2026; "L2++" là cách gọi của ngành) là hiện
+  thân của workflow xe: stack AI học từ fleet + stack cổ điển trên Halos đỡ phía dưới.
+  *(Sửa 07/2026: bản đầu ghi nhầm "production Q1/2026" — lẫn mốc sản xuất xe với mốc
+  rollout tính năng lái.)*
 
 ## 7. Regulatory & Market — lý do thật sự phải tách hai line
 
@@ -131,7 +134,8 @@ Khác biệt nằm ở tầng giữa và dữ liệu:
 4. **Lifecycle**: xe cần cam kết cung ứng silicon + vá lỗi 10–20 năm; Jetson đổi thế hệ 2–3 năm.
 5. **Quy mô tiền**: automotive NVIDIA FY2026 = **$2.3B** (⚠AUDIT), +39% YoY — có thật nhưng
    chỉ ~1% doanh thu NVIDIA; đổi lại design-win khóa chặt hàng thập kỷ (Uber: LA/SF H1-2027,
-   28 thành phố + 100.000 robotaxi đến 2028 trên Hyperion + Alpamayo — ⚠AUDIT confirmed).
+   28 thành phố đến 2028; mục tiêu 100.000 robotaxi là "tăng dần, bắt đầu từ 2027" —
+   ⚠AUDIT: mốc 28 thành phố confirmed, mốc 100k không gắn deadline 2028).
 6. Robotics bán kiểu **devkit + license mở** để chiếm developer mindshare trước khi thị
    trường humanoid có luật — hai motion thương mại không thể chung một tổ chức sản phẩm.
 
@@ -186,9 +190,9 @@ tụ ở **tầng model/tooling**, tách vĩnh viễn ở **tầng chứng nhậ
 ## Nguồn chính (đã audit 07/2026)
 
 - Alpamayo-R1-10B model card (10.5B, non-commercial weights + Apache-2.0 code): huggingface.co/nvidia/Alpamayo-R1-10B
-- Alpamayo 2 Super 34B (31/05/2026): nvidianews.nvidia.com/news/nvidia-alpamayo-2-super-robotaxis
+- Alpamayo 2 Super 34B (31/05/2026): nvidianews.nvidia.com/news/nvidia-alpamayo-2-super-robotaxis — lưu ý: product page nvidia.com ghi 32B, hai nguồn chính chủ đang vênh nhau (07/2026)
 - Uber × NVIDIA robotaxi 28 thành phố (03/2026): investor.uber.com (press release)
-- Mercedes CLA dual-stack production Q1/2026: blogs.nvidia.com/blog/drive-av-software-mercedes-benz-cla/
+- Mercedes CLA: sản xuất từ 6/2025 (group.mercedes-benz.com); stack lái NVIDIA rollout Mỹ dự kiến cuối 2026: blogs.nvidia.com/blog/drive-av-software-mercedes-benz-cla/
 - DRIVE AGX Thor devkit (DriveOS 7, 64GB, GMSL, SKU 10/12): developer.nvidia.com/blog/accelerate-autonomous-vehicle-development-with-the-nvidia-drive-agx-thor-developer-kit/
 - DriveOS 6.0 ASIL-D trên Orin (01/2025): eenewseurope.com "nvidia-certifies-drive-os-to-asil-d-but-on-orin"; DriveOS 5.2 ASIL-B TÜV SÜD (12/2022): blogs.nvidia.com
 - QNX OS for Safety tích hợp DRIVE Thor devkit tại GA: automotiveworld.com; qnx.software/en/blog/2026/the-qnx-and-nvidia-foundation
