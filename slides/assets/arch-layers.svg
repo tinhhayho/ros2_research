@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">ROS 2 Architecture — the layer cake</text>
+
+  <!-- ===================== Left gutter row labels ===================== -->
+  <text x="105" y="110" text-anchor="middle" font-size="15" fill="#333">Application Layer</text>
+  <text x="105" y="215" text-anchor="middle" font-size="15" fill="#333">Client Layer</text>
+  <text x="105" y="322" text-anchor="middle" font-size="15" fill="#333">Abstraction Layer</text>
+  <text x="105" y="404" text-anchor="middle" font-size="15" fill="#333">Implementation Layer</text>
+  <text x="105" y="482" text-anchor="middle" font-size="15" fill="#333">OS Layer</text>
+
+  <!-- ===================== Centerline connectors ===================== -->
+  <line x1="460" y1="130" x2="460" y2="158" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="460" y1="258" x2="460" y2="288" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="460" y1="344" x2="460" y2="372" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="460" y1="422" x2="460" y2="450" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ===================== Row 1: Application ===================== -->
+  <rect x="200" y="78" width="520" height="52" rx="8" fill="#2E5FAC"/>
+  <text x="460" y="110" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Your ROS 2 Nodes  (talker / listener / service / action)</text>
+
+  <!-- ===================== Row 2: Client ===================== -->
+  <!-- thin links from client boxes down to rcl -->
+  <line x1="280" y1="206" x2="280" y2="218" stroke="#9aa4b0" stroke-width="1.5"/>
+  <line x1="460" y1="206" x2="460" y2="218" stroke="#9aa4b0" stroke-width="1.5"/>
+  <line x1="640" y1="206" x2="640" y2="218" stroke="#9aa4b0" stroke-width="1.5"/>
+
+  <rect x="200" y="160" width="160" height="46" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="280" y="189" text-anchor="middle" font-size="15" fill="#6B4A2B">rclcpp (C++)</text>
+
+  <rect x="380" y="160" width="160" height="46" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="460" y="189" text-anchor="middle" font-size="15" fill="#6B4A2B">rclpy (Python)</text>
+
+  <rect x="560" y="160" width="160" height="46" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="640" y="189" text-anchor="middle" font-size="15" fill="#6B4A2B">other-language APIs</text>
+
+  <rect x="200" y="218" width="520" height="40" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="460" y="244" text-anchor="middle" font-size="15" fill="#6B4A2B">rcl  —  common C core (names, params, time)</text>
+
+  <!-- ===================== Row 3: Abstraction (rmw) ===================== -->
+  <rect x="200" y="290" width="520" height="54" rx="8" fill="#DCE9F7" stroke="#6F9BD1" stroke-width="1.5"/>
+  <text x="460" y="312" text-anchor="middle" font-size="16" font-weight="600" fill="#234">rmw  —  ROS Middleware Interface</text>
+  <text x="460" y="332" text-anchor="middle" font-size="13" fill="#234">(the stable HAL)</text>
+
+  <!-- right-side callout on the rmw row -->
+  <line x1="810" y1="317" x2="723" y2="317" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="884" y="258" text-anchor="middle" font-size="13" font-style="italic" fill="#234">
+    <tspan x="884" dy="0">swap with one</tspan>
+    <tspan x="884" dy="16">env var:</tspan>
+    <tspan x="884" dy="16">zero recompiles</tspan>
+    <tspan x="884" dy="16">(like a HAL)</tspan>
+  </text>
+
+  <!-- ===================== Row 4: Implementation (vendors) ===================== -->
+  <rect x="200" y="374" width="150" height="48" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="275" y="404" text-anchor="middle" font-size="15" fill="#234">Fast DDS</text>
+  <text x="367" y="404" text-anchor="middle" font-size="13" font-style="italic" fill="#666">or</text>
+  <rect x="385" y="374" width="150" height="48" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="460" y="404" text-anchor="middle" font-size="15" fill="#234">Cyclone DDS</text>
+  <text x="552" y="404" text-anchor="middle" font-size="13" font-style="italic" fill="#666">or</text>
+  <rect x="570" y="374" width="150" height="48" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="645" y="404" text-anchor="middle" font-size="15" fill="#234">Zenoh</text>
+
+  <!-- ===================== Row 5: OS ===================== -->
+  <rect x="200" y="452" width="150" height="48" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="275" y="482" text-anchor="middle" font-size="15" fill="#333">Linux</text>
+  <text x="367" y="482" text-anchor="middle" font-size="13" font-style="italic" fill="#666">or</text>
+  <rect x="385" y="452" width="150" height="48" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="460" y="482" text-anchor="middle" font-size="15" fill="#333">Windows</text>
+  <text x="552" y="482" text-anchor="middle" font-size="13" font-style="italic" fill="#666">or</text>
+  <rect x="570" y="452" width="150" height="48" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="645" y="482" text-anchor="middle" font-size="15" fill="#333">macOS</text>
+
+  <!-- ===================== Footnote ===================== -->
+  <text x="480" y="565" text-anchor="middle" font-size="13" font-style="italic" fill="#666">rmw hides the DDS implementation. Use rclcpp for speed, rclpy for quick prototyping.</text>
+</svg>

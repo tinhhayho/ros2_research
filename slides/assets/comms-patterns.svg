@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">Three ways nodes talk</text>
+
+  <!-- Column panels -->
+  <rect x="36"  y="66" width="288" height="476" rx="8" fill="#FCFCFD" stroke="#EEEEEE"/>
+  <rect x="336" y="66" width="288" height="476" rx="8" fill="#FCFCFD" stroke="#EEEEEE"/>
+  <rect x="636" y="66" width="288" height="476" rx="8" fill="#FCFCFD" stroke="#EEEEEE"/>
+
+  <!-- Heading boxes -->
+  <rect x="56"  y="80" width="248" height="42" rx="8" fill="#2E5FAC"/>
+  <text x="180" y="107" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">Topic (stream)</text>
+  <rect x="356" y="80" width="248" height="42" rx="8" fill="#2E5FAC"/>
+  <text x="480" y="106" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">Service (request / reply)</text>
+  <rect x="656" y="80" width="248" height="42" rx="8" fill="#2E5FAC"/>
+  <text x="780" y="106" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">Action (long task)</text>
+
+  <!-- ============ COLUMN 1: TOPIC ============ -->
+  <!-- Publisher -->
+  <rect x="120" y="160" width="120" height="46" rx="8" fill="#FCE8D5" stroke="#E0A96D"/>
+  <text x="180" y="189" text-anchor="middle" font-size="15" fill="#6B4A2B">Publisher</text>
+  <!-- Subscribers -->
+  <rect x="40"  y="400" width="110" height="46" rx="8" fill="#DCE9F7" stroke="#6F9BD1"/>
+  <text x="95"  y="429" text-anchor="middle" font-size="15" fill="#234">Subscriber</text>
+  <rect x="210" y="400" width="110" height="46" rx="8" fill="#DCE9F7" stroke="#6F9BD1"/>
+  <text x="265" y="429" text-anchor="middle" font-size="15" fill="#234">Subscriber</text>
+  <!-- one-to-many arrows -->
+  <line x1="180" y1="208" x2="98"  y2="398" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="180" y1="208" x2="262" y2="398" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- caption -->
+  <text x="180" y="497" text-anchor="middle" font-size="13" font-style="italic" fill="#666">fire-and-forget broadcast &#8212;</text>
+  <text x="180" y="515" text-anchor="middle" font-size="13" font-style="italic" fill="#666">like sensor frames on a bus</text>
+
+  <!-- ============ COLUMN 2: SERVICE ============ -->
+  <rect x="420" y="160" width="120" height="46" rx="8" fill="#FCE8D5" stroke="#E0A96D"/>
+  <text x="480" y="189" text-anchor="middle" font-size="15" fill="#6B4A2B">Client</text>
+  <rect x="420" y="400" width="120" height="46" rx="8" fill="#DCE9F7" stroke="#6F9BD1"/>
+  <text x="480" y="429" text-anchor="middle" font-size="15" fill="#234">Server</text>
+  <!-- request down, response up -->
+  <line x1="460" y1="208" x2="460" y2="398" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="500" y1="398" x2="500" y2="208" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="452" y="305" text-anchor="end"   font-size="13" fill="#444">request</text>
+  <text x="508" y="305" text-anchor="start" font-size="13" fill="#444">response</text>
+  <!-- caption -->
+  <text x="480" y="497" text-anchor="middle" font-size="13" font-style="italic" fill="#666">synchronous RPC &#8212;</text>
+  <text x="480" y="515" text-anchor="middle" font-size="13" font-style="italic" fill="#666">like a register read/write</text>
+
+  <!-- ============ COLUMN 3: ACTION ============ -->
+  <rect x="715" y="160" width="130" height="46" rx="8" fill="#FCE8D5" stroke="#E0A96D"/>
+  <text x="780" y="189" text-anchor="middle" font-size="15" fill="#6B4A2B">Client</text>
+  <rect x="715" y="400" width="130" height="46" rx="8" fill="#DCE9F7" stroke="#6F9BD1"/>
+  <text x="780" y="429" text-anchor="middle" font-size="15" fill="#234">Server</text>
+  <!-- goal down -->
+  <line x1="735" y1="208" x2="735" y2="398" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="728" y="252" text-anchor="end" font-size="13" fill="#444">goal</text>
+  <!-- feedback up dashed (repeated) -->
+  <line x1="780" y1="398" x2="780" y2="208" stroke="#444" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+  <rect x="743" y="296" width="74" height="17" fill="#FCFCFD"/>
+  <text x="780" y="309" text-anchor="middle" font-size="13" fill="#444">feedback &#215;N</text>
+  <!-- result up -->
+  <line x1="825" y1="398" x2="825" y2="208" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="833" y="252" text-anchor="start" font-size="13" fill="#444">result</text>
+  <!-- caption -->
+  <text x="780" y="497" text-anchor="middle" font-size="13" font-style="italic" fill="#666">long-running goal w/ progress + cancel &#8212;</text>
+  <text x="780" y="515" text-anchor="middle" font-size="13" font-style="italic" fill="#666">like a DMA/motor move</text>
+</svg>

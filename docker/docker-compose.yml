@@ -1,0 +1,47 @@
+# ros2-explained — Linux-native compose.
+#
+# Every service shares the host network + IPC namespace, so DDS multicast discovery
+# and the Fast DDS shared-memory transport work across containers exactly like a
+# native (non-containerized) ROS 2 system on this Linux host. (See PLAN §1 / §5.)
+name: ros2-explained
+
+x-ros-common: &ros-common
+  image: ros2-explained:jazzy
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+    args:
+      ROS_IMAGE: ${ROS_IMAGE:-ros:jazzy-ros-base-noble}
+  network_mode: host          # real host networking on Linux: native multicast discovery, no NAT
+  ipc: host                   # shared /dev/shm -> Fast DDS shared-memory transport works cross-container
+  volumes:
+    - ../:/repo:rw                       # whole repo mounted: ws/, scripts/, docs/, artifacts
+    - /tmp/.X11-unix:/tmp/.X11-unix:rw   # GUI forwarding: share the host X socket (turtlesim, rqt_graph)
+  working_dir: /repo/ws
+  environment:
+    ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-42}
+    RMW_IMPLEMENTATION: ${RMW_IMPLEMENTATION:-rmw_fastrtps_cpp}
+    DISPLAY: ${DISPLAY:-:0}              # render GUI windows on the host display
+    QT_X11_NO_MITSHM: "1"               # Qt apps (turtlesim/rqt) over a shared X socket
+    QT_QPA_PLATFORM: xcb                # force X11 (works under XWayland too)
+  stdin_open: true
+  tty: true
+
+services:
+  # Main workspace container. On Linux we can also spin up multiple of these and they
+  # discover each other natively; we isolate concurrent runs with ROS_DOMAIN_ID.
+  ws:
+    <<: *ros-common
+    container_name: ros2_ws
+
+  # Zenoh router daemon for Demo 3's Zenoh leg. rmw_zenoh disables multicast scouting
+  # by default, so this MUST be up before any Zenoh node starts (a real rmw_zenoh
+  # design lesson, not a Docker workaround). Only started when the "zenoh" profile is on.
+  zenoh-router:
+    <<: *ros-common
+    container_name: ros2_zenoh_router
+    environment:
+      RMW_IMPLEMENTATION: rmw_zenoh_cpp
+      ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-42}
+    command: ros2 run rmw_zenoh_cpp rmw_zenohd
+    profiles: ["zenoh"]

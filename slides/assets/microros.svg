@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">micro-ROS: ROS 2 down to the MCU</text>
+
+  <!-- Zone labels -->
+  <text x="145" y="98" text-anchor="middle" font-size="11" fill="#999" letter-spacing="1.5">ON THE MCU</text>
+  <text x="675" y="98" text-anchor="middle" font-size="11" fill="#999" letter-spacing="1.5">ON THE LINUX HOST</text>
+
+  <!-- Divider between embedded side and host side -->
+  <line x1="340" y1="112" x2="340" y2="350" stroke="#cccccc" stroke-width="1.5" stroke-dasharray="4 5"/>
+
+  <!-- MCU group box -->
+  <rect x="30" y="130" width="230" height="210" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="145" y="155" text-anchor="middle" font-size="16" font-weight="700" fill="#333">MCU</text>
+  <text x="145" y="174" text-anchor="middle" font-size="11" font-style="italic" fill="#666">FreeRTOS / Zephyr / bare-metal</text>
+
+  <!-- your firmware + rclc -->
+  <rect x="45" y="190" width="200" height="54" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="145" y="222" text-anchor="middle" font-size="14" font-weight="600" fill="#6B4A2B">your firmware + rclc</text>
+
+  <!-- Micro XRCE-DDS Client -->
+  <rect x="45" y="256" width="200" height="54" rx="8" fill="#DCE9F7" stroke="#6F9BD1" stroke-width="1.5"/>
+  <text x="145" y="288" text-anchor="middle" font-size="14" fill="#234">Micro XRCE-DDS Client</text>
+
+  <text x="145" y="360" text-anchor="middle" font-size="11" font-style="italic" fill="#888">rclc = ROS 2 client lib for MCUs</text>
+
+  <!-- Arrow 1: MCU -> agent (transport) -->
+  <line x1="260" y1="235" x2="416" y2="235" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="340" y="208" text-anchor="middle" font-size="12" fill="#555">UDP / TCP / Serial</text>
+  <text x="340" y="223" text-anchor="middle" font-size="12" fill="#555">(UART, USB-CDC)</text>
+  <text x="340" y="258" text-anchor="middle" font-size="11" font-style="italic" fill="#888">[CAN FD = custom]</text>
+
+  <!-- micro_ros_agent -->
+  <rect x="420" y="190" width="160" height="90" rx="8" fill="#DCE9F7" stroke="#6F9BD1" stroke-width="1.5"/>
+  <text x="500" y="232" text-anchor="middle" font-size="15" font-weight="600" fill="#234">micro_ros_agent</text>
+  <text x="500" y="252" text-anchor="middle" font-size="12" fill="#234">(Linux host)</text>
+  <text x="500" y="300" text-anchor="middle" font-size="11" font-style="italic" fill="#888">bridges XRCE-DDS to DDS</text>
+
+  <!-- Arrow 2: agent -> ROS 2 graph (DDS / RTPS) -->
+  <line x1="580" y1="235" x2="706" y2="235" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="645" y="225" text-anchor="middle" font-size="12" fill="#555">DDS / RTPS</text>
+
+  <!-- ROS 2 graph -->
+  <rect x="710" y="190" width="220" height="90" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="820" y="230" text-anchor="middle" font-size="16" font-weight="700" fill="#234">ROS 2 graph</text>
+  <text x="820" y="252" text-anchor="middle" font-size="12" fill="#234">(Fast DDS / Cyclone)</text>
+
+  <!-- Arrow 3: graph -> ros2 node list -->
+  <line x1="820" y1="280" x2="820" y2="396" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ros2 node list / topic echo -->
+  <rect x="710" y="400" width="220" height="80" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="820" y="432" text-anchor="middle" font-size="13" font-weight="600" fill="#333">ros2 node list / topic echo</text>
+  <text x="820" y="456" text-anchor="middle" font-size="11" font-style="italic" fill="#666">MCU shows up as an ordinary node</text>
+
+  <!-- Footprint caption -->
+  <text x="480" y="540" text-anchor="middle" font-size="13" font-style="italic" fill="#666">Footprint &lt; 75 KB flash, ~3 KB RAM (middleware). Start on ESP32 or RP2040.</text>
+</svg>

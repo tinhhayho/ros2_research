@@ -1,0 +1,12 @@
+// Optional rmw_zenohd router config — NOT wired in by default.
+//
+// For the single-host Demo 3 Zenoh leg, the package's default router config is fine,
+// so docker-compose.yml just runs `ros2 run rmw_zenoh_cpp rmw_zenohd` with no override.
+//
+// To customize, point the daemon at this file:
+//   ZENOH_ROUTER_CONFIG_URI=/repo/docker/zenoh/router.json5 ros2 run rmw_zenoh_cpp rmw_zenohd
+// and fill in a full zenoh config (mode, listen endpoints, scouting, etc.). Kept here as
+// a documented extension point only.
+{
+  mode: "router",
+}

@@ -1,0 +1,10 @@
+# The image installs everything via apt and mounts the repo at runtime, so the build
+# context needs almost nothing. Keep it tiny.
+.git/
+ws/build/
+ws/install/
+ws/log/
+slides/*.pdf
+slides/*.html
+docs/img/
+**/*.swp

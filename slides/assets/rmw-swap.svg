@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">One codebase, swappable middleware</text>
+
+  <!-- Top: your code / node binaries -->
+  <rect x="290" y="72" width="380" height="50" rx="8" fill="#2E5FAC" stroke="#234a8a" stroke-width="1"/>
+  <text x="480" y="103" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff">Same node binaries (talker / listener)</text>
+
+  <!-- Arrow down into rmw -->
+  <line x1="480" y1="122" x2="480" y2="145" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- rmw interface box -->
+  <rect x="120" y="148" width="720" height="58" rx="8" fill="#DCE9F7" stroke="#6F9BD1" stroke-width="1.5"/>
+  <text x="480" y="172" text-anchor="middle" font-size="16" font-weight="700" fill="#223344">rmw interface</text>
+  <text x="480" y="191" text-anchor="middle" font-size="13" fill="#223344">RMW_IMPLEMENTATION = rmw_fastrtps_cpp | rmw_cyclonedds_cpp | rmw_zenoh_cpp</text>
+
+  <!-- Three fan-out arrows to vendors -->
+  <line x1="170" y1="206" x2="170" y2="247" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="480" y1="206" x2="480" y2="247" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="790" y1="206" x2="790" y2="247" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Vendor boxes -->
+  <rect x="40" y="250" width="260" height="70" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="170" y="285" text-anchor="middle" font-size="16" font-weight="700" fill="#223344">Fast DDS</text>
+  <text x="170" y="306" text-anchor="middle" font-size="13" font-weight="600" fill="#2f7d32">(Tier 1)</text>
+
+  <rect x="350" y="250" width="260" height="70" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="480" y="285" text-anchor="middle" font-size="16" font-weight="700" fill="#223344">Cyclone DDS</text>
+  <text x="480" y="306" text-anchor="middle" font-size="13" font-weight="600" fill="#2f7d32">(Tier 1)</text>
+
+  <rect x="660" y="250" width="260" height="70" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="790" y="282" text-anchor="middle" font-size="16" font-weight="700" fill="#223344">Zenoh</text>
+  <text x="790" y="303" text-anchor="middle" font-size="12.5" fill="#223344">(add-on; needs rmw_zenohd router)</text>
+
+  <!-- Interop strip background -->
+  <rect x="30" y="346" width="900" height="120" rx="8" fill="#FAFBFD" stroke="#DDE3EC" stroke-width="1"/>
+  <text x="42" y="362" font-size="12" font-style="italic" fill="#999999">interop strip</text>
+
+  <!-- Drop lines from vendor boxes into the strip -->
+  <line x1="170" y1="320" x2="170" y2="400" stroke="#A9B6C7" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="480" y1="320" x2="480" y2="435" stroke="#A9B6C7" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <line x1="790" y1="320" x2="790" y2="435" stroke="#A9B6C7" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+  <!-- Green: Fast DDS <-> Cyclone DDS interoperate -->
+  <text x="325" y="388" text-anchor="middle" font-size="13" font-weight="600" fill="#2d5a2d">interoperate (shared DDSI-RTPS wire)</text>
+  <line x1="178" y1="400" x2="472" y2="400" stroke="#4a9e4a" stroke-width="2.5"/>
+  <polygon points="178,395 170,400 178,405" fill="#4a9e4a"/>
+  <polygon points="472,395 480,400 472,405" fill="#4a9e4a"/>
+
+  <!-- Red broken: DDS <-> Zenoh no native interop -->
+  <text x="635" y="423" text-anchor="middle" font-size="13" font-weight="600" fill="#8a2b32">no native interop (different wire) — needs a bridge</text>
+  <line x1="488" y1="435" x2="620" y2="435" stroke="#C0392B" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <line x1="650" y1="435" x2="782" y2="435" stroke="#C0392B" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <line x1="628" y1="427" x2="636" y2="443" stroke="#C0392B" stroke-width="2.5"/>
+  <line x1="638" y1="427" x2="646" y2="443" stroke="#C0392B" stroke-width="2.5"/>
+  <polygon points="488,430 480,435 488,440" fill="#C0392B"/>
+  <polygon points="782,430 790,435 782,440" fill="#C0392B"/>
+
+  <!-- Caption -->
+  <text x="480" y="512" text-anchor="middle" font-size="13" font-style="italic" fill="#666666">Swap the whole transport with one env var, no recompile —</text>
+  <text x="480" y="532" text-anchor="middle" font-size="13" font-style="italic" fill="#666666">like retargeting firmware UART → SPI → CAN by changing the HAL.</text>
+</svg>

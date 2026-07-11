@@ -1,0 +1,6 @@
+waiting for service to become available...
+requester: making request: example_interfaces.srv.AddTwoInts_Request(a=2, b=3)
+
+response:
+example_interfaces.srv.AddTwoInts_Response(sum=5)
+

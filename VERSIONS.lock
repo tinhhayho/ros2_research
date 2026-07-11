@@ -1,0 +1,24 @@
+# VERSIONS.lock — REAL, captured by scripts/capture_versions.sh + capture_pkgs.sh.
+# Regenerate with: make build.  No value here is hand-written.
+# Reproducibility caveat: apt archives prune old versions over time, so the
+# base-image digest below is the PRIMARY anchor; the rest is a best-effort record.
+
+[base-image]
+tag        = ros:jazzy-ros-base-noble
+digest     = ros@sha256:6513503d0b10e919fbe8134981d4f9d19b5c1f9b045b87a9fe3b0b9e03e7c2a9
+resolved_at = 2026-06-26T07:58:14Z
+# ^ the Dockerfile builds FROM this digest (passed as the ROS_IMAGE build-arg).
+
+[apt-packages]   # captured inside the built image via dpkg-query
+ros-jazzy-rmw-fastrtps-cpp         = 8.4.3-1noble.20260412.034154
+ros-jazzy-rmw-cyclonedds-cpp       = 2.2.3-1noble.20260615.123728
+ros-jazzy-rmw-zenoh-cpp            = 0.2.9-1noble.20260612.051713
+ros-jazzy-example-interfaces       = 0.12.1-1noble.20260615.102406
+ros-jazzy-rqt-graph                = 1.5.6-1noble.20260615.174405
+graphviz                           = 2.42.2-9ubuntu0.1
+
+[rmw-available]  # RMW implementations present in the image
+     RMW MIDDLEWARE
+  middleware name    : rmw_fastrtps_cpp
+
+[captured-in-image-at] 2026-06-26T07:58:57Z

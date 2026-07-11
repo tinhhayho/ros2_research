@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">No master: peer-to-peer discovery</text>
+
+  <!-- Vertical divider -->
+  <line x1="480" y1="72" x2="480" y2="508" stroke="#cccccc" stroke-width="1"/>
+
+  <!-- Half labels -->
+  <text x="250" y="92" text-anchor="middle" font-size="17" font-weight="600" fill="#333">ROS 1 (old way)</text>
+  <text x="710" y="92" text-anchor="middle" font-size="17" font-weight="600" fill="#333">ROS 2</text>
+
+  <!-- ============ LEFT: hub-and-spoke ============ -->
+  <!-- Master box -->
+  <rect x="190" y="270" width="120" height="52" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="250" y="301" text-anchor="middle" font-size="14" font-weight="600" fill="#333">roscore master</text>
+
+  <!-- Spokes (nodes connect to master) -->
+  <line x1="150" y1="182" x2="193" y2="273" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="350" y1="182" x2="307" y2="273" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="150" y1="400" x2="193" y2="319" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="350" y1="400" x2="307" y2="319" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Node boxes (left) -->
+  <rect x="60" y="140" width="90" height="42" rx="8" fill="#2E5FAC" stroke="#234a86" stroke-width="1"/>
+  <text x="105" y="166" text-anchor="middle" font-size="14" fill="#ffffff">Node A</text>
+  <rect x="350" y="140" width="90" height="42" rx="8" fill="#2E5FAC" stroke="#234a86" stroke-width="1"/>
+  <text x="395" y="166" text-anchor="middle" font-size="14" fill="#ffffff">Node B</text>
+  <rect x="60" y="400" width="90" height="42" rx="8" fill="#2E5FAC" stroke="#234a86" stroke-width="1"/>
+  <text x="105" y="426" text-anchor="middle" font-size="14" fill="#ffffff">Node C</text>
+  <rect x="350" y="400" width="90" height="42" rx="8" fill="#2E5FAC" stroke="#234a86" stroke-width="1"/>
+  <text x="395" y="426" text-anchor="middle" font-size="14" fill="#ffffff">Node D</text>
+
+  <!-- SPOF caption -->
+  <text x="250" y="348" text-anchor="middle" font-size="13" font-style="italic" fill="#666">central point of failure</text>
+
+  <!-- ============ RIGHT: peer-to-peer mesh ============ -->
+  <!-- Mesh links (drawn first, cloud covers crossings) -->
+  <line x1="710" y1="151" x2="850" y2="295" stroke="#6F9BD1" stroke-width="2"/>
+  <line x1="850" y1="295" x2="710" y2="439" stroke="#6F9BD1" stroke-width="2"/>
+  <line x1="710" y1="439" x2="570" y2="295" stroke="#6F9BD1" stroke-width="2"/>
+  <line x1="570" y1="295" x2="710" y2="151" stroke="#6F9BD1" stroke-width="2"/>
+  <line x1="710" y1="151" x2="710" y2="439" stroke="#6F9BD1" stroke-width="2"/>
+  <line x1="570" y1="295" x2="850" y2="295" stroke="#6F9BD1" stroke-width="2"/>
+
+  <!-- Faded UDP multicast cloud -->
+  <g fill="#DCE9F7" opacity="0.6">
+    <circle cx="665" cy="300" r="30"/>
+    <circle cx="710" cy="280" r="37"/>
+    <circle cx="757" cy="300" r="30"/>
+    <circle cx="710" cy="316" r="30"/>
+    <ellipse cx="710" cy="306" rx="72" ry="27"/>
+  </g>
+  <text x="710" y="296" text-anchor="middle" font-size="14" font-weight="600" fill="#234">UDP multicast</text>
+  <text x="710" y="315" text-anchor="middle" font-size="12" font-style="italic" fill="#3a5a82">SPDP/SEDP discovery</text>
+
+  <!-- Node boxes (right) -->
+  <rect x="665" y="130" width="90" height="42" rx="8" fill="#2E5FAC" stroke="#234a86" stroke-width="1"/>
+  <text x="710" y="156" text-anchor="middle" font-size="14" fill="#ffffff">Node 1</text>
+  <rect x="805" y="274" width="90" height="42" rx="8" fill="#2E5FAC" stroke="#234a86" stroke-width="1"/>
+  <text x="850" y="300" text-anchor="middle" font-size="14" fill="#ffffff">Node 2</text>
+  <rect x="665" y="418" width="90" height="42" rx="8" fill="#2E5FAC" stroke="#234a86" stroke-width="1"/>
+  <text x="710" y="444" text-anchor="middle" font-size="14" fill="#ffffff">Node 3</text>
+  <rect x="525" y="274" width="90" height="42" rx="8" fill="#2E5FAC" stroke="#234a86" stroke-width="1"/>
+  <text x="570" y="300" text-anchor="middle" font-size="14" fill="#ffffff">Node 4</text>
+
+  <!-- P2P caption -->
+  <text x="710" y="486" text-anchor="middle" font-size="13" font-style="italic" fill="#666">direct peer-to-peer (no broker)</text>
+
+  <!-- ============ Bottom banner ============ -->
+  <rect x="30" y="525" width="900" height="58" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <text x="480" y="550" text-anchor="middle" font-size="15" fill="#333">Same domain (ROS_DOMAIN_ID) &#8594; discover.   Different domain &#8594; fully isolated.</text>
+  <text x="480" y="571" text-anchor="middle" font-size="13" font-style="italic" fill="#666">Analogy: devices enumerating themselves on a shared bus.</text>
+</svg>

@@ -1,0 +1,46 @@
+Waiting for an action server to become available...
+Sending goal:
+     order: 5
+
+Goal accepted with ID: f67e7bef779c4cf69079d9cb6409b51e
+
+Feedback:
+    sequence:
+- 0
+- 1
+- 1
+
+Feedback:
+    sequence:
+- 0
+- 1
+- 1
+- 2
+
+Feedback:
+    sequence:
+- 0
+- 1
+- 1
+- 2
+- 3
+
+Feedback:
+    sequence:
+- 0
+- 1
+- 1
+- 2
+- 3
+- 5
+
+Result:
+    sequence:
+- 0
+- 1
+- 1
+- 2
+- 3
+- 5
+
+Goal finished with status: SUCCEEDED
