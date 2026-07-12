@@ -433,6 +433,92 @@ its own firmware. Thor status, verified from NVIDIA docs + staff forum answers:
 
 ---
 
+## Thor memory — one 273 GB/s pool, no HBM
+
+<style scoped>
+  section { font-size: 19.5px; }
+  table { font-size: 15.5px; }
+  table td, table th { padding: 3px 9px; }
+  .gloss { font-size: 13.5px; margin-top: 6px; }
+</style>
+
+Everything on the die — CPU, GPU, accelerators — shares **one LPDDR5X pool** behind the
+Unified Coherency Fabric. No HBM anywhere in the family: that's the power trade.
+
+| | Jetson T5000 | T4000 / DRIVE AGX Thor |
+|---|---|---|
+| DRAM | **128 GB** LPDDR5X (8×16 GB) | **64 GB** LPDDR5X (8×8 GB) |
+| Bus · clock | 256-bit · 4,266 MHz (≈ 8533 MT/s) | same |
+| Peak bandwidth | **273 GB/s** | **273 GB/s** — full bandwidth kept |
+| CPU | 14× Neoverse V3AE | 12× Neoverse V3AE |
+| Caches | L1 64+64 KB · L2 1 MB/core · **16 MB shared system cache** | same |
+| Compute (FP4 sparse) | 2070 TFLOPS | 1200 TFLOPS |
+| Max module power | 130 W (modes 70/90/120/MAXN) | 90 W (modes 70/MAXN) |
+
+> Memory-bound workloads degrade less on the smaller SKUs than the TFLOPS gap
+> suggests — the bandwidth is identical.
+
+<div class="gloss">HBM = High Bandwidth Memory (stacked, data-center) · TMP = Total Module Power · MT/s = megatransfers/s (8533 derived: 273 GB/s ÷ 32 B; the "4,266 MHz" is NVIDIA's printed figure) · Sources: Jetson Thor datasheet DS-11945-001 v1.5 + DRIVE AGX Thor deck (both PDFs read directly, 07/2026). The "40 W floor" seen in marketing does not appear in the datasheet.</div>
+
+---
+
+## Full coherence is new — and the allocator advice flipped
+
+<style scoped>
+  section { font-size: 20px; }
+  table { font-size: 15.5px; }
+  table td, table th { padding: 3px 9px; }
+  .gloss { font-size: 13.5px; margin-top: 6px; }
+</style>
+
+- **Orin**: one-way *I/O coherency* — GPU snoops CPU caches; CPU can't see GPU-cache updates
+- **Thor**: first Tegra with **Sysmem Full Coherency** — two-way, managed by the hardware fabric
+
+| Allocator | On Thor (CUDA 13.0) |
+|---|---|
+| `malloc` / `mmap` (pageable, GPU-accessed) | **fastest shared path** — GPU-cached, HW-coherent |
+| `cudaHostAlloc` (pinned) | small buffers; no longer the top shared path |
+| `cudaMallocManaged` | easy — but **not GPU-cached on Thor**: don't pick it for latency |
+| `cudaMalloc` | GPU-only buffers, as always |
+
+> A third-party report we reviewed recommended `cudaMallocManaged` "for low latency" —
+> NVIDIA's own docs say the opposite: registered/pageable memory *"can outperform both
+> Pinned memory or Unified memory"*. Perception(GPU)→planning(CPU) handoffs now go
+> fastest through plain system memory.
+
+<div class="gloss">Quotes verbatim from docs.nvidia.com "CUDA for Tegra" appnote ("Full Coherency is supported on Tegra devices starting with Thor SoC") and the "CUDA Toolkit 13.0 for Jetson Thor" blog ("cudaMallocManaged() allocations are not GPU-cached") · UVM = Unified Virtual Memory</div>
+
+---
+
+## 273 GB/s is the budget — size models by bandwidth, not TOPS
+
+<style scoped>
+  section { font-size: 19.5px; }
+  table { font-size: 15px; }
+  table td, table th { padding: 3px 9px; }
+  .gloss { font-size: 13px; margin-top: 6px; }
+</style>
+
+12–30× below data-center HBM: H100 (HBM3) 3.35 → H200 (HBM3e) 4.8 → B200 ≈ 8 TB/s at
+~1000 W. Autoregressive decode re-reads the weights **every token** ⇒ bandwidth-bound:
+
+| Model (quantized) | Bytes/token | Roofline peak | ~Realistic (60–80%) |
+|---|---|---|---|
+| 10 B @ FP4 | 5 GB | ~55 tok/s | ~33–44 |
+| 20 B @ FP4 · 10 B @ FP8 | 10 GB | ~27 tok/s | ~16–22 |
+| 20 B @ FP8 | 20 GB | ~14 tok/s | ~8–11 |
+
+**What NVIDIA ships against it:** FP4/FP8 Transformer Engine (2–4× less traffic) ·
+TensorRT fusion · MIG 2-way (12 SM inference + 8 SM control, JetPack 7.2 preview) ·
+the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
+
+> Server nuance: "unified memory is slow on servers" is outdated — GH200/GB200 pair CPU+GPU
+> over **NVLink-C2C, hardware-coherent at 900 GB/s**. Thor = the same idea at edge power.
+
+<div class="gloss">Roofline table = derived arithmetic (tok/s ≈ bandwidth ÷ model bytes; batch 1, ignores KV-cache and prefill), <b>not a measured run</b> · VLA = Vision-Language-Action model · full audit trail: research/jetson-thor-memory-2026-07.md + claims-audit rows M1–M16</div>
+
+---
+
 <!-- _class: diagram -->
 
 {{diagram:groot-cascade}}
@@ -748,6 +834,7 @@ Everything is public: weights on Hugging Face (`nvidia/GR00T-N1.7-3B` — the ga
 - GR00T N1.7 — huggingface.co/blog/nvidia/gr00t-n1-7 · github.com/NVIDIA/Isaac-GR00T
 - Isaac Sim/Lab/Arena — github.com/isaac-sim · Isaac Teleop — github.com/NVIDIA/IsaacTeleop
 - Jetson Thor — developer.nvidia.com blog "Introducing NVIDIA Jetson Thor" · JetPack 7.2 MIG blog
+- Thor memory — Jetson Thor datasheet DS-11945-001 (PDF) · DRIVE AGX Thor deck (PDF) · docs.nvidia.com "CUDA for Tegra" · "CUDA 13.0 for Jetson Thor" blog · GH200 NVLink-C2C blog · audit: research/jetson-thor-memory-2026-07.md
 - Isaac ROS 4.5 — nvidia-isaac-ros.github.io/releases · LeRobot ×NVIDIA — blogs.nvidia.com (Jul 6 2026)
 
 **NVIDIA Automotive** ·

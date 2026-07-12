@@ -433,6 +433,92 @@ its own firmware. Thor status, verified from NVIDIA docs + staff forum answers:
 
 ---
 
+## Thor memory — one 273 GB/s pool, no HBM
+
+<style scoped>
+  section { font-size: 19.5px; }
+  table { font-size: 15.5px; }
+  table td, table th { padding: 3px 9px; }
+  .gloss { font-size: 13.5px; margin-top: 6px; }
+</style>
+
+Everything on the die — CPU, GPU, accelerators — shares **one LPDDR5X pool** behind the
+Unified Coherency Fabric. No HBM anywhere in the family: that's the power trade.
+
+| | Jetson T5000 | T4000 / DRIVE AGX Thor |
+|---|---|---|
+| DRAM | **128 GB** LPDDR5X (8×16 GB) | **64 GB** LPDDR5X (8×8 GB) |
+| Bus · clock | 256-bit · 4,266 MHz (≈ 8533 MT/s) | same |
+| Peak bandwidth | **273 GB/s** | **273 GB/s** — full bandwidth kept |
+| CPU | 14× Neoverse V3AE | 12× Neoverse V3AE |
+| Caches | L1 64+64 KB · L2 1 MB/core · **16 MB shared system cache** | same |
+| Compute (FP4 sparse) | 2070 TFLOPS | 1200 TFLOPS |
+| Max module power | 130 W (modes 70/90/120/MAXN) | 90 W (modes 70/MAXN) |
+
+> Memory-bound workloads degrade less on the smaller SKUs than the TFLOPS gap
+> suggests — the bandwidth is identical.
+
+<div class="gloss">HBM = High Bandwidth Memory (stacked, data-center) · TMP = Total Module Power · MT/s = megatransfers/s (8533 derived: 273 GB/s ÷ 32 B; the "4,266 MHz" is NVIDIA's printed figure) · Sources: Jetson Thor datasheet DS-11945-001 v1.5 + DRIVE AGX Thor deck (both PDFs read directly, 07/2026). The "40 W floor" seen in marketing does not appear in the datasheet.</div>
+
+---
+
+## Full coherence is new — and the allocator advice flipped
+
+<style scoped>
+  section { font-size: 20px; }
+  table { font-size: 15.5px; }
+  table td, table th { padding: 3px 9px; }
+  .gloss { font-size: 13.5px; margin-top: 6px; }
+</style>
+
+- **Orin**: one-way *I/O coherency* — GPU snoops CPU caches; CPU can't see GPU-cache updates
+- **Thor**: first Tegra with **Sysmem Full Coherency** — two-way, managed by the hardware fabric
+
+| Allocator | On Thor (CUDA 13.0) |
+|---|---|
+| `malloc` / `mmap` (pageable, GPU-accessed) | **fastest shared path** — GPU-cached, HW-coherent |
+| `cudaHostAlloc` (pinned) | small buffers; no longer the top shared path |
+| `cudaMallocManaged` | easy — but **not GPU-cached on Thor**: don't pick it for latency |
+| `cudaMalloc` | GPU-only buffers, as always |
+
+> A third-party report we reviewed recommended `cudaMallocManaged` "for low latency" —
+> NVIDIA's own docs say the opposite: registered/pageable memory *"can outperform both
+> Pinned memory or Unified memory"*. Perception(GPU)→planning(CPU) handoffs now go
+> fastest through plain system memory.
+
+<div class="gloss">Quotes verbatim from docs.nvidia.com "CUDA for Tegra" appnote ("Full Coherency is supported on Tegra devices starting with Thor SoC") and the "CUDA Toolkit 13.0 for Jetson Thor" blog ("cudaMallocManaged() allocations are not GPU-cached") · UVM = Unified Virtual Memory</div>
+
+---
+
+## 273 GB/s is the budget — size models by bandwidth, not TOPS
+
+<style scoped>
+  section { font-size: 19.5px; }
+  table { font-size: 15px; }
+  table td, table th { padding: 3px 9px; }
+  .gloss { font-size: 13px; margin-top: 6px; }
+</style>
+
+12–30× below data-center HBM: H100 (HBM3) 3.35 → H200 (HBM3e) 4.8 → B200 ≈ 8 TB/s at
+~1000 W. Autoregressive decode re-reads the weights **every token** ⇒ bandwidth-bound:
+
+| Model (quantized) | Bytes/token | Roofline peak | ~Realistic (60–80%) |
+|---|---|---|---|
+| 10 B @ FP4 | 5 GB | ~55 tok/s | ~33–44 |
+| 20 B @ FP4 · 10 B @ FP8 | 10 GB | ~27 tok/s | ~16–22 |
+| 20 B @ FP8 | 20 GB | ~14 tok/s | ~8–11 |
+
+**What NVIDIA ships against it:** FP4/FP8 Transformer Engine (2–4× less traffic) ·
+TensorRT fusion · MIG 2-way (12 SM inference + 8 SM control, JetPack 7.2 preview) ·
+the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
+
+> Server nuance: "unified memory is slow on servers" is outdated — GH200/GB200 pair CPU+GPU
+> over **NVLink-C2C, hardware-coherent at 900 GB/s**. Thor = the same idea at edge power.
+
+<div class="gloss">Roofline table = derived arithmetic (tok/s ≈ bandwidth ÷ model bytes; batch 1, ignores KV-cache and prefill), <b>not a measured run</b> · VLA = Vision-Language-Action model · full audit trail: research/jetson-thor-memory-2026-07.md + claims-audit rows M1–M16</div>
+
+---
+
 <!-- _class: diagram -->
 
 <img alt="groot-cascade" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5NjAgNjAwIiB3aWR0aD0iOTYwIiBoZWlnaHQ9IjYwMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYiPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI5NjAiIGhlaWdodD0iNjAwIiBmaWxsPSIjZmZmZmZmIi8+CiAgPGRlZnM+CiAgICA8bWFya2VyIGlkPSJhcnIiIG1hcmtlcldpZHRoPSIxMCIgbWFya2VySGVpZ2h0PSIxMCIgcmVmWD0iOCIgcmVmWT0iMyIgb3JpZW50PSJhdXRvIiBtYXJrZXJVbml0cz0ic3Ryb2tlV2lkdGgiPgogICAgICA8cGF0aCBkPSJNMCwwIEw5LDMgTDAsNiB6IiBmaWxsPSIjNDQ0Ii8+CiAgICA8L21hcmtlcj4KICA8L2RlZnM+CgogIDwhLS0gVGl0bGUgLS0+CiAgPHRleHQgeD0iNDgwIiB5PSI0MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyNiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzFiMmI0YSI+RnJvbSBmb3VuZGF0aW9uIG1vZGVsIHRvIG1vdG9yOiB0aGUgY29udHJvbCBjYXNjYWRlPC90ZXh0PgoKICA8IS0tIDE6IENhbWVyYSArIGxhbmd1YWdlIGluc3RydWN0aW9uIC0tPgogIDxyZWN0IHg9IjE4MCIgeT0iNjQiIHdpZHRoPSI2MDAiIGhlaWdodD0iNDIiIHJ4PSI4IiBmaWxsPSIjRkNFOEQ1IiBzdHJva2U9IiNFMEE5NkQiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHRleHQgeD0iNDgwIiB5PSI5MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzZCNEEyQiI+Q2FtZXJhICsgbGFuZ3VhZ2UgaW5zdHJ1Y3Rpb248L3RleHQ+CgogIDxsaW5lIHgxPSI0ODAiIHkxPSIxMDYiIHgyPSI0ODAiIHkyPSIxMjgiIHN0cm9rZT0iIzQ0NCIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2FycikiLz4KCiAgPCEtLSAyOiBHUjAwVCBOMS43IC0tPgogIDxyZWN0IHg9IjE4MCIgeT0iMTI4IiB3aWR0aD0iNjAwIiBoZWlnaHQ9Ijc4IiByeD0iOCIgZmlsbD0iI0ZDRThENSIgc3Ryb2tlPSIjRTBBOTZEIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDx0ZXh0IHg9IjIwMCIgeT0iMTU0IiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjNkI0QTJCIj5HUjAwVCBOMS43ICgzQiBWTEEpPC90ZXh0PgogIDx0ZXh0IHg9IjIwMCIgeT0iMTc0IiBmb250LXNpemU9IjEzIiBmaWxsPSIjNkI0QTJCIj5Db3Ntb3MtUmVhc29uMiBiYWNrYm9uZSAmIzg1OTQ7IERpVCBhY3Rpb24gaGVhZDwvdGV4dD4KICA8dGV4dCB4PSI3NjAiIHk9IjE2OCIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzJFNUZBQyI+JiM4Nzc2Ozk0IG1zL2luZmVyZW5jZSBvbiBUaG9yPC90ZXh0PgoKICA8IS0tIDM6IHNpZGUgbm90ZSBhdHRhY2hlZCB0byBib3ggMiAtLT4KICA8bGluZSB4MT0iNzgwIiB5MT0iMTUwIiB4Mj0iNzg4IiB5Mj0iMTUwIiBzdHJva2U9IiM5OTkiIHN0cm9rZS13aWR0aD0iMSIvPgogIDx0ZXh0IHg9Ijc5MiIgeT0iMTQ2IiBmb250LXNpemU9IjEzIiBmb250LXN0eWxlPSJpdGFsaWMiIGZpbGw9IiM1NTUiPgogICAgPHRzcGFuIHg9Ijc5MiIgZHk9IjAiPmFjdGlvbiBjaHVua2luZzo8L3RzcGFuPgogICAgPHRzcGFuIHg9Ijc5MiIgZHk9IjE2Ij4xIGluZmVyZW5jZSAmIzg1OTQ7IE48L3RzcGFuPgogICAgPHRzcGFuIHg9Ijc5MiIgZHk9IjE2Ij5hY3Rpb24gc3RlcHM8L3RzcGFuPgogIDwvdGV4dD4KCiAgPGxpbmUgeDE9IjQ4MCIgeTE9IjIwNiIgeDI9IjQ4MCIgeTI9IjIzMCIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyKSIvPgoKICA8IS0tIDQ6IFdob2xlLWJvZHkgcG9saWN5IC0tPgogIDxyZWN0IHg9IjE4MCIgeT0iMjMwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2IiByeD0iOCIgZmlsbD0iI0RDRTlGNyIgc3Ryb2tlPSIjNkY5QkQxIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDx0ZXh0IHg9IjIwMCIgeT0iMjU3IiBmb250LXNpemU9IjE2IiBmaWxsPSIjMjM0Ij5XaG9sZS1ib2R5IHBvbGljeSAoU09OSUMgLyBSTCk8L3RleHQ+CiAgPHRleHQgeD0iNzYwIiB5PSIyNTciIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyRTVGQUMiPn41MCBIejwvdGV4dD4KCiAgPCEtLSBhcnJvdyBjcm9zc2luZyB0aGUgR1BVIC8gZmlybXdhcmUgZGl2aWRlciAtLT4KICA8bGluZSB4MT0iNDgwIiB5MT0iMjc2IiB4Mj0iNDgwIiB5Mj0iMzI2IiBzdHJva2U9IiM0NDQiIHN0cm9rZS13aWR0aD0iMiIgbWFya2VyLWVuZD0idXJsKCNhcnIpIi8+CgogIDwhLS0gZGFzaGVkIGRpdmlkZXIgLS0+CiAgPGxpbmUgeDE9IjEwMCIgeTE9IjMwNiIgeDI9Ijg2MCIgeTI9IjMwNiIgc3Ryb2tlPSIjOTk5IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWRhc2hhcnJheT0iNiA1Ii8+CiAgPHRleHQgeD0iODMwIiB5PSIzMDAiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtc3R5bGU9Iml0YWxpYyIgZmlsbD0iIzJFNUZBQyI+R1BVIGFib3ZlICYjMTgzOyBjbGFzc2ljYWwgZmlybXdhcmUgYmVsb3c8L3RleHQ+CgogIDwhLS0gNTogcm9zMl9jb250cm9sIC0tPgogIDxyZWN0IHg9IjE4MCIgeT0iMzI2IiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2IiByeD0iOCIgZmlsbD0iI0VBRjFGQiIgc3Ryb2tlPSIjOUJCQ0UwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDx0ZXh0IHg9IjIwMCIgeT0iMzUzIiBmb250LXNpemU9IjE1IiBmaWxsPSIjMjM0Ij5yb3MyX2NvbnRyb2wgJiM4MjEyOyB0b3JxdWUvaW1wZWRhbmNlIGxvb3A8L3RleHQ+CiAgPHRleHQgeD0iNzYwIiB5PSIzNTMiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyRTVGQUMiPn4xIGtIejwvdGV4dD4KCiAgPGxpbmUgeDE9IjQ4MCIgeTE9IjM3MiIgeDI9IjQ4MCIgeTI9IjM5NiIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiIG1hcmtlci1lbmQ9InVybCgjYXJyKSIvPgoKICA8IS0tIDY6IEV0aGVyQ0FUIC8gQ0FOLUZEIC0tPgogIDxyZWN0IHg9IjE4MCIgeT0iMzk2IiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2IiByeD0iOCIgZmlsbD0iI0VDRUNFQyIgc3Ryb2tlPSIjQjBCMEIwIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDx0ZXh0IHg9IjIwMCIgeT0iNDIzIiBmb250LXNpemU9IjE2IiBmaWxsPSIjMzMzIj5FdGhlckNBVCAvIENBTi1GRCBmaWVsZGJ1czwvdGV4dD4KICA8dGV4dCB4PSI3NjAiIHk9IjQyMyIgdGV4dC1hbmNob3I9ImVuZCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzJFNUZBQyI+MSYjODIxMTsxMCBrSHo8L3RleHQ+CgogIDxsaW5lIHgxPSI0ODAiIHkxPSI0NDIiIHgyPSI0ODAiIHkyPSI0NjYiIHN0cm9rZT0iIzQ0NCIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2FycikiLz4KCiAgPCEtLSA3OiBKb2ludCBNQ1UgLS0+CiAgPHJlY3QgeD0iMTgwIiB5PSI0NjYiIHdpZHRoPSI2MDAiIGhlaWdodD0iNDYiIHJ4PSI4IiBmaWxsPSIjRUNFQ0VDIiBzdHJva2U9IiNCMEIwQjAiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHRleHQgeD0iMjAwIiB5PSI0OTMiIGZvbnQtc2l6ZT0iMTUiIGZpbGw9IiMzMzMiPkpvaW50IE1DVSAmIzgyMTI7IEZPQyBjdXJyZW50IGxvb3A8L3RleHQ+CiAgPHRleHQgeD0iNzYwIiB5PSI0OTMiIHRleHQtYW5jaG9yPSJlbmQiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMyRTVGQUMiPjgmIzgyMTE7MzIga0h6PC90ZXh0PgoKICA8IS0tIEZvb3Rub3RlIC0tPgogIDx0ZXh0IHg9IjQ4MCIgeT0iNTQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEzIiBmb250LXN0eWxlPSJpdGFsaWMiIGZpbGw9IiM2NjYiPk5WSURJQSdzIHN0YWNrIGVuZHMgYWJvdmUgdGhlIDEga0h6IGxpbmUgJiM4MjEyOyB0aGUgYm90dG9tIGhhbGYgaXMgY2xhc3NpY2FsIGVtYmVkZGVkIGVuZ2luZWVyaW5nPC90ZXh0Pgo8L3N2Zz4K" />
@@ -748,6 +834,7 @@ Everything is public: weights on Hugging Face (`nvidia/GR00T-N1.7-3B` — the ga
 - GR00T N1.7 — huggingface.co/blog/nvidia/gr00t-n1-7 · github.com/NVIDIA/Isaac-GR00T
 - Isaac Sim/Lab/Arena — github.com/isaac-sim · Isaac Teleop — github.com/NVIDIA/IsaacTeleop
 - Jetson Thor — developer.nvidia.com blog "Introducing NVIDIA Jetson Thor" · JetPack 7.2 MIG blog
+- Thor memory — Jetson Thor datasheet DS-11945-001 (PDF) · DRIVE AGX Thor deck (PDF) · docs.nvidia.com "CUDA for Tegra" · "CUDA 13.0 for Jetson Thor" blog · GH200 NVLink-C2C blog · audit: research/jetson-thor-memory-2026-07.md
 - Isaac ROS 4.5 — nvidia-isaac-ros.github.io/releases · LeRobot ×NVIDIA — blogs.nvidia.com (Jul 6 2026)
 
 **NVIDIA Automotive** ·

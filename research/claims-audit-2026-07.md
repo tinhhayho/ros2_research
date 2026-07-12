@@ -89,3 +89,29 @@ Panda demo in RViz) — captured 2026-07 in the repo's pinned Jazzy container +
 - GR00T runs lack a pinned model revision + package lock + seed in the repo; the raw
   log and screenshot are committed, the environment bootstrap is not.
 - The ">22,000 diagnostic mechanisms" count has no primary NVIDIA document behind it.
+
+## Jetson Thor memory claims (added 2026-07-12)
+
+Fact-check of a submitted third-party memory report; full write-up in
+`research/jetson-thor-memory-2026-07.md`. The two NVIDIA PDFs were unreadable by the
+audit agent's web tooling, so they were downloaded and read locally with `pdftotext`
+(primary-verified).
+
+| # | Claim (as now stated) | Source (exact URL) | Status | Notes |
+|---|---|---|---|---|
+| M1 | T5000: 128 GB (8×16 GB) 256-bit LPDDR5X, 273 GB/s peak | https://developer.nvidia.com/downloads/assets/embedded/secure/jetson/thor/docs/jetson-thor-series-modules-datasheet_ds-11945-001.pdf | confirmed | Datasheet DS-11945-001, read locally |
+| M2 | T4000: 64 GB (8×8 GB) 256-bit LPDDR5X, same 273 GB/s | same datasheet | confirmed | |
+| M3 | Memory max operating frequency 4,266 MHz (≈ 8533 MT/s effective) | same datasheet · https://developer.download.nvidia.com/drive/docs/nvidia-drive-agx-thor-platform-for-developers.pdf | confirmed + derived | 8533 MT/s = 273 GB/s ÷ 32 B, our arithmetic |
+| M4 | CPU caches: L1 64+64 KB/core, L2 1 MB/core, 16 MB shared System Cache (both SKUs) | same datasheet | confirmed | Refutes "no SRAM numbers published" |
+| M5 | T5000 = 14× / T4000 = 12× Neoverse V3AE | same datasheet | confirmed | |
+| M6 | Power: T5000 modes 70/90/120/MAXN, TMP 130 W; T4000 modes 70/MAXN, TMP 90 W | same datasheet | confirmed | 40 W floor exists only on marketing page — not in datasheet |
+| M7 | Compute: T5000 2070 / T4000 1200 FP4 TFLOPS (sparse, MAXN) | same datasheet | confirmed | |
+| M8 | DRIVE AGX Thor: 64 GB LPDDR5X at 4266 MHz, 273 GB/s | https://developer.download.nvidia.com/drive/docs/nvidia-drive-agx-thor-platform-for-developers.pdf | confirmed | Deck p.6, read locally |
+| M9 | "Full Coherency is supported on Tegra devices starting with Thor SoC" (two-way; pre-Thor = one-way I/O coherency) | https://docs.nvidia.com/cuda/cuda-for-tegra-appnote/index.html | confirmed | Verbatim quotes re-fetched by orchestrator |
+| M10 | CUDA 13.0: `cudaMallocManaged()` allocations are **not GPU-cached** on Thor | https://developer.nvidia.com/blog/whats-new-in-cuda-toolkit-13-0-for-jetson-thor-unified-arm-ecosystem-and-more/ | confirmed | Verbatim; refutes "managed = low latency" |
+| M11 | Registered/pageable host memory on Thor "can outperform both Pinned memory or Unified memory" | https://docs.nvidia.com/cuda/cuda-for-tegra-appnote/index.html | confirmed | Verbatim |
+| M12 | Thor uncore has a Unified Coherency Fabric (UCF) + system-level cache PMUs | https://docs.nvidia.com/jetson/archives/r38.2.1/DeveloperGuide/AT/JetsonLinuxDevelopmentTools/PerformanceMonitoring.html | confirmed | Audit pass fetched directly |
+| M13 | H100 SXM 3.35 TB/s (HBM3); H200 4.8 TB/s HBM3e; B200 ≈ 8 TB/s HBM3e | https://www.nvidia.com/en-us/data-center/h100/ · https://www.nvidia.com/en-us/data-center/h200/ · https://www.nvidia.com/en-us/data-center/dgx-b200/ | confirmed | H100 "HBM3" label + B200 ~1000 W are datasheet/secondary-corroborated |
+| M14 | GH200/GB200 NVLink-C2C: hardware-coherent, up to 900 GB/s, no page migration | https://developer.nvidia.com/blog/nvidia-grace-hopper-superchip-architecture-in-depth/ | confirmed | Refutes "server unified memory = inefficient" as a blanket claim |
+| M15 | Jetson Thor GA August 25, 2025 | https://nvidianews.nvidia.com/news/nvidia-blackwell-powered-jetson-thor-now-available-accelerating-the-age-of-general-robotics | confirmed | |
+| M16 | Decode roofline on 273 GB/s: 10–20 B params @ 4–8 bit ⇒ ~14–55 tok/s theoretical peak | — | derived | Our arithmetic, assumptions in the memory report §3; not a measured run |
