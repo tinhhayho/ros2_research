@@ -490,6 +490,32 @@ Unified Coherency Fabric. No HBM anywhere in the family: that's the power trade.
 
 ---
 
+## Unified memory on Thor — dGPU folklore vs what actually happens
+
+<style scoped>
+  section { font-size: 19px; }
+  table { font-size: 14.5px; }
+  table td, table th { padding: 3px 9px; }
+  .gloss { font-size: 13px; margin-top: 6px; }
+</style>
+
+A second reviewed report explained Thor's UVM *mechanism* — in discrete-GPU vocabulary.
+On a one-pool, hardware-coherent SoC, most of that vocabulary stops applying:
+
+| dGPU folklore | On Thor (one pool, HW-coherent) |
+|---|---|
+| "The driver **migrates pages** when needed" | **Nothing migrates** — every allocator lands in the same LPDDR5X; only caching + coherence ownership differ ("migration" never appears in the Tegra docs) |
+| "**Oversubscription** works, moderately" | Concept doesn't apply — no smaller GPU pool to oversubscribe; the limit is the shared 64/128 GB budget vs the OS |
+| "**No ATS**-like features — weaker coherence than GH200" | GPU reaches pageable memory **via the host's page tables**; coherence concedes nothing — GH200's real edge is **scale** (480 GB + HBM over 900 GB/s C2C) |
+| "Tune with `cudaMemAdvise` + **prefetch to device**" | `cudaMemAdvise` absent from Tegra docs; prefetch is Thor-only on Tegra (`concurrentManagedAccess=1`) and there is no "device pool" to move bytes to |
+
+> Smell test: advice mentioning *migration, oversubscription or preferred location* was
+> written for a discrete GPU. On Thor the whole game is **allocator choice** (previous slide).
+
+<div class="gloss">dGPU = discrete GPU · Even for dGPUs, "software migration" is wrong — since Pascal it's a hardware page-fault engine + driver copies (HMM on Linux) · Sources: CUDA for Tegra appnote · CUDA 13.0 Jetson Thor blog · GH200 architecture blog + datasheet · full audit: research/thor-unified-memory-2026-07.md (claims U1–U16)</div>
+
+---
+
 ## 273 GB/s is the budget — size models by bandwidth, not TOPS
 
 <style scoped>
@@ -834,7 +860,7 @@ Everything is public: weights on Hugging Face (`nvidia/GR00T-N1.7-3B` — the ga
 - GR00T N1.7 — huggingface.co/blog/nvidia/gr00t-n1-7 · github.com/NVIDIA/Isaac-GR00T
 - Isaac Sim/Lab/Arena — github.com/isaac-sim · Isaac Teleop — github.com/NVIDIA/IsaacTeleop
 - Jetson Thor — developer.nvidia.com blog "Introducing NVIDIA Jetson Thor" · JetPack 7.2 MIG blog
-- Thor memory — Jetson Thor datasheet DS-11945-001 (PDF) · DRIVE AGX Thor deck (PDF) · docs.nvidia.com "CUDA for Tegra" · "CUDA 13.0 for Jetson Thor" blog · GH200 NVLink-C2C blog · audit: research/jetson-thor-memory-2026-07.md
+- Thor memory — Jetson Thor datasheet DS-11945-001 (PDF) · DRIVE AGX Thor deck (PDF) · docs.nvidia.com "CUDA for Tegra" · "CUDA 13.0 for Jetson Thor" blog · GH200 NVLink-C2C blog + datasheet · audits: research/jetson-thor-memory-2026-07.md, thor-unified-memory-2026-07.md
 - Isaac ROS 4.5 — nvidia-isaac-ros.github.io/releases · LeRobot ×NVIDIA — blogs.nvidia.com (Jul 6 2026)
 
 **NVIDIA Automotive** ·

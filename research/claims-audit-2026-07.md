@@ -115,3 +115,27 @@ audit agent's web tooling, so they were downloaded and read locally with `pdftot
 | M14 | GH200/GB200 NVLink-C2C: hardware-coherent, up to 900 GB/s, no page migration | https://developer.nvidia.com/blog/nvidia-grace-hopper-superchip-architecture-in-depth/ | confirmed | Refutes "server unified memory = inefficient" as a blanket claim |
 | M15 | Jetson Thor GA August 25, 2025 | https://nvidianews.nvidia.com/news/nvidia-blackwell-powered-jetson-thor-now-available-accelerating-the-age-of-general-robotics | confirmed | |
 | M16 | Decode roofline on 273 GB/s: 10–20 B params @ 4–8 bit ⇒ ~14–55 tok/s theoretical peak | — | derived | Our arithmetic, assumptions in the memory report §3; not a measured run |
+
+## Thor unified-memory mechanism claims (added 2026-07-12)
+
+Fact-check of a second submitted third-party report (UM mechanism); full write-up in
+`research/thor-unified-memory-2026-07.md`.
+
+| # | Claim (as now stated) | Source (exact URL) | Status | Notes |
+|---|---|---|---|---|
+| U1 | No page migration on Tegra iGPU — managed memory = coherency/cache maintenance; "migration" absent from Tegra docs | https://docs.nvidia.com/cuda/cuda-for-tegra-appnote/index.html | corrected | Refutes third-party "driver migrates pages when necessary" |
+| U2 | Zero-copy: duplicate allocations and transfers "can be avoided" (one SoC DRAM pool) | same appnote | confirmed | Not "cheaper migration" — no copy at all |
+| U3 | Thor GPU accesses pageable memory "via the host's page tables"; system `malloc`/`mmap` usable directly on GPU | https://developer.nvidia.com/blog/whats-new-in-cuda-toolkit-13-0-for-jetson-thor-unified-arm-ecosystem-and-more/ | confirmed | Refutes "no ATS-like features on Thor" |
+| U4 | `concurrentManagedAccess` = 1 only on Thor-or-later Tegra; `cudaMemPrefetchAsync` unsupported where it is 0 | https://docs.nvidia.com/cuda/cuda-for-tegra-appnote/index.html | confirmed | Verbatim quotes, audit pass |
+| U5 | `cudaMemAdvise` / SetPreferredLocation: absent from the Tegra appnote | same appnote | confirmed (absence, scoped) | The third-party tuning advice is dGPU boilerplate |
+| U6 | GH200 ATS = single shared per-process page table; CPU/GPU access each other's memory "without page-migrations" | https://developer.nvidia.com/blog/nvidia-grace-hopper-superchip-architecture-in-depth/ | confirmed | |
+| U7 | GH200 capacities: up to 480 GB LPDDR5X + 96 GB HBM3 / 144 GB HBM3e (≤624 GB combined) | NVIDIA GH200 datasheet (official PDF) · https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/ | confirmed | |
+| U8 | No NVIDIA source ranks CPU–GPU coherence "strength" GH200 > Thor; correct axis = scale/topology (2 dies + 2 memory types vs 1 die + 1 pool) | absence across GH200 blog, Tegra appnote, product docs | scoped (analysis) | Thor Sysmem Full Coherency is two-way HW coherence on-die |
+| U9 | Discrete-GPU UM: hardware Page Migration Engine (page faults) since Pascal + driver copies; HMM on Linux; ATS disables HMM | https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/unified-memory.html | confirmed | Refutes "software page migration" label |
+| U10 | Jetson T5000 has no NVLink-C2C (NVIDIA staff); 2022 dual-Thor C2C config: no evidence it shipped as of 07/2026 | https://forums.developer.nvidia.com/t/request-for-technical-documentation-regarding-nvlink-c2c-gsc-on-nvidia-drive-thor-t5000/358185 · https://blogs.nvidia.com/blog/drive-thor/ | confirmed + scoped | DRIVE C2C ("GSC") docs partner-gated |
+| U11 | Hot Chips 2025: no Thor session (NVIDIA sessions = RTX 5090, ConnectX-8, photonics, GB10); Thor GA was announced during HC week, not as a talk | https://hc2025.hotchips.org/program/ | confirmed | |
+| U12 | FSI: "Jetson Thor does not support FSI. IGX Thor supports FSI." (NVIDIA staff) | https://forums.developer.nvidia.com/t/functional-safety-island-in-jetson-thor-t5000-module/360033 | confirmed | Matches deck slide "hidden MCUs" |
+| U13 | DRIVE AGX Thor platforms cite AEC-Q100 + ISO 26262 + IATF 16949; AEC-Q100 = reliability qualification, not the functional-safety claim | search-corroborated NVIDIA statements | self-reported/secondary | |
+| U14 | Thor DRAM placement (on-module memory-down vs Apple-style PoP) | no Thor teardown found (STH hands-on = specs only) | unverified (inferred from Jetson SoM convention) | Do not assert either way |
+| U15 | `cudaMemPrefetchAsync` on one-pool Thor = page-table pre-population | forum-level explanation only | unverified | Benchmark before relying on it |
+| U16 | Thor MSS = "scalable coherence fabric" (TRM wording); "single memory controller" oversimplifies; channel count not public | Thor SoC TRM DP-11881-002 (developer-gated; wording via secondary index) | scoped | |
