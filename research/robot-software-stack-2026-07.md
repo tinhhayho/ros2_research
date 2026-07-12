@@ -53,7 +53,7 @@ github.com/SteveMacenski/slam_toolbox):
 **On-road autonomous vehicles:**
 - **Autoware** (autoware.org) is the open reference stack: Core (stable, QA-gated) +
   Universe (experimental) on ROS 2; sensing → localization (NDT) → perception → planning →
-  control → drive-by-wire, Lanelet2 HD maps. Adoption ~30 vehicle types / 500 companies;
+  control → drive-by-wire, Lanelet2 HD maps. Adoption ~30 vehicle types / ~500 companies (the foundation's own figure);
   first public-road L4 target is shuttles/buses (Tier IV + Isuzu). Humble→Jazzy migration
   in progress (full support ~Apr 2026 [UNVERIFIED — GitHub issue via search]).
 - The consumer/robotaxi market (Waymo, Tesla) runs proprietary, increasingly **end-to-end
@@ -71,7 +71,7 @@ Atlas to RL-trained "large behavior models" (with TRI).
 **Typical loop-rate cascade** (bottom-up): FOC current loops 8–32 kHz on joint MCUs →
 EtherCAT/CAN-FD 1–10 kHz → torque/impedance ~1 kHz on PREEMPT_RT/RTOS → state estimation
 1–2 kHz → RL policy ~50 Hz on GPU → VLA "System 2" reasoning 1–10 Hz + "System 1" action head
-50–200 Hz. **Dual-system VLA is the convergent architecture** (NVIDIA GR00T N1.6, Figure
+50–200 Hz. **Dual-system VLA is the convergent architecture** (NVIDIA GR00T N1.7, Figure
 Helix, Physical Intelligence π0.5).
 
 **ROS 2 reality check for humanoids:** not exposed in the public materials of commercial
@@ -152,7 +152,7 @@ appliance images; Yocto losing ground to container flows for iteration speed.
 data) → Jetson (deploy). The pieces stack as: Omniverse (USD foundation, free for dev+prod
 since ~May 2026 [UNVERIFIED date]) → **Isaac Sim 6.0.1** (Apache-2.0 core on GitHub; Kit SDK
 still proprietary-licensed) → **Isaac Lab** (BSD-3, RL/imitation) → **Cosmos** (world models,
-synthetic data; used by Figure, Agility, Skild) → **GR00T N1.6** (open weights on HF, Dec
+synthetic data; used by Figure, Agility, Skild) → **GR00T N1.7** (current; N1.6 opened weights on HF, Dec
 2025) → **Isaac ROS 4.5.0** (July 2026) on **Jetson Orin/Thor**.
 
 **Isaac ROS is the part that touches our world**: ROS 2 Jazzy packages, GPU-accelerated

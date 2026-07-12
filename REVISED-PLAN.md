@@ -1,4 +1,7 @@
-# PLAN.md — `ros2-explained` (Linux-native, medium scope, embedded audience)
+> **Historical document (July 2026):** the revised plan that the build followed, kept for
+> the record. See `README.md` for the current state of the repo.
+
+# REVISED-PLAN.md — `ros2-explained` (Linux-native, medium scope, embedded audience)
 
 A self-contained repo that **explains** (slides + concept docs) and **demonstrates** (three
 focused live Docker demos) the architecture and middleware layer of ROS 2 — written for

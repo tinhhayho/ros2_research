@@ -749,7 +749,7 @@ is what the machine can't replace.
 onto silicon — identical skills on both sides of the fence.
 
 > Verdict: **learn on Physical AI** (open, cheap — GR00T already runs on our desk),
-> **keep ISO 26262 literacy**. Convergence is coming (same Cosmos brain in GR00T and
+> **keep ISO 26262 literacy**. Convergence is coming (same Cosmos-Reason lineage in GR00T and
 > Alpamayo; Halos expanding to robotics) — the bilingual engineer gets paid most.
 
 <div class="gloss">MISRA = automotive C/C++ coding standard · AUTOSAR = automotive SW architecture standard · WCET = Worst-Case Execution Time · ASPICE = automotive process-maturity model · Halos = NVIDIA's full-stack safety program</div>

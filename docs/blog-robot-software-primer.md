@@ -101,7 +101,7 @@ If you remember a single technical rule from this primer, make it this:
 Two consequences worth internalizing:
 
 - **"Real-time" means guaranteed deadlines, not speed.** Linux with the PREEMPT_RT option
-  can promise ~1 ms loops (jitter ≈ 50 µs). It cannot promise 100 µs loops — that world
+  can promise ~1 ms loops (jitter ≈ 50 µs — an illustrative tuned-PREEMPT_RT figure, not measured in this repo). It cannot promise 100 µs loops — that world
   belongs to MCUs. This is exactly why every robot still contains microcontrollers no
   matter how big its GPU is.
 - **The AI never touches the motors directly.** If the vision model hangs for half a

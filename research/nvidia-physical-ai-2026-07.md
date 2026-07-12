@@ -182,7 +182,8 @@ photorealizes Isaac Sim renders; Cosmos evaluates policies that Isaac Lab traine
 | Devkit | **$3,499** (1 TB NVMe, 100 GbE QSFP28) | ~$2,000 | — |
 
 - A lower tier exists: **Thor T4000** — 1,536 CUDA cores, 64 GB, 1,200 sparse-FP4 TFLOPS,
-  40–70 W (⚠AUDIT confirmed on the product page).
+  power modes 70 W / MAXN with **max module power (TMP) 90 W** per datasheet DS-11945-001
+  (the marketing page's "40 W" floor does not appear in the datasheet — see claims-audit M6).
 - **JetPack 7.0** = Jetson Linux 38.2, **Ubuntu 24.04, kernel 6.8, PREEMPT_RT kernel
   option** — the robotics-relevant real-time story is finally stock.
 - **MIG (⚠AUDIT — corrected):** Thor is the first Jetson with MIG, arriving in

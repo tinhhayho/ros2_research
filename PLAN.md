@@ -1,3 +1,7 @@
+> **Historical document (July 2026):** this is the original pre-build plan, kept for the
+> record. The repo has long since been built — see `README.md` for the current state; the
+> "no code yet" status below no longer applies.
+
 # PLAN.md — `ros2-explained`
 
 A self-contained repo that **explains** (slides + docs) and **demonstrates** (4 live Docker

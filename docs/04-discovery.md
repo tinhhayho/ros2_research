@@ -26,10 +26,12 @@ shared medium; no controller hands out addresses. SEDP is the capability exchang
 
 ## Multicast works here — because this is Linux + host networking
 
-On this native Linux Docker host with `network_mode: host`, nodes in **separate containers**
-discover each other exactly like native ROS 2 (verified across all three demos). The classic
-"Docker drops multicast between containers" failure is specific to **bridge** networks; host
-networking is the Linux fix.
+On this native Linux Docker host with `network_mode: host`, discovery behaves exactly like
+native ROS 2. What the three demos actually exercise is **multi-process discovery inside one
+`ws` container**; separate containers would discover each other the same way with these
+compose defaults (host network + shared IPC), but demo-1/2/3 do not exercise that path. The
+classic "Docker drops multicast between containers" failure is specific to **bridge**
+networks; host networking is the Linux fix.
 
 | Setup | Multicast discovery | Used here? |
 |---|---|---|

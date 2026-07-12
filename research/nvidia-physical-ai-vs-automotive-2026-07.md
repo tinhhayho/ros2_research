@@ -12,8 +12,9 @@ chưa kiểm chứng được đánh dấu [UNVERIFIED]. Các sửa đổi từ 
 
 ## Tóm tắt điều hành
 
-Hai mảng dùng **cùng một con chip** (Thor SoC — Blackwell + 14 nhân Neoverse-V3AE) và
-**cùng một bộ não world-model** (Cosmos là backbone của cả GR00T N1.7 lẫn Alpamayo), nhưng
+Hai mảng dùng **cùng một dòng SoC** (họ Thor — Blackwell + Neoverse-V3AE; cùng kiến trúc,
+không chắc cùng die) và **chung một dòng model Cosmos-Reason** (lineage backbone của cả
+GR00T N1.7 lẫn Alpamayo — không phải một bộ não dùng chung), nhưng
 NVIDIA vẫn buộc phải tách thành hai product line — vì thứ khác nhau không phải công nghệ,
 mà là **chế độ trách nhiệm pháp lý và chứng nhận**. Robotics được phép "move fast": Ubuntu +
 PREEMPT_RT, devkit $3,499 mua thoải mái, không cert. Automotive bị khóa trong ISO 26262
@@ -30,8 +31,8 @@ một silicon — và phần sau chỉ ra nên đứng ở đâu.
 | RAM | **128 GB** LPDDR5X, 273 GB/s | **64 GB** LPDDR5X @4266, 273 GB/s | Khác dung lượng — robot cần chứa VLA to hơn? xe ưu tiên BOM |
 | Công suất | 40–130 W (module) | devkit board tới **350 W** (cả I/O automotive) | Khác scope đo |
 | I/O | CSI camera, 100GbE QSFP, PCIe | **16× GMSL2 + 2× GMSL3**, automotive Ethernet, CAN | GMSL là đặc sản automotive |
-| Safety island | Không (chỉ IGX Thor công nghiệp có FSI) | Thiết kế "developed for" ASIL-D, >22.000 cơ chế phát hiện lỗi [nguồn QNX/Halos] | Khác căn bản |
-| AEC-Q100 / dải nhiệt | N/A | [UNVERIFIED — không công bố công khai] | — |
+| Safety island | Không (chỉ IGX Thor công nghiệp có FSI) | Thiết kế "developed for" ASIL-D, >22.000 cơ chế phát hiện lỗi [nguồn QNX/Halos — số thứ cấp, chưa đối chiếu được tài liệu chính chủ] | Khác căn bản |
+| AEC-Q100 / dải nhiệt | N/A | Nền tảng DRIVE AGX Thor được nêu đạt AEC-Q100 + ISO 26262 + IATF 16949 [self-reported/secondary — claims-audit A-series] | AEC-Q100 = qualification độ bền, không phải functional safety |
 | Devkit | **$3,499, bán lẻ mở** | Không công bố giá; cần **DRIVE AGX SDK Developer Program**; SKU 10 (bench) / SKU 12 (in-vehicle), ship từ 09/2025 | Rào cản tiếp cận khác hẳn |
 | Reference platform | tự ghép (robot của bạn) | **DRIVE Hyperion 10**: 2× Thor, 14 camera, 9 radar, 1 lidar, 12 ultrasonic — chuẩn L4 (⚠AUDIT confirmed) | Xe có "chuẩn cứng" toàn ngành |
 
@@ -52,8 +53,9 @@ không nằm ở transistor.
   an toàn full-stack + AI Systems Inspection Lab với Continental, onsemi…).
 
 **Robotics (tự nguyện, đang sơ khai):**
-- Jetson AGX Thor: **không có cert nào**. ROS 2/Isaac ROS: không cert. PREEMPT_RT: không
-  phải là cert.
+- Jetson AGX Thor: **chưa có cert sản phẩm hoàn tất nào** (Halos for Robotics + nền tảng
+  an toàn IGX/QNX đã công bố 2026, certs đang chờ). ROS 2/Isaac ROS: không cert.
+  PREEMPT_RT: không phải là cert.
 - Pattern thực tế: an toàn đặt **bên cạnh** compute — safety PLC / MCU safety-rated cầm
   E-stop, laser scanner an toàn, cắt motion độc lập với phần mềm. Chuẩn liên quan:
   ISO 3691-4 (AMR), ISO 13482 (service robot).

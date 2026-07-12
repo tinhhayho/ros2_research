@@ -120,7 +120,7 @@ A `best_effort` sensor publisher delivers **nothing** to a `reliable` subscriber
 
 | Talker | Listener | Msgs | |
 |---|---|---|---|
-| Fast DDS | Fast DDS / Cyclone / Zenoh | **8 / 8 / 8** | all flow |
+| Fast DDS / Cyclone / Zenoh | same RMW on both sides | **8 / 8 / 8** | each same-RMW pair flows |
 | Fast DDS | Cyclone | **8** | ✅ shared RTPS wire |
 | Fast DDS | Zenoh | **0** | ❌ different wire |
 | domain 42 | domain 99 | **0** | ✅ `ROS_DOMAIN_ID` isolation |

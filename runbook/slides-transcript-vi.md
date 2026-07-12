@@ -204,6 +204,6 @@ Cảm ơn mọi người — giờ ai muốn lái thử con rùa thì lên đây
 - **"Số 20 message ở đâu ra?"** — publisher 5 Hz × subscriber chạy 4 giây = 20. Số thật,
   sinh tự động vào `docs/03-qos.md`.
 - **"Zenoh 0 message có phải lỗi không?"** — không, là thiết kế: khác wire protocol. Còn
-  zenoh↔zenoh vẫn 8/8 (cần router `rmf_zenohd` — script tự bật).
+  zenoh↔zenoh vẫn 8/8 (cần router `rmw_zenohd` — script tự bật).
 - **"Sao không benchmark hiệu năng?"** — buổi này dạy khái niệm bằng kết quả thật; benchmark
   latency/jitter là bước nghiên cứu tiếp (đã nằm trong roadmap).

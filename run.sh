@@ -9,6 +9,19 @@ cd "$(dirname "$0")"
 COMPOSE=(docker compose -f docker/docker-compose.yml)
 MARP="marpteam/marp-cli:v4.4.0"
 
+# Fail-closed digest pin: every target that can build/run the ws container must either
+# have the resolved pin (docker/image.env, written by `build`) or an already-built image.
+# Otherwise compose would silently build from the mutable ros:jazzy tag.
+load_pin() {
+  if [[ -f docker/image.env ]]; then
+    set -a; source docker/image.env; set +a
+  elif ! docker image inspect ros2-explained:jazzy >/dev/null 2>&1; then
+    echo "error: docker/image.env missing and image ros2-explained:jazzy not built." >&2
+    echo "       Run ./run.sh build first (it resolves and records the base-image digest)." >&2
+    exit 1
+  fi
+}
+
 build() {
   bash scripts/capture_versions.sh
   set -a; source docker/image.env; set +a
@@ -19,11 +32,11 @@ build() {
   echo "==> build complete. Image + VERSIONS.lock ready."
 }
 
-shell()  { "${COMPOSE[@]}" run --rm ws bash; }
+shell()  { load_pin; "${COMPOSE[@]}" run --rm ws bash; }
 
-demo_1() { bash scripts/verify_basic.sh; }
-demo_2() { bash scripts/verify_qos.sh; }
-demo_3() { bash scripts/verify_middleware.sh; }
+demo_1() { load_pin; bash scripts/verify_basic.sh; }
+demo_2() { load_pin; bash scripts/verify_qos.sh; }
+demo_3() { load_pin; bash scripts/verify_middleware.sh; }
 
 slides() {
   python3 scripts/build_slides.py     # assemble slides.md (inlines the SVG diagrams)
@@ -56,6 +69,7 @@ gui_prep() {
 
 # Visual demo: turtlesim window + drive it with the arrow keys (interactive TTY).
 viz() {
+  load_pin
   gui_prep
   echo "==> Opening turtlesim. A window should appear on your screen."
   echo "==> Click this terminal, then use the ARROW KEYS to drive the turtle. Ctrl-C to quit."
@@ -67,12 +81,14 @@ viz() {
 
 # Live node-graph window (rqt_graph). Run a demo in another terminal first to see nodes.
 rqt() {
+  load_pin
   gui_prep
   echo "==> Opening rqt_graph. Tip: run './run.sh demo-1' or './run.sh viz' in another terminal first."
   "${COMPOSE[@]}" run --rm ws bash -lc 'rqt_graph'
 }
 
 test_all() {
+  load_pin
   bash scripts/verify_basic.sh
   bash scripts/verify_qos.sh
   bash scripts/verify_middleware.sh
