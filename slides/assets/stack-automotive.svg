@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="42" text-anchor="middle" font-size="27" font-weight="700" fill="#1b2b4a">The automotive software stack — 2026 (DRIVE Thor)</text>
+
+  <!-- ===================== Row 7: Cloud loop (top) ===================== -->
+  <rect x="150" y="72" width="620" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="460" y="96" text-anchor="middle" font-size="14" fill="#2d5a2d">Cloud loop — DGX (training) · Omniverse + Cosmos (simulation)</text>
+  <text x="460" y="115" text-anchor="middle" font-size="13" fill="#2d5a2d">OTA updates + fleet data return</text>
+
+  <line x1="460" y1="130" x2="460" y2="144" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 6: AV app / AUTOSAR Adaptive (side by side) ===================== -->
+  <rect x="150" y="146" width="300" height="60" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="300" y="171" text-anchor="middle" font-size="13" fill="#6B4A2B">OEM AV stack — perception · planning</text>
+  <text x="300" y="190" text-anchor="middle" font-size="13" fill="#6B4A2B">(models distilled from Alpamayo)</text>
+
+  <rect x="470" y="146" width="300" height="60" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="620" y="166" text-anchor="middle" font-size="13" font-weight="700" fill="#6B4A2B">AUTOSAR Adaptive apps (OEM option)</text>
+  <text x="620" y="183" text-anchor="middle" font-size="12" fill="#6B4A2B">ara::com — Vector MICROSAR, EB corbos</text>
+  <text x="620" y="199" text-anchor="middle" font-size="11.5" font-style="italic" fill="#6B4A2B">Tier-1 layer — not NVIDIA IP</text>
+
+  <line x1="460" y1="208" x2="460" y2="222" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 5: DriveWorks ===================== -->
+  <rect x="150" y="224" width="620" height="56" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="460" y="257" text-anchor="middle" font-size="15" fill="#223344">DriveWorks SDK — sensor abstraction · calibration · egomotion · DNN</text>
+
+  <!-- ===================== Middleware boundary (dashed divider) ===================== -->
+  <text x="460" y="293" text-anchor="middle" font-size="13" font-style="italic" fill="#2E5FAC">service middleware — NvStreams · SOME/IP · DDS (AUTOSAR AP binding = ROS 2's wire family)</text>
+  <line x1="150" y1="300" x2="770" y2="300" stroke="#2E5FAC" stroke-width="2" stroke-dasharray="7,5"/>
+  <line x1="460" y1="304" x2="460" y2="318" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 3: DriveOS 7 ===================== -->
+  <rect x="150" y="320" width="620" height="52" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="460" y="341" text-anchor="middle" font-size="14" fill="#234">DriveOS 7 — Type-1 hypervisor → QNX safety VM (ASIL-D) + Linux AI VM</text>
+  <text x="460" y="360" text-anchor="middle" font-size="13" fill="#234">CUDA · TensorRT · NvMedia — TÜV SÜD-assessed toolchain</text>
+
+  <line x1="460" y1="374" x2="460" y2="388" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 2: Thor SoC ===================== -->
+  <rect x="150" y="390" width="620" height="48" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="460" y="419" text-anchor="middle" font-size="15" fill="#333">Thor SoC — Blackwell GPU · Neoverse V3AE · FSI safety island (DRIVE/IGX SKUs)</text>
+
+  <line x1="460" y1="440" x2="460" y2="454" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 1: Vehicle ECUs (bottom) ===================== -->
+  <rect x="150" y="456" width="620" height="64" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="460" y="478" text-anchor="middle" font-size="14" font-weight="700" fill="#333">Vehicle ECUs — zonal/domain MCUs + board safety MCU → AUTOSAR Classic land</text>
+  <text x="460" y="496" text-anchor="middle" font-size="12" fill="#333">safety MCU: AURIX (Orin gen) → Renesas RH850 (DRIVE Thor), flashed with Vector AUTOSAR firmware ("AFW")</text>
+  <text x="460" y="512" text-anchor="middle" font-size="12" fill="#333">steer/brake-by-wire · CAN-FD / automotive Ethernet · OSEK-heritage RTOS</text>
+
+  <!-- ===================== Right side bracket ===================== -->
+  <path d="M 786,456 L 800,456 L 800,520 L 786,520" fill="none" stroke="#2E5FAC" stroke-width="2"/>
+  <text x="814" y="488" text-anchor="middle" font-size="12" font-style="italic" fill="#2E5FAC" transform="rotate(-90 814 488)">Classic AUTOSAR</text>
+  <text x="834" y="488" text-anchor="middle" font-size="12" font-style="italic" fill="#2E5FAC" transform="rotate(-90 834 488)">MCU territory</text>
+
+  <!-- Footnote -->
+  <text x="480" y="552" text-anchor="middle" font-size="13" font-style="italic" fill="#666">Same shape as the robot stack (slide 4). NVIDIA ships DriveOS + DriveWorks; AUTOSAR is layered in by Tier-1s —</text>
+  <text x="480" y="570" text-anchor="middle" font-size="13" font-style="italic" fill="#666">Adaptive beside the AV apps on the SoC, Classic down on the MCUs.</text>
+</svg>

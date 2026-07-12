@@ -139,3 +139,23 @@ Fact-check of a second submitted third-party report (UM mechanism); full write-u
 | U14 | Thor DRAM placement (on-module memory-down vs Apple-style PoP) | no Thor teardown found (STH hands-on = specs only) | unverified (inferred from Jetson SoM convention) | Do not assert either way |
 | U15 | `cudaMemPrefetchAsync` on one-pool Thor = page-table pre-population | forum-level explanation only | unverified | Benchmark before relying on it |
 | U16 | Thor MSS = "scalable coherence fabric" (TRM wording); "single memory controller" oversimplifies; channel count not public | Thor SoC TRM DP-11881-002 (developer-gated; wording via secondary index) | scoped | |
+
+## Automotive stack / AUTOSAR claims (added 2026-07-12)
+
+Behind the `stack-automotive` deck diagram; full write-up in
+`research/automotive-stack-autosar-2026-07.md`.
+
+| # | Claim (as now stated) | Source (exact URL) | Status | Notes |
+|---|---|---|---|---|
+| A1 | DriveOS = TÜV SÜD-certified automotive OS: Type-1 hypervisor, CUDA, TensorRT, cuDNN, NvMedia, NvStreams | https://developer.nvidia.com/drive/os | confirmed | |
+| A2 | QNX OS for Safety (pre-certified ASIL-D) integrated on DRIVE AGX Thor devkit (GA Aug 2025) | QNX/press release + developer.nvidia.com/drive/os | confirmed | Concurrent QNX+Linux-on-one-Thor phrasing: virtualization docs say "multiple OS domains… on the same SoC" — kept with caveat |
+| A3 | DriveWorks SDK = sensor abstraction, dynamic calibration, egomotion, image/point-cloud | https://developer.nvidia.com/drive/driveworks | confirmed | |
+| A4 | "NVIDIA DRIVE OS offers full support of Adaptive AUTOSAR"; integrates QNX RTOS + TTTech MotionWise | https://nvidianews.nvidia.com/news/nvidia-announces-worlds-first-functionally-safe-ai-self-driving-platform | confirmed | 2018 press; support = compatibility, NVIDIA ships no AUTOSAR stack |
+| A5 | Vector: MICROSAR Adaptive "can be enabled on the NVIDIA DRIVE AGX platform"; MICROSAR Classic ASIL-D on DRIVE AGX Thor | https://www.vector.com/int/en/news/news/on-the-fast-track-innovators-race-to-redefine-autonomous-mobility-with-safer-and-smarter-solutions/ | confirmed (via cached snippet of same URL) | |
+| A6 | Orin safety MCU = Infineon AURIX TC397X B-Step "supported with Vector firmware" (AFW) | https://developer.nvidia.com/docs/drive/drive-os/6.0.9/public/drive-os-linux-sdk/common/topics/mcu_setup_usage/mcu_setup_and_usage1.html | confirmed | |
+| A7 | **Thor-gen safety MCU = Renesas RH850U2A16** (DRIVE AGX Thor, `AFW-RH850-U2A16` firmware); IGX Thor = Renesas SMCU | https://forums.developer.nvidia.com/t/flash-rh850u2a16-via-thor-commands/367577 · https://docs.nvidia.com/igx/user-guide/latest/SMCU/smcu.html | confirmed | **Corrects** "AURIX continues on Thor" (Infineon partnership page ≠ board evidence) |
+| A8 | Jetson AGX Thor devkit has no functional-safety MCU (only EFM8 power-button MCU) | Jetson Thor Series Modules Design Guide (PDF) | confirmed (absence, scoped to design guide) | |
+| A9 | AUTOSAR Adaptive has a DDS network binding since **R18-03** (same OMG DDS family as ROS 2) | https://www.rti.com/blog/status-of-dds-in-autosar | confirmed | **Corrects** R18-10 folklore |
+| A10 | Alpamayo = teacher models: "Rather than running directly in-vehicle… fine-tune and distill into the backbones of their complete AV stacks" | https://nvidianews.nvidia.com/news/alpamayo-autonomous-vehicle-development | confirmed | |
+| A11 | AUTOSAR CP = static OSEK-heritage stack for deeply embedded MCUs; AP = POSIX/C++ SoA (`ara::com`) for HPC ECUs | https://www.autosar.org/standards/classic-platform · /adaptive-platform | paraphrase-level | autosar.org TLS-blocked in sandbox; cross-checked vs multiple secondaries |
+| A12 | MB.OS base layer built with Vector using AUTOSAR Adaptive + Classic (selective adoption, not full off-the-shelf AP) | https://www.vector.com/int/en/news/news/mercedes-benz-mbos-base-layer/ | partner-confirmed / secondary | |

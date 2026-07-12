@@ -588,6 +588,12 @@ the three-computer loop** — same architecture, not necessarily the same die or
 
 ---
 
+<!-- _class: diagram -->
+
+{{diagram:stack-automotive}}
+
+---
+
 ## NVIDIA certifications — who certified what, exactly
 
 <style scoped>
@@ -867,6 +873,7 @@ Everything is public: weights on Hugging Face (`nvidia/GR00T-N1.7-3B` — the ga
 - DRIVE AGX Thor devkit — developer.nvidia.com blog (Sept 2025 GA)
 - DriveOS 5.2 ASIL-B — blogs.nvidia.com TÜV SÜD (Dec 2022); DriveOS 6.0 ASIL-D on Orin — eenewseurope.com (Jan 2025)
 - QNX × NVIDIA — qnx.software/en/blog/2026 · automotiveworld.com (QNX in Thor devkit)
+- AUTOSAR — autosar.org (Classic/Adaptive) · vector.com (MICROSAR on DRIVE AGX/Thor, MB.OS) · elektrobit.com (EB corbos) · rti.com (DDS in AUTOSAR, R18-03) · DriveOS MCU docs (AURIX+Vector AFW on Orin; RH850 on Thor) · audit: research/automotive-stack-autosar-2026-07.md
 - DRIVE Hyperion — nvidia.com → solutions → drive-hyperion · Halos — blogs.nvidia.com (GTC 2025)
 - Alpamayo — huggingface.co/nvidia/Alpamayo-R1-10B · nvidianews (Alpamayo 2 Super, May 2026)
 - Mercedes CLA — group.mercedes-benz.com (SOP Jun 2025) · blogs.nvidia.com (drive-av-software-mercedes-benz-cla) · Uber robotaxi — investor.uber.com (Mar 2026)
