@@ -1,6 +1,6 @@
 # Transcript thuyết trình — deck `slides/research.html` (tiếng Việt)
 
-Kịch bản nói cho deck research 45 slide. Tổng thời lượng ~40–45 phút (không tính Q&A).
+Kịch bản nói cho deck research 47 slide. Tổng thời lượng ~40–45 phút (không tính Q&A).
 Deck này dày thông tin — nguyên tắc nói: **không đọc bảng**, chỉ kể câu chuyện và chỉ tay
 vào 1–2 ô đắt nhất mỗi bảng; ai cần chi tiết đã có blog + báo cáo trong repo.
 
@@ -335,7 +335,9 @@ sánh từng tầng, và trả lời luôn câu hỏi "AUTOSAR nằm đâu trong
 MCU trên board — đây là **đất của AUTOSAR Classic**, stack tĩnh gốc OSEK. Bằng chứng cụ
 thể: firmware safety MCU trên board NVIDIA tên là **AFW — AUTOSAR firmware của Vector**;
 thế hệ Orin là AURIX, sang Thor đổi sang **Renesas RH850** — đổi vendor, kiểm chứng từ
-docs và forum flash. Lên trên: Thor SoC với đảo an toàn FSI; **DriveOS 7** — hypervisor
+docs và forum flash. Nối ECU với máy tính AD là hàng **mạng trong xe** — chính là hàng
+fieldbus của bên robot: backbone automotive Ethernet tới 10 Gbps có TSN, còn CAN-FD,
+LIN, FlexRay là nhánh legacy. Lên trên: Thor SoC với đảo an toàn FSI; **DriveOS 7** — hypervisor
 Type-1 chia QNX ASIL-D và Linux như slide trước; vạch middleware — NvStreams của NVIDIA,
 còn **SOME/IP và DDS là của AUTOSAR Adaptive mang vào**; DriveWorks SDK; và trên cùng,
 cạnh stack AV của OEM, là ô nét đứt **AUTOSAR Adaptive** — `ara::com`, POSIX/C++, do
@@ -472,7 +474,19 @@ NVIDIA. Toàn việc chạm tay được, mỗi mục một buổi chiều.
 Bảy takeaway đã nằm trên slide — mình chỉ đọc một: **robot và xe chung một dòng model
 (Cosmos-Reason); thứ chia đôi hai thế giới là chứng nhận, không phải công nghệ.**
 
-## Slide 45 — References *(~30 giây)*
+## Slide 45 — Glossary 1/2: robotics & software *(~20 giây)*
+
+Hai slide tra cứu cho người mới — **không đọc, mọi người chụp lại là được**. Slide này là
+toàn bộ từ viết tắt phía robotics: ROS 2, DDS, QoS, FOC, SLAM, VLA, WCET… mỗi từ một
+dòng giải nghĩa. Trong lúc thuyết trình nếu ai lạc ở từ nào thì hai slide này là phao.
+
+## Slide 46 — Glossary 2/2: silicon, memory & automotive *(~20 giây)*
+
+Nửa còn lại: phần cứng và automotive — LPDDR5X, HBM, MIG, UVM/ATS, rồi cụm chứng nhận
+ASIL/SEooC/TÜV, và cụm AUTOSAR CP/AP, SOME/IP, TSN. Điểm nhấn duy nhất đáng nói miệng:
+ASIL đọc từ thấp lên cao là QM rồi A tới D — deck này dùng thang đó liên tục.
+
+## Slide 47 — References *(~30 giây)*
 
 Toàn bộ nguồn — chia ba nhóm, kèm ghi chú số demo là của mình đo. Hai bài blog trên
 Confluence có bản văn xuôi đầy đủ của deck này — một bản primer 10 phút cho người mới, một

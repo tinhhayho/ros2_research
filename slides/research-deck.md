@@ -841,6 +841,98 @@ Everything is public: weights on Hugging Face (`nvidia/GR00T-N1.7-3B` — the ga
 
 ---
 
+## Glossary 1/2 — robotics & software
+
+<style scoped>
+  section { font-size: 13px; padding-top: 30px; padding-bottom: 20px; line-height: 1.4; }
+  ul { columns: 2; column-gap: 30px; margin-top: 4px; }
+  li { margin-bottom: 1.5px; break-inside: avoid; }
+  h2 { margin-bottom: 4px; font-size: 28px; }
+  p { margin: 3px 0 2px 0; font-size: 14px; }
+</style>
+
+A lookup slide — don't read it, screenshot it. Every abbreviation from the robotics half:
+
+- **ROS 2** — Robot Operating System 2: middleware framework for robots (not an OS)
+- **DDS** — Data Distribution Service: the pub/sub middleware standard under ROS 2
+- **RMW** — ROS MiddleWare interface: the swappable layer picking the DDS (or Zenoh) implementation
+- **QoS** — Quality of Service: per-topic delivery contracts (reliability, history, deadline)
+- **LTS / EOL** — Long-Term Support / End Of Life (distro lifecycle)
+- **RTOS** — Real-Time Operating System (FreeRTOS, Zephyr, QNX…)
+- **MCU / DSP / FPGA** — microcontroller / signal processor / programmable logic — the "dedicated silicon" tier
+- **FOC** — Field-Oriented Control: the motor current loop (8–32 kHz)
+- **FK / IK** — Forward / Inverse Kinematics: joint angles ⇄ end-effector pose
+- **SLAM** — Simultaneous Localization And Mapping
+- **AMCL** — Adaptive Monte Carlo Localization (Nav2's localizer)
+- **AMR** — Autonomous Mobile Robot (warehouse/indoor)
+- **AV** — Autonomous Vehicle
+- **RL** — Reinforcement Learning (how humanoid locomotion is trained now)
+- **VLA** — Vision-Language-Action model (GR00T, Helix, π0)
+- **LLM** — Large Language Model
+- **MPPI** — Model-Predictive Path Integral: Nav2's sampling controller
+- **EKF** — Extended Kalman Filter (sensor fusion)
+- **IMU** — Inertial Measurement Unit
+- **WCET** — Worst-Case Execution Time: the number real-time proofs are made of
+- **PREEMPT_RT** — the Linux real-time preemption patch set (mainline since 6.12)
+- **EtherCAT / CAN-FD / CANopen** — industrial fieldbuses between computer and MCUs
+- **Open-RMF / FMS** — Robotics Middleware Framework (open fleet layer) / Fleet Management System
+- **OSRF / OSRA** — Open Source Robotics Foundation / Alliance (ROS governance)
+- **MoveIt** — ROS 2 manipulation-planning framework (not an acronym, but load-bearing)
+- **MSE** — Mean Squared Error (open-loop prediction error — *not* task success)
+- **P90** — 90th percentile (latency statistics)
+- **VRAM** — GPU memory
+- **GA / SOP** — General Availability / Start Of Production
+
+---
+
+## Glossary 2/2 — silicon, memory & automotive
+
+<style scoped>
+  section { font-size: 12.5px; padding-top: 28px; padding-bottom: 18px; line-height: 1.38; }
+  ul { columns: 2; column-gap: 30px; margin-top: 4px; }
+  li { margin-bottom: 1px; break-inside: avoid; }
+  h2 { margin-bottom: 4px; font-size: 28px; }
+  p { margin: 2px 0 2px 0; font-size: 13.5px; }
+</style>
+
+- **SoC / SoM** — System on Chip / System on Module (Jetson = SoM)
+- **iGPU / dGPU** — integrated GPU (shares DRAM with CPU) / discrete GPU (own memory)
+- **SM** — Streaming Multiprocessor: the GPU's core building block
+- **TOPS / TFLOPS** — tera-operations / tera-FLOPs per second (marketing units — check precision + sparsity)
+- **FP4 / FP8 / NVFP4** — 4- and 8-bit float formats; NVFP4 = NVIDIA's FP4 recipe
+- **LPDDR5X** — low-power DRAM (Thor's one pool) · **HBM** — High Bandwidth Memory (stacked, data-center)
+- **MT/s** — megatransfers per second · **TMP** — Total Module Power
+- **MIG** — Multi-Instance GPU: hardware partitioning (2-way on Thor, preview)
+- **UVM** — Unified Virtual Memory · **ATS** — Address Translation Services (shared page tables) · **HMM** — Heterogeneous Memory Management (Linux)
+- **NVLink-C2C** — NVIDIA's coherent chip-to-chip link (GH200) · **UCF** — Unified Coherency Fabric (inside Thor)
+- **CUDA / cuDNN / TensorRT** — NVIDIA's compute API / DNN kernels / inference optimizer
+- **NvMedia / NvStreams** — DriveOS camera pipeline / zero-copy transport
+- **BPMP · PSC · RCE/DCE · SPE · FSI** — Thor's auxiliary MCUs: boot-power · security · camera/display · sensor engine (removed) · safety island
+- **SMCU / AFW** — Safety MCU / the Vector "AUTOSAR FirmWare" flashed onto it
+- **TRM / BSP** — Technical Reference Manual / Board Support Package
+- **ISP / PVA** — Image Signal Processor / Programmable Vision Accelerator
+- **DGX / OVX / AGX** — NVIDIA's training / simulation / edge-vehicle computer lines
+- **OTA** — Over-The-Air (software updates)
+- **OEM / Tier-1** — vehicle manufacturer / its direct supplier (Vector, EB, Bosch…)
+- **ASIL** — Automotive Safety Integrity Level, ISO 26262: QM < A < B < C < D
+- **QM** — Quality Managed: no safety claim, process only
+- **SEooC** — Safety Element out of Context: pre-certified component awaiting integration
+- **IEC 61508 / SIL** — the industrial functional-safety standard and its levels
+- **AEC-Q100** — automotive IC stress/reliability qualification (not functional safety)
+- **IATF 16949** — automotive quality-management standard
+- **TÜV** — independent German certification bodies (SÜD and Rheinland are rivals)
+- **UNECE** — UN body issuing international vehicle regulations
+- **QNX** — BlackBerry's commercial safety-certified RTOS
+- **VM / Type-1 hypervisor** — virtual machine / a hypervisor running on bare metal
+- **AUTOSAR CP / AP** — AUTomotive Open System ARchitecture: Classic (static, MCU) / Adaptive (POSIX, HPC) platforms
+- **ara::com** — Adaptive AUTOSAR's communication API
+- **SOME/IP** — Scalable service-Oriented MiddlewarE over IP (automotive services)
+- **LIN / FlexRay / TSN** — legacy low-cost bus / pre-Ethernet redundant bus / Time-Sensitive Networking (deterministic Ethernet)
+- **SAE L2 / L4** — driving-automation levels (assisted, driver liable / driverless in a domain); "L2++" is marketing, not SAE
+- **ECU** — Electronic Control Unit (any vehicle computer node)
+
+---
+
 ## References
 
 <style scoped>

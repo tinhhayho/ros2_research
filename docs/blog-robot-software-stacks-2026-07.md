@@ -516,7 +516,10 @@ Reading bottom-up: the vehicle's zonal/domain ECUs and the board safety MCU are
 **AUTOSAR Classic land** — the statically configured, OSEK-heritage stack for deeply
 embedded MCUs. The proof is in NVIDIA's own firmware naming: the safety MCU ships with
 Vector's "**AFW**" — *AUTOSAR firmware* — on the AURIX (Orin generation) and on the
-**Renesas RH850U2A16** that replaced it on DRIVE Thor boards. Above that: the Thor SoC
+**Renesas RH850U2A16** that replaced it on DRIVE Thor boards. Connecting the ECUs to the
+AD computer is the **in-vehicle network** — the car's equivalent of the robot stack's
+fieldbus row: an automotive-Ethernet backbone (up to 10 Gbps, with TSN — Time-Sensitive
+Networking, deterministic Ethernet) plus CAN-FD/LIN/FlexRay legacy branches. Above that: the Thor SoC
 with its FSI; **DriveOS 7** (Type-1 hypervisor → QNX ASIL-D + Linux, with the TÜV
 SÜD-assessed CUDA/TensorRT toolchain); the middleware line — NVIDIA's own transport is
 **NvStreams**, while **SOME/IP and DDS arrive with AUTOSAR Adaptive**, not from NVIDIA;
