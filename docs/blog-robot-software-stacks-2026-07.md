@@ -395,7 +395,52 @@ The consequence for firmware engineers: **there is no user-programmable RTOS cor
 Jetson Thor anymore** — your real-time code lives on PREEMPT_RT or on an external MCU over
 the fieldbus (the cascade pattern from section 1).
 
-### 5.4. From foundation model to motor
+### 5.4. Thor's memory: one 273 GB/s pool, a coherence flip, and a bandwidth budget
+
+Two third-party reports on Thor's memory crossed our desk in July 2026; we audited both
+against primary sources before using anything (full trail:
+`research/jetson-thor-memory-2026-07.md`, `research/thor-unified-memory-2026-07.md`,
+manifest rows M1–M16 and U1–U16). Three findings matter to an embedded team.
+
+**The numbers (from the datasheet PDF, read directly).** Everything on the die shares
+one LPDDR5X pool behind the Unified Coherency Fabric — no HBM anywhere in the family:
+
+| | Jetson T5000 | T4000 / DRIVE AGX Thor |
+|---|---|---|
+| DRAM | 128 GB LPDDR5X (8×16 GB) | 64 GB (8×8 GB) |
+| Bus · clock | 256-bit · 4,266 MHz (≈ 8533 MT/s) | same |
+| Peak bandwidth | **273 GB/s** | **273 GB/s** — full bandwidth kept |
+| Caches | L1 64+64 KB · L2 1 MB/core · **16 MB shared system cache** | same |
+| Max module power | 130 W | 90 W |
+
+Memory-bound workloads degrade less on the smaller SKUs than the TFLOPS gap (2070 vs
+1200 FP4) suggests — the bandwidth is identical.
+
+**The coherence flip.** Orin had one-way I/O coherency (GPU snoops CPU caches, not vice
+versa). Thor is the first Tegra with **Sysmem Full Coherency** — two-way, in hardware.
+That flips the allocator advice: in CUDA 13.0, `cudaMallocManaged()` allocations are
+**not GPU-cached** on Thor, while plain pageable memory (`malloc`/`mmap`) accessed
+through the new coherence path — the GPU walks the host's page tables directly — "can
+outperform both Pinned memory or Unified memory" (CUDA for Tegra appnote, verbatim).
+The fastest perception(GPU)→planning(CPU) handoff is now plain system memory.
+
+**Beware dGPU folklore.** On a one-pool, hardware-coherent SoC, most discrete-GPU
+unified-memory vocabulary stops applying: nothing *migrates* (there is no second pool —
+"migration" never appears in the Tegra docs); *oversubscription* has no boundary to hit
+(the limit is the shared 64/128 GB budget vs the OS); `cudaMemAdvise` tuning advice is
+absent from the Tegra docs; and ranking Thor's coherence "weaker than Grace Hopper" is
+the wrong axis — GH200's real edge is scale (480 GB LPDDR5X + 96/144 GB HBM over a
+900 GB/s NVLink-C2C link), not coherence strength. Smell test: advice that mentions
+migration, oversubscription or preferred location was written for a discrete GPU.
+
+**The bandwidth budget.** 273 GB/s is 12–30× below data-center HBM (H100, HBM3,
+3.35 TB/s → B200, HBM3e, ≈ 8 TB/s at ~1000 W). Autoregressive decode re-reads the
+weights every token, so a *derived* roofline (tok/s ≈ bandwidth ÷ model bytes; batch 1,
+not a measured run) puts a 10 B-param model at FP4 at ~55 tok/s theoretical peak, and a
+20 B model at FP8 at ~14 — this is why edge VLA models cluster at 2–10 B parameters and
+why FP4 matters more on Thor than on an H100.
+
+### 5.5. From foundation model to motor
 
 ![The GR00T control cascade](groot-cascade.png)
 
@@ -459,7 +504,41 @@ only, no safety claim.*
   **RH850**; the Orin era used Infineon AURIX) holds final watchdog/power authority
   *outside* the SoC.
 
-### 6.3. The certification table — who certified what, exactly
+### 6.3. The full stack in one picture — and where AUTOSAR fits
+
+![The automotive software stack](stack-automotive.png)
+
+This is the automotive counterpart of section 1's robot stack — same layer geometry, so
+the two can be compared row by row. Sources and corrections:
+`research/automotive-stack-autosar-2026-07.md`, manifest rows A1–A12.
+
+Reading bottom-up: the vehicle's zonal/domain ECUs and the board safety MCU are
+**AUTOSAR Classic land** — the statically configured, OSEK-heritage stack for deeply
+embedded MCUs. The proof is in NVIDIA's own firmware naming: the safety MCU ships with
+Vector's "**AFW**" — *AUTOSAR firmware* — on the AURIX (Orin generation) and on the
+**Renesas RH850U2A16** that replaced it on DRIVE Thor boards. Above that: the Thor SoC
+with its FSI; **DriveOS 7** (Type-1 hypervisor → QNX ASIL-D + Linux, with the TÜV
+SÜD-assessed CUDA/TensorRT toolchain); the middleware line — NVIDIA's own transport is
+**NvStreams**, while **SOME/IP and DDS arrive with AUTOSAR Adaptive**, not from NVIDIA;
+**DriveWorks SDK**; and at the top, beside the OEM's AV application, the dashed box:
+**AUTOSAR Adaptive** (`ara::com`, POSIX/C++) — a **Tier-1 layer, not NVIDIA IP**. NVIDIA
+states DRIVE OS "offers full support of Adaptive AUTOSAR"; the actual products come from
+Vector (MICROSAR Adaptive "can be enabled on the NVIDIA DRIVE AGX platform"; MICROSAR
+Classic ASIL-D on DRIVE AGX Thor) and Elektrobit (EB corbos), with TTTech MotionWise as
+a non-AUTOSAR safety framework bundled alongside QNX.
+
+Three notes worth keeping:
+
+- The line that moves here is not DDS (as in the robot stack) but the
+  **hypervisor/ASIL boundary**.
+- **AUTOSAR Adaptive has had a DDS network binding since release 18-03** — an Adaptive
+  ECU and a ROS 2 node speak the same OMG DDS wire family, so interop without a gateway
+  is possible in principle (QoS and type mapping still need care).
+- Market reality (partner-confirmed): OEMs like Mercedes build their own Linux+QNX
+  platform (MB.OS) and adopt AUTOSAR *selectively* through Vector — Adaptive and Classic
+  in the base layer — rather than deploying a full off-the-shelf AP stack.
+
+### 6.4. The certification table — who certified what, exactly
 
 *TÜV — Technischer Überwachungsverein ("Technical Inspection Association"): Germany's
 independent technical-certification bodies. TÜV SÜD (Munich) and TÜV Rheinland (Cologne)
@@ -494,7 +573,7 @@ process* certificate (SEooC). The **vehicle's** ASIL-D is established by the OEM
 item-level safety case — hazard analysis, integration evidence, validation. Chip and OS
 certificates feed that case; they do not replace it.
 
-### 6.4. Alpamayo — GR00T's driving sibling
+### 6.5. Alpamayo — GR00T's driving sibling
 
 NVIDIA frames AV software evolution as: **AV 1.0** modular pipeline → **AV 2.0** end-to-end
 networks → **AV 3.0** reasoning VLA — Alpamayo (launched at CES, January 2026) is the 3.0
@@ -511,7 +590,7 @@ bet. *(AV — Autonomous Vehicle.)*
 The tooling mirrors robotics: AlpaSim (open simulator) · AlpaGym ("the Isaac Lab of
 driving") · OmniDreams (world-model scenario generation).
 
-### 6.5. Reference hardware, and shipping proof
+### 6.6. Reference hardware, and shipping proof
 
 ![DRIVE Hyperion 10](hyperion-sensors.png)
 
@@ -633,6 +712,14 @@ what turns ~9 calls/s into a usable command rate.
    worlds is certification, not technology; "certified" and "assessed" are a world apart.
 7. **Foundation-model robotics already runs on our desk** — ~106 ms per call, 7.5 GB of
    VRAM, everything from public sources.
+8. **On Thor-class silicon, memory is the budget** — one 273 GB/s LPDDR5X pool for
+   everything; size models by bandwidth before TOPS, pick the allocator (plain pageable
+   memory beats managed on Thor), and distrust dGPU advice about migration or
+   oversubscription — those concepts don't exist on a one-pool SoC.
+9. **AUTOSAR is beside the NVIDIA stack, not inside it** — Classic on the vehicle MCUs
+   (the safety MCU literally runs Vector "AUTOSAR firmware"), Adaptive as a Tier-1 layer
+   on the SoC; its DDS binding makes Adaptive ECUs wire-compatible with ROS 2 in
+   principle.
 
 ---
 
@@ -655,6 +742,7 @@ what turns ~9 calls/s into a usable command rate.
 - GR00T N1.7 — huggingface.co/blog/nvidia/gr00t-n1-7 · github.com/NVIDIA/Isaac-GR00T
 - Isaac Sim/Lab/Arena — github.com/isaac-sim · Isaac Teleop — github.com/NVIDIA/IsaacTeleop
 - Jetson Thor — developer.nvidia.com blog "Introducing NVIDIA Jetson Thor" · the JetPack 7.2 (MIG) blog
+- Thor memory — Jetson Thor datasheet DS-11945-001 (PDF) · DRIVE AGX Thor deck (PDF) · docs.nvidia.com "CUDA for Tegra" appnote · "CUDA 13.0 for Jetson Thor" blog · GH200 architecture blog + datasheet
 - Thor TRM DP-11881-002 — developer.nvidia.com download center · FSI — DriveOS 7.0.3 docs, "Functional Safety Island"
 - Isaac ROS 4.5 — nvidia-isaac-ros.github.io/releases · LeRobot × NVIDIA — blogs.nvidia.com (Jul 6, 2026)
 
@@ -668,6 +756,8 @@ what turns ~9 calls/s into a usable command rate.
 - Mercedes CLA — group.mercedes-benz.com (series production, Jun 2025) · blogs.nvidia.com (drive-av-software-mercedes-benz-cla) · Uber robotaxi — investor.uber.com (Mar 2026)
 - Halos for Robotics — nvidia.com/en-us/ai-trust-center/halos/robotics
 - NVIDIA Q4 FY26 financial results (automotive $2.3B) — nvidianews.nvidia.com
+- DriveOS — developer.nvidia.com/drive/os · DriveWorks — developer.nvidia.com/drive/driveworks · DriveOS MCU docs (AURIX + Vector AFW on Orin; RH850 flash thread on Thor)
+- AUTOSAR — autosar.org (Classic/Adaptive) · vector.com (MICROSAR on DRIVE AGX/Thor · MB.OS base layer) · elektrobit.com (EB corbos) · rti.com (DDS in AUTOSAR, since R18-03) · nvidianews (Adaptive AUTOSAR support, TTTech MotionWise)
 
 *Demo numbers (the GR00T inference, the QoS/RMW matrices) are our own captured runs,
 July 2026. Per-claim citations plus the audit trail: `research/claims-audit-2026-07.md`
