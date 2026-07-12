@@ -71,7 +71,7 @@ External claims are URL-sourced; the 14 headline claims were independently re-ch
 
 ---
 
-## Reading the map: three placement rules
+## Which layer does your code go in? — three placement rules
 
 <style scoped>
   section { font-size: 20.5px; padding-top: 32px; }
@@ -104,7 +104,7 @@ collision-aware search taking 100s of ms, up in the ROS 2 graph.
 
 ---
 
-## Real-time ≠ fast — the two worlds inside "ROS 2"
+## Real-time ≠ fast — the RT and non-RT worlds inside "ROS 2"
 
 <style scoped>
   section { font-size: 18.5px; padding-top: 32px; }
@@ -143,7 +143,7 @@ mechanical time constants are ms-scale; the µs world belongs to motor electroni
 
 ---
 
-## The ROS 2 ecosystem — which repo, and when
+## The ROS 2 ecosystem — which repo to use, and when
 
 <style scoped>
   section { font-size: 20px; padding-top: 38px; }
@@ -236,7 +236,7 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
 
 ---
 
-## The graph, live — a real screenshot
+## The ROS 2 node graph, live — a real screenshot
 
 <style scoped>
   section { font-size: 18px; padding-top: 34px; }
@@ -251,7 +251,7 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
 
 ---
 
-## Wheeled robots: the settled part
+## Wheeled robots — the stack the industry has settled on
 
 **Indoor AMR — the de-facto standard stack (unchanged by the ML wave):**
 - `ros2_control` → EKF fusion → `slam_toolbox` + AMCL → **Nav2** (behavior trees,
@@ -332,7 +332,7 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
 
 ---
 
-## Fleet Adapter — where ~80% of the work lives
+## Fleet Adapter — ~80% of the work in an RMF deployment
 
 <style scoped>
   section { font-size: 20px; padding-top: 36px; }
@@ -462,7 +462,7 @@ Unified Coherency Fabric. No HBM anywhere in the family: that's the power trade.
 
 ---
 
-## Full coherence is new — and the allocator advice flipped
+## CPU–GPU full coherence, new on Thor — allocator advice flipped
 
 <style scoped>
   section { font-size: 20px; }
@@ -531,7 +531,7 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 
 ---
 
-## Same silicon, different rules — the software view
+## Robotics vs automotive — same silicon, different software rules
 
 <style scoped>
   section { font-size: 22px; }
@@ -675,7 +675,7 @@ Tooling mirrors robotics: **AlpaSim** (open sim) · **AlpaGym** (closed-loop RL 
 
 ---
 
-## Automotive ships — slowly, and for real
+## Automotive is shipping for real — just slowly
 
 <style scoped>
   section { font-size: 21px; padding-top: 32px; }
@@ -703,7 +703,7 @@ Tooling mirrors robotics: **AlpaSim** (open sim) · **AlpaGym** (closed-loop RL 
 
 ---
 
-## Which side, as an embedded *software* engineer?
+## Robotics or automotive, as an embedded *software* engineer?
 
 **Robotics day-to-day** — write `ros2_control` hardware_interfaces, EtherCAT/CAN-FD
 drivers, MCU firmware, tune PREEMPT_RT, wrap TensorRT policies into ROS 2 nodes.
