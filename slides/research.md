@@ -560,9 +560,9 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 ## Robotics vs automotive — same silicon, different software rules
 
 <style scoped>
-  section { font-size: 22px; }
-  table { font-size: 19px; }
-  .gloss { font-size: 15px; margin-top: 8px; }
+  section { font-size: 21px; }
+  table { font-size: 18px; }
+  .gloss { font-size: 13px; margin-top: 6px; }
 </style>
 
 | | Robotics (Isaac / Jetson) | Automotive (DRIVE) |
@@ -578,7 +578,7 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 Shared underneath: **the Thor SoC family · the Cosmos-Reason model lineage · TensorRT ·
 the three-computer loop** — same architecture, not necessarily the same die or the same model.
 
-<div class="gloss">ASIL = Automotive Safety Integrity Level, ISO 26262 (D = highest) · QNX = safety-certified real-time OS (BlackBerry) · MIG = Multi-Instance GPU · OEM = vehicle manufacturer · *Alpamayo 2 Super: NVIDIA newsroom says 34B, product page says 32B — sources conflict as of 07/2026</div>
+<div class="gloss">ASIL = Automotive Safety Integrity Level, ISO 26262 (D = highest) · QNX = safety-certified real-time OS (BlackBerry) · <b>Type-1 hypervisor</b> = runs on bare metal, boots first, schedules entire OSes — "an RTOS whose tasks are OSes"; small enough to certify, and a Linux panic can't reach the QNX VM · MIG = Multi-Instance GPU · OEM = vehicle manufacturer · *Alpamayo 2 Super: NVIDIA newsroom says 34B, product page says 32B — sources conflict as of 07/2026</div>
 
 ---
 
@@ -923,7 +923,7 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - **TÜV** — independent German certification bodies (SÜD and Rheinland are rivals)
 - **UNECE** — UN body issuing international vehicle regulations
 - **QNX** — BlackBerry's commercial safety-certified RTOS
-- **VM / Type-1 hypervisor** — virtual machine / a hypervisor running on bare metal
+- **VM / Type-1 hypervisor** — virtual machine / a hypervisor running directly on bare metal (no host OS): boots first, then schedules entire OSes the way an RTOS schedules tasks — small enough to certify, and one VM's crash can't reach another (vs Type-2 = an app inside a host OS, e.g. VirtualBox)
 - **AUTOSAR CP / AP** — AUTomotive Open System ARchitecture: Classic (static, MCU) / Adaptive (POSIX, HPC) platforms
 - **ara::com** — Adaptive AUTOSAR's communication API
 - **SOME/IP** — Scalable service-Oriented MiddlewarE over IP (automotive services)

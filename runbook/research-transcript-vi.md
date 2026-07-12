@@ -320,11 +320,18 @@ gắn với quy trình.
 
 ## Slide 31 — Diagram: DriveOS chia đôi phần mềm *(~2 phút)*
 
-Kiến trúc bên xe: hypervisor Type-1 chia SoC thành hai máy ảo cách ly phần cứng. Trái —
-**QNX, RTOS thương mại đã pre-cert ASIL-D**: watchdog, I/O xe, logic fail-operational.
-Phải — Linux: CUDA, DriveWorks, stack AI. Mũi tên giữa hai bên là triết lý cả kiến trúc:
-**"AI đề xuất — bên đã chứng nhận giám sát."** So với robotics ở ô cam: một Ubuntu duy
-nhất, không có partition nào được chứng nhận.
+Kiến trúc bên xe: hypervisor Type-1 chia SoC thành hai máy ảo cách ly phần cứng. Giải
+thích nhanh cho ai chưa quen: **Type-1 nghĩa là hypervisor chạy thẳng trên phần cứng,
+boot lên trước tiên, không có OS nào bên dưới** — hình dung nó như một RTOS tối giản mà
+"task" của nó là nguyên các hệ điều hành. Ba hệ quả: Linux panic thì QNX không hề hấn
+(không có OS chung nào để chết lây); hypervisor chỉ vài chục nghìn dòng nên audit/chứng
+nhận được — khác hẳn kiểu VirtualBox chạy trên một host OS hàng chục triệu dòng; và nó
+tự chia CPU tĩnh cho từng VM nên VM an toàn giữ được deadline.
+
+Trái — **QNX, RTOS thương mại đã pre-cert ASIL-D**: watchdog, I/O xe, logic
+fail-operational. Phải — Linux: CUDA, DriveWorks, stack AI. Mũi tên giữa hai bên là
+triết lý cả kiến trúc: **"AI đề xuất — bên đã chứng nhận giám sát."** So với robotics ở
+ô cam: một Ubuntu duy nhất, không có partition nào được chứng nhận.
 
 ## Slide 32 — Diagram: Automotive software stack (DRIVE Thor) *(~2.5 phút)*
 
