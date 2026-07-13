@@ -90,6 +90,9 @@
     <mxCell id="ddx-footnote2" value="note: DriveOS 6.0's ASIL-D cert was achieved on Orin &#8212; Thor cert still in progress (July 2026)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#666677;" vertex="1" parent="1">
       <mxGeometry x="144" y="554" width="672" height="18" as="geometry" />
     </mxCell>
+    <mxCell id="ddx-footnote3" value="caveat: dual QNX+Linux = platform framing; public SDK runs one guest at a time &#8212; &quot;QNX or Linux, but not both&quot; (rows A2/F12)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#666677;" vertex="1" parent="1">
+      <mxGeometry x="33" y="572" width="894" height="18" as="geometry" />
+    </mxCell>
 
   </root>
 </mxGraphModel>

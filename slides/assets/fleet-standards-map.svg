@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">Fleet standards, robots vs cars — who standardized what (2026)</text>
+
+  <!-- ===================== Header row ===================== -->
+  <rect x="200" y="62" width="355" height="34" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="377" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#6B4A2B">robots — AMR/AGV fleets</text>
+  <rect x="565" y="62" width="355" height="34" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="742" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">cars — automotive fleets</text>
+
+  <!-- ===================== Row 1: fleet orchestration ===================== -->
+  <rect x="40" y="104" width="150" height="56" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="115" y="136" text-anchor="middle" font-size="11.5" fill="#333">fleet orchestration</text>
+  <rect x="200" y="104" width="355" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="377" y="128" text-anchor="middle" font-size="11" fill="#2d5a2d">VDA 5050 v3.0 (wire) · Open-RMF (coordinator) ·</text>
+  <text x="377" y="144" text-anchor="middle" font-size="11" fill="#2d5a2d">MassRobotics (state-sharing)</text>
+  <rect x="565" y="104" width="355" height="56" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="742" y="136" text-anchor="middle" font-size="11" fill="#333">operator-proprietary dispatch — no cross-OEM standard</text>
+
+  <!-- ===================== Row 2: cloud diagnostics API ===================== -->
+  <rect x="40" y="168" width="150" height="56" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="115" y="200" text-anchor="middle" font-size="11.5" fill="#333">cloud diagnostics API</text>
+  <rect x="200" y="168" width="355" height="56" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="377" y="200" text-anchor="middle" font-size="11" fill="#234">vendor platforms: InOrbit · Formant (de-facto)</text>
+  <rect x="565" y="168" width="355" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="742" y="200" text-anchor="middle" font-size="11" fill="#2d5a2d">SOVD — ISO 17978 (2026): REST/JSON</text>
+
+  <!-- ===================== Row 3: diagnostic language ===================== -->
+  <rect x="40" y="232" width="150" height="56" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="115" y="264" text-anchor="middle" font-size="11.5" fill="#333">diagnostic language</text>
+  <rect x="200" y="232" width="355" height="56" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="377" y="264" text-anchor="middle" font-size="11" fill="#234">flat errorType/errorLevel (VDA 5050) + ROS 2 /diagnostics</text>
+  <rect x="565" y="232" width="355" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="742" y="264" text-anchor="middle" font-size="11" fill="#2d5a2d">UDS — ISO 14229: DIDs · DTCs · sessions</text>
+
+  <!-- ===================== Row 4: software update / OTA ===================== -->
+  <rect x="40" y="296" width="150" height="56" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="115" y="328" text-anchor="middle" font-size="11.5" fill="#333">software update / OTA</text>
+  <rect x="200" y="296" width="355" height="56" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="377" y="328" text-anchor="middle" font-size="11" fill="#234">tooling, not a standard: Mender · RAUC · SWUpdate</text>
+  <rect x="565" y="296" width="355" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="742" y="328" text-anchor="middle" font-size="11" fill="#2d5a2d">UDS flash (0x34/0x36/0x37) · UCM per Software Cluster</text>
+
+  <!-- ===================== Row 5: platform architecture ===================== -->
+  <rect x="40" y="360" width="150" height="56" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="115" y="392" text-anchor="middle" font-size="11.5" fill="#333">platform architecture</text>
+  <rect x="200" y="360" width="355" height="56" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="377" y="392" text-anchor="middle" font-size="11" fill="#234">ROS 2 — de-facto, open</text>
+  <rect x="565" y="360" width="355" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="742" y="392" text-anchor="middle" font-size="11" fill="#2d5a2d">AUTOSAR Classic + Adaptive</text>
+
+  <!-- ===================== Row 6: safety standard ===================== -->
+  <rect x="40" y="424" width="150" height="56" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="115" y="456" text-anchor="middle" font-size="11.5" fill="#333">safety standard</text>
+  <rect x="200" y="424" width="355" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="377" y="456" text-anchor="middle" font-size="11" fill="#2d5a2d">ISO 3691-4 — driverless industrial trucks</text>
+  <rect x="565" y="424" width="355" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="742" y="456" text-anchor="middle" font-size="11" fill="#2d5a2d">ISO 26262 — ASIL</text>
+
+  <!-- ===================== Callout strip ===================== -->
+  <rect x="40" y="494" width="880" height="44" rx="8" fill="#ffffff" stroke="#2E5FAC" stroke-width="1.5" stroke-dasharray="7,5"/>
+  <text x="480" y="512" text-anchor="middle" font-size="11.5" font-style="italic" fill="#2E5FAC">each side standardized the layer the other left open — and neither has a UDS-DID-style semantic capability/sensor discovery</text>
+  <text x="480" y="529" text-anchor="middle" font-size="11.5" font-style="italic" fill="#2E5FAC">(the factsheet is physical/protocol only)</text>
+
+  <!-- Footnote -->
+  <text x="480" y="575" text-anchor="middle" font-size="11" font-style="italic" fill="#555">'Redfish + PICMG IoT.x for robot fleets' (external draft): not documented anywhere — struck; audit rows V1–V12, research/vda5050-robot-fleet-2026-07.md</text>
+</svg>

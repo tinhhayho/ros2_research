@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">UDS (ISO 14229) — one diagnostic language, two transports, two platforms</text>
+
+  <!-- ===================== Diagnostic client (top) ===================== -->
+  <rect x="250" y="64" width="460" height="44" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="480" y="91" text-anchor="middle" font-size="13.5" fill="#2d5a2d">Diagnostic client — workshop tester · fleet backend (via gateway)</text>
+
+  <line x1="480" y1="108" x2="480" y2="120" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== UDS services strip ===================== -->
+  <rect x="60" y="122" width="840" height="56" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="480" y="142" text-anchor="middle" font-size="14" font-weight="700" fill="#223344">UDS services (ISO 14229-1, application layer)</text>
+  <text x="480" y="162" text-anchor="middle" font-size="11" fill="#223344">0x10 session · 0x27 security · 0x22 read DID (0xF190 = VIN) · 0x19 read DTC · 0x31 routine · 0x34/0x36/0x37 flash</text>
+
+  <line x1="265" y1="178" x2="265" y2="192" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="695" y1="178" x2="695" y2="192" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Transport boxes ===================== -->
+  <rect x="60" y="192" width="410" height="56" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="265" y="225" text-anchor="middle" font-size="13" fill="#234">DoCAN — CanTp (ISO 15765-2) over CAN / CAN FD</text>
+
+  <rect x="490" y="192" width="410" height="56" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="695" y="225" text-anchor="middle" font-size="13" fill="#234">DoIP (ISO 13400) over automotive Ethernet</text>
+
+  <!-- ===================== Arrows into platform columns ===================== -->
+  <line x1="265" y1="248" x2="265" y2="308" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="695" y1="248" x2="695" y2="308" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="520" y1="248" x2="450" y2="308" stroke="#2E5FAC" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <text x="500" y="275" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">also possible</text>
+
+  <!-- ===================== Classic AUTOSAR ECU column ===================== -->
+  <rect x="60" y="308" width="410" height="200" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="265" y="330" text-anchor="middle" font-size="14" font-weight="700" fill="#6B4A2B">Classic AUTOSAR ECU</text>
+
+  <rect x="80" y="340" width="370" height="42" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="265" y="366" text-anchor="middle" font-size="12.5" fill="#333">DCM — service dispatch, sessions, security</text>
+  <line x1="265" y1="382" x2="265" y2="388" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="80" y="388" width="370" height="42" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="265" y="414" text-anchor="middle" font-size="12.5" fill="#333">DEM — DTCs, freeze frames (NvM-backed)</text>
+  <line x1="265" y1="430" x2="265" y2="436" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="80" y="436" width="370" height="42" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="265" y="462" text-anchor="middle" font-size="12.5" fill="#333">SWCs provide the data</text>
+
+  <!-- ===================== Adaptive AUTOSAR machine column ===================== -->
+  <rect x="490" y="308" width="410" height="200" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="695" y="330" text-anchor="middle" font-size="14" font-weight="700" fill="#6B4A2B">Adaptive AUTOSAR machine</text>
+
+  <rect x="510" y="340" width="370" height="42" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="695" y="366" text-anchor="middle" font-size="12.5" fill="#333">DM (ara::diag) — DoIP only</text>
+  <line x1="695" y1="382" x2="695" y2="388" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="510" y="388" width="370" height="42" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="695" y="414" text-anchor="middle" font-size="12.5" fill="#333">one diagnostic server per Software Cluster</text>
+  <line x1="695" y1="430" x2="695" y2="436" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="510" y="436" width="370" height="42" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="695" y="462" text-anchor="middle" font-size="12.5" fill="#333">Adaptive apps provide the data</text>
+
+  <!-- Footnote -->
+  <text x="480" y="545" text-anchor="middle" font-size="11" font-style="italic" fill="#555">same request bytes either way — 22 F1 90 reads the VIN on a body ECU over CAN or on a central computer over Ethernet</text>
+</svg>

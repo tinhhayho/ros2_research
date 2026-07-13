@@ -533,11 +533,358 @@
     <mxCell id="ddx-footnote2" value="note: DriveOS 6.0's ASIL-D cert was achieved on Orin &#8212; Thor cert still in progress (July 2026)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#666677;" vertex="1" parent="1">
       <mxGeometry x="144" y="554" width="672" height="18" as="geometry" />
     </mxCell>
+    <mxCell id="ddx-footnote3" value="caveat: dual QNX+Linux = platform framing; public SDK runs one guest at a time &#8212; &quot;QNX or Linux, but not both&quot; (rows A2/F12)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#666677;" vertex="1" parent="1">
+      <mxGeometry x="33" y="572" width="894" height="18" as="geometry" />
+    </mxCell>
 
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page4" name="groot-cascade">
+  <diagram id="page4" name="fleet-on-thor">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="fot-title" value="Fleet management on DRIVE Thor &#8212; what's actually documented (2026)" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="30" y="20" width="900" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Fleet backend (top) -->
+    <mxCell id="fot-backend-box" value="Fleet backend &#8212; OTA campaigns &#183; telemetry &#183; SOVD/telematics APIs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=13.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="58" width="560" height="40" as="geometry" />
+    </mxCell>
+
+    <mxCell id="fot-arrow-backend-gw" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="98" as="sourcePoint" />
+        <mxPoint x="480" y="110" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- TCU + central gateway -->
+    <mxCell id="fot-gateway-box" value="TCU + central gateway &#8212; separate ECUs: terminate the cloud link, speak UDS into the vehicle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="170" y="112" width="560" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="fot-gateway-note" value="Thor has no documented&lt;br&gt;fleet-gateway role" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="745" y="115" width="200" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- Arrows from gateway into the board -->
+    <mxCell id="fot-arrow-doip" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="490" y="156" as="sourcePoint" />
+        <mxPoint x="490" y="257" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="fot-label-doip" value="DoIP / UDS" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="500" y="173" width="120" height="18" as="geometry" />
+    </mxCell>
+
+    <mxCell id="fot-arrow-ivn" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="700" y="156" as="sourcePoint" />
+        <mxPoint x="890" y="490" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="700" y="178" />
+          <mxPoint x="925" y="178" />
+          <mxPoint x="925" y="490" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="fot-label-ivn" value="in-vehicle network" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#223344;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="881" y="325" width="120" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- DRIVE AGX Thor board -->
+    <mxCell id="fot-board-outer" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#2E5FAC;strokeWidth=2;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+      <mxGeometry x="60" y="200" width="840" height="340" as="geometry" />
+    </mxCell>
+    <mxCell id="fot-board-label" value="DRIVE AGX Thor board" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=3;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="82" y="208" width="200" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Thor SoC -->
+    <mxCell id="fot-soc-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="80" y="228" width="740" height="210" as="geometry" />
+    </mxCell>
+    <mxCell id="fot-soc-label" value="Thor SoC" style="text;html=1;align=left;verticalAlign=middle;fontSize=13.5;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="100" y="237" width="120" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Guest OS VM -->
+    <mxCell id="fot-guestvm-box" value="Guest OS VM &#8212; QNX or Linux (public SDK: one guest, not both)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+      <mxGeometry x="95" y="260" width="575" height="120" as="geometry" />
+    </mxCell>
+
+    <mxCell id="fot-avstack-box" value="OEM AV stack &#183; DriveWorks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="110" y="292" width="175" height="72" as="geometry" />
+    </mxCell>
+
+    <mxCell id="fot-adaptive-box" value="&lt;b&gt;AUTOSAR Adaptive &#8212; Tier-1: Vector MICROSAR, EB corbos&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;DM (ara::diag) &#8212; UDS over DoIP, one server per Software Cluster&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;UCM &#8212; OTA install per Software Cluster&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="300" y="292" width="355" height="72" as="geometry" />
+    </mxCell>
+
+    <!-- DriveOS strip -->
+    <mxCell id="fot-driveos-box" value="DriveOS 7 &#8212; Type-1 hypervisor + NVIDIA service VMs (storage &#183; display &#183; GPU sharing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="95" y="392" width="575" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- FSI -->
+    <mxCell id="fot-fsi-box" value="FSI &#8212; lockstep&lt;br&gt;Cortex-R52,&lt;br&gt;separate silicon&lt;br&gt;&lt;br&gt;Vector MICROSAR&lt;br&gt;Classic in the&lt;br&gt;reference integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="685" y="260" width="120" height="166" as="geometry" />
+    </mxCell>
+
+    <!-- companion MCU -->
+    <mxCell id="fot-mcu-box" value="&lt;b&gt;companion MCU &#8212; Renesas RH850&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;MICROSAR Classic (AFW): DCM + DEM&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Classic AUTOSAR land &#8212; a real ECU, not a VM&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="560" y="452" width="325" height="76" as="geometry" />
+    </mxCell>
+
+    <!-- Connector SoC <-> companion MCU -->
+    <mxCell id="fot-connector-ci" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="200" y="438" as="sourcePoint" />
+        <mxPoint x="560" y="490" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="200" y="490" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="fot-label-ci" value="proprietary Common Interface (UDP over Ethernet) &#8212; not DoIP" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="215" y="470" width="320" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="fot-footnote" value="documented: DM + UCM inside the guest, Classic on the companion MCU &#183;&lt;br&gt;refuted: 'virtual Classic-ECU partitions', 'Thor as UDS gateway' &#8212; rows F12&#8211;F13, research/fleet-uds-autosar-2026-07.md" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="548" width="840" height="36" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page5" name="fleet-standards-map">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="fsm-title" value="Fleet standards, robots vs cars &#8212; who standardized what (2026)" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="60" y="20" width="840" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Header row -->
+    <mxCell id="fsm-hdr-robots" value="&lt;b&gt;robots &#8212; AMR/AGV fleets&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="62" width="355" height="34" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-hdr-cars" value="&lt;b&gt;cars &#8212; automotive fleets&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="565" y="62" width="355" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- Row 1: fleet orchestration -->
+    <mxCell id="fsm-lbl-1" value="fleet orchestration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=11.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="104" width="150" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-rob-1" value="VDA 5050 v3.0 (wire) &#183; Open-RMF (coordinator) &#183;&lt;br&gt;MassRobotics (state-sharing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="104" width="355" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-car-1" value="operator-proprietary dispatch &#8212; no cross-OEM standard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=11;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="565" y="104" width="355" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Row 2: cloud diagnostics API -->
+    <mxCell id="fsm-lbl-2" value="cloud diagnostics API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=11.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="168" width="150" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-rob-2" value="vendor platforms: InOrbit &#183; Formant (de-facto)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="168" width="355" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-car-2" value="SOVD &#8212; ISO 17978 (2026): REST/JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="565" y="168" width="355" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Row 3: diagnostic language -->
+    <mxCell id="fsm-lbl-3" value="diagnostic language" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=11.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="232" width="150" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-rob-3" value="flat errorType/errorLevel (VDA 5050) + ROS 2 /diagnostics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="232" width="355" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-car-3" value="UDS &#8212; ISO 14229: DIDs &#183; DTCs &#183; sessions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="565" y="232" width="355" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Row 4: software update / OTA -->
+    <mxCell id="fsm-lbl-4" value="software update / OTA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=11.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="296" width="150" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-rob-4" value="tooling, not a standard: Mender &#183; RAUC &#183; SWUpdate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="296" width="355" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-car-4" value="UDS flash (0x34/0x36/0x37) &#183; UCM per Software Cluster" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="565" y="296" width="355" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Row 5: platform architecture -->
+    <mxCell id="fsm-lbl-5" value="platform architecture" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=11.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="360" width="150" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-rob-5" value="ROS 2 &#8212; de-facto, open" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="360" width="355" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-car-5" value="AUTOSAR Classic + Adaptive" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="565" y="360" width="355" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Row 6: safety standard -->
+    <mxCell id="fsm-lbl-6" value="safety standard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=11.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="424" width="150" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-rob-6" value="ISO 3691-4 &#8212; driverless industrial trucks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="424" width="355" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-car-6" value="ISO 26262 &#8212; ASIL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="565" y="424" width="355" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Callout strip -->
+    <mxCell id="fsm-callout" value="each side standardized the layer the other left open &#8212; and neither has a UDS-DID-style semantic capability/sensor discovery&lt;br&gt;(the factsheet is physical/protocol only)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2E5FAC;strokeWidth=1.5;dashed=1;dashPattern=7 5;fontSize=11.5;fontStyle=2;fontColor=#2E5FAC;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="494" width="880" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="fsm-footnote" value="'Redfish + PICMG IoT.x for robot fleets' (external draft): not documented anywhere &#8212; struck; audit rows V1&#8211;V12, research/vda5050-robot-fleet-2026-07.md" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="30" y="566" width="900" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page6" name="fleet-uds-flow">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="flt-title" value="Fleet diagnostics end-to-end &#8212; where UDS really lives (2026)" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="20" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Fleet backend (top) -->
+    <mxCell id="flt-backend-box" value="Fleet backend &#8212; telemetry DB &#183; predictive maintenance &#183; OTA campaigns" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=13.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="230" y="58" width="500" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Wireless link zone -->
+    <mxCell id="flt-arrow-telemetry" style="endArrow=classic;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1.5;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="248" y="104" as="sourcePoint" />
+        <mxPoint x="248" y="196" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-arrow-diag" style="endArrow=classic;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1.5;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="712" y="104" as="sourcePoint" />
+        <mxPoint x="712" y="196" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-label-telemetry" value="telemetry: MQTT / proprietary telematics (continuous data)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="258" y="117" width="300" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-label-diag" value="diagnostics: SOVD &#8212; REST/HTTP + JSON (ISO 17978:2026)" style="text;html=1;align=right;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="402" y="139" width="300" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-warning" value="raw UDS is NOT exposed to the internet" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#b04a4a;" vertex="1" parent="1">
+      <mxGeometry x="280" y="163" width="400" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Vehicle boundary -->
+    <mxCell id="flt-vehicle-outer" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#2E5FAC;strokeWidth=2;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+      <mxGeometry x="60" y="200" width="840" height="340" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-vehicle-label" value="vehicle" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=3;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="82" y="210" width="100" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- TCU -->
+    <mxCell id="flt-tcu-box" value="TCU &#8212; telematics unit (4G/5G modem, TLS + certificates)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="280" y="232" width="400" height="44" as="geometry" />
+    </mxCell>
+
+    <mxCell id="flt-arrow-tcu-gw" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="276" as="sourcePoint" />
+        <mxPoint x="480" y="292" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Central gateway -->
+    <mxCell id="flt-gateway-box" value="central gateway &#8212; DoIP gateway + firewall: the security chokepoint; translates external requests into in-vehicle UDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="110" y="294" width="740" height="48" as="geometry" />
+    </mxCell>
+
+    <mxCell id="flt-arrow-gw-eth" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="290" y="342" as="sourcePoint" />
+        <mxPoint x="290" y="372" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-arrow-gw-can" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="670" y="342" as="sourcePoint" />
+        <mxPoint x="670" y="372" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Network branches -->
+    <mxCell id="flt-eth-box" value="Ethernet backbone &#8212; DoIP/UDS + SOME/IP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="110" y="374" width="360" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-can-box" value="CAN / CAN-FD branches &#8212; CanTp/UDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="490" y="374" width="360" height="44" as="geometry" />
+    </mxCell>
+
+    <mxCell id="flt-arrow-eth-hpc" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="290" y="418" as="sourcePoint" />
+        <mxPoint x="200" y="446" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-arrow-can-zonal" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="670" y="418" as="sourcePoint" />
+        <mxPoint x="480" y="446" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-arrow-can-legacy" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="670" y="418" as="sourcePoint" />
+        <mxPoint x="760" y="446" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Bottom compute row -->
+    <mxCell id="flt-hpc-box" value="HPC / central computer &#8212;&lt;br&gt;Adaptive DM (ara::diag),&lt;br&gt;UCM for OTA install" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="70" y="446" width="260" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-zonal-box" value="zonal/domain ECUs &#8212; Classic DCM + DEM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="350" y="446" width="260" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-legacy-box" value="legacy ECUs &#8212; Classic DCM + DEM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="630" y="446" width="260" height="64" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="flt-footnote" value="UDS 0x2A periodic reads exist, but continuous fleet telemetry runs on telematics pipelines &#8212; UDS stays a diagnostic protocol" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="566" width="840" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page7" name="groot-cascade">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -659,7 +1006,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page5" name="hyperion-sensors">
+  <diagram id="page8" name="hyperion-sensors">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -840,7 +1187,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page6" name="layer-tasks">
+  <diagram id="page9" name="layer-tasks">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -961,7 +1308,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page7" name="microros">
+  <diagram id="page10" name="microros">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -1062,7 +1409,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page8" name="nvidia-three-computers">
+  <diagram id="page11" name="nvidia-three-computers">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -1160,7 +1507,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page9" name="qos-rxo">
+  <diagram id="page12" name="qos-rxo">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -1287,7 +1634,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page10" name="rmf-position">
+  <diagram id="page13" name="rmf-position">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -1390,7 +1737,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page11" name="rmw-swap">
+  <diagram id="page14" name="rmw-swap">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -1531,7 +1878,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page12" name="robot-vs-car">
+  <diagram id="page15" name="robot-vs-car">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -1718,7 +2065,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page13" name="ros2-reality">
+  <diagram id="page16" name="ros2-reality">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -1808,7 +2155,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page14" name="rtps-arq">
+  <diagram id="page17" name="rtps-arq">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" /><mxCell id="1" parent="0" />
@@ -1979,7 +2326,338 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page15" name="stack-automotive">
+  <diagram id="page18" name="sdv-ecu-consolidation">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="sdv-title" value="E/E architecture evolution &#8212; why fleet management got easier" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="180" y="20" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Panel 1: distributed (gray) ===================== -->
+    <mxCell id="sdv-panel1-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="20" y="60" width="270" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-panel1-header" value="distributed (2000s&#8211;2010s)" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="76" width="270" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- point-to-point CAN wiring lines -->
+    <mxCell id="sdv-p1-line1" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="50" y="113" as="sourcePoint" />
+        <mxPoint x="170" y="111" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line2" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="110" y="117" as="sourcePoint" />
+        <mxPoint x="227" y="111" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line3" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="50" y="175" as="sourcePoint" />
+        <mxPoint x="175" y="173" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line4" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="115" y="179" as="sourcePoint" />
+        <mxPoint x="227" y="173" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line5" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="60" y="235" as="sourcePoint" />
+        <mxPoint x="230" y="233" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line6" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="150" y="239" as="sourcePoint" />
+        <mxPoint x="150" y="296" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line7" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="60" y="292" as="sourcePoint" />
+        <mxPoint x="230" y="290" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 14 tiny scattered ECU boxes -->
+    <mxCell id="sdv-p1-ecu-01" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="43" y="108" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-02" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="103" y="112" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-03" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="163" y="106" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-04" value="ECU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="213" y="104" width="28" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-05" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="43" y="170" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-06" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="108" y="174" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-07" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="168" y="168" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-08" value="ECU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="213" y="166" width="28" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-09" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="53" y="230" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-10" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="143" y="234" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-11" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="223" y="228" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-12" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="53" y="287" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-13" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="143" y="291" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-14" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="223" y="285" width="14" height="10" as="geometry" />
+    </mxCell>
+
+    <!-- Panel 1 sub-captions -->
+    <mxCell id="sdv-p1-cap1" value="&#8216;100+ ECUs&#8217;, one function each &#8212;" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="336" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-cap2" value="point-to-point CAN wiring" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="349" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-cap3" value="diagnostics: plug into the OBD port," style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="366" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-cap4" value="talk to each ECU" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="379" width="270" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Arrow 1 ===================== -->
+    <mxCell id="sdv-arrow1-body" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="292" y="238" width="31" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-arrow1-head" value="" style="triangle;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;direction=east;" vertex="1" parent="1">
+      <mxGeometry x="323" y="225" width="20" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Panel 2: domain (light-blue) ===================== -->
+    <mxCell id="sdv-panel2-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="345" y="60" width="270" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-panel2-header" value="domain (2015&#8211;2022)" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="345" y="76" width="270" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- gateway backbone lines -->
+    <mxCell id="sdv-p2-line1" style="endArrow=none;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="415" y="132" as="sourcePoint" />
+        <mxPoint x="545" y="132" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p2-line2" style="endArrow=none;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="545" y="132" as="sourcePoint" />
+        <mxPoint x="545" y="257" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p2-line3" style="endArrow=none;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="545" y="257" as="sourcePoint" />
+        <mxPoint x="415" y="257" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p2-line4" style="endArrow=none;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="415" y="257" as="sourcePoint" />
+        <mxPoint x="415" y="132" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 4 domain controller boxes -->
+    <mxCell id="sdv-p2-dc-powertrain" value="powertrain DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="360" y="105" width="110" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-dc-body" value="body DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="490" y="105" width="110" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-dc-chassis" value="chassis DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="360" y="230" width="110" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-dc-infotainment" value="infotainment DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="490" y="230" width="110" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- tiny gray ECU boxes hanging under each DC -->
+    <mxCell id="sdv-p2-ecu-01" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="372" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-02" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="398" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-03" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="424" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-04" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="502" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-05" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="528" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-06" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="554" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-07" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="372" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-08" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="398" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-09" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="424" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-10" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="502" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-11" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="528" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-12" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="554" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+
+    <!-- Panel 2 sub-caption -->
+    <mxCell id="sdv-p2-cap1" value="domain controllers group functions &#8212;" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="345" y="391" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-cap2" value="gateways route between buses" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="345" y="404" width="270" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Arrow 2 ===================== -->
+    <mxCell id="sdv-arrow2-body" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="617" y="238" width="31" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-arrow2-head" value="" style="triangle;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;direction=east;" vertex="1" parent="1">
+      <mxGeometry x="648" y="225" width="20" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Panel 3: zonal + central (green) ===================== -->
+    <mxCell id="sdv-panel3-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="670" y="60" width="270" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-panel3-header" value="zonal + central (SDV, now)" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="670" y="76" width="270" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- central computer(s) -->
+    <mxCell id="sdv-p3-central" value="&lt;b&gt;central computer(s) &#8212; HPC: AV/AD &#183;&lt;/b&gt;&lt;br&gt;Adaptive AUTOSAR &#183; OTA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="690" y="100" width="230" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- Ethernet backbone (TSN) ring -->
+    <mxCell id="sdv-p3-ring1" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="735" y="195" as="sourcePoint" />
+        <mxPoint x="865" y="195" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p3-ring2" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="865" y="195" as="sourcePoint" />
+        <mxPoint x="865" y="305" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p3-ring3" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="865" y="305" as="sourcePoint" />
+        <mxPoint x="735" y="305" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p3-ring4" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="735" y="305" as="sourcePoint" />
+        <mxPoint x="735" y="195" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p3-ring-label" value="Ethernet backbone (TSN)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="730" y="243" width="140" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- zonal ECU boxes at car corners -->
+    <mxCell id="sdv-p3-zonal-fl" value="zonal ECU FL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="690" y="180" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-zonal-fr" value="zonal ECU FR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="820" y="180" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-zonal-rl" value="zonal ECU RL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="690" y="290" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-zonal-rr" value="zonal ECU RR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="820" y="290" width="90" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- tiny sensor/actuator boxes under zonals -->
+    <mxCell id="sdv-p3-sens-fl" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="700" y="215" width="70" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-sens-fr" value="sensors/actuators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="808" y="213" width="115" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-sens-rl" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="700" y="325" width="70" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-sens-rr" value="sensors/actuators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="808" y="323" width="115" height="14" as="geometry" />
+    </mxCell>
+
+    <!-- Panel 3 sub-caption -->
+    <mxCell id="sdv-p3-cap1" value="ECUs grouped by LOCATION," style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="670" y="381" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-cap2" value="software consolidated centrally" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="670" y="394" width="270" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Bottom strip ===================== -->
+    <mxCell id="sdv-strip-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="20" y="450" width="920" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-strip-text1" value="what it buys a fleet: fewer boxes to flash &#183; one gateway to secure &#183; one place to collect health data &#183;" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="20" y="461" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-strip-text2" value="OTA per software cluster instead of per-ECU reflash" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="20" y="477" width="920" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="sdv-footnote1" value="industry framing: Bosch &#8216;distributed application software consolidated in a few powerful vehicle computers&#8217;;" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="40" y="516" width="880" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-footnote2" value="reported targets go from 100+ ECUs to under a dozen &#8212; vendor figures, not a measurement" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="40" y="533" width="880" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page19" name="stack-automotive">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -2121,7 +2799,222 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page16" name="stack-unified">
+  <diagram id="page20" name="stack-autosar-adaptive">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="saa-title" value="AUTOSAR Adaptive &#8212; a POSIX service-oriented platform, not an OS" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="180" y="20" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Row 1: Adaptive Applications -->
+    <mxCell id="saa-app-box" value="&lt;b&gt;Adaptive Applications &#8212; C++14 processes&lt;/b&gt;&lt;br&gt;each belongs to a Software Cluster: the unit of update and diagnosis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="64" width="620" height="78" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-arrow1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="142" as="sourcePoint" />
+        <mxPoint x="460" y="154" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 2: ARA outer -->
+    <mxCell id="saa-ara-outer" value="ARA &#8212; AUTOSAR Runtime for Adaptive" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=14;fontStyle=1;fontColor=#223344;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+      <mxGeometry x="150" y="156" width="620" height="214" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-com-box" value="ara::com &#8212;&lt;br&gt;SOME/IP &#183; DDS binding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="190" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-diag-box" value="ara::diag &#8212;&lt;br&gt;DM (UDS over DoIP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=10.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="360" y="190" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-ucm-box" value="ara::ucm &#8212;&lt;br&gt;UCM updates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=10.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="560" y="190" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-exec-box" value="ara::exec &#8212;&lt;br&gt;lifecycle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="274" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-per-box" value="ara::per &#8212;&lt;br&gt;persistency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="360" y="274" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-log-box" value="ara::log" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="560" y="274" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-arrow2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="370" as="sourcePoint" />
+        <mxPoint x="460" y="382" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 3: POSIX OS -->
+    <mxCell id="saa-posix-box" value="&lt;b&gt;POSIX OS &#8212; QNX or Linux&lt;/b&gt;&lt;br&gt;apps see the PSE51 profile; platform services may use full POSIX" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="384" width="620" height="76" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-arrow3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="460" as="sourcePoint" />
+        <mxPoint x="460" y="472" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 4: High-performance SoC -->
+    <mxCell id="saa-soc-box" value="High-performance SoC &#8212; Thor-class central computers, domain/zonal HPCs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=13;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="474" width="620" height="66" as="geometry" />
+    </mxCell>
+
+    <!-- Right-side dashed callout -->
+    <mxCell id="saa-callout-box" value="service-oriented: apps find services at runtime (discovery) &#8212;&lt;br&gt;&lt;br&gt;but production builds pin discovery down and restrict dynamic memory to startup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2E5FAC;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=10;fontColor=#2E5FAC;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="775" y="180" width="175" height="200" as="geometry" />
+    </mxCell>
+
+    <!-- Left-side annotation -->
+    <mxCell id="saa-anno1" value="middleware ON an OS &#8212;&lt;br&gt;Adaptive is not itself&lt;br&gt;an operating system" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="8" y="234" width="134" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="saa-anno1-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="75" y="278" as="sourcePoint" />
+        <mxPoint x="150" y="300" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="saa-footnote" value="updates per Software Cluster via UCM (Update and Configuration Management) &#8212; not full-ECU reflash &#183;&lt;br&gt;safety: ASIL-B shipping, ASIL-D programs underway" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="562" width="840" height="36" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page21" name="stack-autosar-classic">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="sac-title" value="AUTOSAR Classic &#8212; the layered stack on one deeply embedded ECU" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="180" y="20" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Row 1: Application Layer -->
+    <mxCell id="sac-app-box" value="&lt;b&gt;Application Layer &#8212; SWCs (Software Components)&lt;/b&gt;&lt;br&gt;e.g. door control &#183; torque request &#183; diagnostics data providers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="64" width="620" height="72" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sac-arrow1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="136" as="sourcePoint" />
+        <mxPoint x="460" y="148" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 2: RTE -->
+    <mxCell id="sac-rte-box" value="&lt;b&gt;RTE &#8212; Runtime Environment&lt;/b&gt;&lt;br&gt;generated glue: the only interface SWCs ever see (ports, not addresses)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="150" width="620" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sac-arrow2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="210" as="sourcePoint" />
+        <mxPoint x="460" y="222" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 3: BSW composite band -->
+    <mxCell id="sac-bsw-outer" value="BSW &#8212; Basic Software" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=14;fontStyle=1;fontColor=#223344;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+      <mxGeometry x="150" y="224" width="620" height="230" as="geometry" />
+    </mxCell>
+
+    <!-- Sub-row 1: Services Layer -->
+    <mxCell id="sac-services-box" value="Services Layer &#8212; AUTOSAR OS (OSEK-heritage) &#183; COM &#183; NvM &#183; WdgM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="256" width="600" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sac-dcm-dem-box" value="&lt;b&gt;DCM &#183; DEM&lt;/b&gt;&lt;br&gt;&lt;i&gt;diagnostics (UDS)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="610" y="266" width="140" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Sub-row 2: ECU Abstraction Layer -->
+    <mxCell id="sac-ecu-abs-box" value="ECU Abstraction Layer &#8212; abstracts the board wiring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="328" width="600" height="48" as="geometry" />
+    </mxCell>
+
+    <!-- Sub-row 3: MCAL -->
+    <mxCell id="sac-mcal-box" value="MCAL &#8212; Microcontroller Abstraction Layer:&lt;br&gt;CAN/LIN/ETH drivers &#183; ADC &#183; PWM &#183; watchdog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="388" width="600" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- CDD -->
+    <mxCell id="sac-cdd-box" value="&lt;b&gt;CDD&lt;/b&gt;&lt;br&gt;Complex Device&lt;br&gt;Drivers&lt;br&gt;&lt;i&gt;(bypass lane)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="780" y="256" width="130" height="186" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sac-arrow3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="454" as="sourcePoint" />
+        <mxPoint x="460" y="466" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 4: Microcontroller -->
+    <mxCell id="sac-mcu-box" value="Microcontroller &#8212; e.g. Renesas RH850 &#183; Infineon AURIX &#183; NXP S32K" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="468" width="620" height="72" as="geometry" />
+    </mxCell>
+
+    <!-- Left-side annotations -->
+    <mxCell id="sac-anno1" value="one binary, one ECU,&lt;br&gt;hard real-time" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="8" y="80" width="134" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sac-anno1-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="75" y="108" as="sourcePoint" />
+        <mxPoint x="150" y="105" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="sac-anno2" value="everything statically&lt;br&gt;configured at build&lt;br&gt;time (ARXML)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="8" y="240" width="134" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="sac-anno2-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="75" y="284" as="sourcePoint" />
+        <mxPoint x="150" y="330" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="sac-anno3" value="MCAL &#8776; the vendor HAL&lt;br&gt;you already know" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="8" y="384" width="134" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sac-anno3-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="75" y="410" as="sourcePoint" />
+        <mxPoint x="150" y="414" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="sac-footnote" value="AUTOSAR OS is a backward-compatible superset of OSEK OS &#8212; memory/timing protection, multicore, scalability classes SC1&#8211;SC4" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="566" width="840" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page22" name="stack-unified">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" /><mxCell id="1" parent="0" />
@@ -2234,7 +3127,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page17" name="thor-soc">
+  <diagram id="page23" name="thor-soc">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" />
@@ -2361,7 +3254,7 @@
   </root>
 </mxGraphModel>
   </diagram>
-  <diagram id="page18" name="turtlesim-graph">
+  <diagram id="page24" name="turtlesim-graph">
 <mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
   <root>
     <mxCell id="0" /><mxCell id="1" parent="0" />
@@ -2514,6 +3407,296 @@
 
     <mxCell id="turtlesim-bottom-caption" value="Press arrow keys &#8594; Twist on /turtle1/cmd_vel &#8594; turtle moves &#8594; Pose streams back. Topics + services, visible." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#444444;" vertex="1" parent="1">
       <mxGeometry x="94" y="559" width="772" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page25" name="uds-diag-stack">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="uds-title" value="UDS (ISO 14229) &#8212; one diagnostic language, two transports, two platforms" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="20" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Diagnostic client (top) -->
+    <mxCell id="uds-client-box" value="Diagnostic client &#8212; workshop tester &#183; fleet backend (via gateway)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=13.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="250" y="64" width="460" height="44" as="geometry" />
+    </mxCell>
+
+    <mxCell id="uds-arrow-client" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="108" as="sourcePoint" />
+        <mxPoint x="480" y="120" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- UDS services strip -->
+    <mxCell id="uds-services-box" value="&lt;b&gt;UDS services (ISO 14229-1, application layer)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;0x10 session &#183; 0x27 security &#183; 0x22 read DID (0xF190 = VIN) &#183; 0x19 read DTC &#183; 0x31 routine &#183; 0x34/0x36/0x37 flash&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=14;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="60" y="122" width="840" height="56" as="geometry" />
+    </mxCell>
+
+    <mxCell id="uds-arrow-services-l" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="265" y="178" as="sourcePoint" />
+        <mxPoint x="265" y="192" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="uds-arrow-services-r" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="695" y="178" as="sourcePoint" />
+        <mxPoint x="695" y="192" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Transport boxes -->
+    <mxCell id="uds-docan-box" value="DoCAN &#8212; CanTp (ISO 15765-2) over CAN / CAN FD" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="60" y="192" width="410" height="56" as="geometry" />
+    </mxCell>
+
+    <mxCell id="uds-doip-box" value="DoIP (ISO 13400) over automotive Ethernet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="490" y="192" width="410" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Arrows into platform columns -->
+    <mxCell id="uds-arrow-docan-classic" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="265" y="248" as="sourcePoint" />
+        <mxPoint x="265" y="308" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="uds-arrow-doip-adaptive" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="695" y="248" as="sourcePoint" />
+        <mxPoint x="695" y="308" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="uds-arrow-doip-classic" value="also possible" style="endArrow=classic;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;align=center;verticalAlign=middle;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="520" y="248" as="sourcePoint" />
+        <mxPoint x="450" y="308" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Classic AUTOSAR ECU column -->
+    <mxCell id="uds-classic-outer" value="&lt;b&gt;Classic AUTOSAR ECU&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=14;fontColor=#6B4A2B;align=center;verticalAlign=top;spacingTop=14;" vertex="1" parent="1">
+      <mxGeometry x="60" y="308" width="410" height="200" as="geometry" />
+    </mxCell>
+
+    <mxCell id="uds-dcm-box" value="DCM &#8212; service dispatch, sessions, security" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="80" y="340" width="370" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="uds-arrow-dcm-dem" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="265" y="382" as="sourcePoint" />
+        <mxPoint x="265" y="388" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="uds-dem-box" value="DEM &#8212; DTCs, freeze frames (NvM-backed)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="80" y="388" width="370" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="uds-arrow-dem-swc" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="265" y="430" as="sourcePoint" />
+        <mxPoint x="265" y="436" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="uds-swc-box" value="SWCs provide the data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="80" y="436" width="370" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Adaptive AUTOSAR machine column -->
+    <mxCell id="uds-adaptive-outer" value="&lt;b&gt;Adaptive AUTOSAR machine&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=14;fontColor=#6B4A2B;align=center;verticalAlign=top;spacingTop=14;" vertex="1" parent="1">
+      <mxGeometry x="490" y="308" width="410" height="200" as="geometry" />
+    </mxCell>
+
+    <mxCell id="uds-dm-box" value="DM (ara::diag) &#8212; DoIP only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="510" y="340" width="370" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="uds-arrow-dm-cluster" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="695" y="382" as="sourcePoint" />
+        <mxPoint x="695" y="388" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="uds-cluster-box" value="one diagnostic server per Software Cluster" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="510" y="388" width="370" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="uds-arrow-cluster-apps" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="695" y="430" as="sourcePoint" />
+        <mxPoint x="695" y="436" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="uds-apps-box" value="Adaptive apps provide the data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="510" y="436" width="370" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="uds-footnote" value="same request bytes either way &#8212; 22 F1 90 reads the VIN on a body ECU over CAN or on a central computer over Ethernet" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="536" width="840" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page26" name="vda5050-interface">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="vda-title" value="VDA 5050 v3.0 &#8212; the AGV/AMR fleet wire protocol (MQTT + JSON)" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="60" y="20" width="840" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Fleet control (top) -->
+    <mxCell id="vda-fleetcontrol-box" value="Fleet control ('master control') &#8212; SYNAOS &#183; Open-RMF &#183; Isaac Mission Dispatch &#8230;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=13;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="220" y="64" width="520" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow groups fleet control <-> broker -->
+    <mxCell id="vda-arrow-down" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="380" y="108" as="sourcePoint" />
+        <mxPoint x="380" y="250" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-label-down" value="order &#183; instantActions &#183; zoneSet (v3.0)" style="text;html=1;align=right;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="120" y="176" width="250" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-arrow-up" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="580" y="252" as="sourcePoint" />
+        <mxPoint x="580" y="112" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-label-up" value="state &#183; factsheet &#183; connection &#183; visualization" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="592" y="176" width="250" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- MQTT broker strip -->
+    <mxCell id="vda-broker-box" value="&lt;b&gt;MQTT broker (3.1.1 minimum) &#8212; JSON payloads&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11.5px&quot;&gt;topics: vda5050/v3/&amp;lt;manufacturer&amp;gt;/&amp;lt;serialNumber&amp;gt;/&amp;lt;topic&amp;gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=13.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="60" y="252" width="840" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- Left inset: an order = a graph -->
+    <mxCell id="vda-inset-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="60" y="340" width="280" height="150" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-inset-title" value="an order = a graph" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="100" y="350" width="200" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-edge-1" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="107" y="398" as="sourcePoint" />
+        <mxPoint x="143" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-edge-2" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="157" y="398" as="sourcePoint" />
+        <mxPoint x="193" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-edge-3" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="207" y="398" as="sourcePoint" />
+        <mxPoint x="243" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-edge-4" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="257" y="398" as="sourcePoint" />
+        <mxPoint x="293" y="398" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-node-1" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="93" y="391" width="14" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-node-2" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="143" y="391" width="14" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-node-3" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="193" y="391" width="14" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-node-4" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.5;dashed=1;dashPattern=3 2;" vertex="1" parent="1">
+      <mxGeometry x="243" y="391" width="14" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-node-5" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.5;dashed=1;dashPattern=3 2;" vertex="1" parent="1">
+      <mxGeometry x="293" y="391" width="14" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-label-base" value="base (released)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="90" y="416" width="120" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-label-horizon" value="horizon (planned)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="202" y="416" width="120" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-inset-caption" value="traffic control = releasing edges;&lt;br&gt;the logic itself is explicitly out of scope" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="70" y="440" width="260" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- AMR/AGV row arrows -->
+    <mxCell id="vda-arrow-a-down" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="442" y="312" as="sourcePoint" />
+        <mxPoint x="442" y="438" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-arrow-a-up" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="458" y="438" as="sourcePoint" />
+        <mxPoint x="458" y="314" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-arrow-b-down" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="627" y="312" as="sourcePoint" />
+        <mxPoint x="627" y="438" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-arrow-b-up" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="643" y="438" as="sourcePoint" />
+        <mxPoint x="643" y="314" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-arrow-c-down" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="812" y="312" as="sourcePoint" />
+        <mxPoint x="812" y="438" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="vda-arrow-c-up" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="828" y="438" as="sourcePoint" />
+        <mxPoint x="828" y="314" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- AMR/AGV boxes -->
+    <mxCell id="vda-amr-a" value="&lt;b&gt;AMR A &#8212; vendor X&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;declares itself via factsheet&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="370" y="440" width="160" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-amr-b" value="&lt;b&gt;AMR B &#8212; vendor Y&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;declares itself via factsheet&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="555" y="440" width="160" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="vda-agv-c" value="&lt;b&gt;AGV C &#8212; vendor Z&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;declares itself via factsheet&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="740" y="440" width="160" height="64" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="vda-footnote" value="v3.0.0 released 2026-03-19 (VDA + VDMA + KIT-IFL) &#8212; adds freely-navigating robots, zones (BLOCKED &#183; SPEED_LIMIT &#183; PRIORITY &#8230;),&lt;br&gt;CRITICAL/URGENT errors &#183; no OTA, no UDS-style diagnostics; security left to broker/TLS config" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="546" width="840" height="36" as="geometry" />
     </mxCell>
 
   </root>

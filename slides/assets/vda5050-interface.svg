@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">VDA 5050 v3.0 — the AGV/AMR fleet wire protocol (MQTT + JSON)</text>
+
+  <!-- ===================== Fleet control (top) ===================== -->
+  <rect x="220" y="64" width="520" height="44" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="480" y="91" text-anchor="middle" font-size="13" fill="#2d5a2d">Fleet control ('master control') — SYNAOS · Open-RMF · Isaac Mission Dispatch …</text>
+
+  <!-- ===================== Arrow groups fleet control <-> broker ===================== -->
+  <line x1="380" y1="108" x2="380" y2="250" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="370" y="185" text-anchor="end" font-size="11" fill="#223344">order · instantActions · zoneSet (v3.0)</text>
+
+  <line x1="580" y1="252" x2="580" y2="112" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="592" y="185" text-anchor="start" font-size="11" fill="#223344">state · factsheet · connection · visualization</text>
+
+  <!-- ===================== MQTT broker strip ===================== -->
+  <rect x="60" y="252" width="840" height="60" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="480" y="277" text-anchor="middle" font-size="13.5" font-weight="700" fill="#223344">MQTT broker (3.1.1 minimum) — JSON payloads</text>
+  <text x="480" y="298" text-anchor="middle" font-size="11.5" fill="#223344">topics: vda5050/v3/&lt;manufacturer&gt;/&lt;serialNumber&gt;/&lt;topic&gt;</text>
+
+  <!-- ===================== Left inset: an order = a graph ===================== -->
+  <rect x="60" y="340" width="280" height="150" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="200" y="364" text-anchor="middle" font-size="12" font-weight="700" fill="#234">an order = a graph</text>
+  <line x1="107" y1="398" x2="143" y2="398" stroke="#444" stroke-width="1.5"/>
+  <line x1="157" y1="398" x2="193" y2="398" stroke="#444" stroke-width="1.5"/>
+  <line x1="207" y1="398" x2="243" y2="398" stroke="#444" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="257" y1="398" x2="293" y2="398" stroke="#444" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <circle cx="100" cy="398" r="7" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <circle cx="150" cy="398" r="7" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <circle cx="200" cy="398" r="7" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <circle cx="250" cy="398" r="7" fill="#ffffff" stroke="#7f9dc9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="300" cy="398" r="7" fill="#ffffff" stroke="#7f9dc9" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="150" y="425" text-anchor="middle" font-size="10.5" fill="#234">base (released)</text>
+  <text x="262" y="425" text-anchor="middle" font-size="10.5" fill="#234">horizon (planned)</text>
+  <text x="200" y="452" text-anchor="middle" font-size="10.5" font-style="italic" fill="#555">traffic control = releasing edges;</text>
+  <text x="200" y="468" text-anchor="middle" font-size="10.5" font-style="italic" fill="#555">the logic itself is explicitly out of scope</text>
+
+  <!-- ===================== AMR/AGV row ===================== -->
+  <line x1="442" y1="312" x2="442" y2="438" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="458" y1="438" x2="458" y2="314" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="627" y1="312" x2="627" y2="438" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="643" y1="438" x2="643" y2="314" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="812" y1="312" x2="812" y2="438" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="828" y1="438" x2="828" y2="314" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <rect x="370" y="440" width="160" height="64" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="450" y="466" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6B4A2B">AMR A — vendor X</text>
+  <text x="450" y="486" text-anchor="middle" font-size="10.5" fill="#6B4A2B">declares itself via factsheet</text>
+
+  <rect x="555" y="440" width="160" height="64" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="635" y="466" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6B4A2B">AMR B — vendor Y</text>
+  <text x="635" y="486" text-anchor="middle" font-size="10.5" fill="#6B4A2B">declares itself via factsheet</text>
+
+  <rect x="740" y="440" width="160" height="64" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="820" y="466" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6B4A2B">AGV C — vendor Z</text>
+  <text x="820" y="486" text-anchor="middle" font-size="10.5" fill="#6B4A2B">declares itself via factsheet</text>
+
+  <!-- Footnote -->
+  <text x="480" y="558" text-anchor="middle" font-size="11" font-style="italic" fill="#555">v3.0.0 released 2026-03-19 (VDA + VDMA + KIT-IFL) — adds freely-navigating robots, zones (BLOCKED · SPEED_LIMIT · PRIORITY …),</text>
+  <text x="480" y="576" text-anchor="middle" font-size="11" font-style="italic" fill="#555">CRITICAL/URGENT errors · no OTA, no UDS-style diagnostics; security left to broker/TLS config</text>
+</svg>

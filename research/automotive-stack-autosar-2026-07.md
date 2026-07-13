@@ -58,6 +58,20 @@ Claim rows in `research/claims-audit-2026-07.md` (A-series).
   fetched page did not name QNX+Linux+Thor in one sentence; kept as the deck's existing
   dual-stack framing with this caveat noted.
 
+## 5. Addendum (2026-07-13, from the fleet/UDS audit)
+
+- **Vector × Thor now primary-verified** (full-page fetch of the 2025-08-25 news post,
+  previously snippet-only): Vector provides the reference integration for **both the FSI
+  and the companion MCU**; "a tightly integrated FSI, where our MICROSAR Classic
+  Solution takes an essential role… up to ASIL-D". This sharpens §2: Classic AUTOSAR's
+  footprint on Thor boards covers the companion MCU *and* (per Vector) the FSI
+  integration — still not a hypervisor guest on the main cores.
+- **OpenSynergy COQOS is Qualcomm-owned since 2024-06-10** (virtualization assets
+  acquired; OpenSynergy keeps Bluetooth/Radio-Tuner). COQOS's supported-SoC list
+  (Qualcomm, NXP, Renesas, TI, Samsung) does not include NVIDIA — treat COQOS
+  Classic-vECU material as evidence for the *pattern*, not for Thor.
+- Full audit + F-series manifest rows: `research/fleet-uds-autosar-2026-07.md`.
+
 ## Sources
 
 - developer.nvidia.com/drive/os · /drive/driveworks · DriveOS 7.0.3 virtualization docs

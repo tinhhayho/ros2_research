@@ -1,0 +1,121 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="flt-title" value="Fleet diagnostics end-to-end &#8212; where UDS really lives (2026)" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="20" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Fleet backend (top) -->
+    <mxCell id="flt-backend-box" value="Fleet backend &#8212; telemetry DB &#183; predictive maintenance &#183; OTA campaigns" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=13.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="230" y="58" width="500" height="42" as="geometry" />
+    </mxCell>
+
+    <!-- Wireless link zone -->
+    <mxCell id="flt-arrow-telemetry" style="endArrow=classic;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1.5;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="248" y="104" as="sourcePoint" />
+        <mxPoint x="248" y="196" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-arrow-diag" style="endArrow=classic;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1.5;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="712" y="104" as="sourcePoint" />
+        <mxPoint x="712" y="196" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-label-telemetry" value="telemetry: MQTT / proprietary telematics (continuous data)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="258" y="117" width="300" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-label-diag" value="diagnostics: SOVD &#8212; REST/HTTP + JSON (ISO 17978:2026)" style="text;html=1;align=right;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="402" y="139" width="300" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-warning" value="raw UDS is NOT exposed to the internet" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#b04a4a;" vertex="1" parent="1">
+      <mxGeometry x="280" y="163" width="400" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Vehicle boundary -->
+    <mxCell id="flt-vehicle-outer" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#2E5FAC;strokeWidth=2;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+      <mxGeometry x="60" y="200" width="840" height="340" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-vehicle-label" value="vehicle" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=3;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="82" y="210" width="100" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- TCU -->
+    <mxCell id="flt-tcu-box" value="TCU &#8212; telematics unit (4G/5G modem, TLS + certificates)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="280" y="232" width="400" height="44" as="geometry" />
+    </mxCell>
+
+    <mxCell id="flt-arrow-tcu-gw" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="276" as="sourcePoint" />
+        <mxPoint x="480" y="292" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Central gateway -->
+    <mxCell id="flt-gateway-box" value="central gateway &#8212; DoIP gateway + firewall: the security chokepoint; translates external requests into in-vehicle UDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="110" y="294" width="740" height="48" as="geometry" />
+    </mxCell>
+
+    <mxCell id="flt-arrow-gw-eth" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="290" y="342" as="sourcePoint" />
+        <mxPoint x="290" y="372" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-arrow-gw-can" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="670" y="342" as="sourcePoint" />
+        <mxPoint x="670" y="372" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Network branches -->
+    <mxCell id="flt-eth-box" value="Ethernet backbone &#8212; DoIP/UDS + SOME/IP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="110" y="374" width="360" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-can-box" value="CAN / CAN-FD branches &#8212; CanTp/UDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="490" y="374" width="360" height="44" as="geometry" />
+    </mxCell>
+
+    <mxCell id="flt-arrow-eth-hpc" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="290" y="418" as="sourcePoint" />
+        <mxPoint x="200" y="446" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-arrow-can-zonal" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="670" y="418" as="sourcePoint" />
+        <mxPoint x="480" y="446" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="flt-arrow-can-legacy" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="670" y="418" as="sourcePoint" />
+        <mxPoint x="760" y="446" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Bottom compute row -->
+    <mxCell id="flt-hpc-box" value="HPC / central computer &#8212;&lt;br&gt;Adaptive DM (ara::diag),&lt;br&gt;UCM for OTA install" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="70" y="446" width="260" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-zonal-box" value="zonal/domain ECUs &#8212; Classic DCM + DEM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="350" y="446" width="260" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="flt-legacy-box" value="legacy ECUs &#8212; Classic DCM + DEM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="630" y="446" width="260" height="64" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="flt-footnote" value="UDS 0x2A periodic reads exist, but continuous fleet telemetry runs on telematics pipelines &#8212; UDS stays a diagnostic protocol" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="566" width="840" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

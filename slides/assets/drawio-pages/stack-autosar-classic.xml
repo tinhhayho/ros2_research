@@ -1,0 +1,113 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="sac-title" value="AUTOSAR Classic &#8212; the layered stack on one deeply embedded ECU" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="180" y="20" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Row 1: Application Layer -->
+    <mxCell id="sac-app-box" value="&lt;b&gt;Application Layer &#8212; SWCs (Software Components)&lt;/b&gt;&lt;br&gt;e.g. door control &#183; torque request &#183; diagnostics data providers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="64" width="620" height="72" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sac-arrow1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="136" as="sourcePoint" />
+        <mxPoint x="460" y="148" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 2: RTE -->
+    <mxCell id="sac-rte-box" value="&lt;b&gt;RTE &#8212; Runtime Environment&lt;/b&gt;&lt;br&gt;generated glue: the only interface SWCs ever see (ports, not addresses)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="150" width="620" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sac-arrow2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="210" as="sourcePoint" />
+        <mxPoint x="460" y="222" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 3: BSW composite band -->
+    <mxCell id="sac-bsw-outer" value="BSW &#8212; Basic Software" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=14;fontStyle=1;fontColor=#223344;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+      <mxGeometry x="150" y="224" width="620" height="230" as="geometry" />
+    </mxCell>
+
+    <!-- Sub-row 1: Services Layer -->
+    <mxCell id="sac-services-box" value="Services Layer &#8212; AUTOSAR OS (OSEK-heritage) &#183; COM &#183; NvM &#183; WdgM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="256" width="600" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sac-dcm-dem-box" value="&lt;b&gt;DCM &#183; DEM&lt;/b&gt;&lt;br&gt;&lt;i&gt;diagnostics (UDS)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="610" y="266" width="140" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Sub-row 2: ECU Abstraction Layer -->
+    <mxCell id="sac-ecu-abs-box" value="ECU Abstraction Layer &#8212; abstracts the board wiring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="328" width="600" height="48" as="geometry" />
+    </mxCell>
+
+    <!-- Sub-row 3: MCAL -->
+    <mxCell id="sac-mcal-box" value="MCAL &#8212; Microcontroller Abstraction Layer:&lt;br&gt;CAN/LIN/ETH drivers &#183; ADC &#183; PWM &#183; watchdog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="388" width="600" height="54" as="geometry" />
+    </mxCell>
+
+    <!-- CDD -->
+    <mxCell id="sac-cdd-box" value="&lt;b&gt;CDD&lt;/b&gt;&lt;br&gt;Complex Device&lt;br&gt;Drivers&lt;br&gt;&lt;i&gt;(bypass lane)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="780" y="256" width="130" height="186" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sac-arrow3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="454" as="sourcePoint" />
+        <mxPoint x="460" y="466" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 4: Microcontroller -->
+    <mxCell id="sac-mcu-box" value="Microcontroller &#8212; e.g. Renesas RH850 &#183; Infineon AURIX &#183; NXP S32K" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="468" width="620" height="72" as="geometry" />
+    </mxCell>
+
+    <!-- Left-side annotations -->
+    <mxCell id="sac-anno1" value="one binary, one ECU,&lt;br&gt;hard real-time" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="8" y="80" width="134" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sac-anno1-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="75" y="108" as="sourcePoint" />
+        <mxPoint x="150" y="105" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="sac-anno2" value="everything statically&lt;br&gt;configured at build&lt;br&gt;time (ARXML)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="8" y="240" width="134" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="sac-anno2-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="75" y="284" as="sourcePoint" />
+        <mxPoint x="150" y="330" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <mxCell id="sac-anno3" value="MCAL &#8776; the vendor HAL&lt;br&gt;you already know" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="8" y="384" width="134" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sac-anno3-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="75" y="410" as="sourcePoint" />
+        <mxPoint x="150" y="414" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="sac-footnote" value="AUTOSAR OS is a backward-compatible superset of OSEK OS &#8212; memory/timing protection, multicore, scalability classes SC1&#8211;SC4" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="566" width="840" height="18" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

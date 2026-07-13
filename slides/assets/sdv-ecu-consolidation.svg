@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">E/E architecture evolution — why fleet management got easier</text>
+
+  <!-- ===================== Panel 1: distributed (gray) ===================== -->
+  <rect x="20" y="60" width="270" height="380" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="155" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#333333">distributed (2000s&#8211;2010s)</text>
+
+  <!-- point-to-point CAN wiring (thin lines, drawn under boxes) -->
+  <line x1="50" y1="113" x2="170" y2="111" stroke="#888888" stroke-width="1"/>
+  <line x1="110" y1="117" x2="227" y2="111" stroke="#888888" stroke-width="1"/>
+  <line x1="50" y1="175" x2="175" y2="173" stroke="#888888" stroke-width="1"/>
+  <line x1="115" y1="179" x2="227" y2="173" stroke="#888888" stroke-width="1"/>
+  <line x1="60" y1="235" x2="230" y2="233" stroke="#888888" stroke-width="1"/>
+  <line x1="150" y1="239" x2="150" y2="296" stroke="#888888" stroke-width="1"/>
+  <line x1="60" y1="292" x2="230" y2="290" stroke="#888888" stroke-width="1"/>
+
+  <!-- 14 tiny scattered ECU boxes -->
+  <rect x="43" y="108" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="103" y="112" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="163" y="106" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="213" y="104" width="28" height="14" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <text x="227" y="114" text-anchor="middle" font-size="10.5" fill="#333333">ECU</text>
+  <rect x="43" y="170" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="108" y="174" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="168" y="168" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="213" y="166" width="28" height="14" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <text x="227" y="176" text-anchor="middle" font-size="10.5" fill="#333333">ECU</text>
+  <rect x="53" y="230" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="143" y="234" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="223" y="228" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="53" y="287" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="143" y="291" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="223" y="285" width="14" height="10" rx="2" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+
+  <!-- Panel 1 sub-captions -->
+  <text x="155" y="345" text-anchor="middle" font-size="10.5" fill="#333333">&#8216;100+ ECUs&#8217;, one function each &#8212;</text>
+  <text x="155" y="358" text-anchor="middle" font-size="10.5" fill="#333333">point-to-point CAN wiring</text>
+  <text x="155" y="375" text-anchor="middle" font-size="10.5" fill="#333333">diagnostics: plug into the OBD port,</text>
+  <text x="155" y="388" text-anchor="middle" font-size="10.5" fill="#333333">talk to each ECU</text>
+
+  <!-- ===================== Arrow 1 ===================== -->
+  <rect x="292" y="238" width="31" height="24" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <polygon points="323,225 343,250 323,275" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+
+  <!-- ===================== Panel 2: domain (light-blue) ===================== -->
+  <rect x="345" y="60" width="270" height="380" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="480" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#223344">domain (2015&#8211;2022)</text>
+
+  <!-- gateway backbone lines (drawn under DC boxes) -->
+  <line x1="415" y1="132" x2="545" y2="132" stroke="#7f9dc9" stroke-width="1.5"/>
+  <line x1="545" y1="132" x2="545" y2="257" stroke="#7f9dc9" stroke-width="1.5"/>
+  <line x1="545" y1="257" x2="415" y2="257" stroke="#7f9dc9" stroke-width="1.5"/>
+  <line x1="415" y1="257" x2="415" y2="132" stroke="#7f9dc9" stroke-width="1.5"/>
+
+  <!-- 4 domain controller boxes -->
+  <rect x="360" y="105" width="110" height="55" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="415" y="137" text-anchor="middle" font-size="11" fill="#223344">powertrain DC</text>
+  <rect x="490" y="105" width="110" height="55" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="545" y="137" text-anchor="middle" font-size="11" fill="#223344">body DC</text>
+  <rect x="360" y="230" width="110" height="55" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="415" y="262" text-anchor="middle" font-size="11" fill="#223344">chassis DC</text>
+  <rect x="490" y="230" width="110" height="55" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="545" y="262" text-anchor="middle" font-size="11" fill="#223344">infotainment DC</text>
+
+  <!-- tiny gray ECU boxes hanging under each DC -->
+  <rect x="372" y="168" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="398" y="168" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="424" y="168" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="502" y="168" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="528" y="168" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="554" y="168" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="372" y="293" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="398" y="293" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="424" y="293" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="502" y="293" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="528" y="293" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="554" y="293" width="12" height="10" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+
+  <!-- Panel 2 sub-caption -->
+  <text x="480" y="400" text-anchor="middle" font-size="10.5" fill="#223344">domain controllers group functions &#8212;</text>
+  <text x="480" y="413" text-anchor="middle" font-size="10.5" fill="#223344">gateways route between buses</text>
+
+  <!-- ===================== Arrow 2 ===================== -->
+  <rect x="617" y="238" width="31" height="24" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <polygon points="648,225 668,250 648,275" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+
+  <!-- ===================== Panel 3: zonal + central (green) ===================== -->
+  <rect x="670" y="60" width="270" height="380" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="805" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#2d5a2d">zonal + central (SDV, now)</text>
+
+  <!-- central computer(s) -->
+  <rect x="690" y="100" width="230" height="55" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="805" y="122" text-anchor="middle" font-size="11" font-weight="700" fill="#6B4A2B">central computer(s) &#8212; HPC: AV/AD &#183;</text>
+  <text x="805" y="139" text-anchor="middle" font-size="11" fill="#6B4A2B">Adaptive AUTOSAR &#183; OTA</text>
+
+  <!-- Ethernet backbone (TSN) ring, drawn under zonal boxes -->
+  <line x1="735" y1="195" x2="865" y2="195" stroke="#2E5FAC" stroke-width="3"/>
+  <line x1="865" y1="195" x2="865" y2="305" stroke="#2E5FAC" stroke-width="3"/>
+  <line x1="865" y1="305" x2="735" y2="305" stroke="#2E5FAC" stroke-width="3"/>
+  <line x1="735" y1="305" x2="735" y2="195" stroke="#2E5FAC" stroke-width="3"/>
+  <text x="800" y="253" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2E5FAC">Ethernet backbone (TSN)</text>
+
+  <!-- zonal ECU boxes at car corners -->
+  <rect x="690" y="180" width="90" height="30" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="735" y="199" text-anchor="middle" font-size="10.5" fill="#223344">zonal ECU FL</text>
+  <rect x="820" y="180" width="90" height="30" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="865" y="199" text-anchor="middle" font-size="10.5" fill="#223344">zonal ECU FR</text>
+  <rect x="690" y="290" width="90" height="30" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="735" y="309" text-anchor="middle" font-size="10.5" fill="#223344">zonal ECU RL</text>
+  <rect x="820" y="290" width="90" height="30" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="865" y="309" text-anchor="middle" font-size="10.5" fill="#223344">zonal ECU RR</text>
+
+  <!-- tiny sensor/actuator boxes under zonals -->
+  <rect x="700" y="215" width="70" height="12" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="808" y="213" width="115" height="14" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <text x="865" y="223" text-anchor="middle" font-size="10.5" fill="#333333">sensors/actuators</text>
+  <rect x="700" y="325" width="70" height="12" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <rect x="808" y="323" width="115" height="14" rx="2" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1"/>
+  <text x="865" y="333" text-anchor="middle" font-size="10.5" fill="#333333">sensors/actuators</text>
+
+  <!-- Panel 3 sub-caption -->
+  <text x="805" y="390" text-anchor="middle" font-size="10.5" fill="#2d5a2d">ECUs grouped by LOCATION,</text>
+  <text x="805" y="403" text-anchor="middle" font-size="10.5" fill="#2d5a2d">software consolidated centrally</text>
+
+  <!-- ===================== Bottom strip ===================== -->
+  <rect x="20" y="450" width="920" height="50" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="480" y="470" text-anchor="middle" font-size="11" fill="#223344">what it buys a fleet: fewer boxes to flash &#183; one gateway to secure &#183; one place to collect health data &#183;</text>
+  <text x="480" y="486" text-anchor="middle" font-size="11" fill="#223344">OTA per software cluster instead of per-ECU reflash</text>
+
+  <!-- Footnote -->
+  <text x="480" y="525" text-anchor="middle" font-size="11" font-style="italic" fill="#555555">industry framing: Bosch &#8216;distributed application software consolidated in a few powerful vehicle computers&#8217;;</text>
+  <text x="480" y="542" text-anchor="middle" font-size="11" font-style="italic" fill="#555555">reported targets go from 100+ ECUs to under a dozen &#8212; vendor figures, not a measurement</text>
+</svg>

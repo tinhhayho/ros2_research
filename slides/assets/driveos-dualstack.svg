@@ -71,4 +71,5 @@
   <!-- ===================== Footnote ===================== -->
   <text x="480" y="545" text-anchor="middle" font-size="13" fill="#667">ASIL-D = highest Automotive Safety Integrity Level (ISO 26262) · QNX = safety-certified RTOS (BlackBerry) · VM = virtual machine</text>
   <text x="480" y="563" text-anchor="middle" font-size="13" fill="#667">note: DriveOS 6.0's ASIL-D cert was achieved on Orin — Thor cert still in progress (July 2026)</text>
+  <text x="480" y="581" text-anchor="middle" font-size="13" fill="#667">caveat: dual QNX+Linux = platform framing; public SDK runs one guest at a time — "QNX or Linux, but not both" (rows A2/F12)</text>
 </svg>

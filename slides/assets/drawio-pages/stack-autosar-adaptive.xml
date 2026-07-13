@@ -1,0 +1,98 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="saa-title" value="AUTOSAR Adaptive &#8212; a POSIX service-oriented platform, not an OS" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="180" y="20" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Row 1: Adaptive Applications -->
+    <mxCell id="saa-app-box" value="&lt;b&gt;Adaptive Applications &#8212; C++14 processes&lt;/b&gt;&lt;br&gt;each belongs to a Software Cluster: the unit of update and diagnosis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="64" width="620" height="78" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-arrow1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="142" as="sourcePoint" />
+        <mxPoint x="460" y="154" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 2: ARA outer -->
+    <mxCell id="saa-ara-outer" value="ARA &#8212; AUTOSAR Runtime for Adaptive" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=14;fontStyle=1;fontColor=#223344;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+      <mxGeometry x="150" y="156" width="620" height="214" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-com-box" value="ara::com &#8212;&lt;br&gt;SOME/IP &#183; DDS binding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="190" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-diag-box" value="ara::diag &#8212;&lt;br&gt;DM (UDS over DoIP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=10.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="360" y="190" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-ucm-box" value="ara::ucm &#8212;&lt;br&gt;UCM updates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=10.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="560" y="190" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-exec-box" value="ara::exec &#8212;&lt;br&gt;lifecycle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="160" y="274" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-per-box" value="ara::per &#8212;&lt;br&gt;persistency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="360" y="274" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-log-box" value="ara::log" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="560" y="274" width="180" height="70" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-arrow2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="370" as="sourcePoint" />
+        <mxPoint x="460" y="382" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 3: POSIX OS -->
+    <mxCell id="saa-posix-box" value="&lt;b&gt;POSIX OS &#8212; QNX or Linux&lt;/b&gt;&lt;br&gt;apps see the PSE51 profile; platform services may use full POSIX" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="384" width="620" height="76" as="geometry" />
+    </mxCell>
+
+    <mxCell id="saa-arrow3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="460" y="460" as="sourcePoint" />
+        <mxPoint x="460" y="472" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Row 4: High-performance SoC -->
+    <mxCell id="saa-soc-box" value="High-performance SoC &#8212; Thor-class central computers, domain/zonal HPCs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=13;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="474" width="620" height="66" as="geometry" />
+    </mxCell>
+
+    <!-- Right-side dashed callout -->
+    <mxCell id="saa-callout-box" value="service-oriented: apps find services at runtime (discovery) &#8212;&lt;br&gt;&lt;br&gt;but production builds pin discovery down and restrict dynamic memory to startup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#2E5FAC;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=10;fontColor=#2E5FAC;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="775" y="180" width="175" height="200" as="geometry" />
+    </mxCell>
+
+    <!-- Left-side annotation -->
+    <mxCell id="saa-anno1" value="middleware ON an OS &#8212;&lt;br&gt;Adaptive is not itself&lt;br&gt;an operating system" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="8" y="234" width="134" height="46" as="geometry" />
+    </mxCell>
+    <mxCell id="saa-anno1-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=1;dashed=1;dashPattern=4 3;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="75" y="278" as="sourcePoint" />
+        <mxPoint x="150" y="300" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="saa-footnote" value="updates per Software Cluster via UCM (Update and Configuration Management) &#8212; not full-ECU reflash &#183;&lt;br&gt;safety: ASIL-B shipping, ASIL-D programs underway" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="562" width="840" height="36" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

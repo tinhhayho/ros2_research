@@ -1,0 +1,329 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="sdv-title" value="E/E architecture evolution &#8212; why fleet management got easier" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="180" y="20" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Panel 1: distributed (gray) ===================== -->
+    <mxCell id="sdv-panel1-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="20" y="60" width="270" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-panel1-header" value="distributed (2000s&#8211;2010s)" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="76" width="270" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- point-to-point CAN wiring lines -->
+    <mxCell id="sdv-p1-line1" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="50" y="113" as="sourcePoint" />
+        <mxPoint x="170" y="111" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line2" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="110" y="117" as="sourcePoint" />
+        <mxPoint x="227" y="111" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line3" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="50" y="175" as="sourcePoint" />
+        <mxPoint x="175" y="173" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line4" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="115" y="179" as="sourcePoint" />
+        <mxPoint x="227" y="173" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line5" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="60" y="235" as="sourcePoint" />
+        <mxPoint x="230" y="233" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line6" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="150" y="239" as="sourcePoint" />
+        <mxPoint x="150" y="296" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p1-line7" style="endArrow=none;html=1;rounded=0;strokeColor=#888888;strokeWidth=1;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="60" y="292" as="sourcePoint" />
+        <mxPoint x="230" y="290" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 14 tiny scattered ECU boxes -->
+    <mxCell id="sdv-p1-ecu-01" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="43" y="108" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-02" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="103" y="112" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-03" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="163" y="106" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-04" value="ECU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="213" y="104" width="28" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-05" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="43" y="170" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-06" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="108" y="174" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-07" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="168" y="168" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-08" value="ECU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="213" y="166" width="28" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-09" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="53" y="230" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-10" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="143" y="234" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-11" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="223" y="228" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-12" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="53" y="287" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-13" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="143" y="291" width="14" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-ecu-14" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="223" y="285" width="14" height="10" as="geometry" />
+    </mxCell>
+
+    <!-- Panel 1 sub-captions -->
+    <mxCell id="sdv-p1-cap1" value="&#8216;100+ ECUs&#8217;, one function each &#8212;" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="336" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-cap2" value="point-to-point CAN wiring" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="349" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-cap3" value="diagnostics: plug into the OBD port," style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="366" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p1-cap4" value="talk to each ECU" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="20" y="379" width="270" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Arrow 1 ===================== -->
+    <mxCell id="sdv-arrow1-body" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="292" y="238" width="31" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-arrow1-head" value="" style="triangle;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;direction=east;" vertex="1" parent="1">
+      <mxGeometry x="323" y="225" width="20" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Panel 2: domain (light-blue) ===================== -->
+    <mxCell id="sdv-panel2-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="345" y="60" width="270" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-panel2-header" value="domain (2015&#8211;2022)" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="345" y="76" width="270" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- gateway backbone lines -->
+    <mxCell id="sdv-p2-line1" style="endArrow=none;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="415" y="132" as="sourcePoint" />
+        <mxPoint x="545" y="132" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p2-line2" style="endArrow=none;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="545" y="132" as="sourcePoint" />
+        <mxPoint x="545" y="257" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p2-line3" style="endArrow=none;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="545" y="257" as="sourcePoint" />
+        <mxPoint x="415" y="257" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p2-line4" style="endArrow=none;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="415" y="257" as="sourcePoint" />
+        <mxPoint x="415" y="132" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- 4 domain controller boxes -->
+    <mxCell id="sdv-p2-dc-powertrain" value="powertrain DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="360" y="105" width="110" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-dc-body" value="body DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="490" y="105" width="110" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-dc-chassis" value="chassis DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="360" y="230" width="110" height="55" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-dc-infotainment" value="infotainment DC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="490" y="230" width="110" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- tiny gray ECU boxes hanging under each DC -->
+    <mxCell id="sdv-p2-ecu-01" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="372" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-02" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="398" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-03" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="424" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-04" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="502" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-05" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="528" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-06" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="554" y="168" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-07" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="372" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-08" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="398" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-09" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="424" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-10" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="502" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-11" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="528" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-ecu-12" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="554" y="293" width="12" height="10" as="geometry" />
+    </mxCell>
+
+    <!-- Panel 2 sub-caption -->
+    <mxCell id="sdv-p2-cap1" value="domain controllers group functions &#8212;" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="345" y="391" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p2-cap2" value="gateways route between buses" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="345" y="404" width="270" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Arrow 2 ===================== -->
+    <mxCell id="sdv-arrow2-body" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="617" y="238" width="31" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-arrow2-head" value="" style="triangle;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;direction=east;" vertex="1" parent="1">
+      <mxGeometry x="648" y="225" width="20" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Panel 3: zonal + central (green) ===================== -->
+    <mxCell id="sdv-panel3-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="670" y="60" width="270" height="380" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-panel3-header" value="zonal + central (SDV, now)" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="670" y="76" width="270" height="20" as="geometry" />
+    </mxCell>
+
+    <!-- central computer(s) -->
+    <mxCell id="sdv-p3-central" value="&lt;b&gt;central computer(s) &#8212; HPC: AV/AD &#183;&lt;/b&gt;&lt;br&gt;Adaptive AUTOSAR &#183; OTA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="690" y="100" width="230" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- Ethernet backbone (TSN) ring -->
+    <mxCell id="sdv-p3-ring1" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="735" y="195" as="sourcePoint" />
+        <mxPoint x="865" y="195" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p3-ring2" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="865" y="195" as="sourcePoint" />
+        <mxPoint x="865" y="305" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p3-ring3" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="865" y="305" as="sourcePoint" />
+        <mxPoint x="735" y="305" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p3-ring4" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="735" y="305" as="sourcePoint" />
+        <mxPoint x="735" y="195" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="sdv-p3-ring-label" value="Ethernet backbone (TSN)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=1;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="730" y="243" width="140" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- zonal ECU boxes at car corners -->
+    <mxCell id="sdv-p3-zonal-fl" value="zonal ECU FL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="690" y="180" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-zonal-fr" value="zonal ECU FR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="820" y="180" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-zonal-rl" value="zonal ECU RL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="690" y="290" width="90" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-zonal-rr" value="zonal ECU RR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="820" y="290" width="90" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- tiny sensor/actuator boxes under zonals -->
+    <mxCell id="sdv-p3-sens-fl" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="700" y="215" width="70" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-sens-fr" value="sensors/actuators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="808" y="213" width="115" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-sens-rl" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="700" y="325" width="70" height="12" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-sens-rr" value="sensors/actuators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="808" y="323" width="115" height="14" as="geometry" />
+    </mxCell>
+
+    <!-- Panel 3 sub-caption -->
+    <mxCell id="sdv-p3-cap1" value="ECUs grouped by LOCATION," style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="670" y="381" width="270" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-p3-cap2" value="software consolidated centrally" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#2d5a2d;" vertex="1" parent="1">
+      <mxGeometry x="670" y="394" width="270" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Bottom strip ===================== -->
+    <mxCell id="sdv-strip-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="20" y="450" width="920" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-strip-text1" value="what it buys a fleet: fewer boxes to flash &#183; one gateway to secure &#183; one place to collect health data &#183;" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="20" y="461" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-strip-text2" value="OTA per software cluster instead of per-ECU reflash" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="20" y="477" width="920" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="sdv-footnote1" value="industry framing: Bosch &#8216;distributed application software consolidated in a few powerful vehicle computers&#8217;;" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="40" y="516" width="880" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-footnote2" value="reported targets go from 100+ ECUs to under a dozen &#8212; vendor figures, not a measurement" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="40" y="533" width="880" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

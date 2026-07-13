@@ -1,0 +1,121 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="fot-title" value="Fleet management on DRIVE Thor &#8212; what's actually documented (2026)" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="30" y="20" width="900" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Fleet backend (top) -->
+    <mxCell id="fot-backend-box" value="Fleet backend &#8212; OTA campaigns &#183; telemetry &#183; SOVD/telematics APIs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=13.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="200" y="58" width="560" height="40" as="geometry" />
+    </mxCell>
+
+    <mxCell id="fot-arrow-backend-gw" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="480" y="98" as="sourcePoint" />
+        <mxPoint x="480" y="110" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- TCU + central gateway -->
+    <mxCell id="fot-gateway-box" value="TCU + central gateway &#8212; separate ECUs: terminate the cloud link, speak UDS into the vehicle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="170" y="112" width="560" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="fot-gateway-note" value="Thor has no documented&lt;br&gt;fleet-gateway role" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="745" y="115" width="200" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- Arrows from gateway into the board -->
+    <mxCell id="fot-arrow-doip" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="490" y="156" as="sourcePoint" />
+        <mxPoint x="490" y="257" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="fot-label-doip" value="DoIP / UDS" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="500" y="173" width="120" height="18" as="geometry" />
+    </mxCell>
+
+    <mxCell id="fot-arrow-ivn" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="700" y="156" as="sourcePoint" />
+        <mxPoint x="890" y="490" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="700" y="178" />
+          <mxPoint x="925" y="178" />
+          <mxPoint x="925" y="490" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="fot-label-ivn" value="in-vehicle network" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#223344;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="881" y="325" width="120" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- DRIVE AGX Thor board -->
+    <mxCell id="fot-board-outer" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#2E5FAC;strokeWidth=2;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+      <mxGeometry x="60" y="200" width="840" height="340" as="geometry" />
+    </mxCell>
+    <mxCell id="fot-board-label" value="DRIVE AGX Thor board" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=3;fontColor=#2E5FAC;" vertex="1" parent="1">
+      <mxGeometry x="82" y="208" width="200" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Thor SoC -->
+    <mxCell id="fot-soc-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="80" y="228" width="740" height="210" as="geometry" />
+    </mxCell>
+    <mxCell id="fot-soc-label" value="Thor SoC" style="text;html=1;align=left;verticalAlign=middle;fontSize=13.5;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="100" y="237" width="120" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Guest OS VM -->
+    <mxCell id="fot-guestvm-box" value="Guest OS VM &#8212; QNX or Linux (public SDK: one guest, not both)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+      <mxGeometry x="95" y="260" width="575" height="120" as="geometry" />
+    </mxCell>
+
+    <mxCell id="fot-avstack-box" value="OEM AV stack &#183; DriveWorks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="110" y="292" width="175" height="72" as="geometry" />
+    </mxCell>
+
+    <mxCell id="fot-adaptive-box" value="&lt;b&gt;AUTOSAR Adaptive &#8212; Tier-1: Vector MICROSAR, EB corbos&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;DM (ara::diag) &#8212; UDS over DoIP, one server per Software Cluster&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;UCM &#8212; OTA install per Software Cluster&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="300" y="292" width="355" height="72" as="geometry" />
+    </mxCell>
+
+    <!-- DriveOS strip -->
+    <mxCell id="fot-driveos-box" value="DriveOS 7 &#8212; Type-1 hypervisor + NVIDIA service VMs (storage &#183; display &#183; GPU sharing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="95" y="392" width="575" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- FSI -->
+    <mxCell id="fot-fsi-box" value="FSI &#8212; lockstep&lt;br&gt;Cortex-R52,&lt;br&gt;separate silicon&lt;br&gt;&lt;br&gt;Vector MICROSAR&lt;br&gt;Classic in the&lt;br&gt;reference integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="685" y="260" width="120" height="166" as="geometry" />
+    </mxCell>
+
+    <!-- companion MCU -->
+    <mxCell id="fot-mcu-box" value="&lt;b&gt;companion MCU &#8212; Renesas RH850&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;MICROSAR Classic (AFW): DCM + DEM&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Classic AUTOSAR land &#8212; a real ECU, not a VM&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="560" y="452" width="325" height="76" as="geometry" />
+    </mxCell>
+
+    <!-- Connector SoC <-> companion MCU -->
+    <mxCell id="fot-connector-ci" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="200" y="438" as="sourcePoint" />
+        <mxPoint x="560" y="490" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="200" y="490" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="fot-label-ci" value="proprietary Common Interface (UDP over Ethernet) &#8212; not DoIP" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="215" y="470" width="320" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="fot-footnote" value="documented: DM + UCM inside the guest, Classic on the companion MCU &#183;&lt;br&gt;refuted: 'virtual Classic-ECU partitions', 'Thor as UDS gateway' &#8212; rows F12&#8211;F13, research/fleet-uds-autosar-2026-07.md" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="548" width="840" height="36" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

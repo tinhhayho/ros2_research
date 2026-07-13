@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">Fleet management on DRIVE Thor — what's actually documented (2026)</text>
+
+  <!-- ===================== Fleet backend (top) ===================== -->
+  <rect x="200" y="58" width="560" height="40" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="480" y="83" text-anchor="middle" font-size="13.5" fill="#2d5a2d">Fleet backend — OTA campaigns · telemetry · SOVD/telematics APIs</text>
+
+  <line x1="480" y1="98" x2="480" y2="110" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== TCU + central gateway ===================== -->
+  <rect x="170" y="112" width="560" height="44" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="450" y="139" text-anchor="middle" font-size="12.5" fill="#223344">TCU + central gateway — separate ECUs: terminate the cloud link, speak UDS into the vehicle</text>
+  <text x="845" y="128" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">Thor has no documented</text>
+  <text x="845" y="143" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">fleet-gateway role</text>
+
+  <!-- Arrows from gateway into the board -->
+  <line x1="490" y1="156" x2="490" y2="257" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="500" y="182" text-anchor="start" font-size="11" fill="#223344">DoIP / UDS</text>
+
+  <path d="M700,156 L700,178 L925,178 L925,490 L890,490" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="941" y="334" text-anchor="middle" font-size="11" fill="#223344" transform="rotate(-90 941 334)">in-vehicle network</text>
+
+  <!-- ===================== DRIVE AGX Thor board ===================== -->
+  <rect x="60" y="200" width="840" height="340" rx="8" fill="#EAF1FB" stroke="#2E5FAC" stroke-width="2" stroke-dasharray="7,5"/>
+  <text x="82" y="221" font-size="12" font-weight="700" font-style="italic" fill="#2E5FAC">DRIVE AGX Thor board</text>
+
+  <!-- Thor SoC -->
+  <rect x="80" y="228" width="740" height="210" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="100" y="250" font-size="13.5" font-weight="700" fill="#333">Thor SoC</text>
+
+  <!-- Guest OS VM -->
+  <rect x="95" y="260" width="575" height="120" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="382" y="280" text-anchor="middle" font-size="12.5" fill="#223344">Guest OS VM — QNX or Linux (public SDK: one guest, not both)</text>
+
+  <rect x="110" y="292" width="175" height="72" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="197" y="332" text-anchor="middle" font-size="11.5" fill="#6B4A2B">OEM AV stack · DriveWorks</text>
+
+  <rect x="300" y="292" width="355" height="72" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="478" y="310" text-anchor="middle" font-size="11" font-weight="700" fill="#2d5a2d">AUTOSAR Adaptive — Tier-1: Vector MICROSAR, EB corbos</text>
+  <text x="478" y="330" text-anchor="middle" font-size="10.5" fill="#2d5a2d">DM (ara::diag) — UDS over DoIP, one server per Software Cluster</text>
+  <text x="478" y="347" text-anchor="middle" font-size="10.5" fill="#2d5a2d">UCM — OTA install per Software Cluster</text>
+
+  <!-- DriveOS strip -->
+  <rect x="95" y="392" width="575" height="34" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="382" y="413" text-anchor="middle" font-size="12" fill="#223344">DriveOS 7 — Type-1 hypervisor + NVIDIA service VMs (storage · display · GPU sharing)</text>
+
+  <!-- FSI -->
+  <rect x="685" y="260" width="120" height="166" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="745" y="290" text-anchor="middle" font-size="10.5" fill="#234">FSI — lockstep</text>
+  <text x="745" y="305" text-anchor="middle" font-size="10.5" fill="#234">Cortex-R52,</text>
+  <text x="745" y="320" text-anchor="middle" font-size="10.5" fill="#234">separate silicon</text>
+  <text x="745" y="350" text-anchor="middle" font-size="10.5" fill="#234">Vector MICROSAR</text>
+  <text x="745" y="365" text-anchor="middle" font-size="10.5" fill="#234">Classic in the</text>
+  <text x="745" y="380" text-anchor="middle" font-size="10.5" fill="#234">reference integration</text>
+
+  <!-- companion MCU -->
+  <rect x="560" y="452" width="325" height="76" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="722" y="475" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6B4A2B">companion MCU — Renesas RH850</text>
+  <text x="722" y="494" text-anchor="middle" font-size="11" fill="#6B4A2B">MICROSAR Classic (AFW): DCM + DEM</text>
+  <text x="722" y="511" text-anchor="middle" font-size="11" fill="#6B4A2B">Classic AUTOSAR land — a real ECU, not a VM</text>
+
+  <!-- Connector SoC <-> companion MCU -->
+  <path d="M200,438 L200,490 L560,490" fill="none" stroke="#444" stroke-width="1.5"/>
+  <text x="375" y="483" text-anchor="middle" font-size="10.5" font-style="italic" fill="#555">proprietary Common Interface (UDP over Ethernet) — not DoIP</text>
+
+  <!-- Footnote -->
+  <text x="480" y="560" text-anchor="middle" font-size="11" font-style="italic" fill="#555">documented: DM + UCM inside the guest, Classic on the companion MCU ·</text>
+  <text x="480" y="578" text-anchor="middle" font-size="11" font-style="italic" fill="#555">refuted: 'virtual Classic-ECU partitions', 'Thor as UDS gateway' — rows F12–F13, research/fleet-uds-autosar-2026-07.md</text>
+</svg>

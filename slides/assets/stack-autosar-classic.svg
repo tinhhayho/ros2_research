@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">AUTOSAR Classic — the layered stack on one deeply embedded ECU</text>
+
+  <!-- ===================== Row 1: Application Layer ===================== -->
+  <rect x="150" y="64" width="620" height="72" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="460" y="95" text-anchor="middle" font-size="13.5" font-weight="700" fill="#6B4A2B">Application Layer — SWCs (Software Components)</text>
+  <text x="460" y="115" text-anchor="middle" font-size="12.5" fill="#6B4A2B">e.g. door control · torque request · diagnostics data providers</text>
+
+  <line x1="460" y1="136" x2="460" y2="148" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 2: RTE ===================== -->
+  <rect x="150" y="150" width="620" height="60" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="460" y="176" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">RTE — Runtime Environment</text>
+  <text x="460" y="195" text-anchor="middle" font-size="11.5" fill="#223344">generated glue: the only interface SWCs ever see (ports, not addresses)</text>
+
+  <line x1="460" y1="210" x2="460" y2="222" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 3: BSW composite band ===================== -->
+  <rect x="150" y="224" width="620" height="230" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="460" y="246" text-anchor="middle" font-size="14" font-weight="700" fill="#223344">BSW — Basic Software</text>
+
+  <!-- Sub-row 1: Services Layer -->
+  <rect x="160" y="256" width="600" height="60" rx="6" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="385" y="290" text-anchor="middle" font-size="10.5" fill="#223344">Services Layer — AUTOSAR OS (OSEK-heritage) · COM · NvM · WdgM</text>
+  <rect x="610" y="266" width="140" height="40" rx="6" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="680" y="283" text-anchor="middle" font-size="11" font-weight="700" fill="#2d5a2d">DCM · DEM</text>
+  <text x="680" y="298" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2d5a2d">diagnostics (UDS)</text>
+
+  <!-- Sub-row 2: ECU Abstraction Layer -->
+  <rect x="160" y="328" width="600" height="48" rx="6" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="460" y="356" text-anchor="middle" font-size="11.5" fill="#223344">ECU Abstraction Layer — abstracts the board wiring</text>
+
+  <!-- Sub-row 3: MCAL -->
+  <rect x="160" y="388" width="600" height="54" rx="6" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="460" y="410" text-anchor="middle" font-size="11.5" fill="#223344">MCAL — Microcontroller Abstraction Layer:</text>
+  <text x="460" y="428" text-anchor="middle" font-size="11.5" fill="#223344">CAN/LIN/ETH drivers · ADC · PWM · watchdog</text>
+
+  <!-- CDD — beside the composite band, spanning the three sub-rows -->
+  <rect x="780" y="256" width="130" height="186" rx="6" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="845" y="325" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">CDD</text>
+  <text x="845" y="343" text-anchor="middle" font-size="10.5" fill="#223344">Complex Device</text>
+  <text x="845" y="359" text-anchor="middle" font-size="10.5" fill="#223344">Drivers</text>
+  <text x="845" y="377" text-anchor="middle" font-size="10.5" font-style="italic" fill="#223344">(bypass lane)</text>
+
+  <line x1="460" y1="454" x2="460" y2="466" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Row 4: Microcontroller ===================== -->
+  <rect x="150" y="468" width="620" height="72" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="460" y="509" text-anchor="middle" font-size="12.5" fill="#333">Microcontroller — e.g. Renesas RH850 · Infineon AURIX · NXP S32K</text>
+
+  <!-- ===================== Left-side annotations ===================== -->
+  <text x="75" y="88" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">one binary, one ECU,</text>
+  <text x="75" y="102" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">hard real-time</text>
+  <line x1="75" y1="108" x2="150" y2="105" stroke="#2E5FAC" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <text x="75" y="252" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">everything statically</text>
+  <text x="75" y="266" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">configured at build</text>
+  <text x="75" y="280" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">time (ARXML)</text>
+  <line x1="75" y1="284" x2="150" y2="330" stroke="#2E5FAC" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <text x="75" y="392" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">MCAL ≈ the vendor HAL</text>
+  <text x="75" y="406" text-anchor="middle" font-size="10.5" font-style="italic" fill="#2E5FAC">you already know</text>
+  <line x1="75" y1="410" x2="150" y2="414" stroke="#2E5FAC" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Footnote -->
+  <text x="480" y="576" text-anchor="middle" font-size="11" font-style="italic" fill="#555">AUTOSAR OS is a backward-compatible superset of OSEK OS — memory/timing protection, multicore, scalability classes SC1–SC4</text>
+</svg>

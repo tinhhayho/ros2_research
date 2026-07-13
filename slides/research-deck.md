@@ -36,9 +36,9 @@ External claims are URL-sourced; the 14 headline claims were independently re-ch
 1. **The map** — one stack shape for every robot, and who does what per layer
 2. **ROS 2 up close** — the two worlds, key repos, real code, a live graph
 3. **Reality check** — wheeled AMR & AV · humanoids · where ROS 2 actually stands
-4. **Fleet layer** — Open-RMF: the picture, the responsibility split, the Fleet Adapter
+4. **Fleet layer** — Open-RMF: the picture, the responsibility split, the Fleet Adapter · **VDA 5050 v3.0**
 5. **NVIDIA Physical AI** — Cosmos · GR00T · Isaac · Jetson Thor (inside the chip)
-6. **Physical AI vs Automotive** — same silicon, different rules (DRIVE, Alpamayo, certifications)
+6. **Physical AI vs Automotive** — same silicon, different rules (DRIVE, Alpamayo, certifications) + **fleet diagnostics**: UDS · AUTOSAR · SOVD
 7. **Trust, but audit** + **live GR00T demo** on this machine
 8. **So what** — what it means for an embedded team, and our roadmap
 
@@ -363,6 +363,45 @@ Existing adapters: MiR, Clearpath/OTTO, Gaussian Ecobot… (`open-rmf/awesome_ad
 
 <!-- _class: diagram -->
 
+{{diagram:vda5050-interface}}
+
+---
+
+## VDA 5050 — the robot-fleet wire protocol, audited
+
+<style scoped>
+  section { font-size: 20.5px; padding-top: 38px; }
+  h2 { margin-bottom: 6px; }
+  ul { margin-top: 4px; }
+  .gloss { font-size: 13.5px; margin-top: 8px; }
+</style>
+
+The industry answer to "how does a fleet manager talk to robots from N vendors":
+
+- **What:** a vendor-neutral interface between fleet control ("master control") and
+  AMR/AGVs — published by **VDA + VDMA + KIT-IFL** (the automotive association again!)
+- **Current: v3.0.0, released 2026-03-19** — the "AMR release": freely-navigating
+  robots, a real **zone concept** (BLOCKED · SPEED_LIMIT · PRIORITY…), CRITICAL/URGENT
+  error levels
+- **Wire:** **MQTT (3.1.1+) + JSON** — topics `order · instantActions · zoneSet` down,
+  `state · factsheet · connection · visualization` up
+- **Order = a graph** of nodes/edges; master control releases the **base**, plans the
+  **horizon** — that release mechanism *is* the traffic control (the logic itself:
+  explicitly out of scope)
+- **Factsheet** = robot self-description (geometry, speeds, protocol features — but no
+  semantic sensor model)
+- **Limits (per the spec itself):** no OTA, no UDS-style diagnostics (flat
+  errorType/errorLevel), security left to broker/TLS config, safety = ISO 3691-4's job
+- **Adoption:** Europe-strongest (SYNAOS ecosystem: KUKA, Omron, SEW, STILL, MiR;
+  Bosch Rexroth; DS Automotion) + real North-American uptake (OTTO by Rockwell
+  certifications); Asia fragmented
+
+<div class="gloss">VDA = Verband der Automobilindustrie · VDMA = German machine-builders' association · KIT-IFL = Karlsruhe Institute of Technology, material-handling institute · verified from the spec + GitHub release directly: rows V1–V8, research/vda5050-robot-fleet-2026-07.md · fits the previous slides: RMF can drive robots <i>over</i> VDA 5050 (vda5050_connector; MiR ships an adapter; Isaac Mission Dispatch speaks it)</div>
+
+---
+
+<!-- _class: diagram -->
+
 {{diagram:nvidia-three-computers}}
 
 ---
@@ -567,7 +606,7 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 
 | | Robotics (Isaac / Jetson) | Automotive (DRIVE) |
 |---|---|---|
-| OS | Ubuntu 24.04 + PREEMPT_RT (JetPack 7) | DriveOS 7: hypervisor → **QNX** (safety) + Linux (AI) |
+| OS | Ubuntu 24.04 + PREEMPT_RT (JetPack 7) | DriveOS 7: hypervisor → **QNX or Linux** guest + service VMs* |
 | Middleware | **ROS 2** + Isaac ROS + ros2_control — industry-shared | DriveWorks SDK — every OEM builds its own on top |
 | AI model | GR00T N1.7, **3B**, open + commercial OK | Alpamayo-R1 **10.5B** / 2-Super 34B*, weights gated |
 | Safety cert | none — safety PLC lives *beside* the compute | ASIL-D: DriveOS 6.0 certified — **on Orin; Thor still pending** |
@@ -578,7 +617,7 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 Shared underneath: **the Thor SoC family · the Cosmos-Reason model lineage · TensorRT ·
 the three-computer loop** — same architecture, not necessarily the same die or the same model.
 
-<div class="gloss">ASIL = Automotive Safety Integrity Level, ISO 26262 (D = highest) · QNX = safety-certified real-time OS (BlackBerry) · <b>Type-1 hypervisor</b> = runs on bare metal, boots first, schedules entire OSes — "an RTOS whose tasks are OSes"; small enough to certify, and a Linux panic can't reach the QNX VM · MIG = Multi-Instance GPU · OEM = vehicle manufacturer · *Alpamayo 2 Super: NVIDIA newsroom says 34B, product page says 32B — sources conflict as of 07/2026</div>
+<div class="gloss">ASIL = Automotive Safety Integrity Level, ISO 26262 (D = highest) · QNX = safety-certified real-time OS (BlackBerry) · <b>Type-1 hypervisor</b> = runs on bare metal, boots first, schedules entire OSes — "an RTOS whose tasks are OSes"; small enough to certify; isolation means one VM's crash can't reach another · *public SDK runs ONE guest OS at a time — "QNX or Linux, but not both" (only dual-QNX documented, on Orin); dual QNX+Linux is platform framing, rows A2/F12 · MIG = Multi-Instance GPU · OEM = vehicle manufacturer · *Alpamayo 2 Super: NVIDIA newsroom says 34B, product page says 32B — sources conflict as of 07/2026</div>
 
 ---
 
@@ -644,8 +683,9 @@ Certification isn't sprinkled on at the end — every layer is designed for its 
   rest of the SoC (public DriveOS 7.0.3 docs)
 - **SoC-wide diagnostics:** >22,000 fault-detection mechanisms — BIST, watchdogs, NoC
   firewalls, voltage/clock/thermal monitors *(secondary source — treat the exact count with care)*
-- **Software partitioning:** Type-1 hypervisor → **QNX ASIL-D VM** (safety functions) kept
-  hardware-isolated from the **Linux VM** (AI, rated QM — no safety claim needed)
+- **Software partitioning:** Type-1 hypervisor → the certified **QNX ASIL-D guest** kept
+  hardware-isolated from the QM-rated AI stack (dual QNX+Linux = platform framing;
+  the public SDK runs one guest at a time — row F12)
 - **ASIL decomposition:** the AI driving stack stays QM; a certified classical stack
   supervises it — the architecture that lets the OEM *argue* system-level ASIL-D in its
   item safety case (redundancy instead of certifying a neural net; never automatic)
@@ -657,6 +697,196 @@ Certification isn't sprinkled on at the end — every layer is designed for its 
 > certified core hold the kill switch.**
 
 <div class="gloss">lockstep = two cores execute identical code cycle-by-cycle, mismatch ⇒ fault · QM = Quality Managed (lowest ISO 26262 class, no safety requirement) · decomposition = splitting one ASIL-D requirement across redundant lower-rated elements · BIST = Built-In Self-Test · NoC = Network-on-Chip · Sources: developer.nvidia.com DriveOS 7.0.3 "Functional Safety Island" · qnx.software · forums.developer.nvidia.com (RH850 flashing)</div>
+
+---
+
+## Fleet management — the same standards, one layer up
+
+<style scoped>
+  section { font-size: 22px; padding-top: 40px; }
+  h2 { margin-bottom: 6px; }
+  .gloss { font-size: 13.5px; margin-top: 8px; }
+</style>
+
+Running a **fleet** (robotaxis, trucks, delivery vans) means doing four things to
+thousands of vehicles you'll never touch physically:
+
+1. **Remote diagnostics** — read fault codes without a workshop visit
+2. **Predictive maintenance** — spot the battery/brake/sensor drifting out of spec
+3. **OTA updates** — fix software without a recall
+4. **Health telemetry** — continuous data feeding the first two
+
+The standards that make this vendor-neutral:
+
+- **UDS (ISO 14229)** — one diagnostic *language* every ECU speaks, whatever the brand
+- **AUTOSAR** — one software architecture that fixes *where* diagnostics live in the stack
+- **SOVD (ISO 17978, new in 2026)** — the cloud-facing REST/JSON API layered on top
+
+Next five figures: the two AUTOSAR stacks, the UDS path, the honest end-to-end fleet
+picture, and why E/E consolidation makes all of it easier.
+
+<div class="gloss">This section began as an external draft report — it went through the standard audit first: 30 claims checked, 8 refuted (incl. the draft's centerpiece "virtual Classic-AUTOSAR ECU partitions on Thor"), corrections in <code>research/fleet-uds-autosar-2026-07.md</code> + manifest rows F1–F17. What you see here is the surviving, corrected version.</div>
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:stack-autosar-classic}}
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:stack-autosar-adaptive}}
+
+---
+
+## Classic vs Adaptive — the corrected comparison
+
+<style scoped>
+  section { font-size: 21px; padding-top: 38px; }
+  table { font-size: 16.5px; }
+  table td, table th { padding: 4px 10px; }
+  .gloss { font-size: 13.5px; margin-top: 8px; }
+  h2 { margin-bottom: 6px; }
+</style>
+
+| | **AUTOSAR Classic** | **AUTOSAR Adaptive** |
+|---|---|---|
+| Target | deeply embedded hard-RT ECUs | HPC — central + zonal computers |
+| OS | **AUTOSAR OS** (OSEK superset, SC1–SC4) | POSIX — QNX or Linux (apps see **PSE51**) |
+| Model | signal-based, **static** — all wired at build time (ARXML) | **service-oriented** — discovery at runtime; production builds pin it down |
+| Comms | CAN/LIN/FlexRay **+ Ethernet/SOME/IP since 4.2.1 (2016)** | Ethernet-native: SOME/IP · **DDS binding** |
+| Diagnostics | **DCM + DEM** (BSW modules) | **DM** (`ara::diag`) — **DoIP only** |
+| Updates | full reflash via bootloader (UDS 0x34/0x36/0x37) | per **Software Cluster** via **UCM** |
+| Safety | the mature ASIL-D path | ASIL-B shipping; ASIL-D programs underway |
+
+They **coexist** in one vehicle — Classic on the MCUs, Adaptive on the big computers.
+
+<div class="gloss">Folklore killed by the audit: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (2016), a year <i>before</i> Adaptive's first release (R17-10) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD · OSEK = the 1990s automotive RTOS standard Classic's OS descends from · PSE51 = minimal real-time POSIX profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3 · rows F5, F8–F10</div>
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:uds-diag-stack}}
+
+---
+
+## The UDS services a fleet actually uses
+
+<style scoped>
+  section { font-size: 21px; padding-top: 38px; }
+  table { font-size: 16px; }
+  table td, table th { padding: 4px 9px; }
+  .gloss { font-size: 13.5px; margin-top: 8px; }
+  h2 { margin-bottom: 6px; }
+</style>
+
+| SID | Service | Fleet use |
+|---|---|---|
+| `0x10` | DiagnosticSessionControl | enter extended/programming session |
+| `0x27` | SecurityAccess | seed–key unlock before touching anything sensitive |
+| `0x22` | ReadDataByIdentifier | read a **DID**: `0xF190` = VIN, versions, sensor health |
+| `0x19` | ReadDTCInformation | read fault codes (**DTC**s) + freeze frames |
+| `0x31` | RoutineControl | run a routine: self-test, calibration, pre-flash erase |
+| `0x34/0x35/0x36/0x37` | Download / **Upload** / TransferData / TransferExit | flashing (the draft forgot `0x35`) |
+| `0x2A` | ReadDataByPeriodicIdentifier | periodic reads — **diagnostic bursts, not telemetry** |
+
+Same bytes on a $2 body ECU and on a central computer: `22 F1 90` → VIN.
+
+<div class="gloss">SID = service ID · DID = data identifier (16-bit, `0xF2xx` reserved for periodic) · DTC = Diagnostic Trouble Code · seed–key = challenge–response unlock · 0x2A is session-scoped and time-polled — continuous fleet telemetry runs on telematics pipelines (MQTT/proprietary), not on UDS; rows F1, F7</div>
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:fleet-uds-flow}}
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:fleet-on-thor}}
+
+---
+
+## Fleet reality check — what's documented vs what's hype
+
+<style scoped>
+  section { font-size: 20.5px; padding-top: 38px; }
+  h2 { margin-bottom: 6px; }
+  ul { margin-top: 4px; }
+  .gloss { font-size: 13.5px; margin-top: 8px; }
+</style>
+
+**Documented (kept):**
+
+- One gateway/TCU terminates the cloud link; **raw UDS never touches the internet**
+- **SOVD (ISO 17978:2026)**: REST/JSON diagnostics for HPCs *and* legacy ECUs — and
+  Adaptive's DM already implements ASAM SOVD alongside ISO 14229
+- Classic **vECUs under a hypervisor** are real — on EB corbos, and COQOS
+  (Qualcomm-owned since 06/2024; supported SoCs: Qualcomm/NXP/Renesas/TI/Samsung)
+
+**Hype (refuted for Thor, public SDK 7.0.3):**
+
+- ~~"Multiple virtual Classic-AUTOSAR ECU partitions on Thor"~~ — *"Multiple Guest OS
+  are not supported. In addition, you can run QNX or Linux, but not both."*
+- ~~"Thor as the fleet's UDS/DoIP gateway"~~ — zero documentation; the SoC-to-MCU link is
+  a proprietary UDP-based interface, and Classic/UDS land is the **companion MCU (RH850)**
+- ~~"FSI = hypervisor partition"~~ — FSI is separate lockstep-R52 silicon
+
+> Vector (2025-08-25, primary-fetched): MICROSAR Classic = reference integration for the
+> **FSI and companion MCU**, "up to ASIL-D"; MICROSAR Adaptive "can be enabled on
+> NVIDIA DRIVE AGX platform" — that's where AUTOSAR really sits on a Thor car.
+
+<div class="gloss">vECU = virtual ECU (a Classic stack in a VM — consolidation/simulation/HIL) · TCU = telematics control unit · sources + verbatim quotes: rows F11–F14, research/fleet-uds-autosar-2026-07.md</div>
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:sdv-ecu-consolidation}}
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:fleet-standards-map}}
+
+---
+
+## Two fleets, two standard stacks — what the audit caught
+
+<style scoped>
+  section { font-size: 20.5px; padding-top: 38px; }
+  h2 { margin-bottom: 6px; }
+  ul { margin-top: 4px; }
+  .gloss { font-size: 13.5px; margin-top: 8px; }
+</style>
+
+**The asymmetry** (previous figure): robots standardized **fleet orchestration**
+(VDA 5050 · Open-RMF · MassRobotics) — the layer cars leave operator-proprietary.
+Cars standardized **diagnostics, OTA and the platform** (UDS · SOVD · UCM · AUTOSAR) —
+the layer robots leave to ROS 2 conventions and vendor tooling. Each side built the
+standard the other skipped.
+
+**What the audit caught in the second external draft** (same treatment as the first):
+
+- ✓ *"VDA 5050 v3.0 is current"* — **true**, and better than the draft knew: released
+  2026-03-19, most public write-ups still describe v2.x
+- ✗ *"charging zone"* — **invented**; the spec's zone types have no such entry
+  (charging = `startCharging`/`stopCharging` actions)
+- ✗ MQTT/JSON — the actual wire protocol — **never mentioned** in the draft
+- ✗ *"Redfish + PICMG IoT.x is being pushed for robot fleets"* — **documented
+  nowhere**; two real, unrelated standards stitched into a nonexistent trend
+- ✗ landscape omitted: MassRobotics (state-sharing, complementary), OPC 40010
+  (asset monitoring), and RMF-over-VDA-5050 (real, shipping integrations)
+
+**The gap both industries share:** no semantic capability/sensor discovery —
+nothing like a UDS DID dictionary for "what can this machine actually see and do".
+
+<div class="gloss">verdict tables: research/vda5050-robot-fleet-2026-07.md (V1–V12) + research/fleet-uds-autosar-2026-07.md (F1–F17) · pattern worth remembering: both drafts were right about the standards and wrong about the architecture trends they extrapolated</div>
 
 ---
 
@@ -841,7 +1071,7 @@ Everything is public: weights on Hugging Face (`nvidia/GR00T-N1.7-3B` — the ga
 
 ---
 
-## Glossary 1/2 — robotics & software
+## Glossary 1/3 — robotics & software
 
 <style scoped>
   section { font-size: 13px; padding-top: 30px; padding-bottom: 20px; line-height: 1.4; }
@@ -885,7 +1115,7 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 
 ---
 
-## Glossary 2/2 — silicon, memory & automotive
+## Glossary 2/3 — silicon, memory & automotive
 
 <style scoped>
   section { font-size: 12.5px; padding-top: 28px; padding-bottom: 18px; line-height: 1.38; }
@@ -930,6 +1160,53 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - **LIN / FlexRay / TSN** — legacy low-cost bus / pre-Ethernet redundant bus / Time-Sensitive Networking (deterministic Ethernet)
 - **SAE L2 / L4** — driving-automation levels (assisted, driver liable / driverless in a domain); "L2++" is marketing, not SAE
 - **ECU** — Electronic Control Unit (any vehicle computer node)
+- **E/E** — Electrical/Electronic (as in "E/E architecture": the vehicle's full electronics layout)
+- **HPC** — High-Performance Computer: a vehicle central/zonal computer (Thor-class)
+
+---
+
+## Glossary 3/3 — AUTOSAR & vehicle diagnostics
+
+<style scoped>
+  section { font-size: 12.5px; padding-top: 28px; padding-bottom: 18px; line-height: 1.38; }
+  ul { columns: 2; column-gap: 30px; margin-top: 4px; }
+  li { margin-bottom: 1px; break-inside: avoid; }
+  h2 { margin-bottom: 4px; font-size: 28px; }
+  p { margin: 2px 0 2px 0; font-size: 13.5px; }
+</style>
+
+- **SWC** — Software Component: Classic's unit of application code, wired via ports (never addresses)
+- **RTE** — Runtime Environment: the generated glue layer — the only interface SWCs ever see
+- **BSW** — Basic Software: Classic's standardized lower layers (Services, ECU Abstraction, MCAL)
+- **MCAL** — Microcontroller Abstraction Layer: the standardized vendor-driver layer (≈ the vendor HAL you know)
+- **CDD** — Complex Device Driver: the sanctioned bypass lane for drivers that don't fit the BSW layering
+- **NvM / WdgM / COM** — Classic BSW services: non-volatile memory · watchdog manager · signal communication
+- **ARXML** — AUTOSAR XML: the build-time configuration format everything is generated from
+- **OSEK/VDX** — the 1990s European automotive RTOS standard; AUTOSAR OS is its backward-compatible superset
+- **AUTOSAR OS / SC1–SC4** — Classic's statically configured RTOS; scalability classes add memory/timing protection
+- **ARA / `ara::`** — AUTOSAR Runtime for Adaptive: the platform's C++ API namespace (`ara::com`, `ara::diag`, `ara::ucm`, `ara::exec`…)
+- **PSE51** — IEEE 1003.13's minimal real-time POSIX profile — the interface Adaptive *applications* are held to
+- **Software Cluster** — Adaptive's unit of deployment: updated by UCM, diagnosed by its own server
+- **UDS** — Unified Diagnostic Services, ISO 14229: the standard in-vehicle diagnostic protocol
+- **SID** — UDS service identifier: the first request byte (0x22 = read DID, 0x19 = read DTCs…)
+- **DTC / DID** — Diagnostic Trouble Code (a stored fault) / Data Identifier (16-bit address of a readable value; 0xF190 = VIN)
+- **freeze frame** — the sensor snapshot DEM stores alongside a DTC at the moment of the fault
+- **seed–key** — SecurityAccess (0x27) challenge–response: ECU sends a seed, tester answers with the key
+- **DoCAN / DoIP** — Diagnostics over CAN (ISO 15765-2) / over Ethernet-IP (ISO 13400) — UDS's two transports
+- **DCM / DEM** — Classic's diagnostic modules: Diagnostic Communication Manager (dispatch, sessions, security) / Diagnostic Event Manager (fault memory)
+- **DM / UCM** — Adaptive's Diagnostic Manager (`ara::diag`, DoIP-only) / Update and Configuration Management (per-cluster OTA)
+- **SOVD** — Service-Oriented Vehicle Diagnostics, ISO 17978 (2026): REST/JSON diagnostic API above UDS
+- **ODX / DEXT / PDX** — diagnostic data formats (ISO 22901 "Open Diagnostic data eXchange" / AUTOSAR Diagnostic Extract) and the packaged container file tools load
+- **TCU** — Telematics Control Unit: the vehicle's modem + cloud endpoint
+- **vECU** — virtual ECU: a Classic AUTOSAR stack running in a VM (consolidation, simulation, HIL)
+- **HIL** — Hardware-In-the-Loop: testing real ECU software against simulated plant/vehicle
+- **VDA 5050** — the AGV/AMR fleet wire protocol (VDA + VDMA + KIT-IFL); v3.0.0 since 03/2026, MQTT + JSON
+- **AGV** — Automated Guided Vehicle: line/track-guided predecessor of the freely-navigating AMR
+- **MQTT** — lightweight publish/subscribe messaging protocol (broker-based) — VDA 5050's transport
+- **base / horizon** — VDA 5050 order graph: released-for-driving part / planned-but-not-released part
+- **MassRobotics AMR Interop** — complementary robot-fleet standard: cross-fleet *state sharing* only, no task assignment
+- **OPC 40010** — OPC UA for Robotics: vertical asset/condition monitoring (robot → MES/cloud), not fleet orchestration
+- **ISO 3691-4** — safety standard for driverless industrial trucks — the safety half VDA 5050 explicitly leaves out
 
 ---
 
@@ -973,6 +1250,14 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - NVIDIA Q4 FY26 results (automotive $2.3B) — nvidianews.nvidia.com
 - Thor SoC TRM DP-11881-002 — developer.nvidia.com download center · FSI — DriveOS 7.0.3 docs "Functional Safety Island"
 - Thor internal engines — forums.developer.nvidia.com (NVIDIA staff: SPE removal, FSI/SMCU SKU-gating, RH850)
+
+**Fleet / diagnostics** ·
+- UDS/DoCAN/DoIP/UDSonIP — iso.org: 14229-1, 15765-2, 13400, 14229-5 · SOVD — iso.org 17978-1/-2/-3 (2026) + asam.net
+- AUTOSAR diagnostics — autosar.org: SWS_Diagnostics (AP DM), SWS_UpdateAndConfigurationManagement (UCM), CP DCM/DEM specs
+- Vector × Thor (FSI + companion-MCU reference integration, 2025-08-25) — vector.com news · EB corbos Hypervisor / Classic-vECU — elektrobit.com
+- COQOS → Qualcomm (Jun 2024) — opensynergy.com · zone-ECU / central compute — bosch-mobility.com, nxp.com
+- VDA 5050 — github.com/VDA5050/VDA5050 (spec + 3.0.0 release, 2026-03-19) · ifr.org "VDA 5050 explained" · synaos.com (ecosystem; vs MassRobotics/Open-RMF) · ottomotors.com (Rockwell certifications) · massrobotics.org · reference.opcfoundation.org (OPC 40010) · index.ros.org/p/vda5050_connector · github.com/nvidia-isaac/isaac_mission_dispatch
+- audits of the two source drafts: research/fleet-uds-autosar-2026-07.md (F1–F17) · research/vda5050-robot-fleet-2026-07.md (V1–V12)
 
 *Demo numbers (GR00T inference, QoS/RMW matrices) are our own captured runs, July 2026.
 Per-claim citations + audit trail: `research/claims-audit-2026-07.md` and the research reports.*

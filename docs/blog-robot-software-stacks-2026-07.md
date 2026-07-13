@@ -463,7 +463,7 @@ technology — it is **the liability and certification regime**:
 
 | | Robotics (Isaac/Jetson) | Automotive (DRIVE) |
 |---|---|---|
-| OS | Ubuntu 24.04 + PREEMPT_RT (JetPack 7) | DriveOS 7: hypervisor → **QNX** (a commercial safety-certified RTOS by BlackBerry) for safety + Linux for AI |
+| OS | Ubuntu 24.04 + PREEMPT_RT (JetPack 7) | DriveOS 7: hypervisor → a **QNX or Linux** guest (QNX = commercial safety-certified RTOS by BlackBerry) + NVIDIA service VMs |
 | Middleware | **ROS 2** — shared by the whole industry | DriveWorks SDK — every OEM (vehicle manufacturer) builds its own layer on top |
 | AI model | GR00T N1.7, 3B, open + commercial OK | Alpamayo-R1 10.5B / Alpamayo 2 Super 34B — weights not freely commercial |
 | Safety certification | none — safety lives on a PLC next to the computer | ASIL-D (see 6.2) |
@@ -479,6 +479,14 @@ technology — it is **the liability and certification regime**:
 running directly on the hardware): a **QNX VM** (pre-certified ASIL-D) holds the safety
 functions — watchdogs, vehicle I/O, fail-operational logic — hardware-isolated from a
 **Linux VM** carrying CUDA/TensorRT/DriveWorks and the AI stacks.
+
+One honest asterisk on that picture (added after a dedicated cross-check): the dual
+QNX+Linux view is NVIDIA's *platform-level framing*. The public SDK runs **one guest OS
+at a time** — *"you can run QNX or Linux, but not both"* (DriveOS 7.0.3, and the same
+note since 6.x on Orin; the only documented dual-guest configuration is dual-QNX). The
+hypervisor genuinely hosts many VMs, but the others are NVIDIA's *service* VMs (storage,
+display, GPU sharing…). A production QNX+Linux split therefore means an OEM-specific
+build or multiple SoCs — manifest rows A2/F12.
 
 *ASIL — Automotive Safety Integrity Level, ISO 26262's safety scale for road vehicles;
 A is the lowest, D the highest. QM — Quality Managed: below A; requires quality process
@@ -520,7 +528,8 @@ Vector's "**AFW**" — *AUTOSAR firmware* — on the AURIX (Orin generation) and
 AD computer is the **in-vehicle network** — the car's equivalent of the robot stack's
 fieldbus row: an automotive-Ethernet backbone (up to 10 Gbps, with TSN — Time-Sensitive
 Networking, deterministic Ethernet) plus CAN-FD/LIN/FlexRay legacy branches. Above that: the Thor SoC
-with its FSI; **DriveOS 7** (Type-1 hypervisor → QNX ASIL-D + Linux, with the TÜV
+with its FSI; **DriveOS 7** (Type-1 hypervisor → a QNX ASIL-D *or* Linux guest — see
+the single-guest caveat in 6.2 — with the TÜV
 SÜD-assessed CUDA/TensorRT toolchain); the middleware line — NVIDIA's own transport is
 **NvStreams**, while **SOME/IP and DDS arrive with AUTOSAR Adaptive**, not from NVIDIA;
 **DriveWorks SDK**; and at the top, beside the OEM's AV application, the dashed box:
@@ -616,6 +625,141 @@ only ~1% of NVIDIA's total, but design wins lock in for a decade.
 > The contrast in one line: robotics ships **experiments weekly**; automotive ships
 > **certified products yearly** — on the same silicon.
 
+### 6.7. Fleet management: how a backend talks to a hundred thousand cars
+
+Section 4 covered the fleet layer for *robots* (Open-RMF). Cars have their own fleet
+story, and it is older, more standardized, and — after the audit below — a good case
+study in separating standards from hype. This section began as an external draft report;
+it went through the standard audit before earning its place here: **30 claims checked, 8
+refuted**, verdict table in `research/fleet-uds-autosar-2026-07.md`, manifest rows
+F1–F17. What follows is the corrected version.
+
+The fleet problem: remote diagnostics, predictive maintenance, OTA updates, and health
+telemetry for vehicles you never touch. Three standards make it vendor-neutral: **UDS**
+(*Unified Diagnostic Services*, ISO 14229) — one diagnostic language every ECU speaks;
+**AUTOSAR** — one software architecture fixing *where* diagnostics live; and **SOVD**
+(*Service-Oriented Vehicle Diagnostics*, ISO 17978, published 2026) — the new
+cloud-facing REST/JSON API layered on top.
+
+#### The two AUTOSAR stacks, drawn for firmware engineers
+
+![AUTOSAR Classic layered stack](stack-autosar-classic.png)
+
+**Classic** is the stack on the small ECUs — the door controllers, the safety MCU next
+to the Thor SoC. Reading bottom-up: **MCAL** (*Microcontroller Abstraction Layer*) is
+the vendor HAL you already know (CAN, ADC, PWM drivers); the **ECU Abstraction Layer**
+hides the board wiring; the **Services Layer** holds AUTOSAR OS (a backward-compatible
+superset of OSEK OS, the 1990s European automotive RTOS standard — adding memory/timing
+protection, multicore, scalability classes SC1–SC4), communication stacks, NvM
+(non-volatile memory management), and the two diagnostic modules we'll meet again below:
+**DCM** (*Diagnostic Communication Manager* — service dispatch, sessions, security) and
+**DEM** (*Diagnostic Event Manager* — fault memory). Above it all, the **RTE** (*Runtime
+Environment*) — generated glue code — is the only interface application **SWC**s
+(*Software Components*) ever see. Everything is statically configured at build time from
+ARXML (AUTOSAR's XML configuration format); one binary, one ECU, hard real-time.
+
+![AUTOSAR Adaptive stack](stack-autosar-adaptive.png)
+
+**Adaptive** is not an OS — it is a POSIX *middleware platform*: C++14 processes on QNX
+or Linux (applications see the PSE51 profile — IEEE 1003.13's minimal real-time POSIX
+subset; platform services may use full POSIX), talking through **ARA** (*AUTOSAR Runtime
+for Adaptive* — in code, the `ara::` C++ namespace) functional clusters — `ara::com`
+(SOME/IP and, since R18-03, the same OMG DDS wire family ROS 2 speaks), `ara::diag`
+(diagnostics), `ara::ucm` (updates).
+Apps belong to **Software Clusters** — the unit of both update and diagnosis. It is
+service-oriented on paper; in production, integrators pin service discovery down and
+restrict dynamic allocation to startup — the dynamism is a development-time property.
+
+Two pieces of folklore the audit killed: *"Classic can't do Ethernet"* — the SOME/IP
+Transformer entered Classic in release 4.2.1 (2016), a year **before** Adaptive's first
+release; and *"Adaptive = low ASIL"* — Vector ships MICROSAR Adaptive Safe at ASIL-B and
+Wind River's Adaptive safety concept was assessed ASIL-D-suitable by TÜV SÜD.
+
+#### UDS: one language, two transports, two platforms
+
+![UDS diagnostic stack](uds-diag-stack.png)
+
+**UDS (ISO 14229-1)** is an application-layer request/response protocol: the same
+request bytes reach a body ECU over CAN (**DoCAN** — *diagnostics over CAN*, transport
+ISO 15765-2) or a central computer over automotive Ethernet (**DoIP** — *diagnostics
+over IP*, ISO 13400). `22 F1 90` reads the VIN either way — `0x22` is
+ReadDataByIdentifier, `0xF190` is the standardized **DID** (*Data Identifier* — a 16-bit
+address of a readable value) for the VIN. The fleet-relevant services: `0x10` session
+control, `0x27` security access (seed–key: the ECU hands out a random *seed*, the tester
+must answer with the matching *key*), `0x19` read **DTC**s (*Diagnostic Trouble Codes* —
+stored faults, each with a *freeze frame*: the sensor snapshot taken at fault time),
+`0x31` routines (self-tests, pre-flash erase), and the flashing quartet
+`0x34/0x35/0x36/0x37` (download/**upload**/transfer/exit — the draft, like most
+summaries, forgot `0x35`).
+
+On the receiving side the platforms differ: a Classic ECU dispatches through **DCM** and
+stores faults in **DEM**; an Adaptive machine runs the **DM** functional cluster
+(`ara::diag`) — **DoIP only**, no CAN — and instantiates one diagnostic server per
+Software Cluster, so each independently-updatable software unit is also independently
+diagnosable. That symmetry (update unit = diagnosis unit) is the quiet elegance of the
+Adaptive design.
+
+#### The honest end-to-end picture
+
+![Fleet diagnostics end-to-end](fleet-uds-flow.png)
+
+Here the draft needed the most correction. Two rules real deployments follow:
+
+- **Raw UDS is never exposed to the internet.** The TCU (telematics unit) terminates
+  the 4G/5G link with TLS and certificates; a central **gateway** — the security
+  chokepoint — translates authenticated external requests into in-vehicle UDS. The
+  standardized external-facing API is **SOVD**: REST/HTTP + JSON, designed to diagnose
+  HPCs *and* front legacy UDS ECUs — and Adaptive's DM already implements ASAM SOVD
+  alongside ISO 14229.
+- **UDS is not a telemetry pipe.** `0x2A` (periodic reads) exists and works over DoIP,
+  but it is session-scoped, time-polled, and DID-limited — a diagnostic burst tool.
+  Continuous fleet telemetry runs on telematics pipelines (MQTT or proprietary), feeding
+  the predictive-maintenance models; UDS stays the *diagnostic* protocol.
+
+OTA follows the same platform split: Classic ECUs reflash whole images through the
+bootloader (UDS `0x34/0x36/0x37`); Adaptive machines install per Software Cluster via
+**UCM** — *Update and Configuration Management* — fed by an OTA client, no UDS required.
+
+And on DRIVE Thor specifically, the draft's centerpiece — "multiple virtual Classic
+AUTOSAR ECU partitions behind Thor's hypervisor, with Thor as the fleet's UDS gateway" —
+is refuted by NVIDIA's own public SDK: *"Multiple Guest OS are not supported. In
+addition, you can run QNX or Linux, but not both"* (DriveOS 7.0.3). Classic-AUTOSAR land
+on a Thor board is the **companion MCU** (Renesas RH850), and Vector's announcement
+(2025-08-25, primary-fetched this audit) places MICROSAR Classic as the reference
+integration for the **FSI and the companion MCU**, "up to ASIL-D", with MICROSAR
+Adaptive available *inside* the guest OS on DRIVE AGX. Virtual Classic ECUs under a
+hypervisor are a real industry pattern — but the documented homes are EB corbos
+Hypervisor and COQOS (Qualcomm-owned since June 2024; supported SoC list:
+Qualcomm/NXP/Renesas/TI/Samsung — no NVIDIA).
+
+![Fleet management on DRIVE Thor](fleet-on-thor.png)
+
+Putting the corrected pieces on one Thor board: the fleet backend reaches the vehicle
+through the TCU and gateway (separate ECUs); **DoIP/UDS lands on the DM inside Thor's
+single guest OS**, where UCM installs OTA payloads per Software Cluster; the **companion
+MCU (RH850)** is the Classic-AUTOSAR citizen on the in-vehicle network with its own
+DCM + DEM; and the SoC talks to that MCU over NVIDIA's proprietary UDP-based interface —
+not DoIP. Every box in this figure traces to a documented source (manifest rows
+F12–F13); everything the draft invented is simply absent from it.
+
+#### Why this got easier: the E/E consolidation
+
+![E/E architecture evolution](sdv-ecu-consolidation.png)
+
+The reason fleet management is tractable at all in 2026: vehicle E/E
+(electrical/electronic) architecture collapsed from **distributed** (100+
+single-function ECUs, point-to-point CAN) through **domain controllers** to **zonal +
+central compute** — ECUs grouped by location, software consolidated onto a few HPCs
+(high-performance computers) over an Ethernet/TSN backbone (Bosch's framing: distributed
+application software "consolidated in a few powerful vehicle computers"; the "under a
+dozen ECUs" targets are vendor figures, not measurements). Fewer boxes to flash, one
+gateway to secure, one place to collect health data — and updates per Software Cluster
+instead of per-ECU reflash campaigns.
+
+For our team the rhyme with section 4 is worth noticing: Open-RMF's Fleet Adapter and
+SOVD/UDS solve the same problem — a vendor-neutral seam between a fleet backend and
+heterogeneous machines — one for robots, one for cars.
+
 ---
 
 ## 7. Trust, but audit
@@ -637,6 +781,11 @@ source before any number goes on a slide.** (That rule is how this document was 
 Scope, honestly stated: the audit covered the headline claims above and the 14 headline
 claims of the deck — the rest of this document is source-linked but not exhaustively
 re-verified. The full claim-by-claim trail lives in `research/claims-audit-2026-07.md`.
+
+Section 6.7 is the method's best showcase yet: an external draft arrived polished and
+plausible, and the audit refuted 8 of its 30 claims — including its centerpiece
+architecture — before a word of it reached this document
+(`research/fleet-uds-autosar-2026-07.md`).
 
 ---
 
@@ -761,6 +910,17 @@ what turns ~9 calls/s into a usable command rate.
 - NVIDIA Q4 FY26 financial results (automotive $2.3B) — nvidianews.nvidia.com
 - DriveOS — developer.nvidia.com/drive/os · DriveWorks — developer.nvidia.com/drive/driveworks · DriveOS MCU docs (AURIX + Vector AFW on Orin; RH850 flash thread on Thor)
 - AUTOSAR — autosar.org (Classic/Adaptive) · vector.com (MICROSAR on DRIVE AGX/Thor · MB.OS base layer) · elektrobit.com (EB corbos) · rti.com (DDS in AUTOSAR, since R18-03) · nvidianews (Adaptive AUTOSAR support, TTTech MotionWise)
+
+**Fleet / diagnostics (section 6.7)**
+
+- UDS — iso.org 14229-1 · DoCAN — 15765-2 · DoIP — 13400 · UDSonIP — 14229-5 · ODX — 22901-1
+- SOVD — iso.org 17978-1/-2/-3 (2026) · asam.net SOVD page
+- AUTOSAR diagnostics — autosar.org: SWS_Diagnostics (Adaptive DM), SWS_UpdateAndConfigurationManagement (UCM), Classic DCM/DEM specs · SOME/IP Transformer since 4.2.1 — some-ip.com archive
+- Vector — MICROSAR Adaptive product page · Thor FSI + companion-MCU announcement (2025-08-25) · MICROSAR Adaptive Safe ASIL-B news · Wind River Adaptive ASIL-D concept — windriver.com press
+- Classic vECU / hypervisors — elektrobit.com tech corner + EB corbos Hypervisor · COQOS → Qualcomm (Jun 2024) — opensynergy.com
+- E/E consolidation — bosch-mobility.com zone-ECU · nxp.com central compute
+- DriveOS 7.0.3 single-guest + SoC↔MCU interface — developer.nvidia.com/docs/drive (Foundation Services, SoC-to-MCU Communication)
+- Audit of the source draft — `research/fleet-uds-autosar-2026-07.md` + manifest rows F1–F17
 
 *Demo numbers (the GR00T inference, the QoS/RMW matrices) are our own captured runs,
 July 2026. Per-claim citations plus the audit trail: `research/claims-audit-2026-07.md`
