@@ -144,7 +144,7 @@
     </mxCell>
 
     <!-- Footnote -->
-    <mxCell id="vda-footnote" value="v3.0.0 released 2026-03-19 (VDA + VDMA + KIT-IFL) &#8212; adds freely-navigating robots, zones (BLOCKED &#183; SPEED_LIMIT &#183; PRIORITY &#8230;),&lt;br&gt;CRITICAL/URGENT errors &#183; no OTA, no UDS-style diagnostics; security left to broker/TLS config" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+    <mxCell id="vda-footnote" value="v3.0.0 released 2026-03-19 (VDA + VDMA + KIT-IFL) &#8212; adds freely-navigating robots, zones (BLOCKED &#183; SPEED_LIMIT &#183; PRIORITY &#8230;),&lt;br&gt;CRITICAL/URGENT errors &#183; no OTA, only flat error reporting (no deep diagnostics); security left to broker/TLS config" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="60" y="546" width="840" height="36" as="geometry" />
     </mxCell>
 

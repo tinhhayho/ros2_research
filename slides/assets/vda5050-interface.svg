@@ -65,5 +65,5 @@
 
   <!-- Footnote -->
   <text x="480" y="558" text-anchor="middle" font-size="11" font-style="italic" fill="#555">v3.0.0 released 2026-03-19 (VDA + VDMA + KIT-IFL) — adds freely-navigating robots, zones (BLOCKED · SPEED_LIMIT · PRIORITY …),</text>
-  <text x="480" y="576" text-anchor="middle" font-size="11" font-style="italic" fill="#555">CRITICAL/URGENT errors · no OTA, no UDS-style diagnostics; security left to broker/TLS config</text>
+  <text x="480" y="576" text-anchor="middle" font-size="11" font-style="italic" fill="#555">CRITICAL/URGENT errors · no OTA, only flat error reporting (no deep diagnostics); security left to broker/TLS config</text>
 </svg>

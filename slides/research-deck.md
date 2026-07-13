@@ -265,6 +265,12 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
 - Robotaxi & consumer (Waymo, Tesla): proprietary; public materials show **end-to-end
   learned** stacks and expose no ROS
 
+<style scoped>
+  .gloss { font-size: 13.5px; margin-top: 10px; }
+</style>
+
+<div class="gloss">EKF = Extended Kalman Filter (fuses wheel odometry + IMU) · slam_toolbox / Cartographer = SLAM packages — build the map while driving · AMCL = Adaptive Monte-Carlo Localization (particle filter: find yourself on an existing map) · MPPI = Model-Predictive Path Integral, Nav2's sampling-based controller · Nav2 = the ROS 2 navigation framework</div>
+
 ---
 
 <!-- _class: diagram -->
@@ -287,7 +293,16 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
   Unitree ships an optional wrapper
 - The joint-level firmware underneath (FOC 8–32 kHz, EtherCAT/CAN-FD 1–10 kHz) — unchanged
 
+> Next figure: that cascade in one picture — then we zoom out from *one* robot to
+> coordinating a *fleet* of them.
+
 <div class="gloss">RL = Reinforcement Learning (policy learned by trial in simulation) · MPC = Model Predictive Control · QP = Quadratic Programming (whole-body optimizer) · VLA = Vision-Language-Action model (camera + text in → motion out) · FOC = Field-Oriented Control</div>
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:groot-cascade}}
 
 ---
 
@@ -390,11 +405,15 @@ The industry answer to "how does a fleet manager talk to robots from N vendors":
   explicitly out of scope)
 - **Factsheet** = robot self-description (geometry, speeds, protocol features — but no
   semantic sensor model)
-- **Limits (per the spec itself):** no OTA, no UDS-style diagnostics (flat
-  errorType/errorLevel), security left to broker/TLS config, safety = ISO 3691-4's job
+- **Limits (per the spec itself):** no OTA, and diagnostics is just a flat
+  errorType/errorLevel — nothing like the deep automotive diagnostic protocol (**UDS** —
+  taught in section 6); security left to broker/TLS config, safety = ISO 3691-4's job
 - **Adoption:** Europe-strongest (SYNAOS ecosystem: KUKA, Omron, SEW, STILL, MiR;
   Bosch Rexroth; DS Automotion) + real North-American uptake (OTTO by Rockwell
   certifications); Asia fragmented
+
+> That closes the robot fleet layer — next: the silicon both worlds run on
+> (NVIDIA's three computers, then inside the Thor chip).
 
 <div class="gloss">VDA = Verband der Automobilindustrie · VDMA = German machine-builders' association · KIT-IFL = Karlsruhe Institute of Technology, material-handling institute · verified from the spec + GitHub release directly: rows V1–V8, research/vda5050-robot-fleet-2026-07.md · fits the previous slides: RMF can drive robots <i>over</i> VDA 5050 (vda5050_connector; MiR ships an adapter; Isaac Mission Dispatch speaks it)</div>
 
@@ -452,6 +471,9 @@ Openness is layered: **weights + code open, CUDA/TensorRT-locked underneath.**
   table td, table th { padding: 4px 10px; }
   .gloss { font-size: 14px; margin-top: 8px; }
 </style>
+
+*Optional deep dive (5 slides: MCUs → memory) — short on time? Skip ahead to
+"Robotics vs automotive".*
 
 Beyond CPU+GPU, a Tegra-class SoC ships a village of auxiliary MCU cores — each running
 its own firmware. Thor status, verified from NVIDIA docs + staff forum answers:
@@ -586,12 +608,6 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 
 <!-- _class: diagram -->
 
-{{diagram:groot-cascade}}
-
----
-
-<!-- _class: diagram -->
-
 {{diagram:robot-vs-car}}
 
 ---
@@ -617,7 +633,7 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 Shared underneath: **the Thor SoC family · the Cosmos-Reason model lineage · TensorRT ·
 the three-computer loop** — same architecture, not necessarily the same die or the same model.
 
-<div class="gloss">ASIL = Automotive Safety Integrity Level, ISO 26262 (D = highest) · QNX = safety-certified real-time OS (BlackBerry) · <b>Type-1 hypervisor</b> = runs on bare metal, boots first, schedules entire OSes — "an RTOS whose tasks are OSes"; small enough to certify; isolation means one VM's crash can't reach another · *public SDK runs ONE guest OS at a time — "QNX or Linux, but not both" (only dual-QNX documented, on Orin); dual QNX+Linux is platform framing, rows A2/F12 · MIG = Multi-Instance GPU · OEM = vehicle manufacturer · *Alpamayo 2 Super: NVIDIA newsroom says 34B, product page says 32B — sources conflict as of 07/2026</div>
+<div class="gloss">ASIL = Automotive Safety Integrity Level, ISO 26262 (D = highest) · QNX = safety-certified real-time OS (BlackBerry) · <b>Type-1 hypervisor</b> = runs on bare metal, boots first, schedules entire OSes — "an RTOS whose tasks are OSes"; small enough to certify; isolation means one VM's crash can't reach another · *public SDK runs ONE guest OS at a time — "QNX or Linux, but not both" (only dual-QNX documented, on Orin); dual QNX+Linux is platform framing, rows A2/F12 · MIG = Multi-Instance GPU · OEM = vehicle manufacturer · Alpamayo (NVIDIA's driving model) gets its own slide later this section · *Alpamayo 2 Super: NVIDIA newsroom says 34B, product page says 32B — sources conflict as of 07/2026</div>
 
 ---
 
