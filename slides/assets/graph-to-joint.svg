@@ -19,10 +19,6 @@
   <rect x="10" y="60" width="940" height="62" rx="8" fill="#DCE9F7" stroke="#6F9BD1" stroke-width="1.5"/>
   <text x="26" y="84" font-size="13" font-weight="700" fill="#1b2b4a">OPEN-RMF FLEET LAYER (whole building)</text>
   <text x="26" y="104" font-size="11.5" fill="#234">RMF Core = ROS 2 nodes: traffic schedule &#183; negotiation &#183; task dispatch &#8212; cadence: seconds&#8211;minutes (details: RMF figure)</text>
-  <rect x="700" y="68" width="240" height="46" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.2"/>
-  <text x="820" y="87" text-anchor="middle" font-size="11" fill="#333">Robot B &#8212; vendor FMS, no ROS:</text>
-  <text x="820" y="103" text-anchor="middle" font-size="11" fill="#333">joins the same fleet via its fleet adapter</text>
-
   <line x1="205" y1="122" x2="205" y2="148" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
   <text x="215" y="140" font-size="10.5" fill="#6B4A2B">fleet adapter A: tasks &#8594; Nav2 goals (topics / actions)</text>
 
@@ -39,13 +35,14 @@
   <text x="304" y="232" text-anchor="middle" font-size="10" fill="#557">vision</text>
   <line x1="136" y1="220" x2="246" y2="220" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
 
-  <rect x="28" y="262" width="108" height="40" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
-  <text x="82" y="279" text-anchor="middle" font-size="12" font-weight="600" fill="#234">Nav2</text>
-  <text x="82" y="294" text-anchor="middle" font-size="10" fill="#557">planner + BT</text>
+  <rect x="24" y="256" width="116" height="54" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
+  <text x="82" y="272" text-anchor="middle" font-size="11.5" font-weight="600" fill="#234">Nav2 stack</text>
+  <text x="82" y="286" text-anchor="middle" font-size="9.5" fill="#557">a family of nodes;</text>
+  <text x="82" y="300" text-anchor="middle" font-size="9.5" fill="#557">/controller_server</text>
   <rect x="204" y="256" width="212" height="52" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
   <text x="310" y="275" text-anchor="middle" font-size="11.5" font-weight="600" fill="#234">diff_drive_controller &#8212; subscription</text>
   <text x="310" y="292" text-anchor="middle" font-size="10.5" fill="#557">callback runs on a normal thread</text>
-  <line x1="136" y1="282" x2="200" y2="282" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <line x1="144" y1="282" x2="200" y2="282" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
   <text x="168" y="274" text-anchor="middle" font-size="9.5" fill="#557">/cmd_vel 20 Hz</text>
 
   <rect x="28" y="340" width="108" height="40" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
@@ -81,8 +78,8 @@
 
   <!-- mailbox arrows -->
   <line x1="416" y1="282" x2="442" y2="282" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
-  <line x1="542" y1="282" x2="568" y2="282" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
-  <line x1="568" y1="362" x2="542" y2="362" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
+  <line x1="542" y1="290" x2="576" y2="298" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
+  <line x1="576" y1="330" x2="542" y2="352" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
   <line x1="442" y1="362" x2="416" y2="362" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
 
   <!-- ===================== ros2_control ===================== -->
@@ -90,29 +87,30 @@
   <text x="574" y="172" font-size="13" font-weight="700" fill="#922B21">ros2_control &#8212; controller_manager</text>
   <text x="574" y="188" font-size="10.5" fill="#922B21">one SCHED_FIFO thread @ 1 kHz &#183; PREEMPT_RT</text>
 
-  <rect x="566" y="210" width="60" height="38" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
-  <text x="596" y="233" text-anchor="middle" font-size="11.5" font-weight="600" fill="#234">read()</text>
-  <rect x="644" y="210" width="86" height="38" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
-  <text x="687" y="233" text-anchor="middle" font-size="11.5" font-weight="600" fill="#234">update()</text>
-  <rect x="748" y="210" width="60" height="38" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
-  <text x="778" y="233" text-anchor="middle" font-size="11.5" font-weight="600" fill="#234">write()</text>
-  <line x1="626" y1="229" x2="640" y2="229" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-  <line x1="730" y1="229" x2="744" y2="229" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-  <text x="687" y="268" text-anchor="middle" font-size="10" fill="#922B21">repeats every 1 ms &#8212; whether or not anyone listens</text>
-  <text x="687" y="290" text-anchor="middle" font-size="10" fill="#555">update() runs the controllers: diff_drive &#183;</text>
-  <text x="687" y="304" text-anchor="middle" font-size="10" fill="#555">joint_trajectory &#183; joint_state_broadcaster</text>
-  <text x="687" y="322" text-anchor="middle" font-size="9.5" fill="#555">controllers &#8596; hardware: shared handles, not topics</text>
+  <text x="691" y="208" text-anchor="middle" font-size="10" fill="#922B21">every 1 ms, in this order:</text>
 
-  <rect x="566" y="340" width="236" height="104" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
-  <text x="684" y="360" text-anchor="middle" font-size="11" font-weight="600" fill="#234">hardware_interface plugin &#8212; class MyRobot</text>
-  <text x="684" y="378" text-anchor="middle" font-size="10" fill="#555">pos[] &#8592; encoders &#183; cmd[] &#8594; torques</text>
-  <text x="684" y="394" text-anchor="middle" font-size="10" fill="#555">CAN / EtherCAT device opened in on_init()</text>
-  <text x="684" y="412" text-anchor="middle" font-size="10" fill="#922B21">hot path: no malloc &#183; no locks &#183; no DDS</text>
-  <text x="684" y="427" text-anchor="middle" font-size="9.5" fill="#922B21">(your discipline &#8212; the framework can't enforce it)</text>
+  <rect x="580" y="218" width="222" height="46" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
+  <text x="691" y="236" text-anchor="middle" font-size="10.5" font-weight="700" fill="#234">1 &#183; read() &#8212; sample all inputs</text>
+  <text x="691" y="253" text-anchor="middle" font-size="10" fill="#555">encoders on the bus &#8594; pos[]</text>
+
+  <rect x="580" y="276" width="222" height="68" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
+  <text x="691" y="294" text-anchor="middle" font-size="10.5" font-weight="700" fill="#234">2 &#183; update() &#8212; controllers compute</text>
+  <text x="691" y="311" text-anchor="middle" font-size="10" fill="#555">latest mailbox cmd + pos[] &#8594; cmd[]</text>
+  <text x="691" y="327" text-anchor="middle" font-size="9.5" fill="#555">(diff_drive &#183; joint_trajectory &#183; broadcaster)</text>
+
+  <rect x="580" y="356" width="222" height="46" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
+  <text x="691" y="374" text-anchor="middle" font-size="10.5" font-weight="700" fill="#234">3 &#183; write() &#8212; push all outputs</text>
+  <text x="691" y="391" text-anchor="middle" font-size="10" fill="#555">cmd[] &#8594; torque frames on the bus</text>
+
+  <text x="691" y="420" text-anchor="middle" font-size="9.5" fill="#922B21">&#8630; then the next 1 ms tick starts at read()</text>
+  <text x="691" y="433" text-anchor="middle" font-size="9.5" fill="#922B21">&#8212; runs whether or not anyone listens</text>
+
+  <text x="691" y="452" text-anchor="middle" font-size="9.5" fill="#555">read()/write() = your hardware plugin (prev. slide);</text>
+  <text x="691" y="465" text-anchor="middle" font-size="9.5" fill="#555">controllers &#8596; hardware: shared handles, not topics</text>
 
   <!-- ===================== fieldbus + MCU ===================== -->
-  <line x1="812" y1="372" x2="836" y2="372" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
-  <line x1="840" y1="392" x2="816" y2="392" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
+  <line x1="840" y1="241" x2="810" y2="241" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
+  <line x1="806" y1="379" x2="836" y2="379" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
 
   <rect x="844" y="150" width="106" height="330" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
   <text x="897" y="176" text-anchor="middle" font-size="12" font-weight="700" fill="#333">JOINT MCU</text>
@@ -127,7 +125,7 @@
   <text x="897" y="378" text-anchor="middle" font-size="10" fill="#555">matter what the</text>
   <text x="897" y="394" text-anchor="middle" font-size="10" fill="#555">upper stack is</text>
 
-  <text transform="rotate(-90 826 300)" x="826" y="300" text-anchor="middle" font-size="10" fill="#333">CAN-FD / EtherCAT &#183; 1&#8211;10 kHz</text>
+  <text transform="rotate(-90 826 310)" x="826" y="310" text-anchor="middle" font-size="10" fill="#333">CAN-FD / EtherCAT &#183; 1&#8211;10 kHz</text>
 
   <!-- ===================== rate ruler ===================== -->
   <line x1="10" y1="510" x2="950" y2="510" stroke="#B0B0B0" stroke-width="1.5" marker-end="url(#arr)"/>

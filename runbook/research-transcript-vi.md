@@ -244,9 +244,9 @@ dùng được ngay.
 
 Gom mọi thứ từ đầu buổi vào một bức hình, đọc từ trái sang phải là đi từ "cả tòa nhà"
 xuống "một khớp". Trái: tầng fleet Open-RMF — giao task theo nhịp giây/phút, chạm vào
-robot qua đúng một cửa là fleet adapter (robot vendor khác không chạy ROS vẫn vào fleet
-được, sẽ quay lại ở phần RMF). Giữa: ROS 2 graph của một robot — pub/sub async qua DDS,
-`/camera` 30 Hz, Nav2 phát `/cmd_vel` 20 Hz, mất gói cũng không sao.
+robot qua đúng một cửa là fleet adapter. Giữa: ROS 2 graph của một robot — pub/sub async
+qua DDS, `/camera` 30 Hz; ô "Nav2 stack" là cả một họ node (slide 14 đã mở banh nó ra),
+và node thật sự phát `/cmd_vel` 20 Hz là `/controller_server`; mất gói cũng không sao.
 
 Điểm đắt nhất của hình là **dải vàng — ranh giới real-time**: không có call nào xuyên
 qua, chỉ có hai hộp thư lock-free. Lệnh đi xuống qua `RealtimeBuffer` — "lệnh mới nhất
@@ -255,13 +255,19 @@ thắng", kèm watchdog timeout: Nav2 chết là robot tự phanh. State đi lê
 thường làm "bưu tá" publish `/joint_states`. Với dân firmware: đây chính là pattern ISR
 đẩy ring buffer, main loop gửi UART — đổi tên thôi.
 
-Bên phải ranh giới là vòng kín của `ros2_control`: một thread SCHED_FIFO chạy
-`read() → update() → write()` mỗi 1 ms trên PREEMPT_RT — chạy bất kể có ai nghe hay
-không; controller nói chuyện với hardware plugin (class `MyRobot` slide trước) bằng
-handle chia sẻ, không topic nào cả. Rồi CAN-FD/EtherCAT 1–10 kHz xuống MCU firmware —
-FOC 8–32 kHz, thế giới của mình, không đổi. Thước dưới cùng là ý cần chốt: **càng sang
-phải càng nhanh và càng deterministic — mỗi lần đổi "chất" giao tiếp (DDS → hộp thư →
-fieldbus) là một lần đổi hợp đồng timing.**
+Bên phải ranh giới là vòng kín của `ros2_control`: một thread SCHED_FIFO trên
+PREEMPT_RT, mỗi 1 ms làm đúng ba bước **theo thứ tự đánh số trên hình**: 1 — `read()`
+chụp *toàn bộ* input (encoder trên bus → `pos[]`); 2 — `update()` cho các controller
+tính (lệnh mới nhất trong hộp thư + `pos[]` → `cmd[]`); 3 — `write()` xuất *toàn bộ*
+output xuống bus. Nói to điều dễ hiểu nhầm: **đây là trình tự thời gian trong một tick,
+không phải chiều dữ liệu** — state đi lên qua bước 1, lệnh đi xuống qua bước 2-3; y hệt
+vòng lặp MCU mình viết hàng ngày: đọc ADC → tính PID → xuất PWM, và tick chạy bất kể có
+ai nghe hay không. `read()`/`write()` chính là hai method của class `MyRobot` slide
+trước; controller nói chuyện với hardware bằng handle chia sẻ, không topic nào cả. Rồi
+CAN-FD/EtherCAT 1–10 kHz xuống MCU firmware — FOC 8–32 kHz, thế giới của mình, không
+đổi. Thước dưới cùng là ý cần chốt: **càng sang phải càng nhanh và càng deterministic —
+mỗi lần đổi "chất" giao tiếp (DDS → hộp thư → fieldbus) là một lần đổi hợp đồng
+timing.**
 
 ## Slide 17 — Ảnh rqt_graph thật *(~1 phút)*
 
