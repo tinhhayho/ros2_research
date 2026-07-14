@@ -21,7 +21,7 @@
     </mxCell>
 
     <!-- UDS services strip -->
-    <mxCell id="uds-services-box" value="&lt;b&gt;UDS services (ISO 14229-1, application layer)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;0x10 session &#183; 0x27 security &#183; 0x22 read DID (0xF190 = VIN) &#183; 0x19 read DTC &#183; 0x31 routine &#183; 0x34/0x36/0x37 flash&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=14;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="uds-services-box" value="&lt;b&gt;UDS services (ISO 14229-1, application layer)&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;0x10 session &#183; 0x27 security &#183; 0x22 read DID (0xF190 = VIN) &#183; 0x19 read DTC &#183; 0x31 routine &#183; 0x34/0x35/0x36/0x37 transfer (flash)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=14;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="60" y="122" width="840" height="56" as="geometry" />
     </mxCell>
 

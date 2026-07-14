@@ -41,7 +41,7 @@
   <rect x="200" y="296" width="355" height="56" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
   <text x="377" y="328" text-anchor="middle" font-size="11" fill="#234">tooling, not a standard: Mender · RAUC · SWUpdate</text>
   <rect x="565" y="296" width="355" height="56" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
-  <text x="742" y="328" text-anchor="middle" font-size="11" fill="#2d5a2d">UDS flash (0x34/0x36/0x37) · UCM per Software Cluster</text>
+  <text x="742" y="328" text-anchor="middle" font-size="11" fill="#2d5a2d">UDS flash (0x34/0x35/0x36/0x37) · UCM per Software Cluster</text>
 
   <!-- ===================== Row 5: platform architecture ===================== -->
   <rect x="40" y="360" width="150" height="56" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>

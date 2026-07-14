@@ -19,7 +19,7 @@
   <!-- ===================== UDS services strip ===================== -->
   <rect x="60" y="122" width="840" height="56" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
   <text x="480" y="142" text-anchor="middle" font-size="14" font-weight="700" fill="#223344">UDS services (ISO 14229-1, application layer)</text>
-  <text x="480" y="162" text-anchor="middle" font-size="11" fill="#223344">0x10 session · 0x27 security · 0x22 read DID (0xF190 = VIN) · 0x19 read DTC · 0x31 routine · 0x34/0x36/0x37 flash</text>
+  <text x="480" y="162" text-anchor="middle" font-size="11" fill="#223344">0x10 session · 0x27 security · 0x22 read DID (0xF190 = VIN) · 0x19 read DTC · 0x31 routine · 0x34/0x35/0x36/0x37 transfer (flash)</text>
 
   <line x1="265" y1="178" x2="265" y2="192" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
   <line x1="695" y1="178" x2="695" y2="192" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>

@@ -740,8 +740,9 @@ only ~1% of NVIDIA's total, but design wins lock in for a decade.
 Section 4 covered the fleet layer for *robots* (Open-RMF). Cars have their own fleet
 story, and it is older, more standardized, and — after the audit below — a good case
 study in separating standards from hype. This section began as an external draft report;
-it went through the standard audit before earning its place here: **30 claims checked, 8
-refuted**, verdict table in `research/fleet-uds-autosar-2026-07.md`, manifest rows
+it went through the standard audit before earning its place here: **30 claims checked —
+7 refuted, 1 more without any public documentation**, verdict table in
+`research/fleet-uds-autosar-2026-07.md`, manifest rows
 F1–F17. What follows is the corrected version.
 
 The fleet problem: remote diagnostics, predictive maintenance, OTA updates, and health
@@ -783,7 +784,8 @@ restrict dynamic allocation to startup — the dynamism is a development-time pr
 Two pieces of folklore the audit killed: *"Classic can't do Ethernet"* — the SOME/IP
 Transformer entered Classic in release 4.2.1 (2016), a year **before** Adaptive's first
 release; and *"Adaptive = low ASIL"* — Vector ships MICROSAR Adaptive Safe at ASIL-B and
-Wind River's Adaptive safety concept was assessed ASIL-D-suitable by TÜV SÜD.
+Wind River's Adaptive safety concept was assessed ASIL-D-suitable by TÜV SÜD (a 2019
+program assessment — the oldest data point in this section, not a completed cert).
 
 #### UDS: one language, two transports, two platforms
 
@@ -911,7 +913,8 @@ claims of the deck — the rest of this document is source-linked but not exhaus
 re-verified. The full claim-by-claim trail lives in `research/claims-audit-2026-07.md`.
 
 Section 6.7 is the method's best showcase yet: an external draft arrived polished and
-plausible, and the audit refuted 8 of its 30 claims — including its centerpiece
+plausible, and the audit refuted 7 of its 30 claims outright (an eighth had no public
+documentation at all) — including its centerpiece
 architecture — before a word of it reached this document
 (`research/fleet-uds-autosar-2026-07.md`). Section 4.4 got the same treatment (14
 claims; the draft's "charging zone" and its proposed platform-standard trend were

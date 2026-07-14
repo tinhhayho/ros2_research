@@ -1,0 +1,256 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="gtj-title" value="From fleet to joint &#8212; how the layers actually talk" style="text;html=1;align=center;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="10" y="16" width="940" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- Fleet layer -->
+    <mxCell id="gtj-fleet" value="&lt;b&gt;OPEN-RMF FLEET LAYER (building server) &#8212; RMF Core is itself ROS 2 nodes&lt;/b&gt;&lt;br&gt;traffic schedule &#183; negotiation &#183; task dispatch &#8212; cadence: seconds&#8211;minutes &#183; robots plug in via fleet adapters (details: RMF figure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=10;fontColor=#223344;align=left;verticalAlign=middle;spacingLeft=12;" vertex="1" parent="1">
+      <mxGeometry x="10" y="52" width="940" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-e-fleet" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="40" y="104" as="sourcePoint" />
+        <mxPoint x="40" y="166" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-l-fleet" value="fleet adapter A: tasks &#8594; Nav2 goals (topics / actions)" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#1E7D32;" vertex="1" parent="1">
+      <mxGeometry x="50" y="118" width="280" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-heading" value="ROBOT A'S GRAPH" style="text;html=1;align=left;verticalAlign=middle;fontSize=11.5;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="160" y="142" width="140" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- Autonomy nodes -->
+    <mxCell id="gtj-nav2" value="&lt;b&gt;Nav2 stack&lt;/b&gt;&lt;br&gt;a family of nodes;&lt;br&gt;/controller_server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.4;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="14" y="170" width="126" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-camera" value="&lt;b&gt;/camera&lt;/b&gt;&lt;br&gt;sensor driver" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.4;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="14" y="262" width="92" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-detector" value="&lt;b&gt;/detector&lt;/b&gt;&lt;br&gt;vision" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.4;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="190" y="262" width="100" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-e-img" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="106" y="284" as="sourcePoint" />
+        <mxPoint x="186" y="284" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-l-img" value="/image_raw" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#1E7D32;" vertex="1" parent="1">
+      <mxGeometry x="116" y="264" width="60" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-rviz" value="&lt;b&gt;RViz &#183; rosbag&lt;/b&gt;&lt;br&gt;any node may listen &#8212;&lt;br&gt;or nobody at all" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.4;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="14" y="356" width="126" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-e-cmdvel" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="140" y="212" as="sourcePoint" />
+        <mxPoint x="316" y="212" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-l-cmdvel" value="/cmd_vel 20 Hz" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#1E7D32;" vertex="1" parent="1">
+      <mxGeometry x="188" y="194" width="80" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-e-js" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="318" y="372" as="sourcePoint" />
+        <mxPoint x="144" y="372" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-l-js" value="/joint_states" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#1E7D32;" vertex="1" parent="1">
+      <mxGeometry x="192" y="354" width="76" height="14" as="geometry" />
+    </mxCell>
+
+    <!-- controller_manager process -->
+    <mxCell id="gtj-proc" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCFCFC;strokeColor=#888888;strokeWidth=1.5;dashed=1;dashPattern=7 5;" vertex="1" parent="1">
+      <mxGeometry x="310" y="138" width="502" height="332" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-proc-title" value="ONE PROCESS &#8212; controller_manager (ros2_control)" style="text;html=1;align=left;verticalAlign=middle;fontSize=12.5;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="322" y="146" width="400" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-proc-sub" value="each controller gets its own small node; all share the executor &#8212; the RT loop is a separate thread" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="322" y="163" width="480" height="14" as="geometry" />
+    </mxCell>
+
+    <mxCell id="gtj-ddc" value="&lt;b&gt;/diff_drive_controller&lt;/b&gt;&lt;br&gt;subscribes /cmd_vel;&lt;br&gt;callback = executor&lt;br&gt;thread, not RT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.4;fontSize=8.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="322" y="178" width="130" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-jsb" value="&lt;b&gt;/joint_state_broadcaster&lt;/b&gt;&lt;br&gt;publishes /joint_states&lt;br&gt;from a normal thread&lt;br&gt;(the &#8220;postman&#8221;)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.4;fontSize=8.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="322" y="330" width="130" height="68" as="geometry" />
+    </mxCell>
+
+    <!-- mailboxes -->
+    <mxCell id="gtj-mb-cmd" value="&lt;b&gt;&#8595; commands&lt;/b&gt;&lt;br&gt;RealtimeBuffer:&lt;br&gt;latest wins,&lt;br&gt;watchdog timeout" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3D0;strokeColor=#D9A64A;strokeWidth=1.4;fontSize=8.5;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="470" y="178" width="92" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-boundary" value="&lt;b&gt;RT BOUNDARY&lt;/b&gt;&lt;br&gt;no call crosses &#8212;&lt;br&gt;only these mailboxes" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#8A5A00;" vertex="1" parent="1">
+      <mxGeometry x="460" y="258" width="112" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-mb-state" value="&lt;b&gt;&#8593; state&lt;/b&gt;&lt;br&gt;RealtimePublisher:&lt;br&gt;try-lock &#8212; RT side&lt;br&gt;never waits" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3D0;strokeColor=#D9A64A;strokeWidth=1.4;fontSize=8.5;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="470" y="330" width="92" height="64" as="geometry" />
+    </mxCell>
+
+    <!-- RT thread -->
+    <mxCell id="gtj-rt" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEBE9;strokeColor=#D98880;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="572" y="178" width="232" height="282" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-rt-title" value="&lt;b&gt;RT THREAD &#8212; SCHED_FIFO @ 1 kHz&lt;/b&gt;&lt;br&gt;PREEMPT_RT &#183; every 1 ms, in order:" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#922B21;" vertex="1" parent="1">
+      <mxGeometry x="580" y="182" width="216" height="34" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-s1" value="&lt;b&gt;1 &#183; read() &#8212; sample all inputs&lt;/b&gt;&lt;br&gt;encoders on the bus &#8594; pos[]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#D98880;strokeWidth=1.2;fontSize=9.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="580" y="220" width="216" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-s2" value="&lt;b&gt;2 &#183; update() &#8212; controllers compute&lt;/b&gt;&lt;br&gt;latest mailbox cmd + pos[] &#8594; cmd[]&lt;br&gt;(diff_drive &#183; joint_state_broadcaster)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#D98880;strokeWidth=1.2;fontSize=9.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="580" y="274" width="216" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-s3" value="&lt;b&gt;3 &#183; write() &#8212; push all outputs&lt;/b&gt;&lt;br&gt;cmd[] &#8594; torque frames on the bus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#D98880;strokeWidth=1.2;fontSize=9.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="580" y="342" width="216" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-rt-loop" value="&#8630; next tick starts at read() again &#8212;&lt;br&gt;runs whether or not anyone listens" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#922B21;" vertex="1" parent="1">
+      <mxGeometry x="580" y="392" width="216" height="28" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-rt-foot" value="read()/write() = your hardware plugin (prev. slide);&lt;br&gt;hot path: no malloc &#183; no locks &#183; no DDS" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="580" y="424" width="216" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- mailbox hand-off arrows -->
+    <mxCell id="gtj-e-mb1" style="endArrow=classic;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;dashed=1;dashPattern=5 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="452" y="212" as="sourcePoint" />
+        <mxPoint x="466" y="212" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-e-mb2" style="endArrow=classic;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;dashed=1;dashPattern=5 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="562" y="228" as="sourcePoint" />
+        <mxPoint x="576" y="288" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-e-mb3" style="endArrow=classic;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;dashed=1;dashPattern=5 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="578" y="326" as="sourcePoint" />
+        <mxPoint x="566" y="344" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-e-mb4" style="endArrow=classic;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;dashed=1;dashPattern=5 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="468" y="362" as="sourcePoint" />
+        <mxPoint x="456" y="362" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- fieldbus + MCU -->
+    <mxCell id="gtj-e-fb1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="842" y="242" as="sourcePoint" />
+        <mxPoint x="808" y="242" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-e-fb2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="806" y="364" as="sourcePoint" />
+        <mxPoint x="840" y="364" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-l-fb" value="CAN-FD / EtherCAT &#183; 1&#8211;10 kHz" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#333333;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="745" y="295" width="160" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-mcu" value="&lt;b&gt;JOINT MCU&lt;br&gt;FIRMWARE&lt;/b&gt;&lt;br&gt;&lt;br&gt;FOC current loop&lt;br&gt;8&#8211;32 kHz&lt;br&gt;&lt;br&gt;encoder feedback&lt;br&gt;watchdog&lt;br&gt;&lt;br&gt;ISR + ring buffer&lt;br&gt;&#8212; your world,&lt;br&gt;unchanged whatever&lt;br&gt;the upper stack is" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E4E4E4;strokeColor=#8A8A8A;strokeWidth=1.5;fontSize=9.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="846" y="138" width="104" height="332" as="geometry" />
+    </mxCell>
+
+    <!-- rate ruler -->
+    <mxCell id="gtj-ruler" style="endArrow=classic;html=1;rounded=0;strokeColor=#B0B0B0;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="10" y="492" as="sourcePoint" />
+        <mxPoint x="950" y="492" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-r-left" value="coordination &#8212; async, loss-tolerant" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#556677;" vertex="1" parent="1">
+      <mxGeometry x="14" y="500" width="220" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-r-right" value="determinism &#8212; hard deadlines" style="text;html=1;align=right;verticalAlign=middle;fontSize=10;fontColor=#922B21;" vertex="1" parent="1">
+      <mxGeometry x="726" y="500" width="220" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-r1" value="10&#8211;100 Hz" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#556677;" vertex="1" parent="1">
+      <mxGeometry x="110" y="518" width="80" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-r2" value="the timing contract flips here" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#8A5A00;" vertex="1" parent="1">
+      <mxGeometry x="436" y="518" width="160" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-r3" value="1 kHz" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#922B21;" vertex="1" parent="1">
+      <mxGeometry x="658" y="518" width="60" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-r4" value="1&#8211;10 kHz" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="795" y="518" width="60" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-r5" value="8&#8211;32 kHz" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="868" y="518" width="60" height="14" as="geometry" />
+    </mxCell>
+
+    <!-- legend -->
+    <mxCell id="gtj-lg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.4;" vertex="1" parent="1">
+      <mxGeometry x="14" y="546" width="22" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg1-t" value="ROS 2 node" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="42" y="546" width="70" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCFCFC;strokeColor=#888888;strokeWidth=1.4;dashed=1;dashPattern=4 3;" vertex="1" parent="1">
+      <mxGeometry x="126" y="546" width="22" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg2-t" value="one OS process" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="154" y="546" width="94" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEBE9;strokeColor=#D98880;strokeWidth=1.4;" vertex="1" parent="1">
+      <mxGeometry x="256" y="546" width="22" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg3-t" value="real-time thread" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="284" y="546" width="96" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3D0;strokeColor=#D9A64A;strokeWidth=1.4;" vertex="1" parent="1">
+      <mxGeometry x="392" y="546" width="22" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg4-t" value="lock-free mailbox (realtime_tools)" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="420" y="546" width="190" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg5" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E4E4E4;strokeColor=#8A8A8A;strokeWidth=1.4;" vertex="1" parent="1">
+      <mxGeometry x="616" y="546" width="22" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg5-t" value="MCU firmware" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="644" y="546" width="90" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg6" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="14" y="580" as="sourcePoint" />
+        <mxPoint x="50" y="580" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-lg6-t" value="topic (DDS pub/sub) &#8212; arrow label = topic name" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="56" y="573" width="260" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg7" style="endArrow=classic;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;dashed=1;dashPattern=5 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="330" y="580" as="sourcePoint" />
+        <mxPoint x="366" y="580" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-lg7-t" value="mailbox hand-off &#8212; the only way across the RT boundary" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="372" y="573" width="300 " height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="gtj-lg8" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="700" y="580" as="sourcePoint" />
+        <mxPoint x="736" y="580" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="gtj-lg8-t" value="fieldbus frames, fixed cycle" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="744" y="573" width="170" height="14" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

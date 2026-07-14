@@ -8,79 +8,133 @@
       <mxGeometry x="10" y="20" width="940" height="40" as="geometry" />
     </mxCell>
 
-    <!-- Legend -->
-    <mxCell id="rng-legend" value="&#8594; topic (pub/sub) &#183; &#8658; action (goal + feedback + result) &#183; every box = one node, discovered by name" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#B0B0B0;strokeWidth=1;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
-      <mxGeometry x="40" y="56" width="500" height="24" as="geometry" />
+    <!-- Legend (type-based color language, same as graph-to-joint) -->
+    <mxCell id="rng-legend-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#B0B0B0;strokeWidth=1;" vertex="1" parent="1">
+      <mxGeometry x="26" y="56" width="908" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-node" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.4;" vertex="1" parent="1">
+      <mxGeometry x="38" y="62" width="20" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-node-t" value="ROS 2 node" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="62" y="62" width="70" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-fam" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7FAFF;strokeColor=#9BBCE0;strokeWidth=1.4;dashed=1;dashPattern=4 3;" vertex="1" parent="1">
+      <mxGeometry x="136" y="62" width="20" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-fam-t" value="family of nodes" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="160" y="62" width="90" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-topic" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="252" y="69" as="sourcePoint" />
+        <mxPoint x="284" y="69" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rng-lg-topic-t" value="topic (label = its name)" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="290" y="62" width="130" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-act1" style="endArrow=none;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="420" y="65" as="sourcePoint" />
+        <mxPoint x="452" y="65" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rng-lg-act2" style="endArrow=none;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="420" y="72" as="sourcePoint" />
+        <mxPoint x="452" y="72" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rng-lg-act-head" value="" style="triangle;html=1;direction=east;fillColor=#1E7D32;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="452" y="62" width="10" height="13" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-act-t" value="action (goal+feedback+result)" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="468" y="62" width="160" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-rt" style="endArrow=none;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;dashed=1;dashPattern=7 5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="642" y="69" as="sourcePoint" />
+        <mxPoint x="676" y="69" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="rng-lg-rt-t" value="RT boundary" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="682" y="62" width="74" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-mcu" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E4E4E4;strokeColor=#8A8A8A;strokeWidth=1.4;" vertex="1" parent="1">
+      <mxGeometry x="762" y="62" width="20" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="rng-lg-mcu-t" value="fieldbus + MCU firmware" style="text;html=1;align=left;verticalAlign=middle;fontSize=9.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="786" y="62" width="140" height="14" as="geometry" />
     </mxCell>
 
-    <!-- Driver nodes (left, orange) -->
-    <mxCell id="rng-lidar" value="&lt;b&gt;/lidar_driver&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <!-- Driver nodes (left) -->
+    <mxCell id="rng-lidar" value="&lt;b&gt;/lidar_driver&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="50" y="140" width="120" height="34" as="geometry" />
     </mxCell>
-    <mxCell id="rng-imu" value="&lt;b&gt;/imu_driver&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-imu" value="&lt;b&gt;/imu_driver&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="50" y="260" width="120" height="34" as="geometry" />
     </mxCell>
 
-    <!-- Localization nodes (middle-left, blue) -->
-    <mxCell id="rng-slam" value="&lt;b&gt;/slam_toolbox&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <!-- Localization nodes (middle-left) -->
+    <mxCell id="rng-slam" value="&lt;b&gt;/slam_toolbox&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="240" y="120" width="130" height="34" as="geometry" />
     </mxCell>
-    <mxCell id="rng-amcl" value="&lt;b&gt;/amcl&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-amcl" value="&lt;b&gt;/amcl&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="240" y="190" width="130" height="34" as="geometry" />
     </mxCell>
-    <mxCell id="rng-ekf" value="&lt;b&gt;/ekf&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-ekf" value="&lt;b&gt;/ekf&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="240" y="290" width="130" height="34" as="geometry" />
     </mxCell>
 
     <!-- Topic arrows: drivers -> localization -->
-    <mxCell id="rng-e-scan1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-e-scan1" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.7;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="170" y="157" as="sourcePoint" />
         <mxPoint x="240" y="137" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-e-scan2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-e-scan2" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.7;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="170" y="157" as="sourcePoint" />
         <mxPoint x="240" y="207" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-l-scan" value="/scan" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="rng-l-scan" value="/scan" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#1E7D32;" vertex="1" parent="1">
       <mxGeometry x="175" y="156" width="60" height="14" as="geometry" />
     </mxCell>
-    <mxCell id="rng-e-imu" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-e-imu" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.7;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="170" y="277" as="sourcePoint" />
         <mxPoint x="240" y="307" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-l-imu" value="/imu" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="rng-l-imu" value="/imu" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#1E7D32;" vertex="1" parent="1">
       <mxGeometry x="170" y="269" width="60" height="14" as="geometry" />
     </mxCell>
 
-    <!-- Nav2 group -->
-    <mxCell id="rng-nav2-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+    <!-- Nav2 group (a family of nodes) -->
+    <mxCell id="rng-nav2-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7FAFF;strokeColor=#9BBCE0;strokeWidth=1.5;dashed=1;dashPattern=6 4;" vertex="1" parent="1">
       <mxGeometry x="430" y="150" width="230" height="210" as="geometry" />
     </mxCell>
-    <mxCell id="rng-nav2-label" value="Nav2" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
-      <mxGeometry x="445" y="155" width="80" height="18" as="geometry" />
+    <mxCell id="rng-nav2-label" value="Nav2 &#8212; a family of nodes" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="445" y="155" width="200" height="18" as="geometry" />
     </mxCell>
-    <mxCell id="rng-btnav" value="&lt;b&gt;/bt_navigator&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-btnav" value="&lt;b&gt;/bt_navigator&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="450" y="176" width="190" height="32" as="geometry" />
     </mxCell>
-    <mxCell id="rng-planner" value="&lt;b&gt;/planner_server&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-planner" value="&lt;b&gt;/planner_server&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="450" y="232" width="190" height="32" as="geometry" />
     </mxCell>
-    <mxCell id="rng-ctrlsrv" value="&lt;b&gt;/controller_server&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-ctrlsrv" value="&lt;b&gt;/controller_server&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="450" y="288" width="190" height="32" as="geometry" />
     </mxCell>
-    <mxCell id="rng-e-int1" style="endArrow=classic;html=1;rounded=0;strokeColor=#999999;strokeWidth=1.2;" edge="1" parent="1">
+    <mxCell id="rng-e-int1" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.2;opacity=55;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="545" y="208" as="sourcePoint" />
         <mxPoint x="545" y="230" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-e-int2" style="endArrow=classic;html=1;rounded=0;strokeColor=#999999;strokeWidth=1.2;" edge="1" parent="1">
+    <mxCell id="rng-e-int2" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.2;opacity=55;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="545" y="264" as="sourcePoint" />
         <mxPoint x="545" y="286" as="targetPoint" />
@@ -88,39 +142,39 @@
     </mxCell>
 
     <!-- Topic arrows into Nav2 -->
-    <mxCell id="rng-e-map" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-e-map" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.7;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="370" y="137" as="sourcePoint" />
         <mxPoint x="430" y="165" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-l-map" value="/map" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="rng-l-map" value="/map" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#1E7D32;" vertex="1" parent="1">
       <mxGeometry x="370" y="129" width="60" height="14" as="geometry" />
     </mxCell>
-    <mxCell id="rng-e-amclpose" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-e-amclpose" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.7;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="370" y="207" as="sourcePoint" />
         <mxPoint x="430" y="220" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-l-amclpose" value="/amcl_pose" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="rng-l-amclpose" value="/amcl_pose" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#1E7D32;" vertex="1" parent="1">
       <mxGeometry x="360" y="189" width="80" height="14" as="geometry" />
     </mxCell>
-    <mxCell id="rng-e-odomfilt" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-e-odomfilt" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.7;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="370" y="307" as="sourcePoint" />
         <mxPoint x="430" y="300" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-l-odomfilt" value="/odometry/filtered" style="text;html=1;align=right;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="rng-l-odomfilt" value="/odometry/filtered" style="text;html=1;align=right;verticalAlign=middle;fontSize=10.5;fontColor=#1E7D32;" vertex="1" parent="1">
       <mxGeometry x="324" y="329" width="100" height="14" as="geometry" />
     </mxCell>
 
     <!-- Fleet adapter + action arrow -->
-    <mxCell id="rng-fleet" value="&lt;b&gt;/fleet_adapter (Open-RMF)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=12;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-fleet" value="&lt;b&gt;/fleet_adapter (Open-RMF)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="720" y="96" width="200" height="38" as="geometry" />
     </mxCell>
-    <mxCell id="rng-action-line1" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-action-line1" style="endArrow=none;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.5;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="816" y="134" as="sourcePoint" />
         <mxPoint x="652" y="188" as="targetPoint" />
@@ -129,7 +183,7 @@
         </Array>
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-action-line2" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-action-line2" style="endArrow=none;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.5;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="824" y="134" as="sourcePoint" />
         <mxPoint x="652" y="196" as="targetPoint" />
@@ -138,27 +192,27 @@
         </Array>
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-action-head" value="" style="triangle;html=1;direction=west;fillColor=#444444;strokeColor=none;" vertex="1" parent="1">
+    <mxCell id="rng-action-head" value="" style="triangle;html=1;direction=west;fillColor=#1E7D32;strokeColor=none;" vertex="1" parent="1">
       <mxGeometry x="644" y="185" width="12" height="14" as="geometry" />
     </mxCell>
-    <mxCell id="rng-l-action" value="/navigate_to_pose (action)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="rng-l-action" value="/navigate_to_pose (action)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#1E7D32;" vertex="1" parent="1">
       <mxGeometry x="665" y="171" width="140" height="14" as="geometry" />
     </mxCell>
 
     <!-- controller_manager + cmd_vel + odom -->
-    <mxCell id="rng-ctrlmgr" value="&lt;b&gt;/controller_manager (ros2_control)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-ctrlmgr" value="&lt;b&gt;/controller_manager (ros2_control)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#6F9BD1;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="425" y="400" width="240" height="36" as="geometry" />
     </mxCell>
-    <mxCell id="rng-e-cmdvel" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-e-cmdvel" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.7;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="545" y="360" as="sourcePoint" />
         <mxPoint x="545" y="398" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-l-cmdvel" value="/cmd_vel" style="text;html=1;align=left;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="rng-l-cmdvel" value="/cmd_vel" style="text;html=1;align=left;verticalAlign=middle;fontSize=10.5;fontColor=#1E7D32;" vertex="1" parent="1">
       <mxGeometry x="555" y="375" width="80" height="14" as="geometry" />
     </mxCell>
-    <mxCell id="rng-e-odom" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.5;" edge="1" parent="1">
+    <mxCell id="rng-e-odom" style="endArrow=classic;html=1;rounded=0;strokeColor=#1E7D32;strokeWidth=1.7;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="425" y="418" as="sourcePoint" />
         <mxPoint x="305" y="326" as="targetPoint" />
@@ -167,21 +221,21 @@
         </Array>
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-l-odom" value="/odom (wheel odometry)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="rng-l-odom" value="/odom (wheel odometry)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#1E7D32;" vertex="1" parent="1">
       <mxGeometry x="295" y="423" width="130" height="14" as="geometry" />
     </mxCell>
 
     <!-- RT boundary -->
-    <mxCell id="rng-boundary-label" value="the graph ends here &#8212; below: the 1 kHz RT loop (function calls, no topics)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#2E5FAC;" vertex="1" parent="1">
+    <mxCell id="rng-boundary-label" value="the graph ends here &#8212; below: the 1 kHz RT loop (function calls, no topics)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#C0392B;" vertex="1" parent="1">
       <mxGeometry x="280" y="448" width="400" height="18" as="geometry" />
     </mxCell>
-    <mxCell id="rng-boundary-line" style="endArrow=none;html=1;rounded=0;strokeColor=#2E5FAC;strokeWidth=2;dashed=1;dashPattern=7 5;" edge="1" parent="1">
+    <mxCell id="rng-boundary-line" style="endArrow=none;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;dashed=1;dashPattern=7 5;" edge="1" parent="1">
       <mxGeometry width="50" height="50" relative="1" as="geometry">
         <mxPoint x="60" y="470" as="sourcePoint" />
         <mxPoint x="900" y="470" as="targetPoint" />
       </mxGeometry>
     </mxCell>
-    <mxCell id="rng-rt-strip" value="motors &#183; encoders &#8212; EtherCAT / CAN-FD &#8594; MCU firmware (FOC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=11.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="rng-rt-strip" value="motors &#183; encoders &#8212; EtherCAT / CAN-FD &#8594; MCU firmware (FOC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E4E4E4;strokeColor=#8A8A8A;strokeWidth=1.5;fontSize=11.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="60" y="482" width="840" height="32" as="geometry" />
     </mxCell>
 

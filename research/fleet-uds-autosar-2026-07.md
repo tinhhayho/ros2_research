@@ -29,7 +29,7 @@ Status: ✅ confirmed · 🟡 partly (kept with correction) · ❌ refuted (excl
 | 4 | DID 0xF190 = VIN | ✅ | standardized DID, read via 0x22 |
 | 5 | DoCAN = ISO 15765-2; DoIP = ISO 13400 | ✅ | plus ISO 14229-5 (UDSonIP) |
 | 6 | Classic diagnostics = DCM + DEM (+NvM), CanTp transport | ✅ | module names and split correct |
-| 7 | Adaptive DM "primarily over DoIP", C++ API | 🟡 | per SWS_Diagnostics, DM supports **only** DoIP as transport (not CAN); API = `ara::diag`; DM also implements ASAM SOVD v1.0.0 |
+| 7 | Adaptive DM "primarily over DoIP", C++ API | 🟡 | per SWS_Diagnostics, DM supports **only** DoIP as transport (not CAN); API = `ara::diag`; DM also implements ASAM SOVD v1.0.0. *Currency note (2026-07-15): verified against R22-11; R23-11/R24-11 not yet re-checked (autosar.org unreachable from sandbox) — one unconfirmed web summary suggests R24-11 may add a CAN transport to DM; re-verify against the actual PDF before relying on "DoIP-only" for R24-11+* |
 | 8 | Each Software Cluster has its own diagnostic address | ✅ | DM instantiates one diagnostic server per SoftwareCluster |
 | 9 | UCM = "Update Configuration Management" | 🟡 | **Update *and* Configuration Management** (AUTOSAR's own doc title) |
 | 10 | UDS 0x34–0x37 is the usual Adaptive FOTA path | 🟡 | one valid channel; the native path is UCM's `ara::com` TransferStart/TransferData/TransferExit fed by an OTA client — not routed through UDS |
@@ -42,7 +42,7 @@ Status: ✅ confirmed · 🟡 partly (kept with correction) · ❌ refuted (excl
 | 17 | Adaptive OS = "POSIX (QNX/Linux)" | 🟡 | requirement is the **PSE51** profile *for Adaptive Applications*; Foundation/Services may use full POSIX; QNX and Linux are indeed the dominant choices |
 | 18 | Classic comms = "CAN/DoCAN" vs Adaptive "Ethernet/SOME/IP" | ❌ (as written) | Classic has had a standardized **SOME/IP Transformer since 4.2.1 (2016)** — a year before Adaptive's first release — plus Ethernet, DoIP, LIN, FlexRay; the row implied Classic can't do Ethernet |
 | 19 | Classic = full-flash updates; Adaptive = per-cluster via UCM | ✅ | EB: Classic "always required a full update", Adaptive supports differential/per-cluster |
-| 20 | Classic = high ASIL, Adaptive = lower (implicit) | 🟡 | outdated ceiling: Vector ships MICROSAR Adaptive Safe at **ASIL-B**, ASIL-D planned; Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD |
+| 20 | Classic = high ASIL, Adaptive = lower (implicit) | 🟡 | outdated ceiling: Vector ships MICROSAR Adaptive Safe at **ASIL-B**, ASIL-D planned; Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD (2019-10-15 press release — a program-readiness assessment, not a completed certification; date added 2026-07-15) |
 | 21 | "Classic on Adaptive" trend (Classic BSW as an Adaptive app) | ❌ | no such pattern under that name; the real pattern is **Classic vECU in a VM under a hypervisor** (EB corbos Hypervisor et al.), used for consolidation/simulation/HIL |
 | 22 | ECU consolidation: dozens of ECUs → central+zonal | ✅ | Bosch zone-ECU framing; NXP central compute; reported targets 100+ → under a dozen (vendor figures) |
 | 23 | Thor = Blackwell GPU | ✅ | current official page; note the still-live 2022 unveil page says Hopper/Ada — superseded in Mar 2024, a stale-source trap |
@@ -96,8 +96,13 @@ Status: ✅ confirmed · 🟡 partly (kept with correction) · ❌ refuted (excl
   Our earlier COQOS row should be read as Qualcomm-camp IP.
 - **Classic SOME/IP predates Adaptive**: SOME/IP Transformer standardized in AUTOSAR
   4.2.1 (2016); AP's first release was R17-03 (March 2017; R17-10 was the second release).
+  *First-release label verified 2026-07-14 against autosar.org: the R17-03 standards set
+  is dated 2017-03-31, and AUTOSAR's own R17-10 announcement (2017-10-27) presents R17-10
+  as a feature release on top of it — full source list in
+  `research/fact-check-2026-07-14.md`.*
 - **Adaptive safety ceiling is moving**: MICROSAR Adaptive Safe ASIL-B shipping, ASIL-D
-  planned; Wind River Adaptive safety concept assessed ASIL-D-suitable (TÜV SÜD).
+  planned; Wind River Adaptive safety concept assessed ASIL-D-suitable (TÜV SÜD,
+  2019-10-15 press release — program assessment, not a completed certification).
 - **AUTOSAR Adaptive DM implements ASAM SOVD v1.0.0** alongside ISO 14229-1 — the
   UDS→SOVD bridge is already inside the platform spec.
 
@@ -157,7 +162,7 @@ its two load-bearing new sources were then re-fetched and verified here. Refinem
   RS_OperatingSystemInterface (PSE51) · SWS_OS (Classic) · SOME/IP Transformer 4.2.1
 - asam.net: SOVD standard page ("developed… not to replace… UDS but to coexist")
 - developer.nvidia.com: DriveOS 7.0.3 Foundation Services ("Multiple Guest OS are not
-  supported…") · SoC-to-MCU Communication (Common Interface over UDP) · DriveOS 7.0.3
+  supported…") · SoC-to-MCU Communication (Common Interface over UDP over Ethernet) · DriveOS 7.0.3
   virtualization docs
 - nvidia.com in-vehicle-computing (Blackwell; ">1,000 INT8 TOPS (2,000 FP4 TFLOPs)")
 - vector.com: news 2025-08-25 "On the fast track…" (FSI + companion-MCU reference

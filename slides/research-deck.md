@@ -830,7 +830,7 @@ The standards that make this vendor-neutral:
 Next five figures: the two AUTOSAR stacks, the UDS path, the honest end-to-end fleet
 picture, and why E/E consolidation makes all of it easier.
 
-<div class="gloss">This section began as an external draft report — it went through the standard audit first: 30 claims checked, 8 refuted (incl. the draft's centerpiece "virtual Classic-AUTOSAR ECU partitions on Thor"), corrections in <code>research/fleet-uds-autosar-2026-07.md</code> + manifest rows F1–F17. What you see here is the surviving, corrected version.</div>
+<div class="gloss">This section began as an external draft report — it went through the standard audit first: 30 claims checked — 7 refuted (incl. the draft's centerpiece "virtual Classic-AUTOSAR ECU partitions on Thor") + 1 with zero public documentation, corrections in <code>research/fleet-uds-autosar-2026-07.md</code> + manifest rows F1–F17. What you see here is the surviving, corrected version.</div>
 
 ---
 
@@ -868,7 +868,7 @@ picture, and why E/E consolidation makes all of it easier.
 
 They **coexist** in one vehicle — Classic on the MCUs, Adaptive on the big computers.
 
-<div class="gloss">Folklore killed by the audit: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (2016), a year <i>before</i> Adaptive's first release (R17-03, March 2017) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD · OSEK = the 1990s automotive RTOS standard Classic's OS descends from · PSE51 = minimal real-time POSIX profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3 · rows F5, F8–F10</div>
+<div class="gloss">Folklore killed by the audit: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (2016), a year <i>before</i> Adaptive's first release (R17-03, March 2017) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD (2019 program assessment, not a completed cert) · OSEK = the 1990s automotive RTOS standard Classic's OS descends from · PSE51 = minimal real-time POSIX profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3 · rows F5, F8–F10</div>
 
 ---
 

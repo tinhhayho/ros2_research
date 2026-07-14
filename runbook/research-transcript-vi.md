@@ -643,7 +643,8 @@ cloud nằm trên UDS.
 
 Và một điểm phải nói thẳng ngay từ đầu cụm này, vì nó quyết định độ tin của cả cụm slide
 tiếp theo: nó bắt đầu từ một **báo cáo bên ngoài** — đã đi qua đúng quy trình audit của
-mình: **30 nhận định được kiểm tra, 8 bị bác bỏ** — trong đó có chính luận điểm trung tâm
+mình: **30 nhận định được kiểm tra: 7 bị bác bỏ, 1 không tìm được bất kỳ tài liệu công
+khai nào** — trong nhóm bị bác có chính luận điểm trung tâm
 của báo cáo gốc ("các phân vùng ảo Classic-AUTOSAR trên Thor"). Năm hình tiếp theo là bản
 đã sửa, sống sót sau audit đó.
 
@@ -700,7 +701,7 @@ Classic **4.2.1 từ 2016** — trước cả bản đầu tiên của Adaptive 
 Classic vẫn có
 CAN/LIN/FlexRay nhưng Ethernet/SOME/IP đã ở đó từ lâu. Hàng safety — ai đó nói "Adaptive
 là hạng an toàn thấp" cũng sai: Vector đã ship MICROSAR Adaptive Safe ở **ASIL-B**, và
-các chương trình ASIL-D đang chạy — kể cả Wind River được TÜV SÜD đánh giá là
+các chương trình ASIL-D đang chạy — kể cả Wind River được TÜV SÜD đánh giá (từ 2019) là
 "ASIL-D-suitable".
 
 ## Slide 47 — Diagram: UDS diagnostic stack *(~2 phút)*
@@ -906,7 +907,8 @@ lên slide.** Deck này được viết đúng bằng quy tắc đó.
 
 Và cụm fleet/AUTOSAR/UDS vừa học không nằm trong 14 nhận định gốc — nó là một audit riêng,
 chạy sau, trên hai báo cáo bên ngoài khác: một về AUTOSAR + UDS trên Thor, một về VDA 5050.
-Tổng cộng **30 nhận định được kiểm, 8 bị bác bỏ** — trong đó có chính kiến trúc trung tâm
+Tổng cộng **30 nhận định được kiểm: 7 bị bác bỏ, 1 không có tài liệu công khai** — trong
+nhóm bị bác có chính kiến trúc trung tâm
 của báo cáo đầu (phân vùng Classic-AUTOSAR ảo trên Thor) và cú thổi phồng "Redfish/PICMG"
 của báo cáo sau. Cùng một quy tắc, áp dụng thêm một lần nữa.
 
