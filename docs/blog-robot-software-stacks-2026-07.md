@@ -411,6 +411,41 @@ navigate / stop) — the template already speaks RMF. Robots running Nav2 can us
 Try it on a workstation: `rmf_demos` (jazzy branch) simulates an entire hotel/office with
 multiple fleets — requires Ubuntu 24.04 + ROS 2 Jazzy + Gazebo Harmonic.
 
+### 4.4. VDA 5050 — the industry's fleet wire protocol, audited
+
+![VDA 5050 interface](vda5050-interface.png)
+
+Open-RMF is a *coordinator*; the industry also standardized the *wire* between any fleet
+manager and the robots — **VDA 5050**, published jointly by VDA (the German automotive
+association), VDMA and KIT-IFL. This section, like 6.7, survived an audit of an external
+draft first (14 claims, verdicts in `research/vda5050-robot-fleet-2026-07.md`, manifest
+rows V1–V12); what follows is the corrected version.
+
+- **Current version: v3.0.0, released 2026-03-19** — the "AMR release": freely-navigating
+  robots, a real zone concept (BLOCKED · SPEED_LIMIT · PRIORITY… — and *no* "charging
+  zone", whatever summaries claim: charging is the `startCharging`/`stopCharging` action
+  pair), CRITICAL/URGENT error levels. Most public write-ups still describe v2.x.
+- **The wire is MQTT (3.1.1 minimum) + JSON** — topics
+  `vda5050/v3/<manufacturer>/<serialNumber>/<topic>`: `order`, `instantActions`,
+  `zoneSet` downstream; `state`, `factsheet`, `connection`, `visualization` upstream.
+- **An order is a graph** of nodes and edges: master control releases the **base**
+  (drive it now) and plans the **horizon** — that release mechanism *is* the traffic
+  control, while the traffic *logic* itself is explicitly out of the spec's scope.
+- **Robots self-describe via the factsheet** — physically detailed (geometry, envelope
+  curves, protocol features), but no semantic sensor model.
+- **Limits, per the spec itself:** no OTA, no deep diagnostics (a flat
+  errorType/errorLevel — nothing like automotive UDS, see 6.7), security left to
+  broker/TLS configuration, safety delegated to ISO 3691-4.
+- **Adoption:** strongest in Europe (SYNAOS ecosystem: KUKA, Omron, SEW, STILL, MiR;
+  Bosch Rexroth; DS Automotion) with real North-American uptake (OTTO by Rockwell's
+  VDA 5050 certifications); Asia fragmented.
+- **The landscape around it is complementary, not competing:** MassRobotics AMR Interop
+  covers cross-fleet *state sharing* only ("not a task management type of system");
+  OPC 40010 (OPC UA Robotics) covers vertical asset/condition monitoring; and Open-RMF
+  can drive robots *over* VDA 5050 (`vda5050_connector`; MiR ships an adapter; NVIDIA's
+  Isaac Mission Dispatch speaks it) — RMF above, VDA 5050 below is a real, shipping
+  combination, not a choice.
+
 ---
 
 ## 5. NVIDIA Physical AI
@@ -835,6 +870,24 @@ For our team the rhyme with section 4 is worth noticing: Open-RMF's Fleet Adapte
 SOVD/UDS solve the same problem — a vendor-neutral seam between a fleet backend and
 heterogeneous machines — one for robots, one for cars.
 
+#### The two standard stacks, side by side
+
+![Fleet standards, robots vs cars](fleet-standards-map.png)
+
+Put section 4.4 and this section on one grid and the pattern is an *asymmetry*, not a
+deficit list. Robots standardized **fleet orchestration** — VDA 5050 as the wire,
+Open-RMF as a coordinator, MassRobotics for state-sharing — precisely the layer cars
+leave operator-proprietary (there is no cross-OEM dispatch standard for a robotaxi
+fleet). Cars standardized **diagnostics, OTA and the platform** — UDS, SOVD, UCM,
+AUTOSAR — precisely the layers robots leave to ROS 2 conventions and vendor tooling
+(InOrbit/Formant clouds ingesting `/diagnostics`; Mender/RAUC/SWUpdate as de-facto OTA
+tooling with no interop standard). Each side built the standard the other skipped. The
+gap both sides share: no semantic capability discovery — nothing like a UDS DID
+dictionary for "what can this machine actually see and do"; VDA 5050's factsheet is
+physical/protocol only. And the two worlds are drifting toward each other: SOVD borrowed
+REST/JSON from the software world, and the emerging ISO work on mobile-robot
+interoperability builds directly on VDA 5050 + MassRobotics.
+
 ---
 
 ## 7. Trust, but audit
@@ -860,7 +913,12 @@ re-verified. The full claim-by-claim trail lives in `research/claims-audit-2026-
 Section 6.7 is the method's best showcase yet: an external draft arrived polished and
 plausible, and the audit refuted 8 of its 30 claims — including its centerpiece
 architecture — before a word of it reached this document
-(`research/fleet-uds-autosar-2026-07.md`).
+(`research/fleet-uds-autosar-2026-07.md`). Section 4.4 got the same treatment (14
+claims; the draft's "charging zone" and its proposed platform-standard trend were
+struck). And the rule works on our own writing too: a third pass over the new section
+2.6 caught a from-memory "5–7 threads" figure and replaced it with a measured **15**
+(`docs/img/demo1_threads.txt`, `research/info-audit-2026-07-14.md`) — the drafted number
+was off by 2×, which is the best argument for the capture rule we know of.
 
 ---
 
@@ -996,6 +1054,7 @@ what turns ~9 calls/s into a usable command rate.
 - E/E consolidation — bosch-mobility.com zone-ECU · nxp.com central compute
 - DriveOS 7.0.3 single-guest + SoC↔MCU interface — developer.nvidia.com/docs/drive (Foundation Services, SoC-to-MCU Communication)
 - Audit of the source draft — `research/fleet-uds-autosar-2026-07.md` + manifest rows F1–F17
+- VDA 5050 (section 4.4) — github.com/VDA5050/VDA5050 (spec + 3.0.0 release, 2026-03-19) · ifr.org "VDA 5050 explained" · synaos.com · ottomotors.com (Rockwell certifications) · massrobotics.org · reference.opcfoundation.org (OPC 40010) · index.ros.org/p/vda5050_connector · github.com/nvidia-isaac/isaac_mission_dispatch · audit: `research/vda5050-robot-fleet-2026-07.md` (V1–V12)
 
 *Demo numbers (the GR00T inference, the QoS/RMW matrices) are our own captured runs,
 July 2026. Per-claim citations plus the audit trail: `research/claims-audit-2026-07.md`
