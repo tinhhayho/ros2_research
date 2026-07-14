@@ -10,6 +10,9 @@ docker/image.env
 # optional PDF export of the slides (HTML is the committed deliverable)
 slides/slides.pdf
 
+# optional text-only PPTX export (a hand-editing starting point, not a deliverable)
+slides/*.pptx
+
 # PNG renders of the SVG diagrams (verification only; the .svg files are the source)
 slides/assets/*.png
 

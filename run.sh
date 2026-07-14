@@ -56,6 +56,11 @@ slides_pdf() {
     "$MARP" slides.md -o slides.pdf --pdf --allow-local-files
   echo "==> slides/slides.pdf built."
 }
+slides_pptx() {
+  # text-only .pptx mirror of the research deck (stdlib only, no deps);
+  # image slides become paste-here placeholders — see scripts/build_pptx.py
+  python3 scripts/build_pptx.py "$@"
+}
 
 # Allow the container (local, non-network client) to talk to the host X server.
 gui_prep() {
@@ -114,6 +119,7 @@ Usage: ./run.sh <target>   (or: make <target>)
   slides      Build slides/slides.html (the committed deliverable)
   slides-research  Build slides/research.html (deep-research findings deck)
   slides-pdf  Also export slides/slides.pdf (optional)
+  slides-pptx Text-only slides/research.pptx (paste images by hand; optional)
   test        Run all verify scripts
   clean       Stop containers + remove colcon artifacts
 EOF
@@ -130,6 +136,7 @@ case "${1:-help}" in
   slides) slides ;;
   slides-research) slides_research ;;
   slides-pdf) slides_pdf ;;
+  slides-pptx) shift; slides_pptx "$@" ;;
   test) test_all ;;
   clean) clean ;;
   help|-h|--help) usage ;;
