@@ -76,6 +76,8 @@ independent audit pass on 2026-07-12. Result: **13 confirmed · 1 corrected**.
 | R12 | ros_gz_sim_demos diff_drive demo, model vehicle_blue, /model/vehicle_blue/cmd_vel; Jazzy pairs Gazebo Harmonic | https://raw.githubusercontent.com/gazebosim/ros_gz/ros2/ros_gz_sim_demos/config/diff_drive.yaml · https://www.openrobotics.org/blog/2024/5/ros-jazzy-jalisco-released | confirmed | Own-run addendum: the Jazzy **binary** ships `diff_drive.launch.py`, not the `.launch.xml` seen on the ros2 branch |
 | R13 | ros2_control_demos: example_1 RRBot / example_2 DiffBot, Jazzy docs on control.ros.org | https://github.com/ros-controls/ros2_control_demos · https://control.ros.org/jazzy/doc/ros2_control_demos/example_2/doc/userdoc.html | confirmed | |
 | R14 | ROSCon 2026 Toronto Sept 22–24; ROSCon 2025 Singapore | https://roscon.ros.org/2026/ | confirmed | |
+| R15 | One "simple" C++ node = **15 OS threads** (main + executor/rcl + tracing + `dds.*` I/O pack; rmw_fastrtps_cpp, Jazzy) | own capture: `docs/img/demo1_threads.txt` (talker_cpp, 2026-07-14) | own-run | replaces an uncaptured "5–7 threads" figure caught by the 2026-07-14 info audit; thread count varies by RMW vendor |
+| R16 | Intra-process comms is **opt-in** per node (`use_intra_process_comms(true)`), rclcpp-only — composition alone does not enable it | https://design.ros2.org/articles/intraprocess_communications.html | confirmed | corrects the 2026-07-14 first-draft wording that implied composition ⇒ automatic pointer-pass (info-audit 2026-07-14, MAJOR 1) |
 
 Own-run artifacts for the deep-dive: `docs/img/ros2_gz_diffdrive.png` (Gazebo Harmonic
 diff-drive, before/after 14 s Twist) and `docs/img/ros2_moveit_panda.png` (MoveIt 2

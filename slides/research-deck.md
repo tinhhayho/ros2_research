@@ -167,6 +167,86 @@ Docs: **docs.ros.org** · package index: **index.ros.org** · our distro: **Jazz
 
 ---
 
+<!-- _class: diagram -->
+
+{{diagram:node-process-graph}}
+
+---
+
+## A node is a name, not a thread
+
+<style scoped>
+  section { font-size: 20.5px; padding-top: 38px; }
+  h2 { margin-bottom: 6px; }
+  ul { margin-top: 4px; }
+  .gloss { font-size: 13.5px; margin-top: 8px; }
+</style>
+
+The word "node" trips up every firmware engineer — it sounds like "task". It isn't:
+
+- A **node = an identity in the graph**: a name (`/camera`) + its endpoints
+  (publishers, subscriptions, services, timers, parameters). It's an *object*,
+  not a unit of execution
+- **The process/thread mapping is free**: 1 process = 1 node (classic, our demo-1
+  runs 5 of these) · 1 process = N nodes (**composition**) — and with **opt-in**
+  intra-process comms (rclcpp-only: `use_intra_process_comms(true)`), co-located
+  nodes pass pointers: no serialization, no network
+- **Threads belong to the executor, not the node**: a `SingleThreadedExecutor` runs
+  *every* callback of *every* node in it sequentially; `MultiThreadedExecutor` uses a
+  pool. DDS adds its own I/O threads underneath either way
+- **Callbacks ≠ ISRs**: the executor runs each callback to completion — no priority
+  preemption between callbacks. A stuck callback starves a single-threaded executor
+  outright (a multi-threaded one merely degrades)
+- Corollary you already know: hard-RT loops don't live in callbacks — `ros2_control`
+  runs its 1 kHz loop in a plain `SCHED_FIFO` thread *outside* the graph
+
+<div class="gloss">executor = the event loop that dequeues ready work (timer fired, message arrived) and invokes your callbacks · composition = loading several nodes into one container process · measured on our demo-1 (own capture: docs/img/demo1_threads.txt): the C++ talker alone — one node, one process — is <b>15 OS threads</b>: main + executor/rcl + tracing + a dozen <code>dds.*</code> I/O threads (rmw_fastrtps_cpp, the Jazzy default)</div>
+
+---
+
+## The graph is discovered, not drawn
+
+<style scoped>
+  section { font-size: 20.5px; padding-top: 38px; }
+  h2 { margin-bottom: 6px; }
+  table { font-size: 16px; }
+  table td, table th { padding: 3px 9px; }
+  .gloss { font-size: 13.5px; margin-top: 8px; }
+</style>
+
+No GUI, no wiring file, no code generation. A connection exists because **names match**:
+
+`create_publisher("chatter")` in one program + `create_subscription("chatter")` in
+another + compatible type & QoS → discovery handshake → an edge in the graph. Stop a
+process and its edges vanish. **`rqt_graph` is an X-ray viewer, not an editor.**
+
+Where the real "wiring harness" lives: **topic names in code** + **launch files** —
+which start the nodes and re-wire them (`remappings=[('image_raw', '/front_cam/image')]`),
+set namespaces and parameters.
+
+| | AUTOSAR Classic (section 6) | ROS 2 |
+|---|---|---|
+| Connections declared | **ARXML, at build time** (SWC ports) | **topic names, at runtime** |
+| Who wires it | generated **RTE** glue | **DDS discovery** matches names |
+| The diagram is | the *input* (authoring artifact) | the *output* (an observation) |
+| Change a connection | rebuild | restart with a different remap |
+
+<div class="gloss">the one draw-then-run GUI in this ecosystem is Groot2 — but that edits the <i>behavior tree inside</i> a node (Nav2's BT navigator), not the graph between nodes · remapping = renaming a node's topics/name/namespace at launch, the ROS 2 equivalent of re-pinning a harness connector</div>
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:dds-scope}}
+
+---
+
+<!-- _class: diagram -->
+
+{{diagram:robot-node-graph}}
+
+---
+
 ## Calling the framework — a complete node in 20 lines
 
 <style scoped>
@@ -316,6 +396,9 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
 
 - **What it is:** the coordination layer for **many robots from many vendors** in one
   building — traffic negotiation, task dispatch, doors/lifts/chargers
+- **RMF Core is itself ROS 2 nodes** — the scheduler, dispatcher and negotiation arrive
+  as nodes + topics in the same graph ("installing RMF" = launching more nodes);
+  even doors and lifts join via small adapter nodes
 - **Not** middleware, **not** a Nav2 replacement — robots plug in via *fleet adapters*
 - **Health 2026:** alive under OSRA (+ Intrinsic backing), active Jazzy branches;
   flagship deployments = Singapore hospitals/airport → *niche but real*
@@ -1100,7 +1183,11 @@ Everything is public: weights on Hugging Face (`nvidia/GR00T-N1.7-3B` — the ga
 A lookup slide — don't read it, screenshot it. Every abbreviation from the robotics half:
 
 - **ROS 2** — Robot Operating System 2: middleware framework for robots (not an OS)
-- **DDS** — Data Distribution Service: the pub/sub middleware standard under ROS 2
+- **DDS** — Data Distribution Service: the pub/sub middleware standard under ROS 2 (an OMG standard with several interoperable vendor implementations)
+- **executor** — the event loop that runs a node's callbacks; owns the threads (nodes don't)
+- **composition / intra-process** — several nodes in one process / the opt-in (rclcpp-only) zero-serialization path between them
+- **remapping** — renaming a node's topics, node name or namespace at launch time: ROS 2's wiring harness
+- **XRCE-DDS / Agent** — the slimmed client protocol micro-ROS speaks / the big-computer process that joins the graph on the MCU's behalf
 - **RMW** — ROS MiddleWare interface: the swappable layer picking the DDS (or Zenoh) implementation
 - **QoS** — Quality of Service: per-topic delivery contracts (reliability, history, deadline)
 - **LTS / EOL** — Long-Term Support / End Of Life (distro lifecycle)

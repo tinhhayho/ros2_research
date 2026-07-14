@@ -1,0 +1,20 @@
+$ ws/install/demo_basic_cpp/lib/demo_basic_cpp/talker_cpp &   # the C++ /talker_cpp node from Demo 1, one plain process
+$ ps -T -p 37
+    PID    SPID TTY          TIME CMD
+     37      37 ?        00:00:00 talker_cpp
+     37      39 ?        00:00:00 talker_cpp-ust
+     37      40 ?        00:00:00 talker_cpp-ust
+     37      41 ?        00:00:00 talker_cpp
+     37      42 ?        00:00:00 talker_cpp
+     37      43 ?        00:00:00 dds.shm.wdog
+     37      44 ?        00:00:00 dds.ev.0
+     37      45 ?        00:00:00 dds.udp.17910
+     37      46 ?        00:00:00 dds.udp.17900
+     37      47 ?        00:00:00 dds.shm.17911
+     37      48 ?        00:00:00 dds.udp.17911
+     37      49 ?        00:00:00 dds.asyn.0.0
+     37      50 ?        00:00:00 dds.shm.7000
+     37      51 ?        00:00:00 dds.udp.7000
+     37      52 ?        00:00:00 talker_cpp
+
+# thread count: 15 (RMW: rmw_fastrtps_cpp; ros:jazzy image pinned by digest)

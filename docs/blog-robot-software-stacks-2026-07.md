@@ -219,6 +219,79 @@ C++ `/talker_cpp` publish the same `/chatter` topic into `/listener` — the sub
 tell the languages apart; the service/action servers idle until called. Nobody configured
 any master: pure DDS discovery.
 
+### 2.6. Nodes, the graph, and DDS — what is actually talking to what
+
+![Node vs process vs thread](node-process-graph.png)
+
+Three words carry most of ROS 2's conceptual weight, and all three mislead a firmware
+engineer on first contact.
+
+**A node is a name, not a thread.** A node is an *object* — an identity in the graph: a
+name (`/camera`) plus its endpoints (publishers, subscriptions, services, timers,
+parameters). How it maps to the OS is a separate, free choice: one process per node (the
+classic layout — our Demo 1 runs five), or several nodes **composed** into one process —
+where, if they **opt in** to intra-process communication
+(`use_intra_process_comms(true)`; rclcpp/C++ only, not rclpy), co-located nodes exchange
+messages as a pointer pass: no serialization, no network. Composition alone does *not*
+switch this on — non-opting composed nodes still ride the normal DDS path. Threads
+belong to the **executor** — the event loop that
+dequeues ready work and invokes callbacks. A `SingleThreadedExecutor` runs *every*
+callback of every node in it sequentially, to completion: no priority preemption between
+callbacks, which is why one stuck callback starves its executor — and why hard-RT loops
+live *outside* the graph in a plain `SCHED_FIFO` thread (section 2.1's `ros2_control`
+pattern). Underneath either way, DDS runs its own pack of I/O threads — and the count
+surprises everyone. Our captured run (`docs/img/demo1_threads.txt`): Demo 1's C++ talker
+— one node, one process — is **15 OS threads** in `ps -T`: main + executor/rcl + tracing
++ a dozen `dds.*` I/O threads (Fast DDS, the Jazzy default RMW).
+
+**The graph is discovered, not drawn.** There is no GUI where you wire nodes together,
+no wiring file, no code generation. A connection exists because *names match*:
+`create_publisher("chatter")` in one program, `create_subscription("chatter")` in
+another, compatible type and QoS — the discovery handshake creates the edge. Stop a
+process and its edges vanish. `rqt_graph` is an X-ray viewer, not an editor. The actual
+"wiring harness" is the topic names in code plus **launch files**, which start nodes and
+re-wire them via *remapping* (`('image_raw', '/front_cam/image')`). The contrast with
+section 6's AUTOSAR Classic could not be sharper: there, connections are declared in
+ARXML at build time and a generated RTE wires them — the diagram is the *input*. In
+ROS 2 the diagram is the *output*: an observation of whatever matched at runtime. (The
+one draw-then-run GUI in this ecosystem, Groot2, edits the behavior tree *inside* a node
+— not the graph between nodes.)
+
+![A real robot's graph](robot-node-graph.png)
+
+Here is what those rules produce at robot scale — section 3.1's wheeled-AMR stack drawn
+as the graph `rqt_graph` would show: driver nodes fan `/scan` out to both `/slam_toolbox`
+and `/amcl`; `/ekf` fuses `/imu` with the wheel `/odom` that `ros2_control`'s
+`/controller_manager` publishes; everything converges on the Nav2 servers, whose
+`/cmd_vel` goes back down to `/controller_manager`; and the fleet layer reaches in
+through exactly one door — the `/navigate_to_pose` *action* into `/bt_navigator`. Note
+where the picture stops: below `/controller_manager` there are no topics, only the
+1 kHz function-call loop and the fieldbus.
+
+![What DDS connects](dds-scope.png)
+
+**DDS connects processes, not controllers.** DDS (Data Distribution Service, an OMG
+standard with several interoperable implementations — Fast DDS, Cyclone) is the
+network stack under the graph, and its participants are *OS processes with an IP stack*.
+The same pub/sub API covers three cases transparently: two nodes in one process
+(opt-in intra-process, DDS bypassed), two processes on one machine (shared memory/loopback),
+and processes across machines (Ethernet, multicast discovery). Below that line — MCUs
+and fieldbuses, the FOC and safety loops on EtherCAT/CAN-FD — there is no DDS: no IP
+stack, and no desire for one (that world wants static, predictable frames — the same
+instinct that makes vehicle body ECUs speak signal-based CAN under Classic AUTOSAR
+rather than SOME/IP). The sanctioned bridge is **micro-ROS**: not an RTOS and not an
+application, but a *client library* (`rclc` + XRCE-DDS) linked into your firmware,
+running as a task on *your* RTOS, speaking a slimmed protocol to an **Agent** on the big
+computer — and the Agent joins the graph on the MCU's behalf. The automotive mirror
+holds here too: on DRIVE Thor, the in-guest middleware (NvStreams, or AUTOSAR Adaptive's
+`ara::com` with its SOME/IP and DDS bindings) plays exactly the role DDS plays on a
+robot computer.
+
+One consequence worth spelling out, because it surprises everyone the first time:
+**Open-RMF's core is itself ROS 2 nodes.** The traffic scheduler, the task dispatcher,
+the negotiation machinery — they arrive as nodes and topics in the same graph as
+everything else. "Installing RMF" means launching more nodes.
+
 ---
 
 ## 3. Reality check
@@ -286,7 +359,9 @@ are the same everywhere anyway.
 Middleware Framework) is not part of any robot and never replaces Nav2. Every robot (or
 every vendor's fleet) keeps its own stack; a **Fleet Adapter** wraps each fleet; the RMF
 Core coordinates *across* adapters: traffic scheduling, task auctioning, and shared
-infrastructure (lifts, doors, chargers).
+infrastructure (lifts, doors, chargers). And per section 2.6: RMF Core is not a separate
+server stack — it is *ROS 2 nodes*, living in the same graph as the robots it
+coordinates; the fleet adapters and even the door/lift adapters are nodes too.
 
 Status in 2026: alive and maintained under OSRA (the Open Source Robotics Alliance — the
 body governing the Open Robotics projects since 2024, backed by Intrinsic among others),

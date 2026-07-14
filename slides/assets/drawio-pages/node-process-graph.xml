@@ -1,0 +1,87 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="600" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="npg-title" value="A node is a name, not a thread &#8212; processes, executors, nodes" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="60" y="20" width="840" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- OS process A -->
+    <mxCell id="npg-proc-a" value="&lt;b&gt;OS process A (one program)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="60" y="70" width="430" height="310" as="geometry" />
+    </mxCell>
+
+    <mxCell id="npg-exec-a" value="Executor &#8212; event loop, owns 1..N callback threads" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="75" y="102" width="400" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="npg-node-camera" value="&lt;b&gt;Node /camera&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;pub /image&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;timer 30 Hz&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="75" y="146" width="190" height="92" as="geometry" />
+    </mxCell>
+
+    <mxCell id="npg-node-detect" value="&lt;b&gt;Node /detect&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;sub /image&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;pub /obstacles&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="285" y="146" width="190" height="92" as="geometry" />
+    </mxCell>
+
+    <mxCell id="npg-tag-intra" value="intra-process (opt-in) &#8212; pointer pass, no serialization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=10.5;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="139" y="250" width="272" height="28" as="geometry" />
+    </mxCell>
+
+    <mxCell id="npg-dds-a" value="DDS threads &#8212; network I/O" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="75" y="334" width="400" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- OS process B -->
+    <mxCell id="npg-proc-b" value="&lt;b&gt;OS process B&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+      <mxGeometry x="600" y="70" width="300" height="310" as="geometry" />
+    </mxCell>
+
+    <mxCell id="npg-exec-b" value="Executor &#8212; event loop, owns 1..N callback threads" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="615" y="102" width="270" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="npg-node-planner" value="&lt;b&gt;Node /planner&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;sub /obstacles&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:10.5px&quot;&gt;pub /cmd_vel&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=12;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="655" y="146" width="190" height="92" as="geometry" />
+    </mxCell>
+
+    <mxCell id="npg-dds-b" value="DDS threads &#8212; network I/O" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="615" y="334" width="270" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- DDS bus -->
+    <mxCell id="npg-conn-a" style="startArrow=classic;endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="275" y="380" as="sourcePoint" />
+        <mxPoint x="275" y="412" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="npg-conn-b" style="startArrow=classic;endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="750" y="380" as="sourcePoint" />
+        <mxPoint x="750" y="412" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="npg-bus-line" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="170" y="412" as="sourcePoint" />
+        <mxPoint x="790" y="412" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="npg-bus-label" value="DDS &#8212; discovery + topics (/obstacles)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="330" y="423" width="300" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Statements strip -->
+    <mxCell id="npg-statements" value="1 process = 1 node &#8212; the classic layout &#183; 1 process = N nodes &#8212; composition &#183; threads belong to the EXECUTOR, not the node" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="60" y="448" width="840" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote -->
+    <mxCell id="npg-footnote" value="callback model: the executor runs each callback to completion &#8212; no priority preemption between callbacks (unlike RTOS tasks);&lt;br&gt;hard-RT loops live outside the graph (ros2_control)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="544" width="840" height="36" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
