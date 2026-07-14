@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Helvetica, Arial, sans-serif">
   <rect x="0" y="0" width="960" height="600" fill="#ffffff"/>
   <defs>
-    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    <marker id="arrG" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#1E7D32"/>
     </marker>
     <marker id="arrR" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L9,3 L0,6 z" fill="#C0392B"/>
@@ -10,138 +10,159 @@
     <marker id="arrF" markerWidth="14" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="userSpaceOnUse">
       <path d="M0,0 L12,4 L0,8 z" fill="#444"/>
     </marker>
+    <marker id="arrN" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#888"/>
+    </marker>
   </defs>
 
   <!-- Title -->
-  <text x="480" y="40" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">From fleet to joint — how the layers actually talk</text>
+  <text x="480" y="36" text-anchor="middle" font-size="25" font-weight="700" fill="#1b2b4a">From fleet to joint &#8212; how the layers actually talk</text>
 
-  <!-- ===================== Fleet strip ===================== -->
-  <rect x="10" y="60" width="940" height="62" rx="8" fill="#DCE9F7" stroke="#6F9BD1" stroke-width="1.5"/>
-  <text x="26" y="84" font-size="13" font-weight="700" fill="#1b2b4a">OPEN-RMF FLEET LAYER (whole building)</text>
-  <text x="26" y="104" font-size="11.5" fill="#234">RMF Core = ROS 2 nodes: traffic schedule &#183; negotiation &#183; task dispatch &#8212; cadence: seconds&#8211;minutes (details: RMF figure)</text>
-  <line x1="205" y1="122" x2="205" y2="148" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-  <text x="215" y="140" font-size="10.5" fill="#6B4A2B">fleet adapter A: tasks &#8594; Nav2 goals (topics / actions)</text>
+  <!-- ===================== Fleet layer (nodes on a building server) ===================== -->
+  <rect x="10" y="52" width="940" height="52" rx="8" fill="#EAF1FB" stroke="#6F9BD1" stroke-width="1.5"/>
+  <text x="24" y="72" font-size="12" font-weight="700" fill="#1b2b4a">OPEN-RMF FLEET LAYER (building server) &#8212; RMF Core is itself ROS 2 nodes</text>
+  <text x="24" y="90" font-size="9.5" fill="#234">traffic schedule &#183; negotiation &#183; task dispatch &#8212; cadence: seconds&#8211;minutes &#183; robots plug in via fleet adapters (details: RMF figure)</text>
 
-  <!-- ===================== ROS 2 graph ===================== -->
-  <rect x="10" y="150" width="420" height="330" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
-  <text x="26" y="172" font-size="13" font-weight="700" fill="#1b2b4a">ROBOT A &#8212; ROS 2 GRAPH</text>
-  <text x="26" y="188" font-size="10.5" fill="#234">async pub/sub over DDS &#183; executor + DDS I/O threads</text>
+  <line x1="40" y1="104" x2="40" y2="166" stroke="#1E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="50" y="126" font-size="9" fill="#1E7D32">fleet adapter A: tasks &#8594; Nav2 goals (topics / actions)</text>
 
-  <rect x="28" y="200" width="108" height="40" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
-  <text x="82" y="217" text-anchor="middle" font-size="12" font-weight="600" fill="#234">/camera</text>
-  <text x="82" y="232" text-anchor="middle" font-size="10" fill="#557">image_raw 30 Hz</text>
-  <rect x="250" y="200" width="108" height="40" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
-  <text x="304" y="217" text-anchor="middle" font-size="12" font-weight="600" fill="#234">/detector</text>
-  <text x="304" y="232" text-anchor="middle" font-size="10" fill="#557">vision</text>
-  <line x1="136" y1="220" x2="246" y2="220" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+  <!-- ===================== Left column: autonomy nodes ===================== -->
+  <text x="160" y="152" font-size="11.5" font-weight="700" fill="#1b2b4a">ROBOT A'S GRAPH</text>
 
-  <rect x="24" y="256" width="116" height="54" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
-  <text x="82" y="272" text-anchor="middle" font-size="11.5" font-weight="600" fill="#234">Nav2 stack</text>
-  <text x="82" y="286" text-anchor="middle" font-size="9.5" fill="#557">a family of nodes;</text>
-  <text x="82" y="300" text-anchor="middle" font-size="9.5" fill="#557">/controller_server</text>
-  <rect x="204" y="256" width="212" height="52" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
-  <text x="310" y="275" text-anchor="middle" font-size="11.5" font-weight="600" fill="#234">diff_drive_controller &#8212; subscription</text>
-  <text x="310" y="292" text-anchor="middle" font-size="10.5" fill="#557">callback runs on a normal thread</text>
-  <line x1="144" y1="282" x2="200" y2="282" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-  <text x="168" y="274" text-anchor="middle" font-size="9.5" fill="#557">/cmd_vel 20 Hz</text>
+  <rect x="14" y="170" width="126" height="60" rx="8" fill="#EAF1FB" stroke="#6F9BD1" stroke-width="1.4"/>
+  <text x="77" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#234">Nav2 stack</text>
+  <text x="77" y="204" text-anchor="middle" font-size="9" fill="#557">a family of nodes;</text>
+  <text x="77" y="218" text-anchor="middle" font-size="9" fill="#557">/controller_server</text>
 
-  <rect x="28" y="340" width="108" height="40" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
-  <text x="82" y="357" text-anchor="middle" font-size="12" font-weight="600" fill="#234">RViz &#183; rosbag</text>
-  <text x="82" y="372" text-anchor="middle" font-size="10" fill="#557">anyone may listen</text>
-  <rect x="204" y="334" width="212" height="52" rx="6" fill="#ffffff" stroke="#9BBCE0" stroke-width="1.2"/>
-  <text x="310" y="353" text-anchor="middle" font-size="11.5" font-weight="600" fill="#234">&#8220;postman&#8221; publishes /joint_states</text>
-  <text x="310" y="370" text-anchor="middle" font-size="10.5" fill="#557">normal thread, outside the RT loop</text>
-  <line x1="200" y1="360" x2="140" y2="360" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-  <text x="170" y="352" text-anchor="middle" font-size="9.5" fill="#557">/joint_states</text>
+  <rect x="14" y="262" width="92" height="44" rx="8" fill="#EAF1FB" stroke="#6F9BD1" stroke-width="1.4"/>
+  <text x="60" y="281" text-anchor="middle" font-size="11" font-weight="700" fill="#234">/camera</text>
+  <text x="60" y="296" text-anchor="middle" font-size="9" fill="#557">sensor driver</text>
 
-  <text x="220" y="424" text-anchor="middle" font-size="10" fill="#557">transport: UDP between hosts &#183; DDS shared memory on one host &#183;</text>
-  <text x="220" y="440" text-anchor="middle" font-size="10" fill="#557">rclcpp intra-process pointers inside one process (opt-in, composition)</text>
-  <text x="220" y="464" text-anchor="middle" font-size="10" fill="#557">loses a packet? fine &#8212; best-effort QoS, nobody misses a deadline</text>
+  <rect x="190" y="262" width="100" height="44" rx="8" fill="#EAF1FB" stroke="#6F9BD1" stroke-width="1.4"/>
+  <text x="240" y="281" text-anchor="middle" font-size="11" font-weight="700" fill="#234">/detector</text>
+  <text x="240" y="296" text-anchor="middle" font-size="9" fill="#557">vision</text>
+  <line x1="106" y1="284" x2="186" y2="284" stroke="#1E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="146" y="276" text-anchor="middle" font-size="9" fill="#1E7D32">/image_raw</text>
 
-  <!-- ===================== RT boundary band ===================== -->
-  <rect x="438" y="150" width="112" height="330" rx="8" fill="#FFF3D0" stroke="#D9A64A" stroke-width="1.5"/>
-  <text x="494" y="172" text-anchor="middle" font-size="12" font-weight="700" fill="#8A5A00">RT BOUNDARY</text>
-  <text x="494" y="188" text-anchor="middle" font-size="9.5" fill="#8A5A00">no call crosses &#8212; only</text>
-  <text x="494" y="200" text-anchor="middle" font-size="9.5" fill="#8A5A00">lock-free mailboxes</text>
+  <rect x="14" y="356" width="126" height="60" rx="8" fill="#EAF1FB" stroke="#6F9BD1" stroke-width="1.4"/>
+  <text x="77" y="378" text-anchor="middle" font-size="11" font-weight="700" fill="#234">RViz &#183; rosbag</text>
+  <text x="77" y="393" text-anchor="middle" font-size="9" fill="#557">any node may listen &#8212;</text>
+  <text x="77" y="406" text-anchor="middle" font-size="9" fill="#557">or nobody at all</text>
 
-  <rect x="446" y="248" width="96" height="66" rx="6" fill="#ffffff" stroke="#D9A64A" stroke-width="1.2"/>
-  <text x="494" y="265" text-anchor="middle" font-size="10.5" font-weight="600" fill="#8A5A00">&#8595; commands</text>
-  <text x="494" y="280" text-anchor="middle" font-size="9.5" fill="#555">RealtimeBuffer</text>
-  <text x="494" y="293" text-anchor="middle" font-size="9.5" fill="#555">latest wins &#183;</text>
-  <text x="494" y="306" text-anchor="middle" font-size="9.5" fill="#555">watchdog timeout</text>
+  <!-- topic arrows crossing into / out of the process -->
+  <line x1="140" y1="212" x2="316" y2="212" stroke="#1E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="228" y="204" text-anchor="middle" font-size="9" fill="#1E7D32">/cmd_vel 20 Hz</text>
+  <line x1="318" y1="372" x2="144" y2="372" stroke="#1E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="230" y="364" text-anchor="middle" font-size="9" fill="#1E7D32">/joint_states</text>
 
-  <rect x="446" y="330" width="96" height="66" rx="6" fill="#ffffff" stroke="#D9A64A" stroke-width="1.2"/>
-  <text x="494" y="347" text-anchor="middle" font-size="10.5" font-weight="600" fill="#8A5A00">&#8593; state</text>
-  <text x="494" y="362" text-anchor="middle" font-size="9.5" fill="#555">RealtimePublisher</text>
-  <text x="494" y="375" text-anchor="middle" font-size="9.5" fill="#555">try-lock &#8212; RT side</text>
-  <text x="494" y="388" text-anchor="middle" font-size="9.5" fill="#555">never waits</text>
+  <!-- ===================== The controller_manager process ===================== -->
+  <rect x="310" y="138" width="502" height="332" rx="10" fill="#FCFCFC" stroke="#888888" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="322" y="158" font-size="12.5" font-weight="700" fill="#1b2b4a">ONE PROCESS &#8212; controller_manager (ros2_control)</text>
+  <text x="322" y="171" font-size="9" fill="#555">each controller gets its own small node; all share the executor &#8212; the RT loop is a separate thread</text>
 
-  <!-- mailbox arrows -->
-  <line x1="416" y1="282" x2="442" y2="282" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
-  <line x1="542" y1="290" x2="576" y2="298" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
-  <line x1="576" y1="330" x2="542" y2="352" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
-  <line x1="442" y1="362" x2="416" y2="362" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
+  <!-- controller nodes (executor side) -->
+  <rect x="322" y="178" width="130" height="68" rx="8" fill="#EAF1FB" stroke="#6F9BD1" stroke-width="1.4"/>
+  <text x="387" y="196" text-anchor="middle" font-size="9.5" font-weight="700" fill="#234">/diff_drive_controller</text>
+  <text x="387" y="211" text-anchor="middle" font-size="8.5" fill="#557">subscribes /cmd_vel;</text>
+  <text x="387" y="224" text-anchor="middle" font-size="8.5" fill="#557">callback = executor</text>
+  <text x="387" y="237" text-anchor="middle" font-size="8.5" fill="#557">thread, not RT</text>
 
-  <!-- ===================== ros2_control ===================== -->
-  <rect x="558" y="150" width="252" height="330" rx="8" fill="#FDEBE9" stroke="#D98880" stroke-width="1.5"/>
-  <text x="574" y="172" font-size="13" font-weight="700" fill="#922B21">ros2_control &#8212; controller_manager</text>
-  <text x="574" y="188" font-size="10.5" fill="#922B21">one SCHED_FIFO thread @ 1 kHz &#183; PREEMPT_RT</text>
+  <rect x="322" y="330" width="130" height="68" rx="8" fill="#EAF1FB" stroke="#6F9BD1" stroke-width="1.4"/>
+  <text x="387" y="348" text-anchor="middle" font-size="9.5" font-weight="700" fill="#234">/joint_state_broadcaster</text>
+  <text x="387" y="363" text-anchor="middle" font-size="8.5" fill="#557">publishes /joint_states</text>
+  <text x="387" y="376" text-anchor="middle" font-size="8.5" fill="#557">from a normal thread</text>
+  <text x="387" y="389" text-anchor="middle" font-size="8.5" fill="#557">(the &#8220;postman&#8221;)</text>
 
-  <text x="691" y="208" text-anchor="middle" font-size="10" fill="#922B21">every 1 ms, in this order:</text>
+  <!-- mailboxes -->
+  <rect x="470" y="178" width="92" height="64" rx="6" fill="#FFF3D0" stroke="#D9A64A" stroke-width="1.4"/>
+  <text x="516" y="194" text-anchor="middle" font-size="9.5" font-weight="700" fill="#8A5A00">&#8595; commands</text>
+  <text x="516" y="207" text-anchor="middle" font-size="8.5" fill="#555">RealtimeBuffer:</text>
+  <text x="516" y="219" text-anchor="middle" font-size="8.5" fill="#555">latest wins,</text>
+  <text x="516" y="231" text-anchor="middle" font-size="8.5" fill="#555">watchdog timeout</text>
 
-  <rect x="580" y="218" width="222" height="46" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
-  <text x="691" y="236" text-anchor="middle" font-size="10.5" font-weight="700" fill="#234">1 &#183; read() &#8212; sample all inputs</text>
-  <text x="691" y="253" text-anchor="middle" font-size="10" fill="#555">encoders on the bus &#8594; pos[]</text>
+  <text x="516" y="272" text-anchor="middle" font-size="10" font-weight="700" fill="#8A5A00">RT BOUNDARY</text>
+  <text x="516" y="285" text-anchor="middle" font-size="8.5" fill="#8A5A00">no call crosses &#8212;</text>
+  <text x="516" y="297" text-anchor="middle" font-size="8.5" fill="#8A5A00">only these mailboxes</text>
 
-  <rect x="580" y="276" width="222" height="68" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
-  <text x="691" y="294" text-anchor="middle" font-size="10.5" font-weight="700" fill="#234">2 &#183; update() &#8212; controllers compute</text>
-  <text x="691" y="311" text-anchor="middle" font-size="10" fill="#555">latest mailbox cmd + pos[] &#8594; cmd[]</text>
-  <text x="691" y="327" text-anchor="middle" font-size="9.5" fill="#555">(diff_drive &#183; joint_trajectory &#183; broadcaster)</text>
+  <rect x="470" y="330" width="92" height="64" rx="6" fill="#FFF3D0" stroke="#D9A64A" stroke-width="1.4"/>
+  <text x="516" y="346" text-anchor="middle" font-size="9.5" font-weight="700" fill="#8A5A00">&#8593; state</text>
+  <text x="516" y="359" text-anchor="middle" font-size="8.5" fill="#555">RealtimePublisher:</text>
+  <text x="516" y="371" text-anchor="middle" font-size="8.5" fill="#555">try-lock &#8212; RT side</text>
+  <text x="516" y="383" text-anchor="middle" font-size="8.5" fill="#555">never waits</text>
 
-  <rect x="580" y="356" width="222" height="46" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
-  <text x="691" y="374" text-anchor="middle" font-size="10.5" font-weight="700" fill="#234">3 &#183; write() &#8212; push all outputs</text>
-  <text x="691" y="391" text-anchor="middle" font-size="10" fill="#555">cmd[] &#8594; torque frames on the bus</text>
+  <!-- RT thread -->
+  <rect x="572" y="178" width="232" height="282" rx="8" fill="#FDEBE9" stroke="#D98880" stroke-width="1.5"/>
+  <text x="688" y="198" text-anchor="middle" font-size="10.5" font-weight="700" fill="#922B21">RT THREAD &#8212; SCHED_FIFO @ 1 kHz</text>
+  <text x="688" y="211" text-anchor="middle" font-size="9" fill="#922B21">PREEMPT_RT &#183; every 1 ms, in order:</text>
 
-  <text x="691" y="420" text-anchor="middle" font-size="9.5" fill="#922B21">&#8630; then the next 1 ms tick starts at read()</text>
-  <text x="691" y="433" text-anchor="middle" font-size="9.5" fill="#922B21">&#8212; runs whether or not anyone listens</text>
+  <rect x="580" y="220" width="216" height="44" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
+  <text x="688" y="238" text-anchor="middle" font-size="10.5" font-weight="700" fill="#234">1 &#183; read() &#8212; sample all inputs</text>
+  <text x="688" y="254" text-anchor="middle" font-size="9.5" fill="#555">encoders on the bus &#8594; pos[]</text>
 
-  <text x="691" y="452" text-anchor="middle" font-size="9.5" fill="#555">read()/write() = your hardware plugin (prev. slide);</text>
-  <text x="691" y="465" text-anchor="middle" font-size="9.5" fill="#555">controllers &#8596; hardware: shared handles, not topics</text>
+  <rect x="580" y="274" width="216" height="58" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
+  <text x="688" y="292" text-anchor="middle" font-size="10" font-weight="700" fill="#234">2 &#183; update() &#8212; controllers compute</text>
+  <text x="688" y="307" text-anchor="middle" font-size="9.5" fill="#555">latest mailbox cmd + pos[] &#8594; cmd[]</text>
+  <text x="688" y="321" text-anchor="middle" font-size="9" fill="#555">(diff_drive &#183; joint_state_broadcaster)</text>
+
+  <rect x="580" y="342" width="216" height="44" rx="6" fill="#ffffff" stroke="#D98880" stroke-width="1.2"/>
+  <text x="688" y="360" text-anchor="middle" font-size="10.5" font-weight="700" fill="#234">3 &#183; write() &#8212; push all outputs</text>
+  <text x="688" y="376" text-anchor="middle" font-size="9.5" fill="#555">cmd[] &#8594; torque frames on the bus</text>
+
+  <text x="688" y="402" text-anchor="middle" font-size="9" fill="#922B21">&#8630; next tick starts at read() again &#8212;</text>
+  <text x="688" y="415" text-anchor="middle" font-size="9" fill="#922B21">runs whether or not anyone listens</text>
+
+  <text x="688" y="436" text-anchor="middle" font-size="9" fill="#555">read()/write() = your hardware plugin (prev. slide);</text>
+  <text x="688" y="449" text-anchor="middle" font-size="9" fill="#555">hot path: no malloc &#183; no locks &#183; no DDS</text>
+
+  <!-- mailbox hand-off arrows -->
+  <line x1="452" y1="212" x2="466" y2="212" stroke="#C0392B" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrR)"/>
+  <line x1="562" y1="228" x2="576" y2="288" stroke="#C0392B" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrR)"/>
+  <line x1="578" y1="326" x2="566" y2="344" stroke="#C0392B" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrR)"/>
+  <line x1="468" y1="362" x2="456" y2="362" stroke="#C0392B" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrR)"/>
 
   <!-- ===================== fieldbus + MCU ===================== -->
-  <line x1="840" y1="241" x2="810" y2="241" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
-  <line x1="806" y1="379" x2="836" y2="379" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
+  <line x1="842" y1="242" x2="808" y2="242" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
+  <line x1="806" y1="364" x2="840" y2="364" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
+  <text transform="rotate(-90 825 303)" x="825" y="303" text-anchor="middle" font-size="9.5" fill="#333">CAN-FD / EtherCAT &#183; 1&#8211;10 kHz</text>
 
-  <rect x="844" y="150" width="106" height="330" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
-  <text x="897" y="176" text-anchor="middle" font-size="12" font-weight="700" fill="#333">JOINT MCU</text>
-  <text x="897" y="192" text-anchor="middle" font-size="12" font-weight="700" fill="#333">FIRMWARE</text>
-  <text x="897" y="222" text-anchor="middle" font-size="10.5" fill="#333">FOC current loop</text>
-  <text x="897" y="237" text-anchor="middle" font-size="10.5" fill="#333">8&#8211;32 kHz</text>
-  <text x="897" y="262" text-anchor="middle" font-size="10.5" fill="#333">encoder feedback</text>
-  <text x="897" y="284" text-anchor="middle" font-size="10.5" fill="#333">watchdog</text>
-  <text x="897" y="330" text-anchor="middle" font-size="10" fill="#555">ISR + ring buffer</text>
-  <text x="897" y="346" text-anchor="middle" font-size="10" fill="#555">&#8212; your world,</text>
-  <text x="897" y="362" text-anchor="middle" font-size="10" fill="#555">unchanged no</text>
-  <text x="897" y="378" text-anchor="middle" font-size="10" fill="#555">matter what the</text>
-  <text x="897" y="394" text-anchor="middle" font-size="10" fill="#555">upper stack is</text>
-
-  <text transform="rotate(-90 826 310)" x="826" y="310" text-anchor="middle" font-size="10" fill="#333">CAN-FD / EtherCAT &#183; 1&#8211;10 kHz</text>
+  <rect x="846" y="138" width="104" height="332" rx="8" fill="#E4E4E4" stroke="#8A8A8A" stroke-width="1.5"/>
+  <text x="898" y="164" text-anchor="middle" font-size="12" font-weight="700" fill="#333">JOINT MCU</text>
+  <text x="898" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#333">FIRMWARE</text>
+  <text x="898" y="212" text-anchor="middle" font-size="10.5" fill="#333">FOC current loop</text>
+  <text x="898" y="228" text-anchor="middle" font-size="10.5" fill="#333">8&#8211;32 kHz</text>
+  <text x="898" y="254" text-anchor="middle" font-size="10.5" fill="#333">encoder feedback</text>
+  <text x="898" y="276" text-anchor="middle" font-size="10.5" fill="#333">watchdog</text>
+  <text x="898" y="330" text-anchor="middle" font-size="9.5" fill="#555">ISR + ring buffer</text>
+  <text x="898" y="346" text-anchor="middle" font-size="9.5" fill="#555">&#8212; your world,</text>
+  <text x="898" y="362" text-anchor="middle" font-size="9.5" fill="#555">unchanged whatever</text>
+  <text x="898" y="378" text-anchor="middle" font-size="9.5" fill="#555">the upper stack is</text>
 
   <!-- ===================== rate ruler ===================== -->
-  <line x1="10" y1="510" x2="950" y2="510" stroke="#B0B0B0" stroke-width="1.5" marker-end="url(#arr)"/>
-  <text x="14" y="530" font-size="10.5" fill="#557">coordination &#8212; async, loss-tolerant</text>
-  <text x="946" y="530" text-anchor="end" font-size="10.5" fill="#922B21">determinism &#8212; hard deadlines</text>
-  <text x="220" y="548" text-anchor="middle" font-size="10.5" fill="#557">10&#8211;100 Hz</text>
-  <text x="494" y="548" text-anchor="middle" font-size="10.5" fill="#8A5A00">the timing contract flips here</text>
-  <text x="687" y="548" text-anchor="middle" font-size="10.5" fill="#922B21">1 kHz</text>
-  <text x="824" y="548" text-anchor="middle" font-size="10.5" fill="#333">1&#8211;10 kHz</text>
-  <text x="897" y="548" text-anchor="middle" font-size="10.5" fill="#333">8&#8211;32 kHz</text>
+  <line x1="10" y1="492" x2="950" y2="492" stroke="#B0B0B0" stroke-width="1.5" marker-end="url(#arrN)"/>
+  <text x="14" y="510" font-size="10" fill="#557">coordination &#8212; async, loss-tolerant</text>
+  <text x="946" y="510" text-anchor="end" font-size="10" fill="#922B21">determinism &#8212; hard deadlines</text>
+  <text x="150" y="528" text-anchor="middle" font-size="10" fill="#557">10&#8211;100 Hz</text>
+  <text x="516" y="528" text-anchor="middle" font-size="10" fill="#8A5A00">the timing contract flips here</text>
+  <text x="688" y="528" text-anchor="middle" font-size="10" fill="#922B21">1 kHz</text>
+  <text x="825" y="528" text-anchor="middle" font-size="10" fill="#333">1&#8211;10 kHz</text>
+  <text x="898" y="528" text-anchor="middle" font-size="10" fill="#333">8&#8211;32 kHz</text>
 
-  <!-- legend -->
-  <line x1="14" y1="572" x2="54" y2="572" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-  <text x="60" y="576" font-size="10.5" fill="#333">DDS pub/sub</text>
-  <line x1="160" y1="572" x2="200" y2="572" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
-  <text x="206" y="576" font-size="10.5" fill="#333">lock-free mailbox (the only way across the boundary)</text>
-  <line x1="500" y1="572" x2="540" y2="572" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
-  <text x="546" y="576" font-size="10.5" fill="#333">fieldbus frames, fixed cycle</text>
+  <!-- ===================== legend ===================== -->
+  <rect x="14" y="546" width="22" height="14" rx="4" fill="#EAF1FB" stroke="#6F9BD1" stroke-width="1.4"/>
+  <text x="42" y="557" font-size="9.5" fill="#333">ROS 2 node</text>
+  <rect x="126" y="546" width="22" height="14" rx="4" fill="#FCFCFC" stroke="#888888" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <text x="154" y="557" font-size="9.5" fill="#333">one OS process</text>
+  <rect x="256" y="546" width="22" height="14" rx="4" fill="#FDEBE9" stroke="#D98880" stroke-width="1.4"/>
+  <text x="284" y="557" font-size="9.5" fill="#333">real-time thread</text>
+  <rect x="392" y="546" width="22" height="14" rx="4" fill="#FFF3D0" stroke="#D9A64A" stroke-width="1.4"/>
+  <text x="420" y="557" font-size="9.5" fill="#333">lock-free mailbox (realtime_tools)</text>
+  <rect x="616" y="546" width="22" height="14" rx="4" fill="#E4E4E4" stroke="#8A8A8A" stroke-width="1.4"/>
+  <text x="644" y="557" font-size="9.5" fill="#333">MCU firmware</text>
+
+  <line x1="14" y1="580" x2="50" y2="580" stroke="#1E7D32" stroke-width="2" marker-end="url(#arrG)"/>
+  <text x="58" y="584" font-size="9.5" fill="#333">topic (DDS pub/sub) &#8212; arrow label = topic name</text>
+  <line x1="330" y1="580" x2="366" y2="580" stroke="#C0392B" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrR)"/>
+  <text x="374" y="584" font-size="9.5" fill="#333">mailbox hand-off &#8212; the only way across the RT boundary</text>
+  <line x1="700" y1="580" x2="736" y2="580" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
+  <text x="744" y="584" font-size="9.5" fill="#333">fieldbus frames, fixed cycle</text>
 </svg>

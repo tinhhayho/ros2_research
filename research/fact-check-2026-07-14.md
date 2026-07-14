@@ -42,6 +42,23 @@ chargers. The only artifact with the wrong phrasing was the discarded Vietnamese
 diagram in the session scratchpad ("door / lift / charger adapters"), superseded by the
 English asset.
 
+## Addendum (same day) — controller nodes, for the diagram redesign
+
+Two further claims verified (2 Sonnet agents, both **correct, high confidence**,
+straight from the `jazzy` branch source):
+
+| # | Claim (short) | Verdict | Primary source |
+|---|---|---|---|
+| N1 | Each loaded ros2_control controller instantiates its own LifecycleNode named after the controller, visible in `ros2 node list`, spun by controller_manager's executor in the same process | correct | `controller_interface_base.cpp` (`make_shared<LifecycleNode>(controller_name…)`) · `controller_manager.cpp` (`executor_->add_node(...)`) · `ros2_control_node.cpp` |
+| N2 | diff_drive's `/cmd_vel` subscription lives on the controller's own node (callback on executor threads); joint_state_broadcaster publishes `/joint_states` from its node; both `update()`s run in the RT loop; realtime_tools buffers bridge | correct | `diff_drive_controller.cpp` · `joint_state_broadcaster.cpp` · realtime_tools docs |
+
+Nuance from N2: `RealtimePublisher`'s actual `publish()` runs on a thread the
+RealtimePublisher spawns itself (`publishingLoop`), not on the executor pool — the
+diagram's wording "from a normal thread (the postman)" stays correct.
+
+This addendum also corrects a statement made in chat during this session
+("plugins never appear on the graph" — wrong: each controller's node *does* appear).
+
 ## Nuances worth keeping in the speaker's head (not errors)
 
 - C4: try-lock/drop semantics confirmed in `realtime_tools` source — the "postman"

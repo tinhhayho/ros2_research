@@ -196,9 +196,11 @@ binding — họ dây DDS chính là thứ AUTOSAR Adaptive chia sẻ với ROS 
 ## Slide 13 — Diagram: graph của một robot thật *(~2 phút)*
 
 Chốt cụm này bằng một tour topology: đây là graph của một con AMR thật, vẽ đúng kiểu
-`rqt_graph` sẽ vẽ. Đọc legend trước: mũi tên đơn là **topic** (pub/sub), mũi tên đôi là
-**action** (goal cộng feedback cộng result), và mỗi box là **một node tự xưng tên qua
-discovery** — không ai đấu dây cả, đúng như slide trước.
+`rqt_graph` sẽ vẽ. Đọc legend trước — mỗi màu là một *loại* thành phần: box xanh =
+**một node** (tự xưng tên qua discovery — không ai đấu dây cả, đúng như slide trước);
+khung viền đứt = **một họ node** (Nav2); mũi tên xanh lá đơn = **topic**, mũi tên đôi =
+**action** (goal cộng feedback cộng result); vạch đỏ đứt = **ranh giới RT**; dải xám =
+fieldbus + firmware. Hệ màu này dùng lại y nguyên ở hình "from fleet to joint" lát nữa.
 
 Giờ lần theo dòng dữ liệu: `/lidar_driver` fan-out topic `/scan` cho cả `/slam_toolbox`
 lẫn `/amcl` — một publisher, hai subscriber, chẳng cần cấu hình gì thêm. `/imu_driver`
@@ -243,13 +245,21 @@ dùng được ngay.
 ## Slide 16 — Diagram: From fleet to joint *(~2.5 phút)*
 
 Gom mọi thứ từ đầu buổi vào một bức hình, đọc từ trái sang phải là đi từ "cả tòa nhà"
-xuống "một khớp". Trái: tầng fleet Open-RMF — giao task theo nhịp giây/phút, chạm vào
-robot qua đúng một cửa là fleet adapter. Giữa: ROS 2 graph của một robot — pub/sub async
-qua DDS, `/camera` 30 Hz; ô "Nav2 stack" là cả một họ node (slide 14 đã mở banh nó ra),
-và node thật sự phát `/cmd_vel` 20 Hz là `/controller_server`; mất gói cũng không sao.
+xuống "một khớp" — và cùng hệ màu với slide 13: xanh = node, xám viền đứt = process, đỏ
+= thread RT, vàng = hộp thư, xanh lá = topic. Trái: tầng fleet Open-RMF — giao task theo
+nhịp giây/phút, chạm vào robot qua đúng một cửa là fleet adapter. Tiếp: các node autonomy
+— pub/sub async qua DDS; ô "Nav2 stack" là cả một họ node (slide 13 đã mở banh nó ra), và
+node thật sự phát `/cmd_vel` 20 Hz là `/controller_server`; mất gói cũng không sao.
 
-Điểm đắt nhất của hình là **dải vàng — ranh giới real-time**: không có call nào xuyên
-qua, chỉ có hai hộp thư lock-free. Lệnh đi xuống qua `RealtimeBuffer` — "lệnh mới nhất
+Khối viền đứt xám là **một process duy nhất: controller_manager**. Chi tiết ít ai để ý —
+và đã verify tận source code nhánh Jazzy: mỗi controller được load có **node nhỏ của
+riêng nó**, `/diff_drive_controller`, `/joint_state_broadcaster`, hiện trong
+`ros2 node list` cạnh `/controller_manager`, cùng chia executor của process. Subscription
+`/cmd_vel` nằm trên node của diff_drive, callback chạy ở thread executor — vẫn là thế
+giới "dân sự", chưa đụng gì đến real-time.
+
+Điểm đắt nhất của hình là **ranh giới real-time — hai hộp thư màu vàng**: không có call
+nào xuyên qua, chỉ có hộp thư lock-free. Lệnh đi xuống qua `RealtimeBuffer` — "lệnh mới nhất
 thắng", kèm watchdog timeout: Nav2 chết là robot tự phanh. State đi lên qua
 `RealtimePublisher` — phía RT chỉ try-lock rồi đi tiếp, không bao giờ chờ; một thread
 thường làm "bưu tá" publish `/joint_states`. Với dân firmware: đây chính là pattern ISR
