@@ -95,7 +95,7 @@ Status: ✅ confirmed · 🟡 partly (kept with correction) · ❌ refuted (excl
   OpenSynergy's own announcement; OpenSynergy retains Bluetooth/Radio-Tuner products.
   Our earlier COQOS row should be read as Qualcomm-camp IP.
 - **Classic SOME/IP predates Adaptive**: SOME/IP Transformer standardized in AUTOSAR
-  4.2.1 (2016); AP's first release was R17-10 (2017).
+  4.2.1 (2016); AP's first release was R17-03 (March 2017; R17-10 was the second release).
 - **Adaptive safety ceiling is moving**: MICROSAR Adaptive Safe ASIL-B shipping, ASIL-D
   planned; Wind River Adaptive safety concept assessed ASIL-D-suitable (TÜV SÜD).
 - **AUTOSAR Adaptive DM implements ASAM SOVD v1.0.0** alongside ISO 14229-1 — the
