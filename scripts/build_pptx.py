@@ -19,6 +19,30 @@ ap.add_argument("--out", default="research.pptx", help="output inside slides/")
 args = ap.parse_args()
 
 EMU_W, EMU_H = 12192000, 6858000  # 16:9
+BODY_FONT = "Calibri"
+
+# PowerPoint/Impress font coverage is unpredictable across machines, so symbols
+# beyond Latin-1 are transliterated to ASCII; anything still exotic is dropped.
+# Accented Latin letters (TÜV, Åström, é) are kept — every font has those.
+SYMBOL_MAP = {
+    "—": "-", "–": "-", "−": "-", " ": " ",
+    "→": "->", "←": "<-", "↔": "<->", "⇒": "=>", "⇐": "<=", "⇄": "<=>",
+    "▸": ">", "►": ">", "❯": ">", "❮": "<",
+    "≠": "!=", "≈": "~", "≥": ">=", "≤": "<=", "×": "x", "±": "+/-",
+    "✓": "[v]", "✔": "[v]", "✗": "[x]", "✘": "[x]", "☑": "[v]", "☐": "[ ]",
+    "“": '"', "”": '"', "‘": "'", "’": "'", "„": '"', "…": "...",
+    "•": "-", "‣": "-", "·": " · ",  # middle dot is Latin-1-safe; normalize spacing
+    "π": "pi", "µ": "u", "½": "1/2", "❝": '"', "❞": '"',
+}
+
+
+def sanitize(s: str, keep_ws: bool = False) -> str:
+    s = "".join(SYMBOL_MAP.get(ch, ch) for ch in s)
+    # keep ASCII + Latin-1 supplement + Latin Extended-A (accented letters); drop the rest
+    s = "".join(ch for ch in s if ord(ch) < 0x180)
+    if keep_ws:  # code lines: indentation is meaning
+        return s.rstrip()
+    return re.sub(r"[ \t]{2,}", " ", s).strip()
 
 # ---------------------------------------------------------------- deck parsing
 raw = (root / "slides" / args.deck).read_text()
@@ -37,7 +61,7 @@ def strip_inline(s: str) -> str:
     s = re.sub(r"\*(.+?)\*", r"\1", s)
     s = re.sub(r"`([^`]*)`", r"\1", s)
     s = re.sub(r"<[^>]+>", "", s)  # any leftover tags
-    return html.unescape(s).strip()
+    return sanitize(html.unescape(s))
 
 
 def parse_slide(md: str):
@@ -48,7 +72,7 @@ def parse_slide(md: str):
     ph = re.search(r"\{\{(diagram|image):([a-z0-9-]+)\}\}", md)
     if ph:
         kind, key = ph.group(1), ph.group(2)
-        return (key, [("body", f"[{kind} slide — paste {key}.png here]"),
+        return (key, [("body", f"[{kind} slide - paste {key}.png here]"),
                       ("gloss", f"source: slides/assets/{key}." + ("png" if kind == "image" else "svg"))])
 
     title, body = "", []
@@ -61,7 +85,7 @@ def parse_slide(md: str):
         if s.startswith("```"):
             i += 1
             while i < len(lines) and not lines[i].strip().startswith("```"):
-                body.append(("code", lines[i].rstrip())); i += 1
+                body.append(("code", sanitize(lines[i], keep_ws=True))); i += 1
             i += 1; continue
         m = re.match(r"^#{1,2}\s+(.*)$", s)
         if m and not title:
@@ -112,9 +136,9 @@ def para(kind, text):
     if kind == "gloss": color, sz = "666677", 1000
     if kind == "code": font, sz, color = "Consolas", 1150, "11233F"
     if kind == "table": font, sz = "Consolas", 1150
-    bu = '<a:buChar char="•"/>' if bullet else "<a:buNone/>"
+    bu = '<a:buChar char="-"/>' if bullet else "<a:buNone/>"
     it = ' i="1"' if kind in ("quote", "gloss") else ""
-    latin = f'<a:latin typeface="{font}"/>' if font else ""
+    latin = f'<a:latin typeface="{font or BODY_FONT}"/>'
     return (f'<a:p><a:pPr marL="{285750 if bullet else indent}" indent="{-285750 if bullet else 0}">{bu}</a:pPr>'
             f'<a:r><a:rPr lang="en-US" sz="{sz}"{it} dirty="0"><a:solidFill><a:srgbClr val="{color}"/></a:solidFill>{latin}</a:rPr>'
             f"<a:t>{esc(text)}</a:t></a:r></a:p>")
@@ -127,7 +151,7 @@ def slide_xml(title, body):
 <p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr/>
 <p:sp><p:nvSpPr><p:cNvPr id="2" name="Title"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="title"/></p:nvPr></p:nvSpPr>
 <p:spPr><a:xfrm><a:off x="457200" y="274638"/><a:ext cx="{EMU_W - 914400}" cy="800000"/></a:xfrm></p:spPr>
-<p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang="en-US" sz="2600" b="1"><a:solidFill><a:srgbClr val="1B2B4A"/></a:solidFill></a:rPr><a:t>{esc(title)}</a:t></a:r></a:p></p:txBody></p:sp>
+<p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang="en-US" sz="2600" b="1"><a:solidFill><a:srgbClr val="1B2B4A"/></a:solidFill><a:latin typeface="{BODY_FONT}"/></a:rPr><a:t>{esc(title)}</a:t></a:r></a:p></p:txBody></p:sp>
 <p:sp><p:nvSpPr><p:cNvPr id="3" name="Body"/><p:cNvSpPr><a:spLocks noGrp="1"/></p:cNvSpPr><p:nvPr><p:ph type="body" idx="1"/></p:nvPr></p:nvSpPr>
 <p:spPr><a:xfrm><a:off x="457200" y="1200150"/><a:ext cx="{EMU_W - 914400}" cy="{EMU_H - 1600200}"/></a:xfrm></p:spPr>
 <p:txBody><a:bodyPr><a:normAutofit fontScale="90000"/></a:bodyPr><a:lstStyle/>{body_ps}</p:txBody></p:sp>
@@ -137,7 +161,7 @@ def slide_xml(title, body):
 THEME = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="plain"><a:themeElements>
 <a:clrScheme name="plain"><a:dk1><a:srgbClr val="1B2B4A"/></a:dk1><a:lt1><a:srgbClr val="FFFFFF"/></a:lt1><a:dk2><a:srgbClr val="2E5FAC"/></a:dk2><a:lt2><a:srgbClr val="EEF2F8"/></a:lt2><a:accent1><a:srgbClr val="2E5FAC"/></a:accent1><a:accent2><a:srgbClr val="E0A96D"/></a:accent2><a:accent3><a:srgbClr val="8FBF8F"/></a:accent3><a:accent4><a:srgbClr val="9BBCE0"/></a:accent4><a:accent5><a:srgbClr val="B0B0B0"/></a:accent5><a:accent6><a:srgbClr val="6B4A2B"/></a:accent6><a:hlink><a:srgbClr val="2E5FAC"/></a:hlink><a:folHlink><a:srgbClr val="5B7BB0"/></a:folHlink></a:clrScheme>
-<a:fontScheme name="plain"><a:majorFont><a:latin typeface="Helvetica"/><a:ea typeface=""/><a:cs typeface=""/></a:majorFont><a:minorFont><a:latin typeface="Helvetica"/><a:ea typeface=""/><a:cs typeface=""/></a:minorFont></a:fontScheme>
+<a:fontScheme name="plain"><a:majorFont><a:latin typeface="Calibri"/><a:ea typeface=""/><a:cs typeface=""/></a:majorFont><a:minorFont><a:latin typeface="Calibri"/><a:ea typeface=""/><a:cs typeface=""/></a:minorFont></a:fontScheme>
 <a:fmtScheme name="plain"><a:fillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:fillStyleLst><a:lnStyleLst><a:ln><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:ln><a:ln><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:ln><a:ln><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:ln></a:lnStyleLst><a:effectStyleLst><a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle><a:effectStyle><a:effectLst/></a:effectStyle></a:effectStyleLst><a:bgFillStyleLst><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"/></a:solidFill><a:solidFill><a:schemeClr val="phClr"/></a:solidFill></a:bgFillStyleLst></a:fmtScheme>
 </a:themeElements></a:theme>"""
 
