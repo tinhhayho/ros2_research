@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="620" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="38" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">AUTOSAR at a glance — three release lines that merged into one</text>
+
+  <!-- ===================== Founding column (left) ===================== -->
+  <text x="104" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="#444">Founding 2002–2003</text>
+
+  <rect x="10" y="68" width="188" height="68" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="104" y="83" text-anchor="middle" font-size="8.5" font-weight="700" fill="#333">2002 — founding discussions</text>
+  <text x="104" y="95" text-anchor="middle" font-size="8.5" fill="#333">&amp; kick-off workshop</text>
+  <text x="104" y="108" text-anchor="middle" font-size="7.5" fill="#333">BMW · Bosch · Continental ·</text>
+  <text x="104" y="118" text-anchor="middle" font-size="7.5" fill="#333">DaimlerChrysler · VW;</text>
+  <text x="104" y="128" text-anchor="middle" font-size="7.5" fill="#333">Siemens VDO soon after</text>
+
+  <rect x="10" y="142" width="188" height="36" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="104" y="158" text-anchor="middle" font-size="8" fill="#333">Jul 2003 — Initial Development</text>
+  <text x="104" y="170" text-anchor="middle" font-size="8" fill="#333">Agreement signed</text>
+
+  <rect x="10" y="184" width="188" height="36" rx="6" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.2"/>
+  <text x="104" y="200" text-anchor="middle" font-size="8" fill="#333">Sep 2003 — public debut, VDI</text>
+  <text x="104" y="212" text-anchor="middle" font-size="8" fill="#333">Conference, Baden-Baden</text>
+
+  <!-- ===================== Swimlane: Classic ===================== -->
+  <rect x="200" y="70" width="440" height="64" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <rect x="204" y="74" width="92" height="56" rx="6" fill="#7f9dc9" stroke="#5f82b8" stroke-width="1.2"/>
+  <text x="250" y="96" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff">Classic</text>
+  <text x="250" y="110" text-anchor="middle" font-size="9.5" fill="#ffffff">Platform (CP)</text>
+  <text x="250" y="124" text-anchor="middle" font-size="8.5" font-style="italic" fill="#eef4fb">from 2005</text>
+
+  <rect x="304" y="80" width="76" height="48" rx="5" fill="#ffffff" stroke="#7f9dc9" stroke-width="1.2"/>
+  <text x="342" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#223344">1.0</text>
+  <text x="342" y="111" text-anchor="middle" font-size="9" fill="#223344">May 2005</text>
+  <text x="342" y="123" text-anchor="middle" font-size="7.5" fill="#223344">first CP release</text>
+
+  <rect x="388" y="80" width="76" height="48" rx="5" fill="#ffffff" stroke="#7f9dc9" stroke-width="1.2"/>
+  <text x="426" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="#223344">4.0</text>
+  <text x="426" y="116" text-anchor="middle" font-size="9" fill="#223344">Dec 2009</text>
+
+  <rect x="472" y="80" width="76" height="48" rx="5" fill="#ffffff" stroke="#7f9dc9" stroke-width="1.2"/>
+  <text x="510" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#223344">4.2.1</text>
+  <text x="510" y="111" text-anchor="middle" font-size="9" fill="#223344">Oct 2014</text>
+  <text x="510" y="123" text-anchor="middle" font-size="7" fill="#223344">SOME/IP Xf std.</text>
+
+  <rect x="556" y="80" width="76" height="48" rx="5" fill="#ffffff" stroke="#7f9dc9" stroke-width="1.2"/>
+  <text x="594" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#223344">4.4.0</text>
+  <text x="594" y="111" text-anchor="middle" font-size="9" fill="#223344">Oct 2018</text>
+  <text x="594" y="123" text-anchor="middle" font-size="7" fill="#223344">last standalone CP</text>
+
+  <!-- ===================== Swimlane: Foundation ===================== -->
+  <rect x="200" y="142" width="440" height="58" rx="8" fill="#ECF6EC" stroke="#8FBF8F" stroke-width="1.5"/>
+  <rect x="204" y="146" width="92" height="50" rx="6" fill="#8FBF8F" stroke="#6fa06f" stroke-width="1.2"/>
+  <text x="250" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#1f3d1f">Foundation</text>
+  <text x="250" y="180" text-anchor="middle" font-size="9.5" fill="#1f3d1f">(FO)</text>
+  <text x="250" y="192" text-anchor="middle" font-size="8.5" font-style="italic" fill="#274a27">from 2016</text>
+
+  <rect x="390" y="150" width="118" height="44" rx="5" fill="#ffffff" stroke="#8FBF8F" stroke-width="1.2"/>
+  <text x="449" y="167" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">R1.0.0 — Oct 2016</text>
+  <text x="449" y="180" text-anchor="middle" font-size="8" fill="#2d5a2d">first Foundation;</text>
+  <text x="449" y="190" text-anchor="middle" font-size="7.5" fill="#2d5a2d">carries shared meta-model/schema</text>
+
+  <rect x="516" y="150" width="118" height="44" rx="5" fill="#ffffff" stroke="#8FBF8F" stroke-width="1.2"/>
+  <text x="575" y="169" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">1.5.1 — Mar 2019</text>
+  <text x="575" y="184" text-anchor="middle" font-size="8.5" fill="#2d5a2d">last standalone FO</text>
+
+  <!-- ===================== Swimlane: Adaptive ===================== -->
+  <rect x="200" y="208" width="440" height="64" rx="8" fill="#FDF1E6" stroke="#E0A96D" stroke-width="1.5"/>
+  <rect x="204" y="212" width="92" height="56" rx="6" fill="#E0A96D" stroke="#c98a4f" stroke-width="1.2"/>
+  <text x="250" y="234" text-anchor="middle" font-size="12" font-weight="700" fill="#5a3d22">Adaptive</text>
+  <text x="250" y="248" text-anchor="middle" font-size="9.5" fill="#5a3d22">Platform (AP)</text>
+  <text x="250" y="262" text-anchor="middle" font-size="8.5" font-style="italic" fill="#5a3d22">from 2017</text>
+
+  <rect x="306" y="214" width="102" height="50" rx="5" fill="#ffffff" stroke="#E0A96D" stroke-width="1.2"/>
+  <text x="357" y="234" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6B4A2B">17-03 — Mar 2017</text>
+  <text x="357" y="249" text-anchor="middle" font-size="8.5" fill="#6B4A2B">first AP release</text>
+
+  <rect x="416" y="214" width="102" height="50" rx="5" fill="#ffffff" stroke="#E0A96D" stroke-width="1.2"/>
+  <text x="467" y="232" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6B4A2B">18-03 — Mar 2018</text>
+  <text x="467" y="246" text-anchor="middle" font-size="8" fill="#6B4A2B">DDS network binding</text>
+  <text x="467" y="257" text-anchor="middle" font-size="7.5" font-style="italic" fill="#6B4A2B">(not 18-10)</text>
+
+  <rect x="526" y="214" width="102" height="50" rx="5" fill="#ffffff" stroke="#E0A96D" stroke-width="1.2"/>
+  <text x="577" y="234" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6B4A2B">19-03 — Mar 2019</text>
+  <text x="577" y="249" text-anchor="middle" font-size="8.5" fill="#6B4A2B">last standalone AP</text>
+
+  <!-- ===================== Convergence funnel to R19-11 ===================== -->
+  <line x1="640" y1="102" x2="672" y2="150" stroke="#444" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="640" y1="171" x2="672" y2="174" stroke="#444" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="640" y1="240" x2="672" y2="200" stroke="#444" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <rect x="674" y="116" width="238" height="116" rx="10" fill="#E4E4EE" stroke="#6b6f8f" stroke-width="2"/>
+  <text x="793" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#2b2f55">R19-11 — Nov 2019</text>
+  <text x="793" y="160" text-anchor="middle" font-size="12" font-weight="700" fill="#5b3a8a">UNIFICATION</text>
+  <text x="793" y="179" text-anchor="middle" font-size="9.5" fill="#2b2f55">one naming R{yy}-11 · one</text>
+  <text x="793" y="192" text-anchor="middle" font-size="9.5" fill="#2b2f55">November cadence · one</text>
+  <text x="793" y="205" text-anchor="middle" font-size="9.5" fill="#2b2f55">AUTOSAR_000nn schema</text>
+  <text x="793" y="218" text-anchor="middle" font-size="9.5" fill="#2b2f55">across CP + AP</text>
+
+  <text x="793" y="250" text-anchor="middle" font-size="8.5" font-style="italic" fill="#555">CP internal version never reset — R25-11 is internally R4.11.0,</text>
+  <text x="793" y="262" text-anchor="middle" font-size="8.5" font-style="italic" fill="#555">so "AUTOSAR 4.x" is still alive</text>
+
+  <!-- ===================== Elbow connector to unified track ===================== -->
+  <polyline points="880,232 880,290 60,290 60,338" fill="none" stroke="#6b6f8f" stroke-width="1.6" marker-end="url(#arr)"/>
+  <text x="440" y="284" text-anchor="middle" font-size="8.5" font-style="italic" fill="#666">the single merged release line — continues every November ↓</text>
+
+  <!-- ===================== Unified bottom track ===================== -->
+  <rect x="48" y="340" width="852" height="54" rx="10" fill="#E2E2EA" stroke="#9a9fb0" stroke-width="1.5"/>
+  <text x="66" y="362" text-anchor="start" font-size="10" font-weight="700" fill="#333">unified R{yy}-11 line —</text>
+  <text x="66" y="378" text-anchor="start" font-size="8.5" fill="#333">one release + one schema, every November</text>
+
+  <text x="356" y="371" text-anchor="middle" font-size="8.5" fill="#333">R20-11</text>
+  <text x="416" y="371" text-anchor="middle" font-size="8.5" fill="#333">R21-11</text>
+  <text x="476" y="371" text-anchor="middle" font-size="8.5" fill="#333">R22-11</text>
+  <text x="536" y="371" text-anchor="middle" font-size="8.5" fill="#333">R23-11</text>
+  <text x="596" y="371" text-anchor="middle" font-size="8.5" fill="#333">R24-11</text>
+  <text x="646" y="371" text-anchor="middle" font-size="12" font-weight="700" fill="#333">…</text>
+
+  <!-- R25-11 end node -->
+  <rect x="684" y="326" width="242" height="78" rx="10" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="2"/>
+  <text x="805" y="352" text-anchor="middle" font-size="15" font-weight="700" fill="#2d5a2d">R25-11</text>
+  <text x="805" y="369" text-anchor="middle" font-size="9.5" fill="#2d5a2d">2025-11-27 · internal R4.11.0</text>
+  <text x="805" y="385" text-anchor="middle" font-size="10" font-weight="700" fill="#2d5a2d">current release</text>
+
+  <!-- Callout tags -->
+  <line x1="760" y1="404" x2="712" y2="414" stroke="#8FBF8F" stroke-width="1.2"/>
+  <rect x="498" y="414" width="428" height="40" rx="6" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.2"/>
+  <text x="712" y="431" text-anchor="middle" font-size="9.5" font-weight="700" fill="#2d5a2d">NEW: DDS Transformer on Classic</text>
+  <text x="712" y="446" text-anchor="middle" font-size="8.5" font-style="italic" fill="#2d5a2d">standard-level concept in R25-11 — no shipping vendor impl yet</text>
+
+  <rect x="498" y="458" width="428" height="44" rx="6" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.2"/>
+  <text x="712" y="475" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6B4A2B">CP removed Fls · Eep · TTCAN · LdCom</text>
+  <text x="712" y="490" text-anchor="middle" font-size="8.5" fill="#6B4A2B">Fls/Eep → Mem/MemAcc · LdCom absorbed into Com</text>
+
+  <!-- Schematic honesty note (lower left) -->
+  <text x="20" y="430" text-anchor="start" font-size="9" font-style="italic" fill="#666">Schematic overview — milestone nodes are shown in chronological</text>
+  <text x="20" y="443" text-anchor="start" font-size="9" font-style="italic" fill="#666">order within each track, not on a linear time scale. The dated</text>
+  <text x="20" y="456" text-anchor="start" font-size="9" font-style="italic" fill="#666">labels are the load-bearing facts.</text>
+
+  <!-- Footnote / gloss -->
+  <text x="480" y="556" text-anchor="middle" font-size="11" font-style="italic" fill="#555">One AUTOSAR standard set, published once a year each November since R19-11.</text>
+  <text x="480" y="574" text-anchor="middle" font-size="9.5" fill="#555555">CP = Classic Platform · AP = Adaptive Platform · FO = Foundation · SOME/IP = Scalable service-Oriented MiddlewarE over IP · DDS = Data Distribution Service · Xf = Transformer</text>
+  <text x="480" y="590" text-anchor="middle" font-size="9.5" fill="#555555">Sources: autosar.org/about/history · CP/AP Release Overviews R25-11 · DDS on AP since R18-03 (rti.com)</text>
+</svg>

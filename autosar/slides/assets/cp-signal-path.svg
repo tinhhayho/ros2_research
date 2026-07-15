@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="620" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+    <marker id="arrb" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#7f9dc9"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="38" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">Classic Platform — signal → PDU → frame, frozen at build time</text>
+
+  <!-- ===================== Left call-out band: K-matrix ===================== -->
+  <rect x="14" y="72" width="150" height="414" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="89" y="93" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6B4A2B">Statically generated</text>
+  <text x="89" y="106" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6B4A2B">from the communication</text>
+  <text x="89" y="119" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6B4A2B">matrix (K-matrix)</text>
+  <text x="89" y="142" text-anchor="middle" font-size="8.5" fill="#6B4A2B">Every frame/PDU, signal,</text>
+  <text x="89" y="154" text-anchor="middle" font-size="8.5" fill="#6B4A2B">sender, receivers, byte</text>
+  <text x="89" y="166" text-anchor="middle" font-size="8.5" fill="#6B4A2B">layout, timing &amp; encoding</text>
+  <text x="89" y="178" text-anchor="middle" font-size="8.5" fill="#6B4A2B">are fixed at BUILD TIME.</text>
+  <text x="89" y="202" text-anchor="middle" font-size="8.5" fill="#6B4A2B">Imported from DBC / LDF /</text>
+  <text x="89" y="214" text-anchor="middle" font-size="8.5" fill="#6B4A2B">FIBEX, carried as ARXML.</text>
+  <text x="89" y="238" text-anchor="middle" font-size="8.5" fill="#6B4A2B">A given ECU only ever</text>
+  <text x="89" y="250" text-anchor="middle" font-size="8.5" fill="#6B4A2B">sees the PDUs configured</text>
+  <text x="89" y="262" text-anchor="middle" font-size="8.5" fill="#6B4A2B">for it.</text>
+  <text x="89" y="470" text-anchor="middle" font-size="8.5" font-style="italic" fill="#6B4A2B">→ configures every layer</text>
+
+  <!-- ===================== TX arrow (left of column) ===================== -->
+  <line x1="186" y1="80" x2="186" y2="440" stroke="#444" stroke-width="2.2" marker-end="url(#arr)"/>
+  <text x="186" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#444">TX</text>
+  <text x="178" y="260" text-anchor="middle" font-size="9.5" font-weight="700" fill="#666" transform="rotate(-90 178 260)">application → CAN wire</text>
+
+  <!-- ===================== RX arrow (right of column) ===================== -->
+  <line x1="584" y1="440" x2="584" y2="80" stroke="#7f9dc9" stroke-width="2.2" marker-end="url(#arrb)"/>
+  <text x="584" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#5f82b8">RX (mirror)</text>
+  <text x="596" y="260" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7f9dc9" transform="rotate(-90 596 260)">CAN wire → application</text>
+
+  <!-- ===================== Main column ===================== -->
+  <!-- 1. SW-C / RTE -->
+  <rect x="206" y="72" width="360" height="54" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="386" y="93" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">SW-C / RTE</text>
+  <text x="386" y="112" text-anchor="middle" font-size="10.5" fill="#223344">application writes a value; RTE calls Com_SendSignal()</text>
+  <line x1="386" y1="126" x2="386" y2="138" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- 2. COM -->
+  <rect x="206" y="138" width="360" height="74" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="386" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">COM</text>
+  <text x="386" y="174" text-anchor="middle" font-size="10" fill="#223344">packs the signal into an I-PDU — bit position, length,</text>
+  <text x="386" y="188" text-anchor="middle" font-size="10" fill="#223344">endianness, sign extension all resolved at BUILD TIME</text>
+  <text x="386" y="203" text-anchor="middle" font-size="9.5" fill="#223344">applies TX modes (periodic / on-change) + minimum delay</text>
+  <line x1="386" y1="212" x2="386" y2="224" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- COM transformer side box -->
+  <line x1="566" y1="176" x2="606" y2="176" stroke="#8FBF8F" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="606" y="132" width="340" height="88" rx="8" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.5"/>
+  <text x="776" y="150" text-anchor="middle" font-size="11" font-weight="700" fill="#2d5a2d">Transformer chain (inside COM)</text>
+  <text x="776" y="170" text-anchor="middle" font-size="9.5" fill="#2d5a2d">E2E protection — CRC + counter + Data ID</text>
+  <text x="776" y="186" text-anchor="middle" font-size="9.5" fill="#2d5a2d">SecOC — MAC + freshness (no encryption)</text>
+  <text x="776" y="202" text-anchor="middle" font-size="9.5" fill="#2d5a2d">SomeIpXf — SOME/IP serialization</text>
+
+  <!-- 3. PduR -->
+  <rect x="206" y="224" width="360" height="58" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="386" y="244" text-anchor="middle" font-size="12.5" font-weight="700" fill="#223344">PduR — PDU Router</text>
+  <text x="386" y="261" text-anchor="middle" font-size="10" fill="#223344">static routing table forwards the I-PDU to CanIf</text>
+  <text x="386" y="275" text-anchor="middle" font-size="9.5" fill="#223344">(or to CanTp first if large); also bus-to-bus gateway routing</text>
+
+  <!-- CanTp conditional side box (dashed) -->
+  <line x1="566" y1="254" x2="606" y2="254" stroke="#7f9dc9" stroke-width="1.5" stroke-dasharray="6,4" marker-end="url(#arrb)"/>
+  <rect x="606" y="228" width="340" height="64" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="776" y="248" text-anchor="middle" font-size="11" font-weight="700" fill="#223344">CanTp — only if PDU &gt; one frame</text>
+  <text x="776" y="265" text-anchor="middle" font-size="9.5" fill="#223344">segments into First Frame / Consecutive Frames</text>
+  <text x="776" y="280" text-anchor="middle" font-size="9.5" fill="#223344">with flow control (ISO 15765-2)</text>
+
+  <line x1="386" y1="282" x2="386" y2="294" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- 4. CanIf -->
+  <rect x="206" y="296" width="360" height="58" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="386" y="316" text-anchor="middle" font-size="12.5" font-weight="700" fill="#223344">CanIf — ECU Abstraction</text>
+  <text x="386" y="333" text-anchor="middle" font-size="10" fill="#223344">maps the abstract PDU to a hardware transmit handle /</text>
+  <text x="386" y="347" text-anchor="middle" font-size="10" fill="#223344">mailbox; manages controller &amp; PDU mode</text>
+  <line x1="386" y1="354" x2="386" y2="366" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- 5. CanDrv -->
+  <rect x="206" y="366" width="360" height="60" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
+  <text x="386" y="386" text-anchor="middle" font-size="12.5" font-weight="700" fill="#223344">CanDrv — MCAL</text>
+  <text x="386" y="403" text-anchor="middle" font-size="10" fill="#223344">writes the CAN / CAN FD frame; transmit confirmation</text>
+  <text x="386" y="417" text-anchor="middle" font-size="9.5" fill="#223344">propagates back up (CanIf → PduR → COM → RTE)</text>
+  <line x1="386" y1="426" x2="386" y2="444" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Bus bar -->
+  <rect x="206" y="446" width="360" height="40" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="386" y="471" text-anchor="middle" font-size="12.5" font-weight="700" fill="#333">CAN / CAN FD bus</text>
+
+  <!-- ===================== RX note ===================== -->
+  <rect x="606" y="322" width="340" height="118" rx="8" fill="#F4F4F4" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="776" y="342" text-anchor="middle" font-size="10.5" font-weight="700" fill="#333">RX mirrors TX (wire → application)</text>
+  <text x="776" y="362" text-anchor="middle" font-size="9.5" fill="#333">CanDrv ISR → CanIf indication → PduR →</text>
+  <text x="776" y="377" text-anchor="middle" font-size="9.5" fill="#333">(CanTp reassembly) → COM unpacks bytes into</text>
+  <text x="776" y="392" text-anchor="middle" font-size="9.5" fill="#333">signals + reception deadline monitoring →</text>
+  <text x="776" y="407" text-anchor="middle" font-size="9.5" fill="#333">RTE delivers to the SW-C</text>
+
+  <!-- ===================== Footnote / gloss ===================== -->
+  <text x="480" y="558" text-anchor="middle" font-size="9.5" fill="#555555">SW-C = Software Component · RTE = Runtime Environment · COM = signal-packing module · I-PDU = Interaction-layer Protocol Data Unit · PduR = PDU Router · CanTp = CAN Transport Layer</text>
+  <text x="480" y="574" text-anchor="middle" font-size="9.5" fill="#555555">CanIf = CAN Interface · MCAL = Microcontroller Abstraction Layer · E2E = End-to-End protection · SecOC = Secure Onboard Communication · SomeIpXf = SOME/IP Transformer</text>
+  <text x="480" y="592" text-anchor="middle" font-size="9.5" font-style="italic" fill="#555">Synthesized from the AUTOSAR CP SWS documents: COM · PduR · CanTp · CanIf</text>
+</svg>

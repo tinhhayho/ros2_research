@@ -50,6 +50,12 @@ slides_research() {
     "$MARP" research.md -o research.html --html
   echo "==> slides/research.html built (deep-research findings deck)."
 }
+slides_autosar() {
+  python3 scripts/build_slides.py --dir autosar/slides --deck autosar-deck.md --out autosar.md
+  docker run --rm -v "$PWD/autosar/slides:/home/marp/app" -e MARP_USER="$(id -u):$(id -g)" \
+    "$MARP" autosar.md -o autosar.html --html
+  echo "==> autosar/slides/autosar.html built (AUTOSAR Classic vs Adaptive deck)."
+}
 slides_pdf() {
   python3 scripts/build_slides.py
   docker run --rm -v "$PWD/slides:/home/marp/app" -e MARP_USER="$(id -u):$(id -g)" \
@@ -118,6 +124,7 @@ Usage: ./run.sh <target>   (or: make <target>)
   rqt         Open rqt_graph (live node/topic graph window)
   slides      Build slides/slides.html (the committed deliverable)
   slides-research  Build slides/research.html (deep-research findings deck)
+  slides-autosar   Build autosar/slides/autosar.html (AUTOSAR Classic vs Adaptive deck)
   slides-pdf  Also export slides/slides.pdf (optional)
   slides-pptx Text-only slides/research.pptx (paste images by hand; optional)
   test        Run all verify scripts
@@ -135,6 +142,7 @@ case "${1:-help}" in
   rqt) rqt ;;
   slides) slides ;;
   slides-research) slides_research ;;
+  slides-autosar) slides_autosar ;;
   slides-pdf) slides_pdf ;;
   slides-pptx) shift; slides_pptx "$@" ;;
   test) test_all ;;

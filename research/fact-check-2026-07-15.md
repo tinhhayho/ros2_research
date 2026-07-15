@@ -1,4 +1,48 @@
-# Fact-check — 2026-07-15 — abbreviation keys (two runs) + deck-wide audit-text sweep
+# Fact-check — 2026-07-15 — AUTOSAR module (run 3) + abbreviation keys (runs 1-2)
+
+## Run 3 — the new AUTOSAR research module (autosar/)
+
+**Scope:** the freshly drafted `autosar/slides/autosar-deck.md` (42 slides) plus the two
+new diagrams `autosar/slides/assets/autosar-timeline.svg` and `cp-signal-path.svg` —
+before first ship, per the standing rule. The three research docs under
+`autosar/research/` inherited the same corrections.
+
+**Method:** `fact-check` workflow (`.claude/workflows/fact-check.js`), files mode —
+extract pass, then one Sonnet verify agent per claim against primary sources, then an
+adversarial refute pass on every non-clean verdict. Run `wf_4748cedc-22d`:
+121 agents, 1658 tool calls, ~4.6M subagent tokens.
+
+**Result: 97 claims — 79 ✅ correct · 16 ⚠️ partially-correct · 2 ❌ wrong.**
+All 18 corrected in place (deck + SVG + docs) the same day; full findings with sources in
+`autosar/research/notes/fact-check-findings-2026-07-15.md`. Highlights:
+
+- ❌ c17 — `cp-signal-path.svg` carried a bogus source line ("AUTOSAR CP CAN communication
+  stack §3.1" — no such document; §3.1 was the research-note's own section number).
+  Replaced with honest attribution to the COM/PduR/CanTp/CanIf SWS set.
+- ❌ c30 — Raw Data Streaming removal + Communication Groups obsolescence were
+  misattributed to R25-11; both actually happened at **R23-11** (and Communication Groups
+  arrived R20-11, not R19-11). Also fixed in `notes/orchestrator-verification.md` §5.
+- ⚠️ dates/numbers: partner count 339→**360** (Jan 2025 snapshot; Asia 174 > Europe 140 >
+  NA 41) · CP 4.2.1 = **Oct 2014** (not 2016) · ETAS RTA-VRTE ASIL-B = **March 2025**
+  (not Feb 2026) · Firewall cluster added **R22-11** · PHM Health Channels obsolete **R21-11**
+- ⚠️ phrasing: CanTp = CAN Transport **Layer** · COM does **not** do scaling (only
+  endianness + sign extension) · PSE51 **keeps** POSIX shared-memory objects · S-CORE is
+  **dual-language C++/Rust** (not "Rust-first") · iceoryx "fully compatible" quote was
+  2019-era marketing · QNX 35-38% = analyst estimate of the overall automotive-OS market ·
+  EB AdaptiveCore "up to ASIL-D" is a 2017 press-release phrase, no longer current ·
+  VW E³ 1.1/1.2 is **domain**-based (zonal arrives with SSP/E3 2.0) · OSEK OS = ISO 17356-**3**
+- Verify pass note: the deck's load-bearing headline facts all survived clean — R25-11
+  release + DDS-on-Classic (verified against the CP Release Overview PDF directly),
+  Orin=AURIX/Thor=RH850 split, "DoIP = only standardized DM transport", ASIL-B-shipping
+  hedge, DDS-binding-since-R18-03.
+- **Addendum 2026-07-16 — "reading map" slide** (added on request): all 33 spec filenames
+  on the slide verified live via HTTP range-requests against the R25-11 directories on
+  autosar.org. Two R25-11 renames caught this way and reflected on the slide: the VFB
+  document is now `CP_TR_VFB` (was `CP_EXP_VFB` in R24-11) and SecOC is
+  `FO_PRS_SecOCProtocol` (was `…SecOcProtocol`).
+
+---
+
 
 ## Run 2 — 7 new glossary expansions (deck-wide abbreviation sweep)
 
