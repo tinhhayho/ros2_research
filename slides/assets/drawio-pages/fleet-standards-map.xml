@@ -87,9 +87,12 @@
       <mxGeometry x="40" y="494" width="880" height="44" as="geometry" />
     </mxCell>
 
-    <!-- Footnote -->
-    <mxCell id="fsm-footnote" value="'Redfish + PICMG IoT.x for robot fleets' (external draft): not documented anywhere &#8212; struck; audit rows V1&#8211;V12, research/vda5050-robot-fleet-2026-07.md" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
-      <mxGeometry x="30" y="566" width="900" height="18" as="geometry" />
+    <!-- Abbreviation key -->
+    <mxCell id="fsm-abbrev1" value="AMR / AGV = autonomous mobile robot / automated guided vehicle &#183; SOVD = service-oriented vehicle diagnostics (ISO 17978) &#183; DID / DTC = UDS data identifier / diagnostic trouble code" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="566" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-abbrev2" value="UCM = AUTOSAR update &amp; configuration management &#183; OTA = over-the-air update &#183; FMS = fleet management system" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="581" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>

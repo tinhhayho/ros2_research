@@ -64,4 +64,5 @@
   <!-- Footnote -->
   <text x="480" y="556" text-anchor="middle" font-size="11" font-style="italic" fill="#555">callback model: the executor runs each callback to completion — no priority preemption between callbacks (unlike RTOS tasks);</text>
   <text x="480" y="574" text-anchor="middle" font-size="11" font-style="italic" fill="#555">hard-RT loops live outside the graph (ros2_control)</text>
+  <text x="480" y="591" text-anchor="middle" font-size="9.5" fill="#555555">DDS = data distribution service &#8212; the pub/sub middleware under ROS 2</text>
 </svg>

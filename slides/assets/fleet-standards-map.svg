@@ -64,6 +64,7 @@
   <text x="480" y="512" text-anchor="middle" font-size="11.5" font-style="italic" fill="#2E5FAC">each side standardized the layer the other left open — and neither has a UDS-DID-style semantic capability/sensor discovery</text>
   <text x="480" y="529" text-anchor="middle" font-size="11.5" font-style="italic" fill="#2E5FAC">(the factsheet is physical/protocol only)</text>
 
-  <!-- Footnote -->
-  <text x="480" y="575" text-anchor="middle" font-size="11" font-style="italic" fill="#555">'Redfish + PICMG IoT.x for robot fleets' (external draft): not documented anywhere — struck; audit rows V1–V12, research/vda5050-robot-fleet-2026-07.md</text>
+  <!-- Abbreviation key -->
+  <text x="480" y="575" text-anchor="middle" font-size="10" fill="#555555">AMR / AGV = autonomous mobile robot / automated guided vehicle &#183; SOVD = service-oriented vehicle diagnostics (ISO 17978) &#183; DID / DTC = UDS data identifier / diagnostic trouble code</text>
+  <text x="480" y="590" text-anchor="middle" font-size="10" fill="#555555">UCM = AUTOSAR update &amp; configuration management &#183; OTA = over-the-air update &#183; FMS = fleet management system</text>
 </svg>

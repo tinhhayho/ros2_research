@@ -97,5 +97,8 @@
     <mxCell id="rp-badge" value="&lt;b&gt;2026: alive under OSRA&lt;/b&gt;&lt;br&gt;flagship: Singapore hospitals/airport" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#6Fae6f;strokeWidth=1.5;fontSize=13;fontColor=#2d5a2d;" vertex="1" parent="1">
       <mxGeometry x="560" y="460" width="350" height="56" as="geometry" />
     </mxCell>
+    <mxCell id="rp-abbrev1" value="FMS = fleet management system &#183; OSRA = Open Source Robotics Alliance &#183; PLC = programmable logic controller" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="519" width="920" height="16" as="geometry" />
+    </mxCell>
   </root>
 </mxGraphModel>

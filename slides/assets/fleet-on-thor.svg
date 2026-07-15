@@ -73,6 +73,9 @@
   <text x="375" y="483" text-anchor="middle" font-size="10.5" font-style="italic" fill="#555">proprietary Common Interface (UDP over Ethernet) — not DoIP</text>
 
   <!-- Footnote -->
-  <text x="480" y="560" text-anchor="middle" font-size="11" font-style="italic" fill="#555">documented: DM + UCM inside the guest, Classic on the companion MCU ·</text>
-  <text x="480" y="578" text-anchor="middle" font-size="11" font-style="italic" fill="#555">refuted: 'virtual Classic-ECU partitions', 'Thor as UDS gateway' — rows F12–F13, research/fleet-uds-autosar-2026-07.md</text>
+  <text x="480" y="560" text-anchor="middle" font-size="11" font-style="italic" fill="#555">documented: DM + UCM inside the guest, Classic on the companion MCU &#8212; no fleet-gateway role, no virtual Classic-ECU partitions</text>
+
+  <!-- Abbreviation key -->
+  <text x="480" y="578" text-anchor="middle" font-size="10" fill="#555555">TCU = telematics control unit &#183; UDS = unified diagnostic services &#183; DoIP = diagnostics over IP &#183; DM / UCM = Adaptive AUTOSAR diagnostics / update &amp; config management</text>
+  <text x="480" y="593" text-anchor="middle" font-size="10" fill="#555555">DCM + DEM = Classic AUTOSAR diagnostic modules &#183; FSI = functional safety island &#183; AFW = Vector's AUTOSAR firmware &#183; SOVD = the REST diagnostic API (ISO 17978)</text>
 </svg>

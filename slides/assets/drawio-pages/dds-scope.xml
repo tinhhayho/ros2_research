@@ -61,5 +61,9 @@
       <mxGeometry x="60" y="544" width="840" height="36" as="geometry" />
     </mxCell>
 
+    <mxCell id="dsc-abbrev1" value="DDS = data distribution service (ROS 2's pub/sub middleware) &#183; XRCE-DDS = DDS for extremely resource-constrained environments (micro-ROS) &#183; SOME/IP = automotive service middleware" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="582" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

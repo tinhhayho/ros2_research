@@ -66,4 +66,7 @@
   <!-- Footnote -->
   <text x="480" y="558" text-anchor="middle" font-size="11" font-style="italic" fill="#555">v3.0.0 released 2026-03-19 (VDA + VDMA + KIT-IFL) — adds freely-navigating robots, zones (BLOCKED · SPEED_LIMIT · PRIORITY …),</text>
   <text x="480" y="576" text-anchor="middle" font-size="11" font-style="italic" fill="#555">CRITICAL/URGENT errors · no OTA, only flat error reporting (no deep diagnostics); security left to broker/TLS config</text>
+
+  <!-- Abbreviation key -->
+  <text x="480" y="592" text-anchor="middle" font-size="10" fill="#555555">AGV / AMR = automated guided vehicle / autonomous mobile robot &#183; MQTT = broker-based pub/sub protocol (VDA 5050's wire) &#183; OTA = over-the-air update</text>
 </svg>

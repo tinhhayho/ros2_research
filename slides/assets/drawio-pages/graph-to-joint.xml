@@ -252,5 +252,9 @@
       <mxGeometry x="744" y="573" width="170" height="14" as="geometry" />
     </mxCell>
 
+    <mxCell id="gtj-abbrev1" value="DDS = data distribution service &#8212; ROS 2's pub/sub middleware &#183; FOC = field-oriented control (the motor current loop)" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="588" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

@@ -130,5 +130,13 @@
       <mxGeometry x="60" y="536" width="840" height="18" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="uds-abbrev1" value="UDS = unified diagnostic services (ISO 14229) &#183; DID / DTC = data identifier / diagnostic trouble code &#183; DoCAN / DoIP = UDS over CAN (ISO 15765-2) / over IP (ISO 13400)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="563" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="uds-abbrev2" value="CanTp = the CAN transport-protocol module &#183; DCM + DEM = Classic AUTOSAR's diagnostic modules &#183; DM = Adaptive's diagnostic manager &#183; SWC = software component" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="579" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

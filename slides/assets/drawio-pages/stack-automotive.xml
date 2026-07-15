@@ -136,5 +136,10 @@
       <mxGeometry x="60" y="579" width="840" height="18" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="sa-abbrev1" value="SOME/IP = automotive service middleware &#183; DNN = deep neural network &#183; FSI = functional safety island &#183; AFW = Vector's AUTOSAR firmware for the safety MCU &#183; AP = AUTOSAR Adaptive" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="589" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

@@ -116,5 +116,9 @@
       <mxGeometry x="151" y="539" width="658" height="18" as="geometry" />
     </mxCell>
 
+    <mxCell id="gc-abbrev1" value="VLA = vision-language-action model &#183; DiT = diffusion transformer (the action head) &#183; RL = reinforcement learning" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="563" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

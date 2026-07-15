@@ -66,4 +66,7 @@
 
   <!-- Footnote -->
   <text x="480" y="575" text-anchor="middle" font-size="11" font-style="italic" fill="#555">UDS 0x2A periodic reads exist, but continuous fleet telemetry runs on telematics pipelines — UDS stays a diagnostic protocol</text>
+
+  <!-- Abbreviation key -->
+  <text x="480" y="592" text-anchor="middle" font-size="9.5" fill="#555555">SOVD = REST/JSON diagnostic API (ISO 17978) &#183; UDS = unified diagnostic services (ISO 14229) &#183; DoIP / CanTp = UDS over IP / over CAN &#183; DM+UCM / DCM+DEM = Adaptive / Classic diagnostic &amp; update modules</text>
 </svg>

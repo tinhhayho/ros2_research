@@ -115,5 +115,8 @@
     <mxCell id="lt-footnote" value="The loop rate picks the layer &#8212; misplace a task and you get either jitter or wasted silicon." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="161.8" y="568.9" width="636.35" height="18.2" as="geometry" />
     </mxCell>
+    <mxCell id="lt-abbrev1" value="SLAM = simultaneous localization &amp; mapping &#183; EKF = extended Kalman filter &#183; MPPI = Nav2's sampling-based controller &#183; RL = reinforcement learning &#183; VLA = vision-language-action model" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="585" width="920" height="16" as="geometry" />
+    </mxCell>
   </root>
 </mxGraphModel>

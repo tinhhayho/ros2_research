@@ -108,5 +108,8 @@
   <text x="480" y="502" text-anchor="middle" font-size="11.5" fill="#333">motors · encoders — EtherCAT / CAN-FD → MCU firmware (FOC)</text>
 
   <!-- Footnote -->
-  <text x="480" y="575" text-anchor="middle" font-size="11" font-style="italic" fill="#555">node/topic names from the audited wheeled-AMR stack (ros2_control · EKF · slam_toolbox + AMCL · Nav2/MPPI); our own captured mini-graph: docs/img/demo1_node_list.txt</text>
+  <text x="480" y="575" text-anchor="middle" font-size="11" font-style="italic" fill="#555">node/topic names from the real wheeled-AMR stack (ros2_control · EKF · slam_toolbox + AMCL · Nav2/MPPI); our own captured mini-graph: docs/img/demo1_node_list.txt</text>
+
+  <!-- Abbreviation key -->
+  <text x="480" y="592" text-anchor="middle" font-size="10" fill="#555555">AMR = autonomous mobile robot &#183; EKF = extended Kalman filter &#183; AMCL = adaptive Monte-Carlo localization &#183; MPPI = Nav2's sampling-based controller</text>
 </svg>

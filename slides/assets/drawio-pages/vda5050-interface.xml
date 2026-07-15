@@ -148,5 +148,10 @@
       <mxGeometry x="60" y="546" width="840" height="36" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="vda-abbrev1" value="AGV / AMR = automated guided vehicle / autonomous mobile robot &#183; MQTT = broker-based pub/sub protocol (VDA 5050's wire) &#183; OTA = over-the-air update" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="583" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

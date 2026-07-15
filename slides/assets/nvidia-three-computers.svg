@@ -73,4 +73,5 @@
 
   <!-- ===================== Footnote ===================== -->
   <text x="480" y="585" text-anchor="middle" font-size="12" fill="#1b2b4a">weights + code open · CUDA/TensorRT-only underneath — no CPU path</text>
+  <text x="480" y="597" text-anchor="middle" font-size="9" fill="#555555">VLA = vision-language-action model &#183; RL = reinforcement learning &#183; MIG = multi-instance GPU &#183; MoT = mixture-of-transformers</text>
 </svg>

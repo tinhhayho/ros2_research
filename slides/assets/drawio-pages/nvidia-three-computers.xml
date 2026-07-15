@@ -92,5 +92,9 @@
       <mxGeometry x="266" y="577" width="429" height="17" as="geometry" />
     </mxCell>
 
+    <mxCell id="ntc-abbrev1" value="VLA = vision-language-action model &#183; RL = reinforcement learning &#183; MIG = multi-instance GPU &#183; MoT = mixture-of-transformers" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="588" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

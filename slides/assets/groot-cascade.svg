@@ -64,4 +64,5 @@
 
   <!-- Footnote -->
   <text x="480" y="548" text-anchor="middle" font-size="13" font-style="italic" fill="#666">NVIDIA's stack ends above the 1 kHz line &#8212; the bottom half is classical embedded engineering</text>
+  <text x="480" y="572" text-anchor="middle" font-size="10" fill="#555555">VLA = vision-language-action model &#183; DiT = diffusion transformer (the action head) &#183; RL = reinforcement learning</text>
 </svg>

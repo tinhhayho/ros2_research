@@ -107,5 +107,9 @@
       <mxGeometry x="69" y="549" width="822" height="18" as="geometry" />
     </mxCell>
 
+    <mxCell id="stack-abbrev1" value="FMS = fleet management system &#183; VLA = vision-language-action model &#183; RL = reinforcement learning &#183; SLAM = simultaneous localization &amp; mapping &#183; DDS = ROS 2's pub/sub middleware" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="571" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

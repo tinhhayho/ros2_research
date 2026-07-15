@@ -45,4 +45,5 @@
   <rect x="40" y="486" width="880" height="94" rx="8" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
   <text x="480" y="524" text-anchor="middle" font-size="17" font-weight="600" fill="#1b2b4a">Learning ROS 2 = learning the industrial mainstream —</text>
   <text x="480" y="550" text-anchor="middle" font-size="17" font-weight="600" fill="#1b2b4a">and the ≤1 kHz firmware layers are the same everywhere</text>
+  <text x="480" y="574" text-anchor="middle" font-size="10" fill="#555555">AMR = autonomous mobile robot &#183; L4 = SAE driving-automation level 4 (driverless in a bounded domain)</text>
 </svg>

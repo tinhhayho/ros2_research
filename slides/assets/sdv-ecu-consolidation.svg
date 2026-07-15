@@ -133,4 +133,8 @@
   <!-- Footnote -->
   <text x="480" y="525" text-anchor="middle" font-size="11" font-style="italic" fill="#555555">industry framing: Bosch &#8216;distributed application software consolidated in a few powerful vehicle computers&#8217;;</text>
   <text x="480" y="542" text-anchor="middle" font-size="11" font-style="italic" fill="#555555">reported targets go from 100+ ECUs to under a dozen &#8212; vendor figures, not a measurement</text>
+
+  <!-- Abbreviation key -->
+  <text x="480" y="566" text-anchor="middle" font-size="10.5" fill="#555555">DC = domain controller &#183; FL/FR/RL/RR = front-left / front-right / rear-left / rear-right corner zones &#183; SDV = software-defined vehicle</text>
+  <text x="480" y="583" text-anchor="middle" font-size="10.5" fill="#555555">HPC = high-performance computer &#183; AV/AD = autonomous vehicle / automated driving &#183; OTA = over-the-air update &#183; TSN = time-sensitive networking</text>
 </svg>

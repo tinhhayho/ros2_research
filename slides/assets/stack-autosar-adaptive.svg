@@ -82,4 +82,7 @@
   <!-- Footnote -->
   <text x="480" y="572" text-anchor="middle" font-size="11" font-style="italic" fill="#555">updates per Software Cluster via UCM (Update and Configuration Management) — not full-ECU reflash ·</text>
   <text x="480" y="588" text-anchor="middle" font-size="11" font-style="italic" fill="#555">safety: ASIL-B shipping, ASIL-D programs underway</text>
+
+  <!-- Abbreviation key -->
+  <text x="480" y="598" text-anchor="middle" font-size="9" fill="#555555">DM = diagnostic manager (UDS over DoIP) &#183; UCM = update &amp; configuration management &#183; SOME/IP = automotive service middleware &#183; PSE51 = the minimal real-time POSIX profile</text>
 </svg>

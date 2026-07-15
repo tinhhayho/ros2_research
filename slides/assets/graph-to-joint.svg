@@ -165,4 +165,5 @@
   <text x="374" y="584" font-size="9.5" fill="#333">mailbox hand-off &#8212; the only way across the RT boundary</text>
   <line x1="700" y1="580" x2="736" y2="580" stroke="#444" stroke-width="4" marker-end="url(#arrF)"/>
   <text x="744" y="584" font-size="9.5" fill="#333">fieldbus frames, fixed cycle</text>
+  <text x="480" y="597" text-anchor="middle" font-size="9" fill="#555555">DDS = data distribution service &#8212; ROS 2's pub/sub middleware &#183; FOC = field-oriented control (the motor current loop)</text>
 </svg>

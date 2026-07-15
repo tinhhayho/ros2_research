@@ -325,5 +325,13 @@
       <mxGeometry x="40" y="533" width="880" height="16" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="sdv-abbrev1" value="DC = domain controller &#183; FL/FR/RL/RR = front-left / front-right / rear-left / rear-right corner zones &#183; SDV = software-defined vehicle" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="40" y="557" width="880" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-abbrev2" value="HPC = high-performance computer &#183; AV/AD = autonomous vehicle / automated driving &#183; OTA = over-the-air update &#183; TSN = time-sensitive networking" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="40" y="574" width="880" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

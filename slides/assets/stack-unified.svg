@@ -60,4 +60,5 @@
 
   <!-- Footnote -->
   <text x="480" y="558" text-anchor="middle" font-size="13" font-style="italic" fill="#666">The ROS 2 boundary is the one line that moved since 2020 — everything below it is still classic embedded/RTOS work.</text>
+  <text x="480" y="580" text-anchor="middle" font-size="10" fill="#555555">FMS = fleet management system &#183; VLA = vision-language-action model &#183; RL = reinforcement learning &#183; SLAM = simultaneous localization &amp; mapping &#183; DDS = ROS 2's pub/sub middleware</text>
 </svg>

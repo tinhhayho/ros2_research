@@ -61,4 +61,5 @@
 
   <!-- Footnote -->
 <text x="480" y="578" text-anchor="middle" font-size="13" font-style="italic" fill="#555">The loop rate picks the layer &#8212; misplace a task and you get either jitter or wasted silicon.</text>
+<text x="480" y="594" text-anchor="middle" font-size="9.5" fill="#555555">SLAM = simultaneous localization &amp; mapping &#183; EKF = extended Kalman filter &#183; MPPI = Nav2's sampling-based controller &#183; RL = reinforcement learning &#183; VLA = vision-language-action model</text>
 </svg>

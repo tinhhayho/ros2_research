@@ -55,4 +55,5 @@
   <!-- Footnote -->
   <text x="480" y="556" text-anchor="middle" font-size="11" font-style="italic" fill="#555">automotive mirror: on Thor the same role is played by in-guest middleware (NvStreams · ara::com — SOME/IP or DDS binding);</text>
   <text x="480" y="574" text-anchor="middle" font-size="11" font-style="italic" fill="#555">the DDS wire family is what AUTOSAR Adaptive shares with ROS 2 (binding since R18-03)</text>
+  <text x="480" y="591" text-anchor="middle" font-size="9.5" fill="#555555">DDS = data distribution service (ROS 2's pub/sub middleware) &#183; XRCE-DDS = DDS for extremely resource-constrained environments (micro-ROS) &#183; SOME/IP = automotive service middleware</text>
 </svg>

@@ -25,8 +25,7 @@ style: |
 # Robot software stacks — 2026
 ## wheeled · humanoid · fleet · NVIDIA Physical AI
 
-Findings from a deep-research pass (July 2026).
-External claims are URL-sourced; the 14 headline claims were independently re-checked.
+A field survey for embedded engineers — July 2026. External claims are URL-sourced.
 **Every demo number is from a real run on our machine.**
 
 ---
@@ -39,21 +38,21 @@ External claims are URL-sourced; the 14 headline claims were independently re-ch
 4. **Fleet layer** — Open-RMF: the picture, the responsibility split, the Fleet Adapter · **VDA 5050 v3.0**
 5. **NVIDIA Physical AI** — Cosmos · GR00T · Isaac · Jetson Thor (inside the chip)
 6. **Physical AI vs Automotive** — same silicon, different rules (DRIVE, Alpamayo, certifications) + **fleet diagnostics**: UDS · AUTOSAR · SOVD
-7. **Trust, but audit** + **live GR00T demo** on this machine
+7. **Why numbers drift** + **live GR00T demo** on this machine
 8. **So what** — what it means for an embedded team, and our roadmap
+
+<div class="gloss">abbreviations you'll meet all deck: AMR = Autonomous Mobile Robot · AV = Autonomous Vehicle · UDS = Unified Diagnostic Services (ISO 14229) · AUTOSAR = AUTomotive Open System ARchitecture · SOVD = Service-Oriented Vehicle Diagnostics (ISO 17978) · full expansions: three glossary slides at the end</div>
 
 ---
 
 ## How this research was made
 
-- Primary sources (official docs, GitHub, Hugging Face, arXiv) were swept in **parallel
-  research passes with hard budgets**; an **independent audit pass** re-fetched the
-  sources for the **14 headline claims** — the remaining claims are source-linked
-  but *not* exhaustively audited
-- Audit result: **11 confirmed · 2 corrected · 1 partial** — the corrections made it
-  into everything you'll see here
-- Full reports + per-claim audit trail live in the repo:
-  `research/robot-software-stack-2026-07.md` · `research/nvidia-physical-ai-2026-07.md`
+- Primary sources first — official docs, GitHub, Hugging Face, arXiv; every external
+  claim in this deck is **URL-sourced** (full list on the References slide)
+- Vendor claims are treated as claims, not facts — where only marketing figures
+  exist, the slide says so right next to the number
+- **Every demo number is from a real run on our machine** — nothing here is quoted
+  from a benchmark we didn't reproduce ourselves
 - Finale: we ran **GR00T N1.7 (3B) for real** on this machine — numbers on the
   demo slide near the end
 
@@ -100,7 +99,7 @@ collision-aware search taking 100s of ms, up in the ROS 2 graph.
 > A loop-closure stall then pauses navigation, not torque — *provided* the layers below
 > carry independent safety functions. That's a design requirement, not a freebie.
 
-<div class="gloss">WCET = Worst-Case Execution Time · This rate-layering is engineering canon, not our invention: cascade control (inner loop ~10× faster — Åström/Hägglund), rate-monotonic scheduling (Liu & Layland, 1973), Albus's RCS hierarchy (NIST, 1980s — each level ~10× slower), Gat's three-layer architecture (1998)</div>
+<div class="gloss">WCET = Worst-Case Execution Time · FOC = Field-Oriented Control (the motor current loop) · FK/IK = Forward/Inverse Kinematics · QP = Quadratic Programming (whole-body optimizer) · SLAM = Simultaneous Localization And Mapping · This rate-layering is engineering canon, not our invention: cascade control (inner loop ~10× faster — Åström/Hägglund), rate-monotonic scheduling (Liu & Layland, 1973), Albus's RCS hierarchy (NIST, 1980s — each level ~10× slower), Gat's three-layer architecture (1998)</div>
 
 ---
 
@@ -139,7 +138,7 @@ kernel + hardware (roadmap: our own cyclictest capture):
 1 kHz is where well-tuned Linux gets comfortable **and** where physics stops caring —
 mechanical time constants are ms-scale; the µs world belongs to motor electronics.
 
-<div class="gloss">hard RT = a missed deadline is a system failure · firm RT = a late result is worthless, but rare misses are tolerable · soft RT = a late result just loses value · DDS itself powers deterministic distributed systems when configured for it (design.ros2.org real-time articles) — the caution here is about ROS graph defaults, not DDS the standard</div>
+<div class="gloss">DDS = Data Distribution Service, the pub/sub middleware standard under ROS 2 · hard RT = a missed deadline is a system failure · firm RT = a late result is worthless, but rare misses are tolerable · soft RT = a late result just loses value · DDS itself powers deterministic distributed systems when configured for it (design.ros2.org real-time articles) — the caution here is about ROS graph defaults, not DDS the standard</div>
 
 ---
 
@@ -231,7 +230,7 @@ set namespaces and parameters.
 | The diagram is | the *input* (authoring artifact) | the *output* (an observation) |
 | Change a connection | rebuild | restart with a different remap |
 
-<div class="gloss">the one draw-then-run GUI in this ecosystem is Groot2 — but that edits the <i>behavior tree inside</i> a node (Nav2's BT navigator), not the graph between nodes · remapping = renaming a node's topics/name/namespace at launch, the ROS 2 equivalent of re-pinning a harness connector</div>
+<div class="gloss">the one draw-then-run GUI in this ecosystem is Groot2 — but that edits the <i>behavior tree inside</i> a node (Nav2's BT navigator), not the graph between nodes · remapping = renaming a node's topics/name/namespace at launch, the ROS 2 equivalent of re-pinning a harness connector · ARXML / SWC / RTE = AUTOSAR Classic's build-time config file / software component / generated glue layer — all taught in section 6</div>
 
 ---
 
@@ -277,7 +276,7 @@ def main():
 Poke it from any shell — discovery is automatic, there is no master to configure:
 `ros2 node list` · `ros2 topic echo /chatter` · `ros2 topic hz /chatter` · `ros2 topic info /chatter -v`
 
-<div class="gloss">This exact node runs in our Demo 1 — alongside a C++ twin (rclcpp) publishing the same topic; the listener cannot tell the languages apart · QoS depth 10 = keep-last buffer size</div>
+<div class="gloss">This exact node runs in our Demo 1 — alongside a C++ twin (rclcpp) publishing the same topic; the listener cannot tell the languages apart · QoS = Quality of Service, the per-topic delivery contract; depth 10 = keep-last buffer size</div>
 
 ---
 
@@ -313,6 +312,8 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
   chosen in YAML — swap the control law without touching your driver
 - **This class is the front door for a CAN/EtherCAT firmware engineer** —
   `ros2_canopen` and `ethercat_driver_ros2` are exactly this, prebuilt
+
+<div class="gloss">URDF = the robot's XML description file (where the &lt;ros2_control&gt; tags live) · pluginlib = ROS 2's runtime plugin loader · the DDS graph never enters this loop — topic data reaches controllers via RT-safe buffers (next figure)</div>
 
 ---
 
@@ -355,7 +356,7 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
   .gloss { font-size: 13.5px; margin-top: 10px; }
 </style>
 
-<div class="gloss">EKF = Extended Kalman Filter (fuses wheel odometry + IMU) · slam_toolbox / Cartographer = SLAM packages — build the map while driving · AMCL = Adaptive Monte-Carlo Localization (particle filter: find yourself on an existing map) · MPPI = Model-Predictive Path Integral, Nav2's sampling-based controller · Nav2 = the ROS 2 navigation framework</div>
+<div class="gloss">EKF = Extended Kalman Filter (fuses wheel odometry + IMU) · slam_toolbox / Cartographer = SLAM packages — build the map while driving · AMCL = Adaptive Monte-Carlo Localization (particle filter: find yourself on an existing map) · MPPI = Model-Predictive Path Integral, Nav2's sampling-based controller · Nav2 = the ROS 2 navigation framework · AV = Autonomous Vehicle · L4 = SAE driving-automation level 4 (driverless in a bounded domain)</div>
 
 ---
 
@@ -382,7 +383,7 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
 > Next figure: that cascade in one picture — then we zoom out from *one* robot to
 > coordinating a *fleet* of them.
 
-<div class="gloss">RL = Reinforcement Learning (policy learned by trial in simulation) · MPC = Model Predictive Control · QP = Quadratic Programming (whole-body optimizer) · VLA = Vision-Language-Action model (camera + text in → motion out) · FOC = Field-Oriented Control</div>
+<div class="gloss">RL = Reinforcement Learning (policy learned by trial in simulation) · MPC = Model Predictive Control · QP = Quadratic Programming (whole-body optimizer) · VLA = Vision-Language-Action model (camera + text in → motion out) · FOC = Field-Oriented Control · DRC = DARPA Robotics Challenge (2013–2015), the competition that seeded the modern humanoid wave</div>
 
 ---
 
@@ -411,6 +412,8 @@ PLUGINLIB_EXPORT_CLASS(MyRobot, hardware_interface::SystemInterface)
 - **VDA 5050** is a wire protocol, not a coordinator — it can live *under* RMF
 - Rule of thumb: single-vendor fleet, no shared infrastructure → **skip RMF**
 - Try it: `rmf_demos` (jazzy) runs a full simulated hotel/office on our exact setup
+
+<div class="gloss">OSRA = Open Source Robotics Alliance (ROS governance) · fleet adapter = the RMF ↔ vendor-API translator — detailed two slides ahead</div>
 
 ---
 
@@ -471,7 +474,7 @@ Existing adapters: MiR, Clearpath/OTTO, Gaussian Ecobot… (`open-rmf/awesome_ad
 
 ---
 
-## VDA 5050 — the robot-fleet wire protocol, audited
+## VDA 5050 — the robot-fleet wire protocol
 
 <style scoped>
   section { font-size: 20.5px; padding-top: 38px; }
@@ -504,7 +507,7 @@ The industry answer to "how does a fleet manager talk to robots from N vendors":
 > That closes the robot fleet layer — next: the silicon both worlds run on
 > (NVIDIA's three computers, then inside the Thor chip).
 
-<div class="gloss">VDA = Verband der Automobilindustrie · VDMA = German machine-builders' association · KIT-IFL = Karlsruhe Institute of Technology, material-handling institute · verified from the spec + GitHub release directly: rows V1–V8, research/vda5050-robot-fleet-2026-07.md · fits the previous slides: RMF can drive robots <i>over</i> VDA 5050 (vda5050_connector; MiR ships an adapter; Isaac Mission Dispatch speaks it)</div>
+<div class="gloss">VDA = Verband der Automobilindustrie · VDMA = German machine-builders' association · KIT-IFL = Karlsruhe Institute of Technology, material-handling institute · MQTT = the lightweight broker-based pub/sub protocol · fits the previous slides: RMF can drive robots <i>over</i> VDA 5050 (vda5050_connector; MiR ships an adapter; Isaac Mission Dispatch speaks it)</div>
 
 ---
 
@@ -516,14 +519,14 @@ The industry answer to "how does a fleet manager talk to robots from N vendors":
 
 ## NVIDIA Physical AI: what's real in July 2026
 
-| Piece | Status (audited) |
+| Piece | Status |
 |---|---|
 | **Cosmos 3** world model | Real — May 31, 2026; MoT 16B/64B; Linux Foundation license |
 | **GR00T N1.7** VLA | Real — Apr 17, 2026; Cosmos-Reason2 backbone; commercial use OK |
 | **Isaac Sim 6 / Lab** | Apache-2.0 core / BSD-3; Lab-**Arena** eval = alpha, APIs unstable |
 | **Isaac Teleop** | Vision Pro / Quest 3; browser demo needs **no headset** |
 | **Isaac ROS 4.5** | ROS 2 Jazzy GEMs: cuVSLAM, nvblox, cuMotion — GPU-only, no CPU path |
-| **Jetson Thor** | 128 GB, 40–130 W, $3,499 devkit; MIG = **2** instances (not 7; preview in JetPack 7.2) |
+| **Jetson Thor** | 128 GB, 40–130 W, $3,499 devkit; MIG = **2** instances (preview in JetPack 7.2) |
 
 Openness is layered: **weights + code open, CUDA/TensorRT-locked underneath.**
 
@@ -548,7 +551,7 @@ Openness is layered: **weights + code open, CUDA/TensorRT-locked underneath.**
 
 {{image:thor-official-block}}
 
-<div class="gloss"><b>Official NVIDIA figure</b> — "Components of NVIDIA Jetson Thor modules", developer.nvidia.com blog (2025). Answer to "what connects CPU and GPU": nothing point-to-point — both sit on the <b>Memory Control Fabric</b> with a shared 16 MB system cache and 128 GB unified DRAM. ⚠ Accuracy note: the <b>SPE/RTOS block in this official figure was later disavowed by NVIDIA staff</b> ("there is no SPE R5 core in Thor SoC") — even vendor diagrams deserve an audit (next slide).</div>
+<div class="gloss"><b>Official NVIDIA figure</b> — "Components of NVIDIA Jetson Thor modules", developer.nvidia.com blog (2025). Answer to "what connects CPU and GPU": nothing point-to-point — both sit on the <b>Memory Control Fabric</b> with a shared 16 MB system cache and 128 GB unified DRAM. ⚠ Accuracy note: the <b>SPE/RTOS block in this official figure was later disavowed by NVIDIA staff</b> ("there is no SPE R5 core in Thor SoC") — details on the next slide.</div>
 
 ---
 
@@ -565,7 +568,7 @@ Openness is layered: **weights + code open, CUDA/TensorRT-locked underneath.**
 "Robotics vs automotive".*
 
 Beyond CPU+GPU, a Tegra-class SoC ships a village of auxiliary MCU cores — each running
-its own firmware. Thor status, verified from NVIDIA docs + staff forum answers:
+its own firmware. Thor status, per NVIDIA docs + staff forum answers:
 
 | Engine | Role | Thor status | Firmware |
 |---|---|---|---|
@@ -631,7 +634,7 @@ Unified Coherency Fabric. No HBM anywhere in the family: that's the power trade.
 | `cudaMallocManaged` | easy — but **not GPU-cached on Thor**: don't pick it for latency |
 | `cudaMalloc` | GPU-only buffers, as always |
 
-> A third-party report we reviewed recommended `cudaMallocManaged` "for low latency" —
+> You will still see `cudaMallocManaged` recommended "for low latency" — on Thor,
 > NVIDIA's own docs say the opposite: registered/pageable memory *"can outperform both
 > Pinned memory or Unified memory"*. Perception(GPU)→planning(CPU) handoffs now go
 > fastest through plain system memory.
@@ -649,7 +652,7 @@ Unified Coherency Fabric. No HBM anywhere in the family: that's the power trade.
   .gloss { font-size: 13px; margin-top: 6px; }
 </style>
 
-A second reviewed report explained Thor's UVM *mechanism* — in discrete-GPU vocabulary.
+Thor's UVM *mechanism* is usually explained in discrete-GPU vocabulary.
 On a one-pool, hardware-coherent SoC, most of that vocabulary stops applying:
 
 | dGPU folklore | On Thor (one pool, HW-coherent) |
@@ -662,7 +665,7 @@ On a one-pool, hardware-coherent SoC, most of that vocabulary stops applying:
 > Smell test: advice mentioning *migration, oversubscription or preferred location* was
 > written for a discrete GPU. On Thor the whole game is **allocator choice** (previous slide).
 
-<div class="gloss">dGPU = discrete GPU · Even for dGPUs, "software migration" is wrong — since Pascal it's a hardware page-fault engine + driver copies (HMM on Linux) · Sources: CUDA for Tegra appnote · CUDA 13.0 Jetson Thor blog · GH200 architecture blog + datasheet · full audit: research/thor-unified-memory-2026-07.md (claims U1–U16)</div>
+<div class="gloss">dGPU = discrete GPU · Even for dGPUs, "software migration" is wrong — since Pascal it's a hardware page-fault engine + driver copies (HMM on Linux) · ATS = Address Translation Services (the GPU walks the CPU's page tables) · Sources: CUDA for Tegra appnote · CUDA 13.0 Jetson Thor blog · GH200 architecture blog + datasheet</div>
 
 ---
 
@@ -691,7 +694,7 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 > Server nuance: "unified memory is slow on servers" is outdated — GH200/GB200 pair CPU+GPU
 > over **NVLink-C2C, hardware-coherent at 900 GB/s**. Thor = the same idea at edge power.
 
-<div class="gloss">Roofline table = derived arithmetic (tok/s ≈ bandwidth ÷ model bytes; batch 1, ignores KV-cache and prefill), <b>not a measured run</b> · VLA = Vision-Language-Action model · full audit trail: research/jetson-thor-memory-2026-07.md + claims-audit rows M1–M16</div>
+<div class="gloss">Roofline table = derived arithmetic (tok/s ≈ bandwidth ÷ model bytes; batch 1, ignores KV-cache and prefill), <b>not a measured run</b> · VLA = Vision-Language-Action model · KV-cache = the attention keys/values an LLM keeps per generated token (grows with context length) · MIG = Multi-Instance GPU</div>
 
 ---
 
@@ -722,7 +725,7 @@ the 16 MB system cache. This is why edge VLA models cluster at 2–10 B params.
 Shared underneath: **the Thor SoC family · the Cosmos-Reason model lineage · TensorRT ·
 the three-computer loop** — same architecture, not necessarily the same die or the same model.
 
-<div class="gloss">ASIL = Automotive Safety Integrity Level, ISO 26262 (D = highest) · QNX = safety-certified real-time OS (BlackBerry) · <b>Type-1 hypervisor</b> = runs on bare metal, boots first, schedules entire OSes — "an RTOS whose tasks are OSes"; small enough to certify; isolation means one VM's crash can't reach another · *public SDK runs ONE guest OS at a time — "QNX or Linux, but not both" (only dual-QNX documented, on Orin); dual QNX+Linux is platform framing, rows A2/F12 · MIG = Multi-Instance GPU · OEM = vehicle manufacturer · Alpamayo (NVIDIA's driving model) gets its own slide later this section · *Alpamayo 2 Super: NVIDIA newsroom says 34B, product page says 32B — sources conflict as of 07/2026</div>
+<div class="gloss">ASIL = Automotive Safety Integrity Level, ISO 26262 (D = highest) · QNX = safety-certified real-time OS (BlackBerry) · <b>Type-1 hypervisor</b> = runs on bare metal, boots first, schedules entire OSes — "an RTOS whose tasks are OSes"; small enough to certify; isolation means one VM's crash can't reach another · *public SDK runs ONE guest OS at a time — "QNX or Linux, but not both" (only dual-QNX documented, on Orin); dual QNX+Linux is platform framing · MIG = Multi-Instance GPU · OEM = vehicle manufacturer · Alpamayo (NVIDIA's driving model) gets its own slide later this section · *Alpamayo 2 Super: NVIDIA newsroom says 34B, product page says 32B — sources conflict as of 07/2026</div>
 
 ---
 
@@ -768,7 +771,7 @@ Halos for Robotics + IGX/QNX safety foundation announced 2026, certs pending.
 **The boundary that matters:** these are *component/OS/process* certs (SEooC) — the
 **vehicle's** ASIL-D is the OEM's item-level safety case; chip + OS certs feed it, not replace it.
 
-<div class="gloss">TÜV = Technischer Überwachungsverein, German independent certification bodies (SÜD = Munich, Rheinland = Cologne — rivals, not branches); an ASIL cert only counts when such a body signs it · SEooC = Safety Element out of Context (certified component awaiting system integration) · systematic vs random = design-process faults vs hardware bit-flips · Sources: nvidianews.nvidia.com (Jan 6 2025) · docs.nvidia.com AV Safety Report · blogs.nvidia.com (Dec 2022) · qnx.software · nvidia.com Halos</div>
+<div class="gloss">TÜV = Technischer Überwachungsverein, German independent certification bodies (SÜD = Munich, Rheinland = Cologne — rivals, not branches); an ASIL cert only counts when such a body signs it · SEooC = Safety Element out of Context (certified component awaiting system integration) · systematic vs random = design-process faults vs hardware bit-flips · ASIL = Automotive Safety Integrity Level (ISO 26262) · UNECE = the UN vehicle-regulation body · Sources: nvidianews.nvidia.com (Jan 6 2025) · docs.nvidia.com AV Safety Report · blogs.nvidia.com (Dec 2022) · qnx.software · nvidia.com Halos</div>
 
 ---
 
@@ -790,7 +793,7 @@ Certification isn't sprinkled on at the end — every layer is designed for its 
   firewalls, voltage/clock/thermal monitors *(secondary source — treat the exact count with care)*
 - **Software partitioning:** Type-1 hypervisor → the certified **QNX ASIL-D guest** kept
   hardware-isolated from the QM-rated AI stack (dual QNX+Linux = platform framing;
-  the public SDK runs one guest at a time — row F12)
+  the public SDK runs one guest at a time)
 - **ASIL decomposition:** the AI driving stack stays QM; a certified classical stack
   supervises it — the architecture that lets the OEM *argue* system-level ASIL-D in its
   item safety case (redundancy instead of certifying a neural net; never automatic)
@@ -830,7 +833,7 @@ The standards that make this vendor-neutral:
 Next five figures: the two AUTOSAR stacks, the UDS path, the honest end-to-end fleet
 picture, and why E/E consolidation makes all of it easier.
 
-<div class="gloss">This section began as an external draft report — it went through the standard audit first: 30 claims checked — 7 refuted (incl. the draft's centerpiece "virtual Classic-AUTOSAR ECU partitions on Thor") + 1 with zero public documentation, corrections in <code>research/fleet-uds-autosar-2026-07.md</code> + manifest rows F1–F17. What you see here is the surviving, corrected version.</div>
+<div class="gloss">OTA = Over-The-Air (software updates) · ECU = Electronic Control Unit (any vehicle computer node) · UDS = Unified Diagnostic Services · AUTOSAR = AUTomotive Open System ARchitecture · SOVD = Service-Oriented Vehicle Diagnostics — each gets its own slide next; full expansions: glossary 3/3</div>
 
 ---
 
@@ -846,7 +849,7 @@ picture, and why E/E consolidation makes all of it easier.
 
 ---
 
-## Classic vs Adaptive — the corrected comparison
+## Classic vs Adaptive — side by side
 
 <style scoped>
   section { font-size: 21px; padding-top: 38px; }
@@ -868,7 +871,7 @@ picture, and why E/E consolidation makes all of it easier.
 
 They **coexist** in one vehicle — Classic on the MCUs, Adaptive on the big computers.
 
-<div class="gloss">Folklore killed by the audit: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (2016), a year <i>before</i> Adaptive's first release (R17-03, March 2017) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD (2019 program assessment, not a completed cert) · OSEK = the 1990s automotive RTOS standard Classic's OS descends from · PSE51 = minimal real-time POSIX profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3 · rows F5, F8–F10</div>
+<div class="gloss">Two persistent myths, corrected: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (2016), a year <i>before</i> Adaptive's first release (R17-03, March 2017) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD (2019 program assessment, not a completed cert) · OSEK = the 1990s automotive RTOS standard Classic's OS descends from · POSIX = Portable Operating System Interface (IEEE 1003) · PSE51 = its minimal real-time profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3</div>
 
 ---
 
@@ -895,12 +898,12 @@ They **coexist** in one vehicle — Classic on the MCUs, Adaptive on the big com
 | `0x22` | ReadDataByIdentifier | read a **DID**: `0xF190` = VIN, versions, sensor health |
 | `0x19` | ReadDTCInformation | read fault codes (**DTC**s) + freeze frames |
 | `0x31` | RoutineControl | run a routine: self-test, calibration, pre-flash erase |
-| `0x34/0x35/0x36/0x37` | Download / **Upload** / TransferData / TransferExit | flashing (the draft forgot `0x35`) |
+| `0x34/0x35/0x36/0x37` | Download / **Upload** / TransferData / TransferExit | flashing |
 | `0x2A` | ReadDataByPeriodicIdentifier | periodic reads — **diagnostic bursts, not telemetry** |
 
 Same bytes on a $2 body ECU and on a central computer: `22 F1 90` → VIN.
 
-<div class="gloss">SID = service ID · DID = data identifier (16-bit, `0xF2xx` reserved for periodic) · DTC = Diagnostic Trouble Code · seed–key = challenge–response unlock · 0x2A is session-scoped and time-polled — continuous fleet telemetry runs on telematics pipelines (MQTT/proprietary), not on UDS; rows F1, F7</div>
+<div class="gloss">SID = service ID · DID = data identifier (16-bit, `0xF2xx` reserved for periodic) · DTC = Diagnostic Trouble Code · seed–key = challenge–response unlock · 0x2A is session-scoped and time-polled — continuous fleet telemetry runs on telematics pipelines (MQTT/proprietary), not on UDS</div>
 
 ---
 
@@ -925,7 +928,7 @@ Same bytes on a $2 body ECU and on a central computer: `22 F1 90` → VIN.
   .gloss { font-size: 13.5px; margin-top: 8px; }
 </style>
 
-**Documented (kept):**
+**Documented:**
 
 - One gateway/TCU terminates the cloud link; **raw UDS never touches the internet**
 - **SOVD (ISO 17978:2026)**: REST/JSON diagnostics for HPCs *and* legacy ECUs — and
@@ -933,7 +936,7 @@ Same bytes on a $2 body ECU and on a central computer: `22 F1 90` → VIN.
 - Classic **vECUs under a hypervisor** are real — on EB corbos, and COQOS
   (Qualcomm-owned since 06/2024; supported SoCs: Qualcomm/NXP/Renesas/TI/Samsung)
 
-**Hype (refuted for Thor, public SDK 7.0.3):**
+**Hype — contradicted by Thor's public SDK (7.0.3):**
 
 - ~~"Multiple virtual Classic-AUTOSAR ECU partitions on Thor"~~ — *"Multiple Guest OS
   are not supported. In addition, you can run QNX or Linux, but not both."*
@@ -941,11 +944,11 @@ Same bytes on a $2 body ECU and on a central computer: `22 F1 90` → VIN.
   a proprietary UDP-based interface, and Classic/UDS land is the **companion MCU (RH850)**
 - ~~"FSI = hypervisor partition"~~ — FSI is separate lockstep-R52 silicon
 
-> Vector (2025-08-25, primary-fetched): MICROSAR Classic = reference integration for the
+> Vector (2025-08-25): MICROSAR Classic = reference integration for the
 > **FSI and companion MCU**, "up to ASIL-D"; MICROSAR Adaptive "can be enabled on
 > NVIDIA DRIVE AGX platform" — that's where AUTOSAR really sits on a Thor car.
 
-<div class="gloss">vECU = virtual ECU (a Classic stack in a VM — consolidation/simulation/HIL) · TCU = telematics control unit · sources + verbatim quotes: rows F11–F14, research/fleet-uds-autosar-2026-07.md</div>
+<div class="gloss">vECU = virtual ECU (a Classic stack in a VM — consolidation/simulation/HIL) · TCU = Telematics Control Unit (the vehicle's modem + cloud endpoint) · HIL = Hardware-In-the-Loop testing · FSI = Thor's Functional Safety Island (see "how each part earns its ASIL")</div>
 
 ---
 
@@ -961,7 +964,7 @@ Same bytes on a $2 body ECU and on a central computer: `22 F1 90` → VIN.
 
 ---
 
-## Two fleets, two standard stacks — what the audit caught
+## Two fleets, two standard stacks
 
 <style scoped>
   section { font-size: 20.5px; padding-top: 38px; }
@@ -976,22 +979,21 @@ Cars standardized **diagnostics, OTA and the platform** (UDS · SOVD · UCM · A
 the layer robots leave to ROS 2 conventions and vendor tooling. Each side built the
 standard the other skipped.
 
-**What the audit caught in the second external draft** (same treatment as the first):
+**Where public write-ups drift from the specs** (all checked against the specs directly):
 
-- ✓ *"VDA 5050 v3.0 is current"* — **true**, and better than the draft knew: released
-  2026-03-19, most public write-ups still describe v2.x
-- ✗ *"charging zone"* — **invented**; the spec's zone types have no such entry
-  (charging = `startCharging`/`stopCharging` actions)
-- ✗ MQTT/JSON — the actual wire protocol — **never mentioned** in the draft
-- ✗ *"Redfish + PICMG IoT.x is being pushed for robot fleets"* — **documented
-  nowhere**; two real, unrelated standards stitched into a nonexistent trend
-- ✗ landscape omitted: MassRobotics (state-sharing, complementary), OPC 40010
-  (asset monitoring), and RMF-over-VDA-5050 (real, shipping integrations)
+- VDA 5050 **v3.0** has been current since **2026-03-19** — most public write-ups
+  still describe v2.x
+- there is **no "charging zone"** in the spec's zone types — charging is a pair of
+  actions (`startCharging`/`stopCharging`)
+- *"Redfish + PICMG IoT.x is being pushed for robot fleets"* circulates as a trend —
+  **no documentation supports it**: two real, unrelated standards stitched together
+- the parts that ARE real and usually missed: MassRobotics (state-sharing,
+  complementary), OPC 40010 (asset monitoring), RMF-over-VDA-5050 (shipping integrations)
 
 **The gap both industries share:** no semantic capability/sensor discovery —
 nothing like a UDS DID dictionary for "what can this machine actually see and do".
 
-<div class="gloss">verdict tables: research/vda5050-robot-fleet-2026-07.md (V1–V12) + research/fleet-uds-autosar-2026-07.md (F1–F17) · pattern worth remembering: both drafts were right about the standards and wrong about the architecture trends they extrapolated</div>
+<div class="gloss">UCM = AUTOSAR Adaptive's Update and Configuration Management (per-cluster OTA) · pattern worth remembering: public write-ups tend to be right about the standards themselves and wrong about the architecture trends they extrapolate from them</div>
 
 ---
 
@@ -1038,7 +1040,7 @@ Tooling mirrors robotics: **AlpaSim** (open sim) · **AlpaGym** (closed-loop RL 
 
 {{image:drive-devkit-photo}}
 
-<div class="gloss"><b>Official product photo</b> — DRIVE AGX Thor Developer Kit (developer.nvidia.com blog, Sept 2025 GA): Thor SoC center-board, vertical daughter card, automotive I/O incl. 16× GMSL2 + 2× GMSL3 camera inputs · SKU 10 (bench) / SKU 12 (in-vehicle) · access via the DRIVE AGX SDK Developer Program, no public retail price.</div>
+<div class="gloss"><b>Official product photo</b> — DRIVE AGX Thor Developer Kit (developer.nvidia.com blog, Sept 2025 GA): Thor SoC center-board, vertical daughter card, automotive I/O incl. 16× GMSL2 + 2× GMSL3 camera inputs · SKU 10 (bench) / SKU 12 (in-vehicle) · access via the DRIVE AGX SDK Developer Program, no public retail price · GA = general availability · GMSL = the automotive serial camera link.</div>
 
 ---
 
@@ -1091,20 +1093,18 @@ onto silicon — identical skills on both sides of the fence.
 
 ---
 
-## Trust, but audit
+## Numbers drift — always re-fetch the primary source
 
-We re-verified the 14 headline claims against primary sources. Two failed:
+Two Physical-AI figures you will meet in secondhand write-ups, next to what
+NVIDIA's own documentation says:
 
-| Claim as first reported | Audited reality |
+| Circulating figure | Primary source says |
 |---|---|
-| "Thor MIG splits into up to 7 GPU instances" | <span class="bad">Wrong</span> — **2** instances (JetPack 7.2) |
-| "GR00T TensorRT: Thor 117→92 ms, vs RTX 5090" | <span class="bad">Wrong</span> — **144.9→93.8 ms**, vs RTX Pro 5000 / H100 |
+| "Thor MIG splits into up to 7 GPU instances" | **2** instances (JetPack 7.2 preview) |
+| "GR00T TensorRT: Thor 117→92 ms, vs RTX 5090" | **144.9→93.8 ms**, and the comparison GPUs are RTX Pro 5000 / H100 |
 
-Lesson for the team: **secondhand Physical-AI numbers drift fast — re-fetch the primary
-source before a number goes into a slide.** (That rule is how this deck was built.)
-
-Scope, honestly stated: the audit covered these **14 headline claims** — everything else
-in the deck is source-linked but *not* exhaustively re-verified.
+Physical-AI releases land monthly; write-ups don't keep up. The habit for the team:
+**re-fetch the primary source before a number goes into a design doc (or a slide).**
 
 ---
 
@@ -1134,7 +1134,7 @@ in the deck is source-linked but *not* exhaustively re-verified.
 Everything is public: weights on Hugging Face (`nvidia/GR00T-N1.7-3B` — the gated
 `Cosmos-Reason2-2B` backbone needs a one-click license), inference script in the repo.
 
-<div class="gloss">zero-shot = no fine-tuning on our data · open-loop = predictions scored against a recorded trajectory, robot not in the loop — says nothing about closed-loop task success · MSE = mean squared error · VRAM = GPU memory (2 s sampling can miss short peaks) · action chunk = one inference emits 8 future steps; how many get executed before replanning is a deployment choice · Source: our own captured runs (raw log in the repo)</div>
+<div class="gloss">zero-shot = no fine-tuning on our data · open-loop = predictions scored against a recorded trajectory, robot not in the loop — says nothing about closed-loop task success · MSE = mean squared error · VRAM = GPU memory (2 s sampling can miss short peaks) · action chunk = one inference emits 8 future steps; how many get executed before replanning is a deployment choice · OOM = out-of-memory · P90 = 90th-percentile latency · Source: our own captured runs (raw log in the repo)</div>
 
 ---
 
@@ -1201,11 +1201,13 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - **MCU / DSP / FPGA** — microcontroller / signal processor / programmable logic — the "dedicated silicon" tier
 - **FOC** — Field-Oriented Control: the motor current loop (8–32 kHz)
 - **FK / IK** — Forward / Inverse Kinematics: joint angles ⇄ end-effector pose
+- **QP** — Quadratic Programming: the constrained optimizer whole-body humanoid control solves every cycle
 - **SLAM** — Simultaneous Localization And Mapping
 - **AMCL** — Adaptive Monte Carlo Localization (Nav2's localizer)
 - **AMR** — Autonomous Mobile Robot (warehouse/indoor)
 - **AV** — Autonomous Vehicle
 - **RL** — Reinforcement Learning (how humanoid locomotion is trained now)
+- **DRC** — DARPA Robotics Challenge (2013–2015): the competition that seeded the modern humanoid wave
 - **VLA** — Vision-Language-Action model (GR00T, Helix, π0)
 - **LLM** — Large Language Model
 - **MPPI** — Model-Predictive Path Integral: Nav2's sampling controller
@@ -1219,6 +1221,7 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - **MoveIt** — ROS 2 manipulation-planning framework (not an acronym, but load-bearing)
 - **MSE** — Mean Squared Error (open-loop prediction error — *not* task success)
 - **P90** — 90th percentile (latency statistics)
+- **OOM** — Out Of Memory
 - **VRAM** — GPU memory
 - **GA / SOP** — General Availability / Start Of Production
 
@@ -1242,6 +1245,7 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - **LPDDR5X** — low-power DRAM (Thor's one pool) · **HBM** — High Bandwidth Memory (stacked, data-center)
 - **MT/s** — megatransfers per second · **TMP** — Total Module Power
 - **MIG** — Multi-Instance GPU: hardware partitioning (2-way on Thor, preview)
+- **KV cache** — the attention keys/values an LLM stores per generated token; grows with context length
 - **UVM** — Unified Virtual Memory · **ATS** — Address Translation Services (shared page tables) · **HMM** — Heterogeneous Memory Management (Linux)
 - **NVLink-C2C** — NVIDIA's coherent chip-to-chip link (GH200) · **UCF** — Unified Coherency Fabric (inside Thor)
 - **CUDA / cuDNN / TensorRT** — NVIDIA's compute API / DNN kernels / inference optimizer
@@ -1294,6 +1298,7 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - **OSEK/VDX** — the 1990s European automotive RTOS standard; AUTOSAR OS is its backward-compatible superset
 - **AUTOSAR OS / SC1–SC4** — Classic's statically configured RTOS; scalability classes add memory/timing protection
 - **ARA / `ara::`** — AUTOSAR Runtime for Adaptive: the platform's C++ API namespace (`ara::com`, `ara::diag`, `ara::ucm`, `ara::exec`…)
+- **POSIX** — Portable Operating System Interface (IEEE 1003): the standard OS API family Adaptive builds on
 - **PSE51** — IEEE 1003.13's minimal real-time POSIX profile — the interface Adaptive *applications* are held to
 - **Software Cluster** — Adaptive's unit of deployment: updated by UCM, diagnosed by its own server
 - **UDS** — Unified Diagnostic Services, ISO 14229: the standard in-vehicle diagnostic protocol
@@ -1344,14 +1349,14 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - GR00T N1.7 — huggingface.co/blog/nvidia/gr00t-n1-7 · github.com/NVIDIA/Isaac-GR00T
 - Isaac Sim/Lab/Arena — github.com/isaac-sim · Isaac Teleop — github.com/NVIDIA/IsaacTeleop
 - Jetson Thor — developer.nvidia.com blog "Introducing NVIDIA Jetson Thor" · JetPack 7.2 MIG blog
-- Thor memory — Jetson Thor datasheet DS-11945-001 (PDF) · DRIVE AGX Thor deck (PDF) · docs.nvidia.com "CUDA for Tegra" · "CUDA 13.0 for Jetson Thor" blog · GH200 NVLink-C2C blog + datasheet · audits: research/jetson-thor-memory-2026-07.md, thor-unified-memory-2026-07.md
+- Thor memory — Jetson Thor datasheet DS-11945-001 (PDF) · DRIVE AGX Thor deck (PDF) · docs.nvidia.com "CUDA for Tegra" · "CUDA 13.0 for Jetson Thor" blog · GH200 NVLink-C2C blog + datasheet · our research notes: research/jetson-thor-memory-2026-07.md, thor-unified-memory-2026-07.md
 - Isaac ROS 4.5 — nvidia-isaac-ros.github.io/releases · LeRobot ×NVIDIA — blogs.nvidia.com (Jul 6 2026)
 
 **NVIDIA Automotive** ·
 - DRIVE AGX Thor devkit — developer.nvidia.com blog (Sept 2025 GA)
 - DriveOS 5.2 ASIL-B — blogs.nvidia.com TÜV SÜD (Dec 2022); DriveOS 6.0 ASIL-D on Orin — eenewseurope.com (Jan 2025)
 - QNX × NVIDIA — qnx.software/en/blog/2026 · automotiveworld.com (QNX in Thor devkit)
-- AUTOSAR — autosar.org (Classic/Adaptive) · vector.com (MICROSAR on DRIVE AGX/Thor, MB.OS) · elektrobit.com (EB corbos) · rti.com (DDS in AUTOSAR, R18-03) · DriveOS MCU docs (AURIX+Vector AFW on Orin; RH850 on Thor) · audit: research/automotive-stack-autosar-2026-07.md
+- AUTOSAR — autosar.org (Classic/Adaptive) · vector.com (MICROSAR on DRIVE AGX/Thor, MB.OS) · elektrobit.com (EB corbos) · rti.com (DDS in AUTOSAR, R18-03) · DriveOS MCU docs (AURIX+Vector AFW on Orin; RH850 on Thor) · our research notes: research/automotive-stack-autosar-2026-07.md
 - DRIVE Hyperion — nvidia.com → solutions → drive-hyperion · Halos — blogs.nvidia.com (GTC 2025)
 - Alpamayo — huggingface.co/nvidia/Alpamayo-R1-10B · nvidianews (Alpamayo 2 Super, May 2026)
 - Mercedes CLA — group.mercedes-benz.com (SOP Jun 2025) · blogs.nvidia.com (drive-av-software-mercedes-benz-cla) · Uber robotaxi — investor.uber.com (Mar 2026)
@@ -1366,7 +1371,7 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - Vector × Thor (FSI + companion-MCU reference integration, 2025-08-25) — vector.com news · EB corbos Hypervisor / Classic-vECU — elektrobit.com
 - COQOS → Qualcomm (Jun 2024) — opensynergy.com · zone-ECU / central compute — bosch-mobility.com, nxp.com
 - VDA 5050 — github.com/VDA5050/VDA5050 (spec + 3.0.0 release, 2026-03-19) · ifr.org "VDA 5050 explained" · synaos.com (ecosystem; vs MassRobotics/Open-RMF) · ottomotors.com (Rockwell certifications) · massrobotics.org · reference.opcfoundation.org (OPC 40010) · index.ros.org/p/vda5050_connector · github.com/nvidia-isaac/isaac_mission_dispatch
-- audits of the two source drafts: research/fleet-uds-autosar-2026-07.md (F1–F17) · research/vda5050-robot-fleet-2026-07.md (V1–V12)
+- our fleet/diagnostics research notes: research/fleet-uds-autosar-2026-07.md · research/vda5050-robot-fleet-2026-07.md
 
 *Demo numbers (GR00T inference, QoS/RMW matrices) are our own captured runs, July 2026.
-Per-claim citations + audit trail: `research/claims-audit-2026-07.md` and the research reports.*
+Per-claim citations: `research/claims-audit-2026-07.md` and the research notes above.*

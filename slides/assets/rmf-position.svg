@@ -62,4 +62,5 @@
   <rect x="560" y="460" width="350" height="56" rx="8" fill="#DFF0D8" stroke="#6Fae6f" stroke-width="1.5"/>
   <text x="735" y="482" text-anchor="middle" font-size="13" font-weight="600" fill="#2d5a2d">2026: alive under OSRA</text>
   <text x="735" y="500" text-anchor="middle" font-size="13" fill="#2d5a2d">flagship: Singapore hospitals/airport</text>
+  <text x="480" y="528" text-anchor="middle" font-size="10.5" fill="#555555">FMS = fleet management system &#183; OSRA = Open Source Robotics Alliance &#183; PLC = programmable logic controller</text>
 </svg>

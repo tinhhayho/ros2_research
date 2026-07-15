@@ -117,5 +117,10 @@
       <mxGeometry x="60" y="566" width="840" height="18" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="flt-abbrev1" value="SOVD = REST/JSON diagnostic API (ISO 17978) &#183; UDS = unified diagnostic services (ISO 14229) &#183; DoIP / CanTp = UDS over IP / over CAN &#183; DM+UCM / DCM+DEM = Adaptive / Classic diagnostic &amp; update modules" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="583" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

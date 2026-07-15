@@ -84,5 +84,8 @@
     <mxCell id="rr-strip" value="Learning ROS 2 = learning the industrial mainstream &#8212;&lt;br&gt;and the &#8804;1 kHz firmware layers are the same everywhere" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=17;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
       <mxGeometry x="40" y="486" width="880" height="94" as="geometry" />
     </mxCell>
+    <mxCell id="rr-abbrev1" value="AMR = autonomous mobile robot &#183; L4 = SAE driving-automation level 4 (driverless in a bounded domain)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="565" width="920" height="16" as="geometry" />
+    </mxCell>
   </root>
 </mxGraphModel>

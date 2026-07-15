@@ -94,5 +94,10 @@
       <mxGeometry x="60" y="562" width="840" height="36" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="saa-abbrev1" value="DM = diagnostic manager (UDS over DoIP) &#183; UCM = update &amp; configuration management &#183; SOME/IP = automotive service middleware &#183; PSE51 = the minimal real-time POSIX profile" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="589" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>

@@ -113,8 +113,16 @@
     </mxCell>
 
     <!-- Footnote -->
-    <mxCell id="fot-footnote" value="documented: DM + UCM inside the guest, Classic on the companion MCU &#183;&lt;br&gt;refuted: 'virtual Classic-ECU partitions', 'Thor as UDS gateway' &#8212; rows F12&#8211;F13, research/fleet-uds-autosar-2026-07.md" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
-      <mxGeometry x="60" y="548" width="840" height="36" as="geometry" />
+    <mxCell id="fot-footnote" value="documented: DM + UCM inside the guest, Classic on the companion MCU &#8212; no fleet-gateway role, no virtual Classic-ECU partitions" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="551" width="840" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Abbreviation key -->
+    <mxCell id="fot-abbrev1" value="TCU = telematics control unit &#183; UDS = unified diagnostic services &#183; DoIP = diagnostics over IP &#183; DM / UCM = Adaptive AUTOSAR diagnostics / update &amp; config management" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="569" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="fot-abbrev2" value="DCM + DEM = Classic AUTOSAR diagnostic modules &#183; FSI = functional safety island &#183; AFW = Vector's AUTOSAR firmware &#183; SOVD = the REST diagnostic API (ISO 17978)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="584" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>

@@ -344,6 +344,10 @@
       <mxGeometry x="60" y="544" width="840" height="36" as="geometry" />
     </mxCell>
 
+    <mxCell id="dsc-abbrev1" value="DDS = data distribution service (ROS 2's pub/sub middleware) &#183; XRCE-DDS = DDS for extremely resource-constrained environments (micro-ROS) &#183; SOME/IP = automotive service middleware" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="582" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>
   </diagram>
@@ -600,7 +604,7 @@
     <mxCell id="ddx-footnote2" value="note: DriveOS 6.0's ASIL-D cert was achieved on Orin &#8212; Thor cert still in progress (July 2026)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#666677;" vertex="1" parent="1">
       <mxGeometry x="144" y="554" width="672" height="18" as="geometry" />
     </mxCell>
-    <mxCell id="ddx-footnote3" value="caveat: dual QNX+Linux = platform framing; public SDK runs one guest at a time &#8212; &quot;QNX or Linux, but not both&quot; (rows A2/F12)" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#666677;" vertex="1" parent="1">
+    <mxCell id="ddx-footnote3" value="caveat: dual QNX+Linux = platform framing; public SDK runs one guest at a time &#8212; &quot;QNX or Linux, but not both&quot;" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#666677;" vertex="1" parent="1">
       <mxGeometry x="33" y="572" width="894" height="18" as="geometry" />
     </mxCell>
 
@@ -723,8 +727,16 @@
     </mxCell>
 
     <!-- Footnote -->
-    <mxCell id="fot-footnote" value="documented: DM + UCM inside the guest, Classic on the companion MCU &#183;&lt;br&gt;refuted: 'virtual Classic-ECU partitions', 'Thor as UDS gateway' &#8212; rows F12&#8211;F13, research/fleet-uds-autosar-2026-07.md" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
-      <mxGeometry x="60" y="548" width="840" height="36" as="geometry" />
+    <mxCell id="fot-footnote" value="documented: DM + UCM inside the guest, Classic on the companion MCU &#8212; no fleet-gateway role, no virtual Classic-ECU partitions" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="60" y="551" width="840" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Abbreviation key -->
+    <mxCell id="fot-abbrev1" value="TCU = telematics control unit &#183; UDS = unified diagnostic services &#183; DoIP = diagnostics over IP &#183; DM / UCM = Adaptive AUTOSAR diagnostics / update &amp; config management" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="569" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="fot-abbrev2" value="DCM + DEM = Classic AUTOSAR diagnostic modules &#183; FSI = functional safety island &#183; AFW = Vector's AUTOSAR firmware &#183; SOVD = the REST diagnostic API (ISO 17978)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="584" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
@@ -820,9 +832,12 @@
       <mxGeometry x="40" y="494" width="880" height="44" as="geometry" />
     </mxCell>
 
-    <!-- Footnote -->
-    <mxCell id="fsm-footnote" value="'Redfish + PICMG IoT.x for robot fleets' (external draft): not documented anywhere &#8212; struck; audit rows V1&#8211;V12, research/vda5050-robot-fleet-2026-07.md" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
-      <mxGeometry x="30" y="566" width="900" height="18" as="geometry" />
+    <!-- Abbreviation key -->
+    <mxCell id="fsm-abbrev1" value="AMR / AGV = autonomous mobile robot / automated guided vehicle &#183; SOVD = service-oriented vehicle diagnostics (ISO 17978) &#183; DID / DTC = UDS data identifier / diagnostic trouble code" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="566" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="fsm-abbrev2" value="UCM = AUTOSAR update &amp; configuration management &#183; OTA = over-the-air update &#183; FMS = fleet management system" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="581" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
@@ -946,6 +961,11 @@
     <!-- Footnote -->
     <mxCell id="flt-footnote" value="UDS 0x2A periodic reads exist, but continuous fleet telemetry runs on telematics pipelines &#8212; UDS stays a diagnostic protocol" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="60" y="566" width="840" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Abbreviation key -->
+    <mxCell id="flt-abbrev1" value="SOVD = REST/JSON diagnostic API (ISO 17978) &#183; UDS = unified diagnostic services (ISO 14229) &#183; DoIP / CanTp = UDS over IP / over CAN &#183; DM+UCM / DCM+DEM = Adaptive / Classic diagnostic &amp; update modules" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="583" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
@@ -1206,6 +1226,10 @@
       <mxGeometry x="744" y="573" width="170" height="14" as="geometry" />
     </mxCell>
 
+    <mxCell id="gtj-abbrev1" value="DDS = data distribution service &#8212; ROS 2's pub/sub middleware &#183; FOC = field-oriented control (the motor current loop)" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="588" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>
   </diagram>
@@ -1326,6 +1350,10 @@
     <!-- Footnote -->
     <mxCell id="gc-footnote" value="NVIDIA's stack ends above the 1 kHz line &#8212; the bottom half is classical embedded engineering" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
       <mxGeometry x="151" y="539" width="658" height="18" as="geometry" />
+    </mxCell>
+
+    <mxCell id="gc-abbrev1" value="VLA = vision-language-action model &#183; DiT = diffusion transformer (the action head) &#183; RL = reinforcement learning" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="563" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
@@ -1630,6 +1658,9 @@
     <mxCell id="lt-footnote" value="The loop rate picks the layer &#8212; misplace a task and you get either jitter or wasted silicon." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="161.8" y="568.9" width="636.35" height="18.2" as="geometry" />
     </mxCell>
+    <mxCell id="lt-abbrev1" value="SLAM = simultaneous localization &amp; mapping &#183; EKF = extended Kalman filter &#183; MPPI = Nav2's sampling-based controller &#183; RL = reinforcement learning &#183; VLA = vision-language-action model" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="585" width="920" height="16" as="geometry" />
+    </mxCell>
   </root>
 </mxGraphModel>
   </diagram>
@@ -1820,6 +1851,10 @@
       <mxGeometry x="60" y="544" width="840" height="36" as="geometry" />
     </mxCell>
 
+    <mxCell id="npg-abbrev1" value="DDS = data distribution service &#8212; the pub/sub middleware under ROS 2" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="582" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>
   </diagram>
@@ -1916,6 +1951,10 @@
     <!-- Footnote -->
     <mxCell id="ntc-footnote" value="weights + code open &#183; CUDA/TensorRT-only underneath &#8212; no CPU path" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#1b2b4a;" vertex="1" parent="1">
       <mxGeometry x="266" y="577" width="429" height="17" as="geometry" />
+    </mxCell>
+
+    <mxCell id="ntc-abbrev1" value="VLA = vision-language-action model &#183; RL = reinforcement learning &#183; MIG = multi-instance GPU &#183; MoT = mixture-of-transformers" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="588" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
@@ -2147,6 +2186,9 @@
     <!-- Status badge -->
     <mxCell id="rp-badge" value="&lt;b&gt;2026: alive under OSRA&lt;/b&gt;&lt;br&gt;flagship: Singapore hospitals/airport" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#6Fae6f;strokeWidth=1.5;fontSize=13;fontColor=#2d5a2d;" vertex="1" parent="1">
       <mxGeometry x="560" y="460" width="350" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="rp-abbrev1" value="FMS = fleet management system &#183; OSRA = Open Source Robotics Alliance &#183; PLC = programmable logic controller" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="519" width="920" height="16" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>
@@ -2535,8 +2577,13 @@
     </mxCell>
 
     <!-- Footnote -->
-    <mxCell id="rng-footnote" value="node/topic names from the audited wheeled-AMR stack (ros2_control &#183; EKF &#183; slam_toolbox + AMCL &#183; Nav2/MPPI); our own captured mini-graph: docs/img/demo1_node_list.txt" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+    <mxCell id="rng-footnote" value="node/topic names from the real wheeled-AMR stack (ros2_control &#183; EKF &#183; slam_toolbox + AMCL &#183; Nav2/MPPI); our own captured mini-graph: docs/img/demo1_node_list.txt" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="30" y="566" width="900" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Abbreviation key -->
+    <mxCell id="rng-abbrev1" value="AMR = autonomous mobile robot &#183; EKF = extended Kalman filter &#183; AMCL = adaptive Monte-Carlo localization &#183; MPPI = Nav2's sampling-based controller" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="583" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
@@ -2815,6 +2862,9 @@
     <!-- Bottom strip -->
     <mxCell id="rr-strip" value="Learning ROS 2 = learning the industrial mainstream &#8212;&lt;br&gt;and the &#8804;1 kHz firmware layers are the same everywhere" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=17;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
       <mxGeometry x="40" y="486" width="880" height="94" as="geometry" />
+    </mxCell>
+    <mxCell id="rr-abbrev1" value="AMR = autonomous mobile robot &#183; L4 = SAE driving-automation level 4 (driverless in a bounded domain)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="565" width="920" height="16" as="geometry" />
     </mxCell>
   </root>
 </mxGraphModel>
@@ -3318,6 +3368,14 @@
       <mxGeometry x="40" y="533" width="880" height="16" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="sdv-abbrev1" value="DC = domain controller &#183; FL/FR/RL/RR = front-left / front-right / rear-left / rear-right corner zones &#183; SDV = software-defined vehicle" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="40" y="557" width="880" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="sdv-abbrev2" value="HPC = high-performance computer &#183; AV/AD = autonomous vehicle / automated driving &#183; OTA = over-the-air update &#183; TSN = time-sensitive networking" style="text;html=1;align=center;verticalAlign=middle;fontSize=10.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="40" y="574" width="880" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>
   </diagram>
@@ -3460,6 +3518,11 @@
       <mxGeometry x="60" y="579" width="840" height="18" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="sa-abbrev1" value="SOME/IP = automotive service middleware &#183; DNN = deep neural network &#183; FSI = functional safety island &#183; AFW = Vector's AUTOSAR firmware for the safety MCU &#183; AP = AUTOSAR Adaptive" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="589" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>
   </diagram>
@@ -3558,6 +3621,11 @@
     <!-- Footnote -->
     <mxCell id="saa-footnote" value="updates per Software Cluster via UCM (Update and Configuration Management) &#8212; not full-ECU reflash &#183;&lt;br&gt;safety: ASIL-B shipping, ASIL-D programs underway" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="60" y="562" width="840" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- Abbreviation key -->
+    <mxCell id="saa-abbrev1" value="DM = diagnostic manager (UDS over DoIP) &#183; UCM = update &amp; configuration management &#183; SOME/IP = automotive service middleware &#183; PSE51 = the minimal real-time POSIX profile" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="589" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
@@ -3675,6 +3743,11 @@
       <mxGeometry x="60" y="566" width="840" height="18" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="sac-abbrev1" value="ARXML = AUTOSAR's build-time XML configuration &#183; UDS = unified diagnostic services (ISO 14229) &#183; DCM + DEM = diagnostic communication manager + diagnostic event manager (fault memory)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="583" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>
   </diagram>
@@ -3786,6 +3859,10 @@
 
     <mxCell id="stack-footnote" value="The ROS 2 boundary is the one line that moved since 2020 &#8212; everything below it is still classic embedded/RTOS work." style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
       <mxGeometry x="69" y="549" width="822" height="18" as="geometry" />
+    </mxCell>
+
+    <mxCell id="stack-abbrev1" value="FMS = fleet management system &#183; VLA = vision-language-action model &#183; RL = reinforcement learning &#183; SLAM = simultaneous localization &amp; mapping &#183; DDS = ROS 2's pub/sub middleware" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="571" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
@@ -4209,6 +4286,14 @@
       <mxGeometry x="60" y="536" width="840" height="18" as="geometry" />
     </mxCell>
 
+    <!-- Abbreviation key -->
+    <mxCell id="uds-abbrev1" value="UDS = unified diagnostic services (ISO 14229) &#183; DID / DTC = data identifier / diagnostic trouble code &#183; DoCAN / DoIP = UDS over CAN (ISO 15765-2) / over IP (ISO 13400)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="563" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="uds-abbrev2" value="CanTp = the CAN transport-protocol module &#183; DCM + DEM = Classic AUTOSAR's diagnostic modules &#183; DM = Adaptive's diagnostic manager &#183; SWC = software component" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="579" width="920" height="16" as="geometry" />
+    </mxCell>
+
   </root>
 </mxGraphModel>
   </diagram>
@@ -4361,6 +4446,11 @@
     <!-- Footnote -->
     <mxCell id="vda-footnote" value="v3.0.0 released 2026-03-19 (VDA + VDMA + KIT-IFL) &#8212; adds freely-navigating robots, zones (BLOCKED &#183; SPEED_LIMIT &#183; PRIORITY &#8230;),&lt;br&gt;CRITICAL/URGENT errors &#183; no OTA, only flat error reporting (no deep diagnostics); security left to broker/TLS config" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="60" y="546" width="840" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- Abbreviation key -->
+    <mxCell id="vda-abbrev1" value="AGV / AMR = automated guided vehicle / autonomous mobile robot &#183; MQTT = broker-based pub/sub protocol (VDA 5050's wire) &#183; OTA = over-the-air update" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="583" width="920" height="16" as="geometry" />
     </mxCell>
 
   </root>
