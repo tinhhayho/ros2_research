@@ -13,6 +13,8 @@ autosar/
     notes/             raw per-topic notes from the research agents (provenance)
   blog/                blog-post versions of the research (text-only Markdown;
                        figures are dropped in by hand later)
+  specs/               local unmodified mirror of the R25-11 spec PDFs the deck
+                       references (offline search; SHA256SUMS + provenance README)
   slides/
     autosar-deck.md    Marp deck TEMPLATE — edit this one
     autosar.md         build artifact (SVGs inlined as base64) — never hand-edit
