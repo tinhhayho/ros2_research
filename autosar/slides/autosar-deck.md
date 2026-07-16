@@ -37,10 +37,16 @@ reflashing — and are new to automotive software platforms. Release-stamped to
 
 ## Agenda
 
+<style scoped>
+  section { font-size: 22px; }
+</style>
+
 1. **One org, three standards** — history, governance, the FO / CP / AP split, the release timeline
 2. **Classic Platform** — the statically-configured RTOS stack you half-know: RTE/VFB, AUTOSAR OS, ARXML, the signal path, E2E/SecOC, DCM/DEM, NvM/WdgM, functional safety
 3. **Adaptive Platform** — the POSIX/C++ service platform on the "big chip": function clusters, EM/SM, `ara::com`, SOME/IP vs DDS, UCM OTA, DM/SOVD, PHM, vendors & ASIL reality, the open-source AP landscape
 4. **Head-to-head & coexistence** — one vehicle running both, the R25-11 convergence, where ROS 2 sits, what it means for our team
+
+**Manager fast path (~10 min):** slides 3–6 (what AUTOSAR is and why) · 46–50 (which stack on which silicon: the split, coexistence, fleet, decision map)
 
 <div class="gloss">AUTOSAR = AUTomotive Open System ARchitecture · FO = Foundation · CP = Classic Platform · AP = Adaptive Platform · RTE = Runtime Environment · VFB = Virtual Functional Bus · UDS = Unified Diagnostic Services (ISO 14229) · SOVD = Service-Oriented Vehicle Diagnostics · full expansions on the glossary slide near the end</div>
 
@@ -881,6 +887,33 @@ open an SWS only when you implement. (Every filename below verified live against
 {{image:spec-ap-cp-interactions}}
 
 <div class="figsrc">Source: AUTOSAR AP_EXP_PlatformDesign, R25-11, Figure 3.2 — © AUTOSAR.</div>
+
+---
+
+## Which stack on which silicon — the decision map
+
+<style scoped>
+  section { font-size: 18px; padding-top: 24px; }
+  h2 { margin-bottom: 6px; }
+  p { margin: 6px 0; }
+  table { font-size: 14px; }
+  table td, table th { padding: 4px 9px; }
+  .gloss { font-size: 12.5px; margin-top: 8px; }
+</style>
+
+The whole deck in one procurement table — what runs where, and who sells it:
+
+| Silicon | What runs there | Who supplies it (examples) |
+|---|---|---|
+| **A-core SoC** — DRIVE Orin/Thor guest · NXP S32G/S32N · R-Car | **QNX or Linux + an AP stack** — or a non-AUTOSAR middleware (the Rivian path) | AP: **Vector · Elektrobit (corbos) · ETAS RTA-VRTE · Qorix** — the OS underneath is a separate procurement |
+| **Safety island on the SoC** — lockstep Cortex-R52 (Thor FSI) | vendor safety firmware — plus a Vector **FSI reference integration** (Thor) | NVIDIA FSI firmware · Vector — its explicit **MICROSAR Classic** up-to-ASIL-D reference targets the **companion MCU** |
+| **Companion / safety MCU** — RH850 (Thor gen) · AURIX (Orin gen) | **CP** | Vector AFW — the NVIDIA reference integration |
+| **Zonal / domain MCUs** — NXP S32Z/E · AURIX · RH850 | **CP** | Tier-1 Classic stacks (MICROSAR, EB tresos class) |
+| **Small edge ECUs** — S32K class | **CP** or bare-metal/RTOS | Tier-1 stacks or in-house |
+
+**The business rule underneath: AUTOSAR value scales with how many organizational boundaries your software crosses** — vertically-integrated OEMs (Rivian) skip it; Tier-1s implement it to win OEM RFQs.
+
+<div class="gloss">FSI = Functional Safety Island (dedicated lockstep silicon on DRIVE/IGX Thor) · AFW = the Vector-built AUTOSAR firmware NVIDIA ships for its companion MCUs · RFQ = request for quotation · S32Z/E = NXP zonal-controller family (lockstep Cortex-R52) · examples only — the vendor cells repeat facts verified elsewhere in this deck, not an exhaustive market list</div>
 
 ---
 

@@ -116,6 +116,31 @@ Deck is now **61 slides**; the 11 spec slides sit at 11, 13, 19, 20, 24, 31, 34,
 49, 51. Spec PDFs themselves are mirrored (35 files, SHA256SUMS) under `autosar/specs/`
 per the same user request — commit `77c2b29`.
 
+## Run 4 — the decision-map slide + manager fast path (5 claims)
+
+**Context.** User persona-test ("an NVIDIA manager new to automotive") exposed the one
+missing synthesis: a silicon→stack→vendor decision map. Added slide 50 ("Which stack on
+which silicon — the decision map", deck now **62 slides**) + a Manager fast path line on
+the Agenda (slides 3–6 · 46–50). Apex.AI was deliberately left out of the AP-vendor cell
+(Run 2/C8: Apex.Ida carries no AP label).
+
+**Fact-check** `wf_056c1447-920` (8 agents, ~395k tokens): **5 claims — 3 ✅ · 2 ⚠️ · 0 ❌.**
+- **C2 ⚠️ (fixed on the slide):** Vector's 2025-08-25 text bundles "reference integration
+  for the FSI **and** the companion MCU", but attaches **MICROSAR Classic** (and the
+  up-to-ASIL-D sentence) explicitly only to the **companion MCU** — the FSI piece is not
+  explicitly labeled MICROSAR Classic. FSI row reworded: "Vector FSI reference
+  integration; its explicit MICROSAR Classic up-to-ASIL-D reference targets the companion
+  MCU." (Also sharpens the older note in `research/fleet-uds-autosar-2026-07.md` that read
+  MICROSAR Classic *into* the FSI — that reading was too strong.)
+- **C5 ⚠️ (no deck change needed):** Rivian's on-record FreeRTOS/non-AUTOSAR statement is
+  scoped to the **zonal controllers**; central compute = Android Automotive (infotainment)
+  + Rivian middleware on NVIDIA foundations (ADAS). Deck and blog wordings checked — none
+  overreach (the walkthrough slide cites Rivian "for the shape"; the decision-map row says
+  only "non-AUTOSAR middleware (the Rivian path)").
+- Clean: C1 (RH850/Thor + AURIX TC397/Orin + Vector AFW = MICROSAR Classic reference),
+  C3 (AP vendors Vector/EB corbos/ETAS RTA-VRTE/Qorix; OS = separate procurement),
+  C4 (S32Z/E lockstep R52 zonal CP targets; S32K-class = CP or bare-metal).
+
 ## Addendum — main research deck synced to previously-verified facts (2026-07-16)
 
 Three edits to `slides/research-deck.md`, all restating claims already verified in the
