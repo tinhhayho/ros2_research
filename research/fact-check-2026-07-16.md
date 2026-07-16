@@ -86,6 +86,36 @@ plus correction banners on the three `ap-oss-*` notes files:
 The blog post carries the same claim set as the slides and inherited the same corrections
 in the same fixer pass — no unshared claims shipped.
 
+## Run 3 — official spec figures as companion slides (11 unmodified R25-11 excerpts)
+
+**Context.** User request: reuse the figures already in the AUTOSAR specs so viewers
+digest faster. Legal basis verified verbatim from the R25-11 PDFs (Disclaimer): *"This
+work may be utilized or reproduced without any modification, in any form or by any
+means, for informational purposes only."* → pixel-faithful crops, attribution captions,
+one covering legal line on References 3/3. Website images were deliberately NOT used
+(no such reuse grant).
+
+**Pipeline.** Mining run `wf_e30dd92c-e1e` (inventory → 10 top-value specs → one miner
+per spec with a view-crop-view loop → judge with vision over all 43 candidates):
+**43 candidates → 11 adopted, 32 rejected** (mostly redundant with the repo's own
+fact-checked diagrams). All 11 adoptions are *additions* ("— as the spec draws it"
+companion slides); zero replacements. Orchestrator eyeballed the top 4 crops before
+approving. Apply + independent review: `wf_fd016528-2ca`, verdict ship.
+
+**Verification is mechanical, not claim-based** (no new textual claims beyond captions):
+- sha256 parity ×11: deployed `autosar/slides/assets/spec-*.png` byte-identical to the
+  mined originals — the unmodified-excerpt chain is provable.
+- Captions rebuilt from miner metadata (doc + figure number extracted from each PDF) and
+  diffed line-for-line; the LSA document has no numbered figure captions, so its caption
+  cites the printed slide title and page ("Overview of Software Layers — detailed view",
+  p. 24) instead of an invented number.
+- Every new slide page viewed in the marp-rendered PDF: figure inside frame, caption
+  present, legible.
+
+Deck is now **61 slides**; the 11 spec slides sit at 11, 13, 19, 20, 24, 31, 34, 36, 37,
+49, 51. Spec PDFs themselves are mirrored (35 files, SHA256SUMS) under `autosar/specs/`
+per the same user request — commit `77c2b29`.
+
 ## Addendum — draw.io mirrors for the two deck-local diagrams (2026-07-16)
 
 `autosar/slides/assets/drawio-pages/autosar-timeline.xml` and `cp-signal-path.xml` added

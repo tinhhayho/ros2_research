@@ -18,6 +18,8 @@ style: |
   .bad { color:#c62828; font-weight:bold; }
   .gloss { font-size:17px; color:#66708a; border-top:1px solid #dde3ee;
            margin-top:16px; padding-top:6px; }
+  img[alt^="spec-"] { display: block; margin: 0 auto; max-width: 88%; max-height: 430px; }
+  .figsrc { font-size: 12px; color: #6b7280; text-align: center; margin-top: 6px; }
 ---
 
 <!-- _class: lead -->
@@ -166,6 +168,14 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
+## The layered software architecture — as the spec draws it
+
+{{image:spec-lsa-detailed-view}}
+
+<div class="figsrc">Source: AUTOSAR CP_EXP_LayeredSoftwareArchitecture, R25-11, "Overview of Software Layers — detailed view" (p. 24) — © AUTOSAR.</div>
+
+---
+
 ## The relocation trick — SWCs, the VFB, and why the RTE is generated
 
 - Application logic is packaged as **Software Components (SWCs)** exposing **ports** typed by
@@ -184,6 +194,18 @@ open an SWS only when you implement. (Every filename below verified live against
   what the RTE generator emits. **There is no real bare-metal analogue to this**
 
 <div class="gloss">SWC = Software Component · VFB = Virtual Functional Bus · runnable = the schedulable C-function unit inside a SWC · COM = the AUTOSAR signal-packing communication module · deployment (which SWC runs on which ECU) is a late-binding config decision realized by regenerating the RTE</div>
+
+---
+
+## The VFB — as the spec draws it
+
+<style scoped>
+  img[alt^="spec-"] { max-height: 470px; }
+</style>
+
+{{image:spec-vfb-concept}}
+
+<div class="figsrc">Source: AUTOSAR CP_TR_VFB, R25-11, Figure 2.2 — © AUTOSAR.</div>
 
 ---
 
@@ -279,6 +301,22 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
+## The Secured I-PDU — as the spec draws it
+
+{{image:spec-secured-ipdu-layout}}
+
+<div class="figsrc">Source: AUTOSAR FO_PRS_SecOCProtocol, R25-11, Figure 5.1 — © AUTOSAR.</div>
+
+---
+
+## E2E protection — as the spec draws it
+
+{{image:spec-e2e-overview}}
+
+<div class="figsrc">Source: AUTOSAR FO_PRS_E2EProtocol, R25-11, Figure 1.1 — © AUTOSAR.</div>
+
+---
+
 ## Diagnostics — DEM computes, DCM formats (get this split right)
 
 - **The #1 conceptual error to avoid**: **DEM is the fault database; DCM is the protocol
@@ -328,6 +366,18 @@ open an SWS only when you implement. (Every filename below verified live against
   ASIL-D braking in one partition, QM comfort code in another
 
 <div class="gloss">FFI = Freedom From Interference (ISO 26262 term) · MPU = Memory Protection Unit (region-compare, not virtual memory) · OS-Application = the partition unit that owns tasks/ISRs/resources · WdgM = Watchdog Manager · WCET = Worst-Case Execution Time · QM = Quality Managed (no ASIL) · execution-time enforcement requires MCU timer/MPU hardware</div>
+
+---
+
+## Memory partitioning and modes — as the spec draws it
+
+<style scoped>
+  img[alt^="spec-"] { max-height: 470px; }
+</style>
+
+{{image:spec-memory-partitioning-modes}}
+
+<div class="figsrc">Source: AUTOSAR CP_EXP_FunctionalSafetyMeasures, R25-11, Figure 2.8 — © AUTOSAR.</div>
 
 ---
 
@@ -441,6 +491,14 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
+## The AP function clusters — as the spec draws it
+
+{{image:spec-ap-architecture-logical-view}}
+
+<div class="figsrc">Source: AUTOSAR AP_EXP_PlatformDesign, R25-11, Figure 4.1 — © AUTOSAR.</div>
+
+---
+
 ## Execution Mgmt vs State Mgmt — EM enforces, SM decides
 
 - **The single most-misunderstood pair.** **Execution Management (EM)** *"starts, configures,
@@ -485,6 +543,14 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
+## Service-oriented communication — as the spec draws it
+
+{{image:spec-cm-service-oriented-communication}}
+
+<div class="figsrc">Source: AUTOSAR AP_SWS_CommunicationManagement, R25-11, Figure 7.2 — © AUTOSAR.</div>
+
+---
+
 ## Binding choice: SOME/IP vs DDS vs local IPC
 
 - **SOME/IP** — the automotive-native option: compact serialization + **SOME/IP-SD** service
@@ -504,6 +570,22 @@ open an SWS only when you implement. (Every filename below verified live against
   is a swappable binding underneath** — exactly like ROS 2's `rmw`/DDS layering
 
 <div class="gloss">SOME/IP = Scalable service-Oriented MiddlewarE over IP · SD = Service Discovery · DDS = Data Distribution Service (OMG) · QoS = Quality of Service · RTPS = the DDS wire protocol · IPC = Inter-Process Communication · iceoryx = the shared-memory zero-copy IPC shared with ROS 2 · `rmw` = ROS 2's middleware-abstraction layer</div>
+
+---
+
+## Communication Management architecture — as the spec draws it
+
+{{image:spec-cm-technical-architecture}}
+
+<div class="figsrc">Source: AUTOSAR AP_SWS_CommunicationManagement, R25-11, Figure 7.1 — © AUTOSAR.</div>
+
+---
+
+## The SOME/IP message header — as the spec draws it
+
+{{image:spec-someip-message-header}}
+
+<div class="figsrc">Source: AUTOSAR FO_PRS_SOMEIPProtocol, R25-11, Figure 5.11 — © AUTOSAR.</div>
 
 ---
 
@@ -794,6 +876,14 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
+## AP and CP interactions — as the spec draws it
+
+{{image:spec-ap-cp-interactions}}
+
+<div class="figsrc">Source: AUTOSAR AP_EXP_PlatformDesign, R25-11, Figure 3.2 — © AUTOSAR.</div>
+
+---
+
 ## Fleet ↔ a CP+AP vehicle — one request, end to end
 
 <style scoped>
@@ -816,6 +906,14 @@ open an SWS only when you implement. (Every filename below verified live against
 **Real vehicles shaped like this:** **Mercedes MB.OS** — CP + AP coexisting under one Vector-built base layer (the named production example) · **Rivian Gen 2** — the zonal topology shipped for real: **3 zone ECUs (West / East / South) + dual NVIDIA DRIVE Orin** as central compute — cited for the *shape*; Rivian's software stack is its own, not an AUTOSAR deployment
 
 <div class="gloss">SOVD = Service-Oriented Vehicle Diagnostics (ISO 17978) · TCU = Telematics Control Unit · DoIP / DoCAN = UDS transports (ISO 13400 / ISO 15765-2) · DM = Diagnostic Manager (AP — one diagnostic server per Software Cluster) · DCM + DEM = Diagnostic Communication / Event Manager (CP) · V-UCM = Vehicle Update & Configuration Management · the punchline: one diagnostic language (UDS, ISO 14229), two transports, two server implementations</div>
+
+---
+
+## The AP and external systems — as the spec draws it
+
+{{image:spec-aap-external-systems}}
+
+<div class="figsrc">Source: AUTOSAR AP_EXP_SWArchitecture, R25-11, Figure 7.2 — © AUTOSAR.</div>
 
 ---
 
@@ -988,5 +1086,6 @@ open an SWS only when you implement. (Every filename below verified live against
 - **Protocol / IPC building blocks**: [github.com/COVESA/vsomeip](https://github.com/COVESA/vsomeip) (MPL-2.0 · SOME/IP) · [github.com/COVESA/capicxx-core-runtime](https://github.com/COVESA/capicxx-core-runtime) (MPL-2.0 · CommonAPI · dormant) · [github.com/eclipse-iceoryx/iceoryx](https://github.com/eclipse-iceoryx/iceoryx) (Apache-2.0 · zero-copy IPC) · [github.com/eclipse-iceoryx/iceoryx2](https://github.com/eclipse-iceoryx/iceoryx2) (Apache-2.0 OR MIT · Rust core) · [github.com/eProsima/Fast-DDS](https://github.com/eProsima/Fast-DDS) (Apache-2.0 · DDS/RTPS)
 - **Open ecosystem around AP**: [github.com/eclipse-score](https://github.com/eclipse-score) (S-CORE org · Apache-2.0) · [github.com/eclipse-score/communication](https://github.com/eclipse-score/communication) (LoLa — partial `ara::com`, `score::mw::com`) · [github.com/eclipse-opensovd/opensovd-core](https://github.com/eclipse-opensovd/opensovd-core) (Apache-2.0 · SOVD / ISO 17978) · [autosar.org — SDV Alliance (CES 2024)](https://www.autosar.org/news-events/detail/collaboration-the-key-to-making-the-software-defined-vehicle-a-reality)
 - **Classic-side contrast**: [github.com/openAUTOSAR/classic-platform](https://github.com/openAUTOSAR/classic-platform) (GPL-2.0 · Arctic Core lineage — the open Classic fork Adaptive has no equivalent of)
+- **Spec figures**: Spec figures on the "as the spec draws it" slides are unmodified excerpts from the AUTOSAR R25-11 PDFs, reproduced for informational purposes — © AUTOSAR (local mirror: autosar/specs/)
 
 <div class="gloss">All repositories, releases and dates verified against their GitHub API / project pages on 2026-07-16 · the CAPI git endpoint (code.autosar.org/capi/capi) is partner-gated (302 → sign-in) and is listed as the boundary, not an open-source download · autosar.org links fetched with the deck's `-ksL` TLS workaround · full provenance in autosar/research/adaptive-open-source-2026-07.md</div>
