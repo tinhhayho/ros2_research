@@ -38,6 +38,54 @@ vehicle, add a concrete real example, and link every reference directly to its d
   workflow journal). Claims run: `wf_c17a3d15-b4e` (~222k subagent tokens).
 - Related: `research/fact-check-2026-07-15.md` (Run 3 — the original 97-claim deck check).
 
+## Run 2 — open-source Adaptive AUTOSAR section (slides 33–36, References 3/3, research doc, blog)
+
+**Context.** User request: colleagues want to see the *real shape* of Adaptive AUTOSAR code
+from public repos (educational welcome). Added: slides 33–36 + References 3/3 (deck now
+**50 slides**; the fleet walkthrough pair moved 36–37 → 40–41), research doc
+`autosar/research/adaptive-open-source-2026-07.md`, and a text-only blog post
+`autosar/blog/adaptive-autosar-open-source-2026-07.md` (per request, no images — figure
+placeholders as HTML comments).
+
+**Pipeline.** 3 research scouts (`wf_5b315d22-3eb`, 22 candidates, every repo fetched live)
+→ orchestrator re-verified the two surprising finds first-hand (CAPI git 302→sign-in;
+LoLa README wording) → draft + independent review (`wf_507d7bc7-433`, verdict ship;
+1 MINOR + 1 NIT fixed: OpenSOVD "Incubating (proposed 2025-05-26)", graveyard date range)
+→ claims-mode fact-check `wf_ecadf716-210`: 26 agents, 671 tool calls, ~1.25M subagent
+tokens. Code snippets were byte-diffed against their pinned permalinks three separate
+times (draft, review, blog).
+
+**Result: 15 claims — 5 ✅ correct · 10 ⚠️ partially-correct · 0 ❌ wrong.**
+All 10 corrected in place same day (fixer run `wf_83190c79-1af`) across deck, blog, doc,
+plus correction banners on the three `ap-oss-*` notes files:
+
+- **C1** langroodi is **C++14**, not C++17 (`CMakeLists.txt: set(CMAKE_CXX_STANDARD 14)`);
+  post-2023 commits are *documentation*-only (one touches CONTRIBUTING.md), not README-only.
+- **C2** its release baseline is **per-cluster R20-11–R22-11** (R21-11 most cited; R22-11
+  only for com/E2E-Profile11 and phm) — not a headline "R22-11".
+- **C3** ara-rs is **dual-licensed Apache-2.0 OR MIT** (not Apache-2.0 alone).
+- **C6** S-CORE: no official statement about AP compatibility either way — community
+  discussions (#759, #882) explore a mapping layer → phrased "makes no AP-compatibility claim".
+- **C7** vsomeip: never mentions `ara::com`, but **does** mention AUTOSAR around E2E
+  (changelog "AutoSAR E2E Profile 4", E2E test docs, two `AUTOSAR FO R22-11` citations).
+- **C8** iceoryx "used by" table labels only **RTA-VRTE and AVIN AGNOSAR** as AP products;
+  Apex.Ida appears without the AP label (safe/certified middleware).
+- **C9** iceoryx2: safety wording also lives in README/FAQ ("designed to operate in
+  safety-critical systems"), "automotive" is not in the roadmap — core point stands: **no
+  AUTOSAR / ISO 26262 / ASIL certification claims**.
+- **C10** `ara::com` standardizes **three** network bindings — SOME/IP · Signal-Based ·
+  DDS — so DDS is "one of the three", not "the other".
+- **C13** uProtocol is **Eclipse-governed** (GM-originated, pairs with COVESA VSS), not an
+  "Eclipse/COVESA" joint project.
+- **C15** insooth graveyard row: **64 spec PDFs + 17 spec ZIPs (88 files total)** + one
+  `ara::per` header — not "~88 PDFs".
+- Verified clean: CAPI partner-gating + wording, all LoLa README quotes, S-CORE
+  dates/backers/dual-language, CommonAPI dormancy (2024-10-09), OpenSOVD (ISO 17978,
+  proposed 2025-05-26), openAUTOSAR/classic-platform GPL-2.0 lineage.
+
+The blog post carries the same claim set as the slides and inherited the same corrections
+in the same fixer pass — no unshared claims shipped.
+
 ## Addendum — draw.io mirrors for the two deck-local diagrams (2026-07-16)
 
 `autosar/slides/assets/drawio-pages/autosar-timeline.xml` and `cp-signal-path.xml` added

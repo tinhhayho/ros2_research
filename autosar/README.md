@@ -11,6 +11,8 @@ software platforms.
 autosar/
   research/            deliverable research documents (English, URL-sourced)
     notes/             raw per-topic notes from the research agents (provenance)
+  blog/                blog-post versions of the research (text-only Markdown;
+                       figures are dropped in by hand later)
   slides/
     autosar-deck.md    Marp deck TEMPLATE — edit this one
     autosar.md         build artifact (SVGs inlined as base64) — never hand-edit

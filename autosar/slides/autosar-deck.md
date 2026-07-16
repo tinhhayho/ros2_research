@@ -37,7 +37,7 @@ reflashing — and are new to automotive software platforms. Release-stamped to
 
 1. **One org, three standards** — history, governance, the FO / CP / AP split, the release timeline
 2. **Classic Platform** — the statically-configured RTOS stack you half-know: RTE/VFB, AUTOSAR OS, ARXML, the signal path, E2E/SecOC, DCM/DEM, NvM/WdgM, functional safety
-3. **Adaptive Platform** — the POSIX/C++ service platform on the "big chip": function clusters, EM/SM, `ara::com`, SOME/IP vs DDS, UCM OTA, DM/SOVD, PHM, vendors & ASIL reality
+3. **Adaptive Platform** — the POSIX/C++ service platform on the "big chip": function clusters, EM/SM, `ara::com`, SOME/IP vs DDS, UCM OTA, DM/SOVD, PHM, vendors & ASIL reality, the open-source AP landscape
 4. **Head-to-head & coexistence** — one vehicle running both, the R25-11 convergence, where ROS 2 sits, what it means for our team
 
 <div class="gloss">AUTOSAR = AUTomotive Open System ARchitecture · FO = Foundation · CP = Classic Platform · AP = Adaptive Platform · RTE = Runtime Environment · VFB = Virtual Functional Bus · UDS = Unified Diagnostic Services (ISO 14229) · SOVD = Service-Oriented Vehicle Diagnostics · full expansions on the glossary slide near the end</div>
@@ -605,6 +605,123 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
+## Open-source Adaptive AUTOSAR — an honest landscape
+
+<style scoped>
+  section { font-size: 20px; padding-top: 30px; }
+  table { font-size: 13.5px; }
+  table td, table th { padding: 4px 9px; }
+  .gloss { font-size: 12.5px; margin-top: 8px; }
+  h2 { margin-bottom: 6px; }
+  p { margin: 6px 0; }
+</style>
+
+| Project | What it really is | License | State (2026-07) |
+|---|---|---|---|
+| **`langroodi/Adaptive-AUTOSAR`** | the broadest readable AP *teaching* codebase — 7 `ara::` clusters (com, exec, diag, phm, sm, core, log) + a runnable simulated demo; exposes **SOME/IP-transport-level** APIs with **no generated `ara::com` Proxy/Skeleton facade**; self-describes **per cluster** against **R20-11 – R22-11** (R21-11 most-cited; R22-11 only for `com`'s E2E Profile 11 + `phm`) | MIT · C++14 | **489★, dormant** — last source commit **2023-06-22** (later commits documentation-only) |
+| **`ZiadAhmed9/ara-rs`** | Rust `ProxyBase`/`SkeletonBase` + SOME/IP transport + `cargo-arxml` ARXML codegen + worked examples | Apache-2.0/MIT · Rust | created **2026-03-30**, solo author, 6★ — **promise, not track record** |
+| **Eclipse S-CORE "LoLa"** | a *partial* `ara::com` communication middleware — but its API namespace is **`score::mw::com`, not `ara::com`**; part of an SDV core stack, **not an AP implementation** | Apache-2.0 · C++/Rust | very active (S-CORE launched 2025-06-12) |
+| **AUTOSAR CAPI** | the **only** official, complete, code-first AP implementation — **partner-gated, NOT open source** (`code.autosar.org/capi/capi` → sign-in, verified 2026-07-16) | partner licence | "by and for AUTOSAR partners"; quarterly releases |
+| **Graveyard** | `insooth/autosar-adaptive` = 64 spec PDFs + 17 spec ZIP archives (88 files total) + one `ara::per` header (33★ mislead) · `LoyenWang/AUTOSAR-Adaptive` = scaffolding whose 14 submodules point at a **deleted org (404)** · several near-empty shells | mixed | mostly abandoned, **2019 onward** |
+
+**Takeaway:** a team **CAN** get educational AP repos, production protocol building blocks, and SDV middleware *around* AP — it **CANNOT** get a conformant, complete, production-grade **open AP stack**; the only complete official one (**CAPI**) is partner-gated, and commercial stacks (Vector, EB, ETAS, Apex.AI, Qorix) are proprietary.
+
+<div class="gloss">AP = Adaptive Platform · `ara::` = the AP C++ API namespaces · Proxy/Skeleton = `ara::com`'s client-/service-side stubs · CAPI = Common Adaptive Platform Implementation · SDV = Software-Defined Vehicle · ★ = GitHub stars · every repo/date verified against its GitHub API on 2026-07-16</div>
+
+---
+
+## The real shape of AP code
+
+<style scoped>
+  section { font-size: 18px; padding-top: 22px; }
+  pre { font-size: 12px; line-height: 1.25; margin: 4px 0; }
+  pre code { font-size: 12px; }
+  h2 { margin-bottom: 4px; }
+  p { margin: 4px 0; }
+  .attr { font-size: 12.5px; color:#66708a; margin: 2px 0 10px 0; }
+  .gloss { font-size: 12.5px; margin-top: 8px; }
+</style>
+
+**C++ — the Adaptive Application → Execution Management state handshake** (`langroodi/Adaptive-AUTOSAR`, dormant since 2023-06-22):
+
+```cpp
+            /// @brief Report the application internal state to Execution Management
+            /// @param state Application current internal state
+            /// @returns Void Result if the state reporting was successful, otherwise a Result containing the occurred error
+            ara::core::Result<void> ReportExecutionState(
+                ExecutionState state) const;
+```
+<p class="attr"><a href="https://github.com/langroodi/Adaptive-AUTOSAR/blob/866d158a10d895f1d269689a8ddf8153dc03b321/src/ara/exec/execution_client.h#L54-L58">langroodi/Adaptive-AUTOSAR @ 866d158 — src/ara/exec/execution_client.h</a></p>
+
+**Rust — the `ara::com` skeleton `OfferService` lifecycle** (`ZiadAhmed9/ara-rs`, created 2026-03-30):
+
+```rust
+    /// Advertise this service instance so that remote proxies can find it.
+    pub async fn offer(
+        &self,
+        major_version: MajorVersion,
+        minor_version: MinorVersion,
+    ) -> Result<(), AraComError> {
+        self.transport
+            .offer_service(
+                self.service_id,
+                self.instance_id,
+                major_version,
+                minor_version,
+            )
+            .await
+    }
+```
+<p class="attr"><a href="https://github.com/ZiadAhmed9/ara-rs/blob/3bb2a86f8570c84be2d0e7cea9e31aa1d6409f67/ara-com/src/skeleton.rs#L46-L60">ZiadAhmed9/ara-rs @ 3bb2a86 — ara-com/src/skeleton.rs</a></p>
+
+<div class="gloss">What to notice: both return an **`ara::core::Result` / `Result<…, AraComError>`** — AP signals errors as a *returned value*, **not a thrown exception**; `ReportExecutionState` is the **contract every AA implements** so EM knows it reached `kRunning`; `offer()`/`stop_offer()` are the **`OfferService`/`StopOfferService` skeleton lifecycle**. Educational caveat: the C++ repo is **dormant (3 years cold)** and the Rust repo is **weeks old** — read them to learn the shape; neither is conformant or production-grade. AA = Adaptive Application · EM = Execution Management.</div>
+
+---
+
+## Building blocks you can actually ship today
+
+<style scoped>
+  section { font-size: 20px; padding-top: 30px; }
+  table { font-size: 13.5px; }
+  table td, table th { padding: 4px 9px; }
+  .gloss { font-size: 12.5px; margin-top: 8px; }
+  h2 { margin-bottom: 6px; }
+  p { margin: 6px 0; }
+</style>
+
+| Building block | License | Activity (2026) | Exact relation to `ara::com` |
+|---|---|---|---|
+| **vsomeip** (COVESA, BMW-originated) | MPL-2.0 | release **3.7.4, 2026-07-06** — actively maintained | a standalone **SOME/IP + Service Discovery + E2E** stack = the standardized **network binding** *under* `ara::com`, not an `ara::com` API; the repo **never mentions `ara::com`**, though AUTOSAR appears around its E2E support (changelog *"Support AutoSAR E2E Profile 4"*, E2E test docs citing the AUTOSAR E2E/CRC specs, two source files citing AUTOSAR FO R22-11) |
+| **Eclipse iceoryx** | Apache-2.0 | **v2.0.8, 2026-05-19** — maintained | zero-copy shared-memory IPC; ships `iceoryx-automotive-soa`, per its README *"a Binding for automotive frameworks like AUTOSAR Adaptive `ara::com`"* (its "Where is iceoryx used" table labels **RTA-VRTE (ETAS)** and **AVIN AGNOSAR** as AUTOSAR Adaptive Platform products, while **Apex.Ida is listed as safe/certified middleware without the AP label**) |
+| **Eclipse iceoryx2** | Apache-2.0 OR MIT | **v0.9.3, 2026-07-08** (pre-1.0) — very active | Rust-core zero-copy IPC successor; its README/FAQ describe safety-critical ambitions (*"designed to operate in safety-critical systems"*) but make **no AUTOSAR / ISO 26262 / ASIL certification claim** |
+| **eProsima Fast DDS** | Apache-2.0 | **v3.6.2, 2026-07-02** — very active | full OMG **DDS/RTPS**; DDS is one of the three standardized `ara::com` network bindings (SOME/IP · Signal-Based · DDS), so technically eligible — but **not** the documented AP Demonstrator binding (that reference work is RTI Connext, proprietary) |
+| **CommonAPI C++ / -SomeIP** (COVESA) | MPL-2.0 | **dormant since 2024-10-09** | Franca-IDL proxy/stub codegen whose shape *rhymes with* `ara::com` proxies/skeletons — but a separate, **non-AUTOSAR** lineage |
+
+**Takeaway:** the **protocol/transport layer** of AP is fully available as production open source — the **`ara::` API layer** is not.
+
+<div class="gloss">SOME/IP = Scalable service-Oriented MiddlewarE over IP · SD = Service Discovery · E2E = End-to-End protection · IPC = Inter-Process Communication · DDS/RTPS = Data Distribution Service + its wire protocol (OMG) · MPL = Mozilla Public License · Franca IDL = the interface-definition language CommonAPI generates from (the non-AUTOSAR analogue to ARXML) · all versions/dates verified 2026-07-16</div>
+
+---
+
+## The open ecosystem around AP — and where the line sits
+
+<style scoped>
+  section { font-size: 18.5px; padding-top: 24px; }
+  h2 { margin-bottom: 6px; }
+  li { margin-bottom: 6px; }
+  .gloss { font-size: 12.5px; margin-top: 8px; }
+</style>
+
+- **Eclipse S-CORE** (Apache-2.0, dual-language **C++/Rust** — never Rust-first; launched **2025-06-12**; backers BMW Group, Mercedes-Benz, Bosch, ETAS, QNX, Qorix, Accenture) is an open SDV **core stack**, **not an AP implementation**, and **makes no AP-compatibility claim** — no official statement either way (community discussions about a compatibility/mapping layer exist — eclipse-score GitHub discussions #759, #882 — but nothing official). Its comms module **LoLa** is *"a communication middleware implementation based on the Adaptive AUTOSAR Communication Management specification"* / *"Partial implementation of Adaptive AUTOSAR Communication Management (ara::com)"* (its README also self-describes **ASIL-B qualified**) — yet its API namespace is **`score::mw::com`, not `ara::com`**, and its IPC is built on **boost.interprocess, not iceoryx**
+- **Eclipse OpenSOVD** (Apache-2.0, mostly Rust, Eclipse **Incubating** (proposed 2025-05-26), active into July 2026) — an open implementation of **SOVD (ISO 17978)** that explicitly **bridges AUTOSAR-Adaptive HPCs and legacy UDS ECUs** and complements S-CORE. It sits exactly on this deck's **Fleet ↔ CP+AP walkthrough** + **fleet-uds-flow** SOVD path: [its Rust REST route table](https://github.com/eclipse-opensovd/opensovd-core/blob/fe75a8e3a9142d11a0ed7152610e29003493de2a/opensovd-server/src/routes/mod.rs#L4-L18) enumerates the `components → data` SOVD endpoints a diagnostics client speaks
+- **Same neighbourhood, none are AP** (all Apache-2.0, all active): **Eclipse Ankaios** (workload orchestration for automotive HPCs — conceptually overlaps AP Execution Management) · **Eclipse Kuksa** (VSS signal databroker, Rust) · **Eclipse uProtocol** (transport-agnostic messaging; originated as a GM contribution, pairs with COVESA VSS/uServices)
+- **Classic contrast**: Classic AUTOSAR has an open **GPL-2.0** lineage (Arctic Core, continued as **`openAUTOSAR/classic-platform`**, 2453 commits) — **Adaptive has no equivalent open conformant stack**
+- **The boundary-keeper**: the one complete official AP implementation is **CAPI**, *"developed collaboratively by and for AUTOSAR partners"* — **partner-gated, not open source.** That is why the honest line holds: open AP means education + building blocks + surrounding middleware, **not a production AP stack**
+
+<div class="gloss">SDV = Software-Defined Vehicle · LoLa = S-CORE's Low-Latency communication module · SOVD = Service-Oriented Vehicle Diagnostics (ISO 17978) · HPC = High-Performance Computer · UDS = Unified Diagnostic Services · VSS = Vehicle Signal Specification · CAPI = Common Adaptive Platform Implementation · the concrete AUTOSAR↔Eclipse tie is the SDV Alliance (formed March 2023, launched CES 2024) — see references</div>
+
+---
+
 ## CP vs AP — the platform split (1/2)
 
 <style scoped>
@@ -820,7 +937,7 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
-## References 1/2 — AUTOSAR primary sources
+## References 1/3 — AUTOSAR primary sources
 
 <style scoped>
   section { font-size: 15px; padding-top: 28px; line-height: 1.32; }
@@ -839,7 +956,7 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
-## References 2/2 — Adaptive, comparison & open efforts
+## References 2/3 — Adaptive, comparison & open efforts
 
 <style scoped>
   section { font-size: 15px; padding-top: 28px; line-height: 1.32; }
@@ -855,3 +972,21 @@ open an SWS only when you implement. (Every filename below verified live against
 - **Comparison / open**: [arxiv.org/pdf/2109.00099](https://arxiv.org/pdf/2109.00099) (AUTOSAR platforms) · [doi.org/10.3390/electronics14183635](https://doi.org/10.3390/electronics14183635) (AP↔ROS2 bridge) · [arxiv.org 2604.22576](https://arxiv.org/pdf/2604.22576) (ROS 2 vs AP, 2026) · [arxiv.org 2511.17540](https://arxiv.org/pdf/2511.17540) (AP↔ROS2 framework, 2025-11) · [apex.ai apexgrace](https://www.apex.ai/apexgrace) + [autosar-and-ros-2-for-SDV](https://www.apex.ai/post/autosar-and-ros-2-for-software-defined-vehicle) · [eclipse S-CORE launch](https://www.globenewswire.com/news-release/2025/06/12/3098131/0/en/the-eclipse-foundation-launches-the-s-core-project-the-automotive-industry-s-first-open-source-core-stack-for-software-defined-vehicles.html) · [covesa SOAFEE blueprint](https://covesa.global/wp-content/uploads/2024/05/SDV-Alliance-Integration-Blueprint-20240109.pdf) · [github.com/langroodi/Adaptive-AUTOSAR](https://github.com/langroodi/Adaptive-AUTOSAR) (MIT AP simulator)
 
 <div class="gloss">Med/low-confidence items and open questions (CAN XL release · C++17 ARA move · SecOC "no confidentiality" wording · exact SC1–SC4 phrasing · S2S-gateway and arXiv rows · ASIL-D field evidence) are flagged as such in the research docs — not asserted here as settled fact.</div>
+
+---
+
+## References 3/3 — open-source Adaptive AUTOSAR
+
+<style scoped>
+  section { font-size: 15px; padding-top: 28px; line-height: 1.32; }
+  ul { margin-top: 4px; }
+  li { margin-bottom: 3px; }
+  h2 { margin-bottom: 6px; }
+</style>
+
+- **AP implementations**: [github.com/langroodi/Adaptive-AUTOSAR](https://github.com/langroodi/Adaptive-AUTOSAR) (MIT · C++ · 7 `ara::` clusters · dormant since 2023-06) · [github.com/ZiadAhmed9/ara-rs](https://github.com/ZiadAhmed9/ara-rs) (Apache-2.0/MIT · Rust proxy/skeleton + `cargo-arxml` · created 2026-03) · [autosar.org/capi](https://www.autosar.org/capi) (CAPI — official, partner-gated, **not** open source)
+- **Protocol / IPC building blocks**: [github.com/COVESA/vsomeip](https://github.com/COVESA/vsomeip) (MPL-2.0 · SOME/IP) · [github.com/COVESA/capicxx-core-runtime](https://github.com/COVESA/capicxx-core-runtime) (MPL-2.0 · CommonAPI · dormant) · [github.com/eclipse-iceoryx/iceoryx](https://github.com/eclipse-iceoryx/iceoryx) (Apache-2.0 · zero-copy IPC) · [github.com/eclipse-iceoryx/iceoryx2](https://github.com/eclipse-iceoryx/iceoryx2) (Apache-2.0 OR MIT · Rust core) · [github.com/eProsima/Fast-DDS](https://github.com/eProsima/Fast-DDS) (Apache-2.0 · DDS/RTPS)
+- **Open ecosystem around AP**: [github.com/eclipse-score](https://github.com/eclipse-score) (S-CORE org · Apache-2.0) · [github.com/eclipse-score/communication](https://github.com/eclipse-score/communication) (LoLa — partial `ara::com`, `score::mw::com`) · [github.com/eclipse-opensovd/opensovd-core](https://github.com/eclipse-opensovd/opensovd-core) (Apache-2.0 · SOVD / ISO 17978) · [autosar.org — SDV Alliance (CES 2024)](https://www.autosar.org/news-events/detail/collaboration-the-key-to-making-the-software-defined-vehicle-a-reality)
+- **Classic-side contrast**: [github.com/openAUTOSAR/classic-platform](https://github.com/openAUTOSAR/classic-platform) (GPL-2.0 · Arctic Core lineage — the open Classic fork Adaptive has no equivalent of)
+
+<div class="gloss">All repositories, releases and dates verified against their GitHub API / project pages on 2026-07-16 · the CAPI git endpoint (code.autosar.org/capi/capi) is partner-gated (302 → sign-in) and is listed as the boundary, not an open-source download · autosar.org links fetched with the deck's `-ksL` TLS workaround · full provenance in autosar/research/adaptive-open-source-2026-07.md</div>
