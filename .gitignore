@@ -9,6 +9,7 @@ docker/image.env
 
 # optional PDF export of the slides (HTML is the committed deliverable)
 slides/slides.pdf
+slides/research.pdf
 
 # optional text-only PPTX export (a hand-editing starting point, not a deliverable)
 slides/*.pptx

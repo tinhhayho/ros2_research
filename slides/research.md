@@ -864,14 +864,14 @@ picture, and why E/E consolidation makes all of it easier.
 | Target | deeply embedded hard-RT ECUs | HPC — central + zonal computers |
 | OS | **AUTOSAR OS** (OSEK superset, SC1–SC4) | POSIX — QNX or Linux (apps see **PSE51**) |
 | Model | signal-based, **static** — all wired at build time (ARXML) | **service-oriented** — discovery at runtime; production builds pin it down |
-| Comms | CAN/LIN/FlexRay **+ Ethernet/SOME/IP since 4.2.1 (2016)** | Ethernet-native: SOME/IP · **DDS binding** |
-| Diagnostics | **DCM + DEM** (BSW modules) | **DM** (`ara::diag`) — **DoIP only** |
+| Comms | CAN/LIN/FlexRay **+ Ethernet/SOME/IP since 4.2.1 (Oct 2014)** · **DDS added at R25-11** | Ethernet-native: SOME/IP · **DDS binding** |
+| Diagnostics | **DCM + DEM** (BSW modules) | **DM** (`ara::diag`) — **DoIP = the only *standardized* transport** |
 | Updates | full reflash via bootloader (UDS 0x34/0x36/0x37) | per **Software Cluster** via **UCM** |
 | Safety | the mature ASIL-D path | ASIL-B shipping; ASIL-D programs underway |
 
 They **coexist** in one vehicle — Classic on the MCUs, Adaptive on the big computers.
 
-<div class="gloss">Two persistent myths, corrected: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (2016), a year <i>before</i> Adaptive's first release (R17-03, March 2017) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD (2019 program assessment, not a completed cert) · OSEK = the 1990s automotive RTOS standard Classic's OS descends from · POSIX = Portable Operating System Interface (IEEE 1003) · PSE51 = its minimal real-time profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3</div>
+<div class="gloss">Two persistent myths, corrected: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (Oct 2014), years <i>before</i> Adaptive's first release (R17-03, March 2017); R25-11 even adds a <b>DDS Transformer</b> to Classic (standard-level — no shipping vendor implementation verified yet) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD (2019 program assessment, not a completed cert) · OSEK = the 1990s automotive RTOS standard Classic's OS descends from · POSIX = Portable Operating System Interface (IEEE 1003) · PSE51 = its minimal real-time profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3</div>
 
 ---
 
@@ -1308,7 +1308,7 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - **seed–key** — SecurityAccess (0x27) challenge–response: ECU sends a seed, tester answers with the key
 - **DoCAN / DoIP** — Diagnostics over CAN (ISO 15765-2) / over Ethernet-IP (ISO 13400) — UDS's two transports
 - **DCM / DEM** — Classic's diagnostic modules: Diagnostic Communication Manager (dispatch, sessions, security) / Diagnostic Event Manager (fault memory)
-- **DM / UCM** — Adaptive's Diagnostic Manager (`ara::diag`, DoIP-only) / Update and Configuration Management (per-cluster OTA)
+- **DM / UCM** — Adaptive's Diagnostic Manager (`ara::diag`; DoIP is the only *standardized* transport — custom ones are permitted) / Update and Configuration Management (per-cluster OTA)
 - **SOVD** — Service-Oriented Vehicle Diagnostics, ISO 17978 (2026): REST/JSON diagnostic API above UDS
 - **ODX / DEXT / PDX** — diagnostic data formats (ISO 22901 "Open Diagnostic data eXchange" / AUTOSAR Diagnostic Extract) and the packaged container file tools load
 - **TCU** — Telematics Control Unit: the vehicle's modem + cloud endpoint

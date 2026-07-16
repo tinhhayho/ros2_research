@@ -116,6 +116,18 @@ Deck is now **61 slides**; the 11 spec slides sit at 11, 13, 19, 20, 24, 31, 34,
 49, 51. Spec PDFs themselves are mirrored (35 files, SHA256SUMS) under `autosar/specs/`
 per the same user request — commit `77c2b29`.
 
+## Addendum — main research deck synced to previously-verified facts (2026-07-16)
+
+Three edits to `slides/research-deck.md`, all restating claims already verified in the
+07-15 runs (no new claims → no new fact-check run): (1) CP 4.2.1 dated **Oct 2014** (was
+"2016") in the CP-vs-AP table and the myths gloss — the 07-15 finding finally propagated
+to the main deck; (2) the DM row/glossary now say **DoIP = the only *standardized*
+transport** (custom transports permitted) instead of bare "DoIP only"; (3) the CP comms
+row + gloss note the **R25-11 DDS Transformer on Classic** (standard-level, no shipping
+vendor implementation verified). Also: `spec-figures-manifest.md` added next to the spec
+PNGs (sha256 ↔ doc/figure/page provenance table), and `slides/research.pdf` gitignored
+per the keep-untracked decision.
+
 ## Addendum — draw.io mirrors for the two deck-local diagrams (2026-07-16)
 
 `autosar/slides/assets/drawio-pages/autosar-timeline.xml` and `cp-signal-path.xml` added
