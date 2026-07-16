@@ -1,0 +1,158 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="620" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="csp-title" value="Classic Platform &#8212; signal &#8594; PDU &#8594; frame, frozen at build time" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="18" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Left call-out band: K-matrix -->
+    <mxCell id="csp-band-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="14" y="72" width="150" height="414" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-head" value="Statically generated&lt;br&gt;from the communication&lt;br&gt;matrix (K-matrix)" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontStyle=1;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="84" width="150" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-p1" value="Every frame/PDU, signal,&lt;br&gt;sender, receivers, byte&lt;br&gt;layout, timing &amp; encoding&lt;br&gt;are fixed at BUILD TIME." style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="133" width="150" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-p2" value="Imported from DBC / LDF /&lt;br&gt;FIBEX, carried as ARXML." style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="195" width="150" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-p3" value="A given ECU only ever&lt;br&gt;sees the PDUs configured&lt;br&gt;for it." style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="229" width="150" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-config" value="&#8594; configures every layer" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontStyle=2;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="461" width="150" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- TX arrow (left of column) -->
+    <mxCell id="csp-tx-arrow" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="186" y="80" as="sourcePoint" />
+        <mxPoint x="186" y="440" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="csp-tx-label" value="TX" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="156" y="57" width="60" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-tx-vlabel" value="application &#8594; CAN wire" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontStyle=1;fontColor=#666666;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="103" y="251" width="150" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- RX arrow (right of column) -->
+    <mxCell id="csp-rx-arrow" style="endArrow=classic;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=2.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="584" y="440" as="sourcePoint" />
+        <mxPoint x="584" y="80" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="csp-rx-label" value="RX (mirror)" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#5f82b8;" vertex="1" parent="1">
+      <mxGeometry x="524" y="57" width="120" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-rx-vlabel" value="CAN wire &#8594; application" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontStyle=1;fontColor=#7f9dc9;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="521" y="251" width="150" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Main column: SW-C / RTE -->
+    <mxCell id="csp-swc-box" value="&lt;b&gt;SW-C / RTE&lt;/b&gt;&lt;br&gt;application writes a value; RTE calls Com_SendSignal()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="72" width="360" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-swc-com" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="126" as="sourcePoint" />
+        <mxPoint x="386" y="138" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Main column: COM -->
+    <mxCell id="csp-com-box" value="&lt;b&gt;COM&lt;/b&gt;&lt;br&gt;packs the signal into an I-PDU &#8212; bit position, length,&lt;br&gt;endianness, sign extension all resolved at BUILD TIME&lt;br&gt;applies TX modes (periodic / on-change) + minimum delay" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="138" width="360" height="74" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-com-pdur" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="212" as="sourcePoint" />
+        <mxPoint x="386" y="224" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- COM transformer side box -->
+    <mxCell id="csp-com-xf-line" style="endArrow=classic;html=1;rounded=0;strokeColor=#8FBF8F;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="566" y="176" as="sourcePoint" />
+        <mxPoint x="606" y="176" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="csp-com-xf-box" value="&lt;b&gt;Transformer chain (inside COM)&lt;/b&gt;&lt;br&gt;E2E protection &#8212; CRC + counter + Data ID&lt;br&gt;SecOC &#8212; MAC + freshness (no encryption)&lt;br&gt;SomeIpXf &#8212; SOME/IP serialization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="606" y="132" width="340" height="88" as="geometry" />
+    </mxCell>
+
+    <!-- Main column: PduR -->
+    <mxCell id="csp-pdur-box" value="&lt;b&gt;PduR &#8212; PDU Router&lt;/b&gt;&lt;br&gt;static routing table forwards the I-PDU to CanIf&lt;br&gt;(or to CanTp first if large); also bus-to-bus gateway routing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="224" width="360" height="58" as="geometry" />
+    </mxCell>
+
+    <!-- CanTp conditional side box (dashed) -->
+    <mxCell id="csp-cantp-line" style="endArrow=classic;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="566" y="254" as="sourcePoint" />
+        <mxPoint x="606" y="254" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="csp-cantp-box" value="&lt;b&gt;CanTp &#8212; only if PDU &gt; one frame&lt;/b&gt;&lt;br&gt;segments into First Frame / Consecutive Frames&lt;br&gt;with flow control (ISO 15765-2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="606" y="228" width="340" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-pdur-canif" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="282" as="sourcePoint" />
+        <mxPoint x="386" y="294" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Main column: CanIf -->
+    <mxCell id="csp-canif-box" value="&lt;b&gt;CanIf &#8212; ECU Abstraction&lt;/b&gt;&lt;br&gt;maps the abstract PDU to a hardware transmit handle /&lt;br&gt;mailbox; manages controller &amp; PDU mode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="296" width="360" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-canif-candrv" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="354" as="sourcePoint" />
+        <mxPoint x="386" y="366" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Main column: CanDrv -->
+    <mxCell id="csp-candrv-box" value="&lt;b&gt;CanDrv &#8212; MCAL&lt;/b&gt;&lt;br&gt;writes the CAN / CAN FD frame; transmit confirmation&lt;br&gt;propagates back up (CanIf &#8594; PduR &#8594; COM &#8594; RTE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="366" width="360" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-candrv-bus" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="426" as="sourcePoint" />
+        <mxPoint x="386" y="444" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Bus bar -->
+    <mxCell id="csp-bus-box" value="CAN / CAN FD bus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="446" width="360" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- RX note -->
+    <mxCell id="csp-rx-note-box" value="&lt;b&gt;RX mirrors TX (wire &#8594; application)&lt;/b&gt;&lt;br&gt;CanDrv ISR &#8594; CanIf indication &#8594; PduR &#8594;&lt;br&gt;(CanTp reassembly) &#8594; COM unpacks bytes into&lt;br&gt;signals + reception deadline monitoring &#8594;&lt;br&gt;RTE delivers to the SW-C" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="606" y="322" width="340" height="118" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote / gloss -->
+    <mxCell id="csp-foot1" value="SW-C = Software Component &#183; RTE = Runtime Environment &#183; COM = signal-packing module &#183; I-PDU = Interaction-layer Protocol Data Unit &#183; PduR = PDU Router &#183; CanTp = CAN Transport Layer" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="549" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-foot2" value="CanIf = CAN Interface &#183; MCAL = Microcontroller Abstraction Layer &#183; E2E = End-to-End protection &#183; SecOC = Secure Onboard Communication &#183; SomeIpXf = SOME/IP Transformer" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="565" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-foot3" value="Synthesized from the AUTOSAR CP SWS documents: COM &#183; PduR &#183; CanTp &#183; CanIf" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="583" width="920" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

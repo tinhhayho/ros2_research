@@ -37,3 +37,14 @@ vehicle, add a concrete real example, and link every reference directly to its d
 - Review + edit workflow: run `wf_d6cbea81-514` (2 Opus agents; reviewer report in the
   workflow journal). Claims run: `wf_c17a3d15-b4e` (~222k subagent tokens).
 - Related: `research/fact-check-2026-07-15.md` (Run 3 — the original 97-claim deck check).
+
+## Addendum — draw.io mirrors for the two deck-local diagrams (2026-07-16)
+
+`autosar/slides/assets/drawio-pages/autosar-timeline.xml` and `cp-signal-path.xml` added
+as editable mirrors of the two already-fact-checked SVGs (module-local `drawio-pages/`
+directory, same bare-mxGraphModel convention as the shared pool). **No new claims**: the
+mirrors are required to carry every visible SVG string verbatim, enforced by an
+independent parity verifier per diagram (workflow `wf_8c898ee6-4ba`, Opus authors +
+verifiers, fix rounds until pass) — so no fact-check run was needed. The cp-signal-path
+pinned strings from Run 3 ("CAN Transport Layer", "sign extension", the honest SWS
+source line, no "§3.1") are asserted explicitly by the verifier.

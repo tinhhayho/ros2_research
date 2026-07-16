@@ -17,6 +17,8 @@ autosar/
     autosar.html       build output
     assets/            SVGs specific to this deck; diagrams shared with the main
                        decks resolve from ../../slides/assets/ as a fallback
+      drawio-pages/    editable draw.io mirrors — one .xml page per deck-local SVG,
+                       same bare-mxGraphModel convention as slides/assets/drawio-pages/
 ```
 
 ## Build

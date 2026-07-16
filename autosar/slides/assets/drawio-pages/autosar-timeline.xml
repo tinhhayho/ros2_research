@@ -1,0 +1,180 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="620" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="atl-title" value="AUTOSAR at a glance &#8212; three release lines that merged into one" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontColor=#1b2b4a;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="30" y="20" width="900" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Founding column (left) -->
+    <mxCell id="atl-founding-header" value="Founding 2002&#8211;2003" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#444444;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="10" y="50" width="188" height="17" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-founding-box1" value="&lt;b&gt;2002 &#8212; founding discussions&lt;/b&gt;&lt;br&gt;&amp; kick-off workshop&lt;br&gt;BMW &#183; Bosch &#183; Continental &#183;&lt;br&gt;DaimlerChrysler &#183; VW;&lt;br&gt;Siemens VDO soon after" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=8;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="10" y="68" width="188" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-founding-box2" value="Jul 2003 &#8212; Initial Development&lt;br&gt;Agreement signed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=8;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="10" y="142" width="188" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-founding-box3" value="Sep 2003 &#8212; public debut, VDI&lt;br&gt;Conference, Baden-Baden" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=8;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="10" y="184" width="188" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- Swimlane: Classic -->
+    <mxCell id="atl-classic-lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="200" y="70" width="440" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-classic-chip" value="&lt;b&gt;Classic&lt;/b&gt;&lt;br&gt;Platform (CP)&lt;br&gt;&lt;i&gt;from 2005&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f9dc9;strokeColor=#5f82b8;strokeWidth=1.2;fontSize=9.5;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="204" y="74" width="92" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-cp-10" value="&lt;b&gt;1.0&lt;/b&gt;&lt;br&gt;May 2005&lt;br&gt;first CP release" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="304" y="80" width="76" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-cp-40" value="&lt;b&gt;4.0&lt;/b&gt;&lt;br&gt;Dec 2009" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="388" y="80" width="76" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-cp-421" value="&lt;b&gt;4.2.1&lt;/b&gt;&lt;br&gt;Oct 2014&lt;br&gt;SOME/IP Xf std." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="472" y="80" width="76" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-cp-440" value="&lt;b&gt;4.4.0&lt;/b&gt;&lt;br&gt;Oct 2018&lt;br&gt;last standalone CP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="556" y="80" width="76" height="48" as="geometry" />
+    </mxCell>
+
+    <!-- Swimlane: Foundation -->
+    <mxCell id="atl-fo-lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECF6EC;strokeColor=#8FBF8F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="200" y="142" width="440" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-fo-chip" value="&lt;b&gt;Foundation&lt;/b&gt;&lt;br&gt;(FO)&lt;br&gt;&lt;i&gt;from 2016&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8FBF8F;strokeColor=#6fa06f;strokeWidth=1.2;fontSize=9.5;fontColor=#1f3d1f;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="204" y="146" width="92" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-fo-r100" value="&lt;b&gt;R1.0.0 &#8212; Oct 2016&lt;/b&gt;&lt;br&gt;first Foundation;&lt;br&gt;carries shared meta-model/schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=8;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="390" y="150" width="118" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-fo-151" value="&lt;b&gt;1.5.1 &#8212; Mar 2019&lt;/b&gt;&lt;br&gt;last standalone FO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=9;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="516" y="150" width="118" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- Swimlane: Adaptive -->
+    <mxCell id="atl-ap-lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDF1E6;strokeColor=#E0A96D;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="200" y="208" width="440" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-ap-chip" value="&lt;b&gt;Adaptive&lt;/b&gt;&lt;br&gt;Platform (AP)&lt;br&gt;&lt;i&gt;from 2017&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0A96D;strokeColor=#c98a4f;strokeWidth=1.2;fontSize=9.5;fontColor=#5a3d22;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="204" y="212" width="92" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-ap-1703" value="&lt;b&gt;17-03 &#8212; Mar 2017&lt;/b&gt;&lt;br&gt;first AP release" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=9;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="306" y="214" width="102" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-ap-1803" value="&lt;b&gt;18-03 &#8212; Mar 2018&lt;/b&gt;&lt;br&gt;DDS network binding&lt;br&gt;&lt;i&gt;(not 18-10)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=8;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="416" y="214" width="102" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-ap-1903" value="&lt;b&gt;19-03 &#8212; Mar 2019&lt;/b&gt;&lt;br&gt;last standalone AP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=9;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="526" y="214" width="102" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Convergence arrows to R19-11 -->
+    <mxCell id="atl-arrow-cp" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="640" y="102" as="sourcePoint" />
+        <mxPoint x="672" y="150" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="atl-arrow-fo" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="640" y="171" as="sourcePoint" />
+        <mxPoint x="672" y="174" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="atl-arrow-ap" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="640" y="240" as="sourcePoint" />
+        <mxPoint x="672" y="200" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- R19-11 unification node -->
+    <mxCell id="atl-r1911-box" value="&lt;b&gt;R19-11 &#8212; Nov 2019&lt;/b&gt;&lt;br&gt;&lt;b&gt;&lt;font color=&quot;#5b3a8a&quot;&gt;UNIFICATION&lt;/font&gt;&lt;/b&gt;&lt;br&gt;one naming R{yy}-11 &#183; one&lt;br&gt;November cadence &#183; one&lt;br&gt;AUTOSAR_000nn schema&lt;br&gt;across CP + AP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E4E4EE;strokeColor=#6b6f8f;strokeWidth=2;fontSize=9.5;fontColor=#2b2f55;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="674" y="116" width="238" height="116" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-r1911-note" value="CP internal version never reset &#8212; R25-11 is internally R4.11.0,&lt;br&gt;so &quot;AUTOSAR 4.x&quot; is still alive" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="643" y="239" width="300" height="29" as="geometry" />
+    </mxCell>
+
+    <!-- Elbow connector to unified track -->
+    <mxCell id="atl-elbow" style="endArrow=classic;html=1;rounded=0;strokeColor=#6b6f8f;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="880" y="232" as="sourcePoint" />
+        <mxPoint x="60" y="338" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="880" y="290" />
+          <mxPoint x="60" y="290" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="atl-merged-note" value="the single merged release line &#8212; continues every November &#8595;" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="260" y="273" width="360" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- Unified bottom track -->
+    <mxCell id="atl-unified-lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E2E2EA;strokeColor=#9a9fb0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="48" y="340" width="852" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-label" value="&lt;b&gt;unified R{yy}-11 line &#8212;&lt;/b&gt;&lt;br&gt;one release + one schema, every November" style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="66" y="350" width="300" height="33" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2011" value="R20-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="332" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2111" value="R21-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="392" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2211" value="R22-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="452" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2311" value="R23-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="512" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2411" value="R24-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="572" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-ellipsis" value="&#8230;" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="626" y="358" width="40" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- R25-11 end node -->
+    <mxCell id="atl-r2511-box" value="&lt;b&gt;R25-11&lt;/b&gt;&lt;br&gt;2025-11-27 &#183; internal R4.11.0&lt;br&gt;&lt;b&gt;current release&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=2;fontSize=10;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="684" y="326" width="242" height="78" as="geometry" />
+    </mxCell>
+
+    <!-- Callout tags -->
+    <mxCell id="atl-callout-leader" style="endArrow=none;html=1;rounded=0;strokeColor=#8FBF8F;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="760" y="404" as="sourcePoint" />
+        <mxPoint x="712" y="414" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="atl-callout-dds" value="&lt;b&gt;NEW: DDS Transformer on Classic&lt;/b&gt;&lt;br&gt;&lt;i&gt;standard-level concept in R25-11 &#8212; no shipping vendor impl yet&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=9;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="498" y="414" width="428" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-callout-removed" value="&lt;b&gt;CP removed Fls &#183; Eep &#183; TTCAN &#183; LdCom&lt;/b&gt;&lt;br&gt;Fls/Eep &#8594; Mem/MemAcc &#183; LdCom absorbed into Com" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=9;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="498" y="458" width="428" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- Schematic honesty note (lower left) -->
+    <mxCell id="atl-schematic-note" value="Schematic overview &#8212; milestone nodes are shown in chronological&lt;br&gt;order within each track, not on a linear time scale. The dated&lt;br&gt;labels are the load-bearing facts." style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="20" y="419" width="360" height="43" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote / gloss -->
+    <mxCell id="atl-gloss" value="One AUTOSAR standard set, published once a year each November since R19-11." style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#555555;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="60" y="544" width="840" height="17" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-abbrev" value="CP = Classic Platform &#183; AP = Adaptive Platform &#183; FO = Foundation &#183; SOME/IP = Scalable service-Oriented MiddlewarE over IP &#183; DDS = Data Distribution Service &#183; Xf = Transformer" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="562" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-sources" value="Sources: autosar.org/about/history &#183; CP/AP Release Overviews R25-11 &#183; DDS on AP since R18-03 (rti.com)" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="578" width="920" height="16" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
