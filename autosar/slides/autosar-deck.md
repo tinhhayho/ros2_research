@@ -180,6 +180,8 @@ open an SWS only when you implement. (Every filename below verified live against
 
 <div class="figsrc">Source: AUTOSAR CP_EXP_LayeredSoftwareArchitecture, R25-11, "Overview of Software Layers — detailed view" (p. 24) — © AUTOSAR.</div>
 
+<div class="gloss">Map the spec labels to the deck's terms: 'Runtime Environment' = the RTE · the BSW (Basic Software) has four layers — Services, ECU Abstraction, Microcontroller Abstraction and Complex Drivers · the bottom 'Drivers' row = MCAL (Microcontroller Abstraction Layer) · 'Complex Drivers' (CDD) = the fourth BSW layer, drawn spanning hardware→RTE — the non-standard escape hatch · HW = hardware (I/O = input/output)</div>
+
 ---
 
 ## The relocation trick — SWCs, the VFB, and why the RTE is generated
@@ -212,6 +214,8 @@ open an SWS only when you implement. (Every filename below verified live against
 {{image:spec-vfb-concept}}
 
 <div class="figsrc">Source: AUTOSAR CP_TR_VFB, R25-11, Figure 2.2 — © AUTOSAR.</div>
+
+<div class="gloss">SW-C = Software Component · ECU = Electronic Control Unit · RTE = Runtime Environment (the generated per-ECU code that actually implements the VFB) · the figure's point: the same SW-C maps onto ECU I / II / n unchanged, over FlexRay or CAN. (VFB itself is spelled 'Virtual Functional Bus' inside the figure.)</div>
 
 ---
 
@@ -260,6 +264,8 @@ open an SWS only when you implement. (Every filename below verified live against
 <!-- _class: diagram -->
 
 {{diagram:cp-signal-path}}
+
+<div class="gloss">Extend the diagram's abbreviation key: DBC = Vector CAN database · LDF = LIN Description File · FIBEX = ASAM multi-bus exchange format · ARXML = AUTOSAR XML · CRC = Cyclic Redundancy Check · MAC = Message Authentication Code (the SVG key already covers SW-C/RTE/COM/I-PDU/PduR/CanTp/CanIf/MCAL/E2E/SecOC/SomeIpXf)</div>
 
 ---
 
@@ -313,6 +319,8 @@ open an SWS only when you implement. (Every filename below verified live against
 
 <div class="figsrc">Source: AUTOSAR FO_PRS_SecOCProtocol, R25-11, Figure 5.1 — © AUTOSAR.</div>
 
+<div class="gloss">I-PDU = Interaction-layer PDU (Protocol Data Unit — the packed signal payload) · Authentic I-PDU = the original data, carried in the clear · Freshness Value = the anti-replay counter (optional, transmitted truncated) · Authenticator = the (typically truncated) MAC (Message Authentication Code) · wire order per [PRS_SecOc_00211]: Authentic I-PDU → Freshness Value → Authenticator · SecOC authenticates, it does not encrypt</div>
+
 ---
 
 ## E2E protection — as the spec draws it
@@ -320,6 +328,8 @@ open an SWS only when you implement. (Every filename below verified live against
 {{image:spec-e2e-overview}}
 
 <div class="figsrc">Source: AUTOSAR FO_PRS_E2EProtocol, R25-11, Figure 1.1 — © AUTOSAR.</div>
+
+<div class="gloss">E2E = End-to-End protection (CRC + counter + Data ID, ISO 26262) · ECU = Electronic Control Unit · MCU = microcontroller · protection is added at the sending SW-C and checked at the receiving SW-C, so corruption introduced in between (lower layers, pass-through gateways) is detected with the profile's bounded residual risk — high-probability detection, not an absolute guarantee</div>
 
 ---
 
@@ -371,7 +381,7 @@ open an SWS only when you implement. (Every filename below verified live against
   multicore FFI and execution-time bounds. So one CP ECU can host mixed-criticality software:
   ASIL-D braking in one partition, QM comfort code in another
 
-<div class="gloss">FFI = Freedom From Interference (ISO 26262 term) · MPU = Memory Protection Unit (region-compare, not virtual memory) · OS-Application = the partition unit that owns tasks/ISRs/resources · WdgM = Watchdog Manager · WCET = Worst-Case Execution Time · QM = Quality Managed (no ASIL) · execution-time enforcement requires MCU timer/MPU hardware</div>
+<div class="gloss">FFI = Freedom From Interference (ISO 26262 term) · MPU = Memory Protection Unit (region-compare, not virtual memory) · OS-Application = the partition unit that owns Tasks/ISRs/Alarms/ScheduleTables (Resources are granted, not owned) · WdgM = Watchdog Manager · WCET = Worst-Case Execution Time · QM = Quality Managed (no ASIL) · execution-time enforcement requires MCU timer/MPU hardware</div>
 
 ---
 
@@ -384,6 +394,8 @@ open an SWS only when you implement. (Every filename below verified live against
 {{image:spec-memory-partitioning-modes}}
 
 <div class="figsrc">Source: AUTOSAR CP_EXP_FunctionalSafetyMeasures, R25-11, Figure 2.8 — © AUTOSAR.</div>
+
+<div class="gloss">OS-Application (OS-App) = the partition unit that owns Tasks/ISRs/Alarms/ScheduleTables (Resources are granted to OS-Applications, not owned) — trusted ones may run in CPU supervisor mode with protection off, non-trusted run in user mode with MPU protection on · SW-C = Software Component (allocated to one or more OS-Applications) · IPC = Inter-Process Communication · ECU = Electronic Control Unit</div>
 
 ---
 
@@ -452,6 +464,8 @@ open an SWS only when you implement. (Every filename below verified live against
 
 {{diagram:stack-autosar-adaptive}}
 
+<div class="gloss">Extend the diagram's key: DDS = Data Distribution Service · UDS = Unified Diagnostic Services (ISO 14229) · DoIP = Diagnostics over IP · SoC = System-on-Chip · HPC = High-Performance Computer · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D) (the SVG key already covers DM/UCM/SOME/IP/PSE51)</div>
+
 ---
 
 ## Adaptive Applications are POSIX processes on ARA
@@ -502,6 +516,8 @@ open an SWS only when you implement. (Every filename below verified live against
 {{image:spec-ap-architecture-logical-view}}
 
 <div class="figsrc">Source: AUTOSAR AP_EXP_PlatformDesign, R25-11, Figure 4.1 — © AUTOSAR.</div>
+
+<div class="gloss">AP = Adaptive Platform · each 'ara::…' box is one Function Cluster (FC) · PSE51 = the minimal single-process real-time POSIX profile exposed by the OS Interface · C++ STL = C++ Standard Template Library (each cluster's full name is printed above its ara:: namespace)</div>
 
 ---
 
@@ -585,6 +601,8 @@ open an SWS only when you implement. (Every filename below verified live against
 
 <div class="figsrc">Source: AUTOSAR AP_SWS_CommunicationManagement, R25-11, Figure 7.1 — © AUTOSAR.</div>
 
+<div class="gloss">ara::com = the one AP communication API · SOME/IP = Scalable service-Oriented MiddlewarE over IP (the cross-machine network binding, over TCP/IP) · IPC = Inter-Process Communication (the same-machine binding) · the app codes to ara::com; the binding beneath it is chosen in the manifest</div>
+
 ---
 
 ## The SOME/IP message header — as the spec draws it
@@ -592,6 +610,8 @@ open an SWS only when you implement. (Every filename below verified live against
 {{image:spec-someip-message-header}}
 
 <div class="figsrc">Source: AUTOSAR FO_PRS_SOMEIPProtocol, R25-11, Figure 5.11 — © AUTOSAR.</div>
+
+<div class="gloss">SOME/IP = Scalable service-Oriented MiddlewarE over IP · ID = Identifier — a call is addressed by Message ID (Service ID + Method ID) and correlated by Request ID (Client ID + Session ID) · Message Type ([PRS_SOMEIP_00055]): 0x00 = REQUEST, 0x01 = REQUEST_NO_RETURN (fire-and-forget), 0x02 = NOTIFICATION, 0x80 = RESPONSE, 0x81 = ERROR · Return Code 0x00 = E_OK · 'Covered by Length' = the byte span the Length field counts · note: this crop is the Magic Cookie Message (§5.2.1.2) — a fixed-value sentinel marking message boundaries in a TCP stream; its Message Type bytes 0x01/0x02 are the sentinel's reserved constants, not the request/response codes</div>
 
 ---
 
@@ -718,12 +738,455 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
+## Inside the repo 1/4: `openAUTOSAR/classic-platform`
+
+<style scoped>
+  section { font-size: 16px; padding: 14px 40px 10px; }
+  h2 { font-size: 24px; margin: 0 0 6px; }
+  .cols { display: flex; gap: 22px; align-items: flex-start; }
+  .tree { flex: 0 0 47%; }
+  .tree pre { font-size: 11px; line-height: 1.3; margin: 0; background: #f6f8fc; }
+  .tree pre code { font-size: 11px; background: transparent; }
+  .pin { font-family: monospace; font-size: 12px; color: #445; margin: 8px 0 0; }
+  .quote { font-size: 13px; font-style: italic; color: #33415c; line-height: 1.34; margin: 8px 0 0; }
+  .quote .src { font-style: normal; color: #66708a; }
+  .info { flex: 1 1 53%; }
+  .info h3 { font-size: 14px; color: #2E5FAC; margin: 0 0 2px; }
+  .info p { margin: 0 0 6px; line-height: 1.26; font-size: 13.5px; }
+  .info code { font-size: 12px; }
+  .gloss { font-size: 11px; margin-top: 7px; line-height: 1.3; }
+</style>
+
+Four repositories are worth your time. This is what is inside each one. This is the Classic Platform side of the story, the one open and complete Classic AUTOSAR stack in this repository tour.
+
+<div class="cols">
+<div class="tree">
+
+```text
+classic-platform/  (master @ 09433770, 2049 tree entries)
+├── system/Os/rtos/          OSEK/AUTOSAR OS kernel
+│   ├── inc/Os.h             public OS API (tasks, alarms, events)
+│   └── src/os_task.c, os_alarm.c, os_counter.c, os_sched_table.c
+├── communication/           BSW comm stack
+│   ├── Com/src/Com_Com.c    signal <-> I-PDU packing (Com_SendSignal)
+│   ├── PduR/src/PduR.c      PDU Router (COM <-> CanIf/CanTp/Dcm)
+│   └── CanIf/src/CanIf.c    CAN Interface (HW-independent CAN)
+├── diagnostic/              UDS diagnostics
+│   ├── Dcm/src/Dcm.c        Diagnostic Communication Manager (UDS server)
+│   └── Dem/src/Dem.c        Diagnostic Event Manager (fault/DTC store)
+├── system/{EcuM,BswM,SchM}  ECU state mgmt + BSW scheduler
+├── boards/<~45 targets>     MPC5xxx, TC2xx/3xx, S32K, RH850, gnulinux
+└── makefile, scripts/       recursive make build (no examples/ dir here)
+```
+
+<p class="pin">openAUTOSAR/classic-platform @ 09433770 · GPL-2.0</p>
+<p class="quote">"This is a fork of the Arctic Core (the open source AUTOSAR embedded platform)." <span class="src">(its README)</span></p>
+
+</div>
+<div class="info">
+<h3>Start reading here</h3>
+<p>The top-level <code>makefile</code> is the build entry. It is a recursive GNU make build where you pick a target board with <code>BOARDDIR</code> and the module directories to compile with <code>BDIR</code>. The OS kernel is always built. <code>system/Os/rtos/inc/Os.h</code> is the public header for the OSEK/AUTOSAR OS kernel, and it declares the task, alarm, counter and event API. <code>communication/Com/src/Com_Com.c</code> is the COM signal input and output, where <code>Com_SendSignal</code> and <code>Com_ReceiveSignal</code> pack and unpack signals into an I-PDU. <code>diagnostic/Dcm/src/Dcm.c</code> is the UDS server and <code>diagnostic/Dem/src/Dem.c</code> is the fault and DTC store.</p>
+<h3>What you can do</h3>
+<p>Cross-compile for a board with <code>make BOARDDIR=&lt;board&gt; BDIR=&lt;dir&gt; CROSS_COMPILE=&lt;gcc&gt; all</code>. This builds the OS kernel, which is always built, plus the module directories you select, for one of about 45 boards. <code>scripts/build_example.sh</code> is a thin wrapper around the same build. There is no graphical development environment and no host application to run. The build produces an embedded firmware image for an MCU target. A gnulinux board also exists for host builds.</p>
+<h3>Know the limits</h3>
+<p>The default branch is dormant. Its last commit on <code>master</code> is from 2020-04-02, with the message "Remove GPLv2 violating files". The repository shows a later push date of 2024-08-06, but that reflects other branches, not <code>master</code>. There is no <code>examples/</code> directory at this commit, so the OSEK example applications the makefile mentions are not present here. This is a continuation of the Arctic Core codebase, a full Classic AUTOSAR basic-software stack in C across about 45 MCU board targets. Read it for the shape of a real Classic stack, not to run it.</p>
+</div>
+</div>
+
+<div class="gloss">OSEK = the 1990s automotive RTOS standard AUTOSAR OS descends from · AUTOSAR OS = the OSEK-derived static real-time kernel · BSW = Basic Software (CP's generated C layer, built statically, no heap) · COM = the AUTOSAR signal-packing communication module (not a serial port) · PDU = Protocol Data Unit · I-PDU = Interaction-layer PDU (the packed frame COM builds from signals) · PduR = PDU Router (routes PDUs between COM and the bus interfaces) · CanIf = CAN Interface (hardware-independent CAN) · CanTp = CAN Transport Protocol (ISO 15765-2 segmentation) · CAN = Controller Area Network (the automotive serial bus) · HW = hardware · UDS = Unified Diagnostic Services (ISO 14229) · Dcm = Diagnostic Communication Manager (the UDS server) · Dem = Diagnostic Event Manager (the fault store) · DTC = Diagnostic Trouble Code · ECU = Electronic Control Unit · EcuM = ECU Manager · BswM = Basic Software Mode Manager · SchM = BSW Scheduler · MCU = Microcontroller · CP = Classic Platform · GNU make = the GNU project build tool · GPL-2.0 = GNU General Public License version 2 (an open-source licence)</div>
+
+<!-- ~65s | say: This is the Classic Platform repository, the one open and complete Classic AUTOSAR stack worth reading. Start at the top makefile. It is a recursive GNU make build. You pick a target board and the module directories to compile, and the OS kernel is always built. Then open Os dot h. It is the public header for the OSEK-derived kernel, and it declares the task, alarm, counter and event calls. Com underscore Com dot c is the communication module, where Com send signal packs an application signal into an I-PDU. The diagnostic folder holds Dcm, the UDS server, and Dem, the fault store. To build it, you cross-compile for one of about forty-five boards. There is no host application to run, because the build produces firmware for a microcontroller. Two honest limits. The main branch has been dormant since 2020, and the example applications the makefile mentions are not in the tree. Read it for the shape. -->
+
+---
+
+## The code 1/4: Classic AUTOSAR in C
+
+<style scoped>
+  section { font-size: 17px; padding: 16px 40px 12px; }
+  h2 { font-size: 24px; margin: 0 0 6px; }
+  p { font-size: 13px; margin: 6px 0 2px; }
+  pre { font-size: 11px; line-height: 1.24; margin: 3px 0 2px; background: #f6f8fc; }
+  pre code { font-size: 11px; background: transparent; }
+  .attr { font-size: 11.5px; color:#66708a; margin: 2px 0 8px; }
+  .gloss { font-size: 12px; margin-top: 8px; }
+</style>
+
+**C: publishing a signal through AUTOSAR COM** (`openAUTOSAR/classic-platform`, dormant since 2020):
+
+```c
+uint8 Com_SendSignal(Com_SignalIdType SignalId, const void *SignalDataPtr) {
+    /* @req COM334 */ /* Shall update buffer if pdu stopped, should not store trigger */
+    uint8 ret = E_OK;
+    boolean dataChanged = FALSE;
+    if( COM_INIT != Com_GetStatus() ) {
+        DET_REPORTERROR(COM_SENDSIGNAL_ID, COM_E_UNINIT);
+        /*lint -e{904} Return statement is necessary in case of reporting a DET error */
+        return COM_SERVICE_NOT_AVAILABLE;
+    }
+```
+
+<p class="attr"><a href="https://github.com/openAUTOSAR/classic-platform/blob/09433770bebb8f27a7b480d7c96d814c68ffed3e/communication/Com/src/Com_Com.c#L44-L52">openAUTOSAR/classic-platform @ 09433770 — communication/Com/src/Com_Com.c</a></p>
+
+**C: reporting a fault to the Diagnostic Event Manager**:
+
+```c
+void Dem_ReportErrorStatus( Dem_EventIdType eventId, Dem_EventStatusType eventStatus ) /** @req DEM206 */
+{
+    /* @req DEM330 */
+    /* @req DEM107 */
+    VALIDATE_NO_RV((DEM_UNINITIALIZED != demState), DEM_REPORTERRORSTATUS_ID, DEM_E_UNINIT);
+    VALIDATE_NO_RV(IS_VALID_EVENT_STATUS(eventStatus), DEM_REPORTERRORSTATUS_ID, DEM_E_PARAM_DATA);
+
+    SchM_Enter_Dem_EA_0();
+```
+
+<p class="attr"><a href="https://github.com/openAUTOSAR/classic-platform/blob/09433770bebb8f27a7b480d7c96d814c68ffed3e/diagnostic/Dem/src/Dem.c#L7458-L7465">openAUTOSAR/classic-platform @ 09433770 — diagnostic/Dem/src/Dem.c</a></p>
+
+<div class="gloss"><b>What to notice:</b> <code>Com_SendSignal</code> is the COM service a task calls to publish an application signal, later packed into an I-PDU on the bus. Before it does any work it checks the module state. If COM is not initialized, it reports a development-time error through the DET and returns a service-not-available code. The <code>/* @req COM334 */</code> comment ties this line to a numbered requirement in the AUTOSAR COM specification, and that traceability tag is the signature style of the whole codebase. <code>Dem_ReportErrorStatus</code> is the entry any basic-software module calls to report a fault as passed or failed by numeric event id. The two <code>VALIDATE_NO_RV</code> macros are the standard guard: they reject calls made before init or with an out-of-range status by reporting to the DET. <code>SchM_Enter_Dem_EA_0()</code> then opens a named exclusive area, so the fault-status update that follows is atomic against task preemption on the ECU. Both patterns, the requirement tags and the init-and-exclusive-area guards, are the OSEK-heritage Classic idiom. · COM = the AUTOSAR signal-packing communication module (not a serial port) · DET = Default Error Tracer (AUTOSAR's development-time error hook) · PDU = Protocol Data Unit · I-PDU = Interaction-layer PDU (the packed frame COM builds from signals) · DEM = Diagnostic Event Manager · BSW = Basic Software (CP's generated C layer) · SchM = BSW Scheduler; the <code>SchM_Enter</code>/<code>SchM_Exit</code> pair brackets an exclusive area (EA), an atomic section against preemption · OSEK = the 1990s automotive RTOS standard AUTOSAR OS descends from · id = identifier · ECU = Electronic Control Unit</div>
+
+<!-- ~65s | say: These are two real functions from the Classic stack, and they show the house style. The first is Com send signal, the service a task calls to publish an application signal. Before it does any work, it checks that the module was initialized. If it was not, it reports a development-time error through the Default Error Tracer and returns a service-not-available code. The comment tagged requirement COM three three four links that line to a numbered requirement in the AUTOSAR COM specification. The second function is Dem report error status. Any basic-software module calls it to report a fault as passed or failed, using a numeric event id. The two validate macros are the standard guard. They reject calls made before init or with a bad status. Then SchM enter opens a named exclusive area, so the fault update that follows cannot be interrupted by another task. Requirement tags and state guards on every entry point are the OSEK-heritage Classic idiom. -->
+
+---
+
+## Inside the repo 2/4: `langroodi/Adaptive-AUTOSAR`
+
+<style scoped>
+  section { font-size: 16px; padding: 20px 40px 16px; }
+  h2 { font-size: 25px; margin: 0 0 8px; }
+  .cols { display: flex; gap: 22px; align-items: flex-start; }
+  .tree { flex: 0 0 47%; }
+  .tree pre { font-size: 11px; line-height: 1.3; margin: 0; background: #f6f8fc; }
+  .tree pre code { font-size: 11px; background: transparent; }
+  .pin { font-family: monospace; font-size: 12px; color: #445; margin: 8px 0 0; }
+  .quote { font-size: 13px; font-style: italic; color: #33415c; line-height: 1.34; margin: 8px 0 0; }
+  .quote .src { font-style: normal; color: #66708a; }
+  .info { flex: 1 1 53%; }
+  .info h3 { font-size: 15px; color: #2E5FAC; margin: 0 0 3px; }
+  .info p { margin: 0 0 9px; line-height: 1.34; }
+  .info code { font-size: 12.5px; }
+  .gloss { font-size: 12px; margin-top: 10px; }
+</style>
+
+<div class="cols">
+<div class="tree">
+
+```text
+Adaptive-AUTOSAR/
+|-- src/
+|   |-- ara/              # seven AP interface clusters
+|   |   |-- com/          # SOME/IP transport layer
+|   |   |-- core/         # Result, ErrorCode, specifiers
+|   |   |-- diag/         # Diagnostic Management
+|   |   `-- exec/         # Execution Management
+|   |   `-- log/ phm/ sm/ # logging, health, state
+|   |-- application/      # simulated demo + managers
+|   `-- arxml/            # ARXML reader (pugixml)
+|-- configuration/        # *.arxml launch manifests
+`-- test/ara/             # GoogleTest units
+```
+
+<p class="pin">langroodi/Adaptive-AUTOSAR @ 866d158 · MIT</p>
+<p class="quote">"The goal of this project is to implement the interfaces defined by the standard for educational purposes." <span class="src">(its README)</span></p>
+
+</div>
+<div class="info">
+<h3>Start reading here</h3>
+<p><code>README.md</code> states what the project is and lists the exact build, test and run commands. <code>src/main.cpp</code> is the ~55-line entry point: it builds Execution Management, spins a polling loop, and passes in the manifests. <code>src/ara/exec/execution_client.h</code> shows an app reporting its state to Execution Management; its private members reveal the call is really a SOME/IP RPC, not a generated ara::com proxy. <code>CMakeLists.txt</code> pins C++14, fetches GoogleTest, and defines the executable plus two test targets.</p>
+<h3>What you can do</h3>
+<p>Configure and build with CMake using GCC or Clang, then run the unit tests with <code>ctest</code>. Launch the simulation by passing the four <code>.arxml</code> manifest files to the executable.</p>
+<h3>Know the limits</h3>
+<p>The demo is not offline. It needs a Volvo API key, an OAuth 2.0 token and live network access to the Volvo Extended Vehicle REST API. The code stops at the SOME/IP transport level, with no generated ara::com Proxy/Skeleton facade. It is dormant, with its last source commit on 2023-06-22. Read it for the shape, not for production.</p>
+</div>
+</div>
+
+<div class="gloss">AP = Adaptive Platform · <code>ara::</code> = the AP C++ API namespaces · <code>ara::com</code> = AP's Communication Management API · Proxy/Skeleton = <code>ara::com</code>'s client-/service-side stubs · SOME/IP = Scalable service-Oriented MiddlewarE over IP · RPC = Remote Procedure Call · ARXML = the AUTOSAR XML manifest and config format · OAuth = Open Authorization (token-based access) · REST = Representational State Transfer (an HTTP API style) · MIT = an open-source licence</div>
+
+<!-- ~65s | say: This is the second of four repositories worth your time. langroodi Adaptive-AUTOSAR is the teaching codebase. Start with the README. It says in one paragraph what the project is, and it lists the exact build, test and run commands. Then open main.cpp. It is about fifty-five lines. It builds Execution Management, spins a polling loop, and passes in the manifest files. The execution-client header is the one to study. It shows an app reporting its state to Execution Management, and its private members reveal that the call is really a SOME/IP remote procedure call, not a generated ara::com proxy. To run it, configure and build with CMake, run the unit tests with ctest, then launch by passing the four ARXML manifest files. Two honest limits. The demo is not offline. It needs a Volvo API key, an OAuth token and live network access. And the code has been dormant since 2023. Read it for the shape. -->
+
+---
+
+## The code 2/4: `langroodi/Adaptive-AUTOSAR`
+
+<style scoped>
+  section { font-size: 17px; padding: 16px 40px 12px; }
+  h2 { font-size: 24px; margin: 0 0 6px; }
+  p { font-size: 13px; margin: 6px 0 2px; }
+  pre { font-size: 11px; line-height: 1.24; margin: 3px 0 2px; background: #f6f8fc; }
+  pre code { font-size: 11px; background: transparent; }
+  .attr { font-size: 11.5px; color:#66708a; margin: 2px 0 8px; }
+  .gloss { font-size: 12px; margin-top: 8px; }
+</style>
+
+**C++: the abstract SOME/IP RPC client** (`langroodi/Adaptive-AUTOSAR`, dormant since 2023):
+
+```cpp
+                class RpcClient
+                {
+                public:
+                    /// @brief SOME/IP RPC response handler type
+                    using HandlerType = std::function<void(const SomeIpRpcMessage &)>;
+
+                private:
+                    const uint8_t mProtocolVersion;
+                    const uint8_t mInterfaceVersion;
+                    std::map<uint32_t, uint16_t> mSessionIds;
+                    std::map<uint32_t, HandlerType> mHandlers;
+```
+
+<p class="attr"><a href="https://github.com/langroodi/Adaptive-AUTOSAR/blob/866d158a10d895f1d269689a8ddf8153dc03b321/src/ara/com/someip/rpc/rpc_client.h#L19-L29">langroodi/Adaptive-AUTOSAR @ 866d158 — src/ara/com/someip/rpc/rpc_client.h</a></p>
+
+**C++: composing the Execution Management cluster**:
+
+```cpp
+                ara::com::someip::rpc::SocketRpcServer _rpcServer(
+                    Poller,
+                    cRpcConfiguration.ipAddress,
+                    cRpcConfiguration.portNumber,
+                    cRpcConfiguration.protocolVersion);
+
+                ara::exec::ExecutionServer _executionServer(&_rpcServer);
+
+                std::set<std::pair<std::string, std::string>> _functionGroupStates;
+                std::map<std::string, std::string> _initialState;
+                fillStates(cConfigFilepath, _functionGroupStates, _initialState);
+```
+
+<p class="attr"><a href="https://github.com/langroodi/Adaptive-AUTOSAR/blob/866d158a10d895f1d269689a8ddf8153dc03b321/src/application/platform/execution_management.cpp#L146-L156">langroodi/Adaptive-AUTOSAR @ 866d158 — src/application/platform/execution_management.cpp</a></p>
+
+<div class="gloss"><b>What to notice:</b> <code>RpcClient</code> is the abstract SOME/IP request-and-response client that the platform's wiring is built on. Its public <code>HandlerType</code> is just a <code>std::function</code> taking a decoded message. Its private state is two maps keyed by a packed service and method id, one tracking per-method session ids and one holding the registered response handlers. The class is deliberately transport-agnostic, so a concrete subclass such as <code>SocketRpcServer</code> supplies the actual send. In the second snippet a concrete <code>SocketRpcServer</code> is built from the parsed RPC configuration (address, port, protocol version) and handed by pointer into an <code>ara::exec::ExecutionServer</code>, so the execution server speaks to clients only through the SOME/IP RPC abstraction. The last lines load the function-group states and their initial state from the ARXML model, which is the config-driven, model-first style of the codebase. · SOME/IP = Scalable service-Oriented MiddlewarE over IP · RPC = Remote Procedure Call · <code>ara::</code> = the AP C++ API namespaces · <code>ara::com</code> = AP's Communication Management API · <code>ara::exec</code> = AP's Execution Management API · ARXML = the AUTOSAR XML manifest and config format · id = identifier · AP = Adaptive Platform</div>
+
+<!-- ~65s | say: Now the same platform in the Adaptive teaching repository. The first snippet is the class shape. RpcClient is the abstract SOME/IP request and response client that all the wiring is built on. Its public handler type is just a function that takes a decoded message. Its private state is two maps, one tracking per-method session ids and one holding the registered response handlers. The class is deliberately transport-agnostic, so a concrete subclass supplies the actual send. The second snippet is the Execution Management entry point. A socket RPC server is built from the parsed configuration, the address, the port and the protocol version. That server is then handed by pointer into an execution server, so the execution server talks to clients only through the RPC abstraction. The last lines load the function-group states and their initial state from the ARXML model. That config-driven, model-first style runs through the whole codebase. -->
+
+---
+
+## Inside the repo 3/4: Eclipse S-CORE `communication` (LoLa)
+
+<style scoped>
+  section { font-size: 16px; padding: 20px 40px 16px; }
+  h2 { font-size: 25px; margin: 0 0 8px; }
+  .cols { display: flex; gap: 22px; align-items: flex-start; }
+  .tree { flex: 0 0 47%; }
+  .tree pre { font-size: 11px; line-height: 1.3; margin: 0; background: #f6f8fc; }
+  .tree pre code { font-size: 11px; background: transparent; }
+  .pin { font-family: monospace; font-size: 12px; color: #445; margin: 8px 0 0; }
+  .quote { font-size: 13px; font-style: italic; color: #33415c; line-height: 1.34; margin: 8px 0 0; }
+  .quote .src { font-style: normal; color: #66708a; }
+  .info { flex: 1 1 53%; }
+  .info h3 { font-size: 15px; color: #2E5FAC; margin: 0 0 3px; }
+  .info p { margin: 0 0 9px; line-height: 1.34; }
+  .info code { font-size: 12.5px; }
+  .gloss { font-size: 12px; margin-top: 10px; }
+</style>
+
+<div class="cols">
+<div class="tree">
+
+```text
+communication/
+├── score/mw/com/                  # score::mw::com API (C++)
+│   ├── impl/                      # core middleware
+│   │   ├── bindings/lola/         # LoLa shared-memory IPC
+│   │   ├── bindings/mock_binding/ # test-double binding
+│   │   ├── configuration/         # service / instance config
+│   │   └── rust/com-api/          # Rust API + FFI bridge
+│   ├── doc/tutorial/              # API walkthrough
+│   ├── example/com-api-example/   # runnable example
+│   └── test/                      # integration tests
+├── score/message_passing/         # low-level messaging
+└── bazel/                         # Bazel build config
+```
+
+<p class="pin">eclipse-score/communication @ 6acba35 · Apache-2.0</p>
+<p class="quote">"A high-performance, safety-critical communication middleware implementation based on the Adaptive AUTOSAR Communication Management specification." <span class="src">(its README)</span></p>
+
+</div>
+<div class="info">
+<h3>Start reading here</h3>
+<p><code>README.md</code> gives the overview and sketches the two-layer design: <code>mw::com</code> over a message-passing layer. <code>score/mw/com/README.md</code> is the API user guide, your first stop after that. <code>score/mw/com/types.h</code> is the public types header, with the Proxy and Skeleton handles and the instance-specifier types you code against (the README maps its ASIL-B and QM QoS support to this header). <code>score/mw/com/impl/bindings/lola/proxy.h</code> is where the concrete zero-copy shared-memory layer lives, under the abstract API in <code>impl/</code>.</p>
+<h3>What you can do</h3>
+<p>Build and test with Bazel from the repo root: <code>bazel build //...</code> and <code>bazel test //...</code>. You need GCC 12 or newer with C++17, and Linux (Ubuntu 24.04+) or QNX. A DevContainer is the recommended setup.</p>
+<h3>Know the limits</h3>
+<p>The namespace is <code>score::mw::com</code>, not <code>ara::com</code>, and it is a partial ara::com implementation. Its shared-memory IPC is declared on boost.interprocess, not iceoryx. It self-describes as ASIL-B qualified. It is part of Eclipse S-CORE, which makes no official Adaptive AUTOSAR compatibility claim.</p>
+</div>
+</div>
+
+<div class="gloss">LoLa = S-CORE's Low-Latency communication module · S-CORE = Eclipse Safe Open Vehicle Core · AP = Adaptive Platform · <code>ara::</code> = the AP C++ API namespaces · <code>ara::com</code> = AP's Communication Management API · Proxy/Skeleton = <code>ara::com</code>'s client-/service-side stubs · IPC = Inter-Process Communication · QoS = Quality of Service · ASIL = Automotive Safety Integrity Level (ISO 26262) · FFI = Foreign Function Interface (the C++/Rust bridge) · Apache-2.0 = an open-source licence</div>
+
+<!-- ~65s | say: The third repository is Eclipse S-CORE's communication module, nicknamed LoLa. Start with the top-level README. It states what LoLa is and sketches the two-layer design, the middleware over a message-passing layer. Then read the API user guide under score, mw, com. The public types header shows the Proxy and Skeleton handles and the instance-specifier types you code against; the README maps its ASIL-B and QM quality-of-service support to this header. The concrete zero-copy shared-memory layer lives in the LoLa binding under impl. To build and test, use Bazel from the repo root: bazel build slash slash dot dot dot, and bazel test the same way. You need GCC twelve or newer with C plus plus seventeen. Now the limits. The namespace is score mw com, not ara com, and it is only a partial ara com implementation. Its shared memory runs on boost interprocess, not iceoryx. It is ASIL-B qualified, and it makes no official Adaptive AUTOSAR compatibility claim. -->
+
+---
+
+## The code 3/4: Eclipse S-CORE LoLa
+
+<style scoped>
+  section { font-size: 17px; padding: 16px 40px 12px; }
+  h2 { font-size: 24px; margin: 0 0 6px; }
+  p { font-size: 13px; margin: 6px 0 2px; }
+  pre { font-size: 11px; line-height: 1.24; margin: 3px 0 2px; background: #f6f8fc; }
+  pre code { font-size: 11px; background: transparent; }
+  .attr { font-size: 11.5px; color:#66708a; margin: 2px 0 8px; }
+  .gloss { font-size: 12px; margin-top: 8px; }
+</style>
+
+**C++: the service (skeleton) side** (`eclipse-score/communication`, LoLa):
+
+```cpp
+    auto instance_specifier = score::mw::com::InstanceSpecifier::Create(std::string{"MyHelloWorldServiceInstance"});
+    SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD_MESSAGE(instance_specifier.has_value(), "Failed to create InstanceSpecifier!");
+
+    auto hello_world_service_instance_result = HelloWorldSkeleton::Create(instance_specifier.value());
+    SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD_MESSAGE(hello_world_service_instance_result.has_value(),
+                                                "Failed to create HelloWorldSkeleton instance!");
+    auto hello_world_service_instance = std::move(hello_world_service_instance_result).value();
+
+    auto offer_result = hello_world_service_instance.OfferService();
+    SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD_MESSAGE(offer_result.has_value(),
+                                                "Failed to offer HelloWorldSkeleton instance!");
+```
+
+<p class="attr"><a href="https://github.com/eclipse-score/communication/blob/6acba35a973db81c0fd2a97e4248db0f3eeeb5d1/score/mw/com/doc/tutorial/chapter_1/provider.cpp#L37-L47">eclipse-score/communication @ 6acba35 — score/mw/com/doc/tutorial/chapter_1/provider.cpp</a></p>
+
+**C++: the client (proxy) side**:
+
+```cpp
+    auto proxy_result = HelloWorldProxy::Create(service_handle.value());
+    if (!proxy_result)
+    {
+        std::cerr << "Failed to create HelloWorldProxy: " << proxy_result.error() << std::endl;
+        exit(1);
+    }
+
+    auto hello_world_proxy = std::move(proxy_result).value();
+    const auto subscribe_result = hello_world_proxy.message.Subscribe(1);
+```
+
+<p class="attr"><a href="https://github.com/eclipse-score/communication/blob/6acba35a973db81c0fd2a97e4248db0f3eeeb5d1/score/mw/com/doc/tutorial/chapter_1/consumer.cpp#L58-L66">eclipse-score/communication @ 6acba35 — score/mw/com/doc/tutorial/chapter_1/consumer.cpp</a></p>
+
+<div class="gloss"><b>What to notice:</b> The first snippet is the service (skeleton) side. It names the instance with <code>InstanceSpecifier::Create</code>, builds the service with <code>HelloWorldSkeleton::Create</code> (the alias for <code>AsSkeleton&lt;HelloWorldInterface&gt;</code>), and publishes it with <code>OfferService()</code>. The second snippet is the client (proxy) side. It builds a typed proxy from a discovered service handle with <code>HelloWorldProxy::Create</code>, then subscribes to the typed event with <code>message.Subscribe(1)</code>, where 1 is the sample-cache depth. <b>The point:</b> name-the-instance-then-offer and typed-proxy-then-subscribe are exactly ara::com's skeleton and proxy idioms. Only two things differ. The namespace is <code>score::mw::com</code>, not <code>ara::com</code>. And errors come back as checkable <code>Result</code> values instead of thrown exceptions. · LoLa = S-CORE's Low-Latency communication module · S-CORE = Eclipse Safe Open Vehicle Core · <code>score::mw::com</code> = S-CORE's Communication Management API · <code>ara::</code> = the AP C++ API namespaces · <code>ara::com</code> = AP's Communication Management API · Skeleton = the service-side stub · Proxy = the client-side stub · AP = Adaptive Platform</div>
+
+<!-- ~65s | say: This is Eclipse S-CORE's LoLa, and the point is the shape. The first snippet is the service side, the skeleton. It names the instance with instance specifier create. It builds the service with HelloWorldSkeleton create. And it publishes it with offer service. That name-the-instance then offer-service shape is exactly the Adaptive skeleton idiom. The second snippet is the client side, the proxy. It builds a typed proxy from a discovered service handle, then subscribes to the typed event, where the number one is the sample-cache depth. Typed-proxy creation plus event subscribe is exactly the Adaptive proxy idiom. So here is the takeaway. The API shape matches ara com almost line for line. Only two things differ. The namespace is score mw com, not ara com. And errors come back as checkable result values instead of thrown exceptions. Same idiom, different namespace. -->
+
+---
+
+## Inside the repo 4/4: COVESA `vsomeip`
+
+<style scoped>
+  section { font-size: 16px; padding: 20px 40px 16px; }
+  h2 { font-size: 25px; margin: 0 0 8px; }
+  .cols { display: flex; gap: 22px; align-items: flex-start; }
+  .tree { flex: 0 0 47%; }
+  .tree pre { font-size: 11px; line-height: 1.3; margin: 0; background: #f6f8fc; }
+  .tree pre code { font-size: 11px; background: transparent; }
+  .pin { font-family: monospace; font-size: 12px; color: #445; margin: 8px 0 0; }
+  .quote { font-size: 13px; font-style: italic; color: #33415c; line-height: 1.34; margin: 8px 0 0; }
+  .quote .src { font-style: normal; color: #66708a; }
+  .info { flex: 1 1 53%; }
+  .info h3 { font-size: 15px; color: #2E5FAC; margin: 0 0 3px; }
+  .info p { margin: 0 0 8px; line-height: 1.33; }
+  .info code { font-size: 12.5px; }
+  .boundary { font-size: 14px; margin: 10px 0 0; line-height: 1.35; }
+  .gloss { font-size: 12px; margin-top: 8px; }
+</style>
+
+<div class="cols">
+<div class="tree">
+
+```text
+vsomeip/  (tag 3.7.4)
+├── interface/vsomeip/        # public API you code against
+│   ├── application.hpp       # offer/request, send, handlers
+│   └── runtime.hpp           # factory: app, message, payload
+├── implementation/           # the stack internals
+│   ├── endpoints/            # TCP/UDP client & server sockets
+│   ├── routing/              # routing manager (dispatch)
+│   ├── service_discovery/    # SOME/IP-SD: offer/find/sub
+│   └── e2e_protection/       # End-to-End (E2E) protection
+├── config/                   # ready-to-use JSON configs
+└── examples/                 # request/response, subscribe
+```
+
+<p class="pin">COVESA/vsomeip @ 7bcc1e0 · MPL-2.0 (tag 3.7.4)</p>
+<p class="quote">"The vSomeIP stack implements the ... Scalable service-Oriented MiddlewarE over IP (SOME/IP) ... Protocol." <span class="src">(its README)</span></p>
+
+</div>
+<div class="info">
+<h3>Start reading here</h3>
+<p><code>interface/vsomeip/runtime.hpp</code> is the singleton factory you call first: <code>runtime::get()</code> hands you the object that creates your application, messages and payloads. <code>interface/vsomeip/application.hpp</code> is the main interface you code against: start and stop, <code>offer_service</code> and <code>request_service</code>, <code>send</code>, and <code>register_message_handler</code>. <code>examples/request-sample.cpp</code> is a short, runnable client paired with <code>response-sample.cpp</code>. <code>implementation/routing/src/routing_manager_impl.cpp</code> is where the routing manager dispatches messages between local apps and remote TCP/UDP endpoints.</p>
+<h3>What you can do</h3>
+<p>Build with CMake: <code>mkdir build</code>, <code>cd build</code>, <code>cmake ..</code>, <code>make</code>. You need a C++20 compiler and Boost 1.75 or newer. Run an example as two processes, each pointed at a JSON config through the <code>VSOMEIP_CONFIGURATION</code> environment variable, for example <code>config/vsomeip-local.json</code>.</p>
+<h3>Know the limits</h3>
+<p>This is the wire binding under <code>ara::com</code>, never the ara::com API, and the repo never mentions ara::com. The samples assume two devices on the same network, so the addresses in the config files must be adapted.</p>
+</div>
+</div>
+
+<div class="gloss">COVESA = Connected Vehicle Systems Alliance · SOME/IP = Scalable service-Oriented MiddlewarE over IP · SD = Service Discovery · E2E = End-to-End protection · <code>ara::</code> = the AP C++ API namespaces · <code>ara::com</code> = AP's Communication Management API · TCP/UDP = the two IP transport protocols · JSON = JavaScript Object Notation (config format) · CAPI = Common Adaptive Platform Implementation · AP = Adaptive Platform · MPL-2.0 = Mozilla Public License (open-source)</div>
+
+<!-- ~65s | say: The fourth repository is COVESA vsomeip, the SOME/IP stack that BMW originated. Start with runtime dot h-p-p. It is the singleton factory you call first. runtime get hands you the object that creates your application, your messages and your payloads. Then read application dot h-p-p, the interface you code against: start and stop, offer service and request service, send, and register message handler. The request sample is a short runnable client, and the routing manager implementation is where messages are dispatched to local apps and remote TCP and UDP endpoints. To build, use CMake, and you need a C plus plus twenty compiler and Boost. Run an example as two processes, each pointed at a JSON config through the configuration environment variable. The key limit: this is the wire binding under ara com, never the ara com API. The repo never mentions ara com. That is the honest boundary for all four. -->
+
+---
+
+## The code 4/4: COVESA `vsomeip`
+
+<style scoped>
+  section { font-size: 17px; padding: 16px 40px 12px; }
+  h2 { font-size: 24px; margin: 0 0 6px; }
+  p { font-size: 13px; margin: 6px 0 2px; }
+  pre { font-size: 11px; line-height: 1.24; margin: 3px 0 2px; background: #f6f8fc; }
+  pre code { font-size: 11px; background: transparent; }
+  .attr { font-size: 11.5px; color:#66708a; margin: 2px 0 8px; }
+  .gloss { font-size: 12px; margin-top: 8px; }
+  .boundary { font-size: 14px; margin: 8px 0 0; line-height: 1.35; }
+</style>
+
+**C++: the SOME/IP service coming up** (`COVESA/vsomeip`):
+
+```cpp
+    bool init() {
+        std::scoped_lock its_lock(mutex_);
+
+        if (!app_->init()) {
+            std::cerr << "Couldn't initialize application" << std::endl;
+            return false;
+        }
+        app_->register_state_handler(std::bind(&service_sample::on_state, this, std::placeholders::_1));
+        app_->register_message_handler(SAMPLE_SERVICE_ID, SAMPLE_INSTANCE_ID, SAMPLE_METHOD_ID,
+                                       std::bind(&service_sample::on_message, this, std::placeholders::_1));
+
+        std::cout << "Static routing " << (use_static_routing_ ? "ON" : "OFF") << std::endl;
+        return true;
+    }
+```
+
+<p class="attr"><a href="https://github.com/COVESA/vsomeip/blob/7bcc1e06f16a774e70931ed641f475fbba9c8c64/examples/response-sample.cpp#L30-L43">COVESA/vsomeip @ 7bcc1e0 — examples/response-sample.cpp</a></p>
+
+**C++: the client firing a request**:
+
+```cpp
+                if (is_available_) {
+                    app_->send(request_);
+                    std::cout << "Client/Session [" << std::hex << std::setfill('0') << std::setw(4) << request_->get_client() << "/"
+                              << std::setw(4) << request_->get_session() << "] sent a request to Service [" << std::setw(4)
+                              << request_->get_service() << "." << std::setw(4) << request_->get_instance() << "]" << std::endl;
+                    blocked_ = false;
+                }
+```
+
+<p class="attr"><a href="https://github.com/COVESA/vsomeip/blob/7bcc1e06f16a774e70931ed641f475fbba9c8c64/examples/request-sample.cpp#L126-L132">COVESA/vsomeip @ 7bcc1e0 — examples/request-sample.cpp</a></p>
+
+<div class="gloss"><b>What to notice:</b> The first snippet is the SOME/IP service coming up. <code>init()</code> attaches the application to the vsomeip routing with <code>app_->init()</code>, then <code>register_message_handler</code> for one service, instance and method triple, so every incoming request for that triple is dispatched to <code>on_message</code>. <code>register_state_handler</code> installs a second callback that fires when the app reaches <code>ST_REGISTERED</code>, which is the cue to actually offer the service on the network. The second snippet is the client firing the request. Once the availability handler reports the service is up, it calls <code>app_->send(request_)</code> on the message it pre-addressed with set_service, set_instance and set_method. vsomeip stamps the outgoing message with a client id and a session id, printed in the log line, and the matching response arrives later in the client's own <code>on_message</code> handler. · vsomeip = COVESA's open SOME/IP stack · COVESA = Connected Vehicle Systems Alliance · SOME/IP = Scalable service-Oriented MiddlewarE over IP · id = identifier · <code>ara::com</code> = AP's Communication Management API · AP = Adaptive Platform · CAPI = Common Adaptive Platform Implementation</div>
+
+<p class="boundary"><b>The honest boundary: building blocks and teaching code are open. A complete, conformant, open AP stack does not exist. The one complete official implementation, CAPI, is partner-gated.</b></p>
+
+<!-- ~65s | say: The last repository is COVESA vsomeip, the wire binding that sits under ara com. The first snippet is the service coming up. Init attaches the application to the vsomeip routing, then registers a message handler for one service, instance and method triple, so every matching request is dispatched to on message. It also registers a state handler, which fires when the app is registered and is the cue to actually offer the service on the network. The second snippet is the client firing the request. Once the availability handler reports the service is up, it calls send on the pre-addressed request. vsomeip stamps the message with a client id and a session id, and the matching response arrives later in the client's own handler. Now the honest boundary for the whole tour. The building blocks and the teaching code are open. A complete, conformant, open Adaptive stack does not exist. The one complete official implementation is partner-gated. -->
+
+---
+
 ## The real shape of AP code
 
 <style scoped>
   section { font-size: 18px; padding-top: 22px; }
-  pre { font-size: 12px; line-height: 1.25; margin: 4px 0; }
-  pre code { font-size: 12px; }
+  pre { font-size: 13px; line-height: 1.3; margin: 6px 0; }
+  pre code { font-size: 13px; }
   h2 { margin-bottom: 4px; }
   p { margin: 4px 0; }
   .attr { font-size: 12.5px; color:#66708a; margin: 2px 0 10px 0; }
@@ -741,28 +1204,7 @@ open an SWS only when you implement. (Every filename below verified live against
 ```
 <p class="attr"><a href="https://github.com/langroodi/Adaptive-AUTOSAR/blob/866d158a10d895f1d269689a8ddf8153dc03b321/src/ara/exec/execution_client.h#L54-L58">langroodi/Adaptive-AUTOSAR @ 866d158 — src/ara/exec/execution_client.h</a></p>
 
-**Rust — the `ara::com` skeleton `OfferService` lifecycle** (`ZiadAhmed9/ara-rs`, created 2026-03-30):
-
-```rust
-    /// Advertise this service instance so that remote proxies can find it.
-    pub async fn offer(
-        &self,
-        major_version: MajorVersion,
-        minor_version: MinorVersion,
-    ) -> Result<(), AraComError> {
-        self.transport
-            .offer_service(
-                self.service_id,
-                self.instance_id,
-                major_version,
-                minor_version,
-            )
-            .await
-    }
-```
-<p class="attr"><a href="https://github.com/ZiadAhmed9/ara-rs/blob/3bb2a86f8570c84be2d0e7cea9e31aa1d6409f67/ara-com/src/skeleton.rs#L46-L60">ZiadAhmed9/ara-rs @ 3bb2a86 — ara-com/src/skeleton.rs</a></p>
-
-<div class="gloss">What to notice: both return an **`ara::core::Result` / `Result<…, AraComError>`** — AP signals errors as a *returned value*, **not a thrown exception**; `ReportExecutionState` is the **contract every AA implements** so EM knows it reached `kRunning`; `offer()`/`stop_offer()` are the **`OfferService`/`StopOfferService` skeleton lifecycle**. Educational caveat: the C++ repo is **dormant (3 years cold)** and the Rust repo is **weeks old** — read them to learn the shape; neither is conformant or production-grade. AA = Adaptive Application · EM = Execution Management.</div>
+<div class="gloss">What to notice: `ReportExecutionState` returns an **`ara::core::Result<void>`** — AP signals errors as a *returned value*, **not a thrown exception**; it is the **contract every AA implements** so EM knows it reached `kRunning`. On the `ara::com` side the skeleton lifecycle is likewise spec-named: **`OfferService()` / `StopOfferService()` on the `ServiceSkeleton` class** ([SWS_CM_00101] / [SWS_CM_00111], AP_SWS_CommunicationManagement). Educational caveat: this C++ repo is **dormant since 2023-06-22 (3 years cold)** — read it to learn the shape; it is not conformant or production-grade. AA = Adaptive Application · EM = Execution Management.</div>
 
 ---
 
@@ -888,6 +1330,8 @@ open an SWS only when you implement. (Every filename below verified live against
 
 <div class="figsrc">Source: AUTOSAR AP_EXP_PlatformDesign, R25-11, Figure 3.2 — © AUTOSAR.</div>
 
+<div class="gloss">In the figure the blue 'A' region = Adaptive Platform (perception → planning → trajectory) and the green 'C' region = Classic Platform (the safety function gating trajectory control) — that split is the whole point · C2C / C2I = Car-to-Car / Car-to-Infrastructure · OEM = the vehicle maker · GPS = satellite positioning</div>
+
 ---
 
 ## Which stack on which silicon — the decision map
@@ -942,11 +1386,67 @@ The whole deck in one procurement table — what runs where, and who sells it:
 
 ---
 
+## If you skip AUTOSAR — four buildable stack paths
+
+<style scoped>
+  section { font-size: 17px; padding-top: 22px; }
+  table { font-size: 12.5px; }
+  table td, table th { padding: 3px 8px; vertical-align: top; }
+  h2 { margin-bottom: 6px; }
+  p { margin: 6px 0; }
+  .gloss { font-size: 12px; margin-top: 8px; }
+</style>
+
+The org-boundary rule scales up to four buildable paths:
+
+| Path | What you get | What you still owe | Named evidence |
+|---|---|---|---|
+| **Buy CP** — Tier-1 Classic (MCUs) | a pre-certified ASIL-D base off the shelf | ECU integration + ARXML supply-chain plumbing | Vector MICROSAR Safe — ISO 26262 up to ASIL D since **2016**; the 2020 exida certificate covers 29 + 19 modules |
+| **Buy an AP stack** — HPC | standardized in-vehicle service endpoints (`ara::com`, DM, V-UCM) | the POSIX OS + hypervisor + your own ASIL-D safety case | Vector · EB corbos · ETAS RTA-VRTE · Qorix |
+| **Join the open collective** — Eclipse S-CORE | a shared open SDV core for non-differentiating scope, Apache-2.0, C++/Rust | it's a core stack, **not** an AP implementation — you still integrate + certify | launched 2025-06-12; BMW · Mercedes-Benz · Bosch · ETAS · QNX · Qorix · Accenture |
+| **Roll your own** — Linux/QNX + in-house middleware | full vertical control + iteration speed | every wire contract re-implemented — **you own the entire ISO 26262 argument** | Rivian: in-house OS on FreeRTOS · Tesla: in-house Linux stack ([teslamotors/linux](https://github.com/teslamotors/linux)) + a non-AUTOSAR telemetry path · Li Auto: Halo OS (**press**) |
+
+**Why fund a collective instead of just buying AP?** S-CORE's charter: build ["a single, joint solution instead of multiple specific ones"](https://projects.eclipse.org/projects/automotive.score) for non-differentiating scope, ["shaped by a broad community"](https://newsroom.eclipse.org/eclipse-newsletter/2025/september/eclipse-s-core-new-approach-building-automotive-software-together) rather than duplicated company-by-company — an open, safety-targeted core stack alongside the specs, **not** an AP implementation and with **no official AP-compatibility statement either way** ([discussion #759](https://github.com/orgs/eclipse-score/discussions/759) even proposes AUTOSAR reuse S-CORE's processes and tooling). ETAS states the both-and out loud: [robust AUTOSAR for safety-critical / hard-real-time, open-source S-CORE for the rest](https://www.etas.com/ww/en/topics/s-core/). Rivian's SVP is on record — ["We don't use any of the industry offerings such as AUTOSAR"](https://www.sonatus.com/resources/vidya-rajagopalan-of-rivian/); its Gen-2 zonal controllers (East / West / South) run an in-house OS layered on FreeRTOS.
+
+**The cautionary tail — press:** in-house at OEM scale is brutal. VW's CARIAD posted an operating loss of **€2.431 bn in 2024** and — per the cited article — ["over $7.5 billion"](https://insideevs.com/news/753673/vw-group-cariad-billions-losses-2024/) (≈ €6.9 bn) in cumulative operating losses across 2022–2024 — a large part of why most OEMs still *buy* rather than *build*.
+
+<div class="gloss">CP = Classic Platform · AP = Adaptive Platform · HPC = High-Performance Computer · MCU = Microcontroller · SDV = Software-Defined Vehicle · S-CORE = Eclipse Safe Open Vehicle Core · SVP = Senior Vice President · DM = Diagnostic Manager · V-UCM = Vehicle Update & Configuration Management · ARXML = AUTOSAR XML exchange format · ASIL = Automotive Safety Integrity Level (ISO 26262) · CARIAD = VW Group's software unit · rows labelled **press** rest on reputable reporting, not primary sources; the "no AUTOSAR" absolute is sourceable for Rivian, not for Tesla</div>
+
+---
+
+## The fleet contracts that don't care which stack you picked
+
+<style scoped>
+  section { font-size: 17px; padding-top: 22px; }
+  h2 { margin-bottom: 6px; }
+  p { margin: 6px 0; }
+  li { margin-bottom: 3px; }
+  .gloss { font-size: 12px; margin-top: 8px; }
+  em { color:#2E5FAC; font-style: normal; font-weight: bold; }
+</style>
+
+**AUTOSAR standardizes the *vehicle*, not the backend link** — V-UCM: the Backend↔OTA-Client protocol is *"out of scope for this specification document"* (AP_SWS_VehicleUpdateAndConfigurationManagement, R25-11). The contracts below are identical whichever stack path you build on:
+
+- **UDS (ISO 14229) + DoIP (ISO 13400)** — *de-facto, tilting legal in the US*: no law mandates DoIP; UDS is de-facto for reflash/diagnostics everywhere and named only as an allowed option in EU 2017/1151 — but **CARB mandates the UDS-based SAE J1979-2 "OBDonUDS" for all MY2027+ vehicles** (13 CCR §§1968.2/1971.1, rule in force since Nov 2022; the older mandated cousin: OBD-II since MY1996 — gasoline, diesel followed 1997)
+- **UN R155 CSMS (cyber) + R156 SUMS (software update)** — *mandated (type approval)*: management systems (organizational processes), not protocols or middleware; **ISO 24089** operationalises R156 but stays *optional*
+- **eCall (EU 2015/758)** — *mandated (type approval)*: auto-dials 112 + transmits location on a severe crash — new M1/N1 types since 31 Mar 2018
+- **SOVD (ISO 17978, parts 1–3 published 2026)** — *de-facto, emerging*: self-describing REST/JSON diagnostics for HPCs
+- **ISO 15118 Plug & Charge** — *de-facto* EV↔charger contract (AFIR pushes 15118-capable public charge-points, making vehicle-side support effectively unavoidable ~2027)
+- **Telemetry** — *AUTOSAR standardizes none of it*: always an OEM/cloud choice — Tesla's [fleet-telemetry](https://github.com/teslamotors/fleet-telemetry/blob/main/README.md) makes the car a *client* pushing protobuf records over WebSocket + mTLS to an operator-hosted server (Kafka behind it); even **AWS IoT FleetWise is closed to new customers (2026)**
+
+**Punchline:** skipping AUTOSAR forfeits pre-built in-vehicle endpoints, **never fleet reachability** — the contracts above are transport/process standards you re-implement on your own OS, proven by **Rivian's non-AUTOSAR stack** and **Tesla's non-AUTOSAR telemetry path**.
+
+<div class="gloss">V-UCM = Vehicle Update & Configuration Management · OTA = Over-The-Air · UDS = Unified Diagnostic Services · DoIP = Diagnostics over IP · OBD = On-Board Diagnostics · CARB = California Air Resources Board · CSMS = Cyber Security Management System · SUMS = Software Update Management System · SOVD = Service-Oriented Vehicle Diagnostics · HPC = High-Performance Computer · AFIR = EU Alternative Fuels Infrastructure Regulation · mTLS = mutual TLS (both ends authenticate) · protobuf = Protocol Buffers (Google's binary serialization) · Kafka = a high-throughput message-streaming backend · SAE J1979-2 (OBDonUDS) = the US emissions-OBD standard rebuilt on UDS · MY = model year · 13 CCR = California Code of Regulations, Title 13</div>
+
+---
+
 ## The AP and external systems — as the spec draws it
 
 {{image:spec-aap-external-systems}}
 
 <div class="figsrc">Source: AUTOSAR AP_EXP_SWArchitecture, R25-11, Figure 7.2 — © AUTOSAR.</div>
+
+<div class="gloss">DoIP = Diagnostics over IP (ISO 13400) · ECU = Electronic Control Unit · «aracom» = an ara::com link (SOME/IP or DDS) · UML notation: «…» is a stereotype (the kind of node/connection) and 0..* / 1 are multiplicities ('zero-or-more' / 'exactly one')</div>
 
 ---
 
@@ -1068,7 +1568,7 @@ The whole deck in one procurement table — what runs where, and who sells it:
 
 ---
 
-## References 1/3 — AUTOSAR primary sources
+## References 1/4 — AUTOSAR primary sources
 
 <style scoped>
   section { font-size: 15px; padding-top: 28px; line-height: 1.32; }
@@ -1087,7 +1587,7 @@ The whole deck in one procurement table — what runs where, and who sells it:
 
 ---
 
-## References 2/3 — Adaptive, comparison & open efforts
+## References 2/4 — Adaptive, comparison & open efforts
 
 <style scoped>
   section { font-size: 15px; padding-top: 28px; line-height: 1.32; }
@@ -1106,7 +1606,7 @@ The whole deck in one procurement table — what runs where, and who sells it:
 
 ---
 
-## References 3/3 — open-source Adaptive AUTOSAR
+## References 3/4 — open-source Adaptive AUTOSAR
 
 <style scoped>
   section { font-size: 15px; padding-top: 28px; line-height: 1.32; }
@@ -1122,3 +1622,20 @@ The whole deck in one procurement table — what runs where, and who sells it:
 - **Spec figures**: Spec figures on the "as the spec draws it" slides are unmodified excerpts from the AUTOSAR R25-11 PDFs, reproduced for informational purposes — © AUTOSAR (local mirror: autosar/specs/)
 
 <div class="gloss">All repositories, releases and dates verified against their GitHub API / project pages on 2026-07-16 · the CAPI git endpoint (code.autosar.org/capi/capi) is partner-gated (302 → sign-in) and is listed as the boundary, not an open-source download · autosar.org links fetched with the deck's `-ksL` TLS workaround · full provenance in autosar/research/adaptive-open-source-2026-07.md</div>
+
+---
+
+## References 4/4 — the non-AUTOSAR fleet & stack choice
+
+<style scoped>
+  section { font-size: 15px; padding-top: 26px; line-height: 1.3; }
+  ul { margin-top: 4px; }
+  li { margin-bottom: 3px; }
+  h2 { margin-bottom: 6px; }
+</style>
+
+- **Non-AUTOSAR OEM stacks (primary)**: [github.com/teslamotors/fleet-telemetry](https://github.com/teslamotors/fleet-telemetry/blob/main/README.md) (server reference impl; vehicle = client, WebSocket + mTLS + protobuf, Kafka behind it — the concrete non-AUTOSAR fleet path) · [github.com/teslamotors/linux](https://github.com/teslamotors/linux) (Tesla's published in-vehicle Linux kernel tree — GPL source offer) · [sonatus.com — Rivian's Vidya Rajagopalan](https://www.sonatus.com/resources/vidya-rajagopalan-of-rivian/) (SVP on record: "we don't use … AUTOSAR"; in-house on FreeRTOS) · [leandesign.com — Rivian software architecture](https://leandesign.com/rivian-software-architecture-update/) (Gen-2 zonal East/West/South) · [cnevpost.com — Li Auto open-sources Halo OS](https://cnevpost.com/2025/03/27/li-auto-open-sources-halo-os/) (announced 2025-03-27; code released in phases to v1.0.0 on 2025-06-30 via Gitee, Apache-2.0; "to challenge the position of AUTOSAR" — **press**)
+- **Fleet contracts — mandated vs de-facto**: [unece.org — UN R156 (SUMS)](https://unece.org/transport/documents/2021/03/standards/un-regulation-no-156-software-update-and-software-update) (**mandated, type approval** — a process, not a protocol) · [europarl.europa.eu — eCall mandatory](https://www.europarl.europa.eu/news/en/press-room/20180326IPR00510/saving-lives-ecall-mandatory-in-new-car-models-from-this-week) (Reg (EU) 2015/758, **mandated** since 31 Mar 2018) · [arb.ca.gov — OBD-II fact sheet](https://ww2.arb.ca.gov/resources/fact-sheets/board-diagnostic-ii-obd-ii-systems-fact-sheet) (the emissions-OBD interface is the **mandated** cousin of de-facto UDS) · [iso.org/standard/74785 — ISO 13400 DoIP](https://www.iso.org/standard/74785.html) (**de-facto** UDS-over-IP transport) · [iso.org/standard/77796 — ISO 24089](https://www.iso.org/standard/77796.html) (software-update engineering — **optional**, operationalises R156) · [charin.global — ISO 15118 Plug & Charge](https://www.charin.global/technology/plug-charge/) (**de-facto** EV↔charger contract; AFIR-pushed) · [docs.aws.amazon.com — IoT FleetWise](https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/what-is-iotfleetwise.html) (closed to new customers, 2026 — telemetry is a churning vendor choice, never an AUTOSAR standard)
+- **The open collective + AUTOSAR's own rationale**: [projects.eclipse.org/projects/automotive.score](https://projects.eclipse.org/projects/automotive.score) (S-CORE charter — "single, joint solution … non-differentiating scopes") · [newsroom.eclipse.org — S-CORE newsletter, Sept 2025](https://newsroom.eclipse.org/eclipse-newsletter/2025/september/eclipse-s-core-new-approach-building-automotive-software-together) (shared open platform vs duplicating work) · [github.com/orgs/eclipse-score/discussions/759](https://github.com/orgs/eclipse-score/discussions/759) (S-CORE positioned complementary to AUTOSAR) · [etas.com/ww/en/topics/s-core](https://www.etas.com/ww/en/topics/s-core/) (Bosch/ETAS both-and: AUTOSAR for safety-critical, S-CORE for the rest) · [presseagentur.com — Vector MICROSAR Safe](https://www.presseagentur.com/vector/detail.php?pr_id=5546&lang=en) (ISO 26262 up to ASIL D, exida 2020 — what "buy CP" gets you) · [autosar.org/faq](https://www.autosar.org/faq) (value = crossing OEM↔supplier boundaries) · [insideevs.com — CARIAD losses](https://insideevs.com/news/753673/vw-group-cariad-billions-losses-2024/) (€2.431 bn 2024, >€7.5 bn 2022–24 — **press**)
+
+<div class="gloss">GitHub facts verified via the GitHub API on 2026-07-17 · SOVD (ISO 17978), the AP V-UCM spec, the AP-vendor list and the S-CORE launch details are reused from this deck's existing References + research docs (autosar/research/), not re-listed here · press-labelled rows (CARIAD, Li Auto) are the only non-primary sources and are marked in-slide · full provenance: autosar/research/{non-autosar-oem-fleet, fleet-contracts-standards, sdv-fleet-oss-toolbox, autosar-vs-inhouse-decision}-2026-07.md</div>

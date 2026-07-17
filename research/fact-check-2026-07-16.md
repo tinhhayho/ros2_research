@@ -217,3 +217,16 @@ independent parity verifier per diagram (workflow `wf_8c898ee6-4ba`, Opus author
 verifiers, fix rounds until pass) — so no fact-check run was needed. The cp-signal-path
 pinned strings from Run 3 ("CAN Transport Layer", "sign extension", the honest SWS
 source line, no "§3.1") are asserted explicitly by the verifier.
+
+## Addendum — [SWS_OSI_01010] cited on compact-deck slide 8 (2026-07-17)
+
+Slide 8's "MMU multi-process OS" sentence now cites its spec anchor: **[SWS_OSI_01010]
+"Virtual Memory"** (Doc 719 `AUTOSAR_AP_SWS_OperatingSystemInterface`, R25-11, upstream
+RS_OSI_00206). Verified first-hand against the local mirror
+(`autosar/specs/R25-11/AP/`, pdftotext extract): requirement text ⌈Operating System
+shall execute each Process in a dedicated address space.⌋ plus the explanatory note that
+the Process address space "is virtualized" (shared physical pages for code/RO data,
+CoW for writable data). Sibling requirements confirmed in the same pass:
+[SWS_OSI_01008] Multi-Process Support, [SWS_OSI_01009] Multi-Process Isolation.
+**No new claims beyond the verbatim spec quote → no workflow run**; the presenter note
+was updated in step ("the spec's virtual-memory requirement, SWS OSI 01010").

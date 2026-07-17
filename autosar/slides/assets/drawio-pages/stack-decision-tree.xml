@@ -1,0 +1,302 @@
+<mxGraphModel dx="1000" dy="820" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="804" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="sdt-title" value="Which stack? Two questions, six outcomes" style="text;html=1;align=center;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="15" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Connectors (drawn first) ===================== -->
+    <!-- Q1 -> Q2a (deeply-embedded MCU) -->
+    <mxCell id="sdt-e-q1-q2a" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="341.2" as="sourcePoint" />
+        <mxPoint x="252" y="221.4" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="191" y="221.4" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q1 -> Q2b (HPC SoC) -->
+    <mxCell id="sdt-e-q1-q2b" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="357.2" as="sourcePoint" />
+        <mxPoint x="252" y="477" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="191" y="477" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2a -> Leaf1 (ASIL A-D, sold to an OEM) -->
+    <mxCell id="sdt-e-q2a-l1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="209.7" as="sourcePoint" />
+        <mxPoint x="586" y="101.5" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="544" y="101.5" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2a -> fork stem (ASIL A-D, your own product) -->
+    <mxCell id="sdt-e-q2a-fork" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="221.4" as="sourcePoint" />
+        <mxPoint x="548" y="221.4" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <!-- fork -> Leaf2 (Buy Classic anyway) -->
+    <mxCell id="sdt-e-fork-l2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="548" y="221.4" as="sourcePoint" />
+        <mxPoint x="586" y="177.2" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="576" y="177.2" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- fork -> Leaf3 (Certified non-AUTOSAR RTOS) -->
+    <mxCell id="sdt-e-fork-l3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="548" y="221.4" as="sourcePoint" />
+        <mxPoint x="586" y="259.2" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="576" y="259.2" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2a -> Leaf4 (QM, no safety rating) -->
+    <mxCell id="sdt-e-q2a-l4" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="233.1" as="sourcePoint" />
+        <mxPoint x="586" y="341.2" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="544" y="341.2" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2b -> Leaf5 (yes -> Buy an AP stack) -->
+    <mxCell id="sdt-e-q2b-l5" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="465.5" as="sourcePoint" />
+        <mxPoint x="586" y="436" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="544" y="436" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2b -> Leaf6 (no -> S-CORE or build your own) -->
+    <mxCell id="sdt-e-q2b-l6" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="488.5" as="sourcePoint" />
+        <mxPoint x="586" y="518" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="544" y="518" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Fork dot -->
+    <mxCell id="sdt-fork-dot" value="" style="ellipse;html=1;fillColor=#444444;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="544.8" y="218.2" width="6.4" height="6.4" as="geometry" />
+    </mxCell>
+    <!-- Dashed tie-line: Q2b HPC region -> HPC ASIL note -->
+    <mxCell id="sdt-e-hpc-note" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="185" y="481" as="sourcePoint" />
+        <mxPoint x="106" y="573.5" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===================== Q1 root (purple decision) ===================== -->
+    <mxCell id="sdt-q1" value="Q1: Where does this&lt;br&gt;function run?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="10" y="326.7" width="120" height="45" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Q2a (purple decision, MCU side) ===================== -->
+    <mxCell id="sdt-q2a" value="Q2: What safety level (ASIL)&lt;br&gt;must this ECU carry, and who is&lt;br&gt;the customer?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="252" y="192.1" width="180" height="58.5" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Q2b (purple decision, HPC side) ===================== -->
+    <mxCell id="sdt-q2b" value="Q2: Do you need standardized&lt;br&gt;service endpoints and supplier&lt;br&gt;interop (ara::com, DM/SOVD,&lt;br&gt;UCM)?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="252" y="441" width="180" height="72" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Level-1 edge labels ===================== -->
+    <mxCell id="sdt-l1a-head" value="deeply-embedded MCU" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="116" y="187" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-l1a-gloss" value="no MMU, task-model RTOS:&lt;br&gt;AURIX / S32K / S32Z / RH850" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="116" y="199" width="150" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-l1b-head" value="HPC SoC" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="116" y="443" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-l1b-gloss" value="MMU, A-class cores:&lt;br&gt;Orin / Thor / S32G / R-Car" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="116" y="455" width="150" height="26" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Level-2 edge labels (answers, purple) ===================== -->
+    <mxCell id="sdt-a1" value="ASIL A-D, sold to an OEM" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="87" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a2-head" value="ASIL A-D, your own product" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="207" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a2-gloss" value="both are valid;&lt;br&gt;choose by team" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="221" width="150" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a3" value="QM, no safety rating" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="327" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a4" value="yes" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="421" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a5" value="no" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="503" width="150" height="14" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 1: Buy Classic (CP), pre-certified ===================== -->
+    <mxCell id="sdt-leaf1-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="66" width="358" height="71" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf1-h" value="Buy Classic (CP), pre-certified" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="72" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf1-1" value="In practice this path is forced: OEM RFQs demand AUTOSAR plus ASIL evidence." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="91" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf1-2" value="The pre-certified base: Vector MICROSAR Safe, exida ASIL D since 2016." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="103.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf1-3" value="&lt;b&gt;SW:&lt;/b&gt; static ARXML config, C, OSEK task model." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="116" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 2: Buy Classic (CP) anyway ===================== -->
+    <mxCell id="sdt-leaf2-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="148" width="358" height="58.5" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf2-h" value="Buy Classic (CP) anyway" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="154" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf2-1" value="Nothing forces it, but it is the low-risk default." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="173" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf2-2" value="You get a certified base, vendor MCAL drivers, and solved UDS / COM / NvM modules." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="185.5" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 3: Certified non-AUTOSAR RTOS ===================== -->
+    <mxCell id="sdt-leaf3-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="217.5" width="358" height="83.5" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-h" value="Certified non-AUTOSAR RTOS, your own safety case" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="223.5" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-1" value="A certified RTOS exists outside AUTOSAR: SAFERTOS, TÜV SÜD, ISO 26262 ASIL D." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="242.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-2" value="You carry the whole ISO 26262 safety case. Rivian ships this way: in-house layers on" style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="255" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-3" value="FreeRTOS." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="267.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-4" value="UDS, COM and NvM are not included. Build or buy them separately." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="280" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 4: QM: free choice ===================== -->
+    <mxCell id="sdt-leaf4-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="312" width="358" height="58.5" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf4-h" value="QM: free choice" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="318" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf4-1" value="No certificate is needed here." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="337" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf4-2" value="Bare-metal, any RTOS, or CP if its ready-made modules save time." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="349.5" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 5: Buy an AP stack ===================== -->
+    <mxCell id="sdt-leaf5-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="400.5" width="358" height="71" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf5-h" value="Buy an AP stack" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="406.5" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf5-1" value="&lt;b&gt;HW:&lt;/b&gt; an MMU multi-process SoC, required by [SWS_OSI_01010]." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="425.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf5-2" value="&lt;b&gt;SW:&lt;/b&gt; a POSIX OS (QNX or Linux) plus PSE51 and the C++ STL, per [RS_OSI_00100]." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="438" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf5-3" value="Still yours: the OS, the hypervisor and the ASIL-D safety case." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="450.5" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 6: S-CORE or build your own ===================== -->
+    <mxCell id="sdt-leaf6-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="482.5" width="358" height="71" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf6-h" value="S-CORE or build your own" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="488.5" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf6-1" value="&lt;b&gt;SW:&lt;/b&gt; Linux or QNX plus open or in-house middleware (Tesla, Rivian)." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="507.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf6-2" value="S-CORE is an open core stack, not an AP implementation. You integrate and certify." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="520" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf6-3" value="You re-implement every wire contract and own ISO 26262." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="532.5" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== HPC ASIL note (purple call-out) ===================== -->
+    <mxCell id="sdt-hpc-note-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="16" y="573.5" width="322" height="55.5" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-hpc-note-1" value="The HPC's ASIL story lives outside the middleware: in the certified OS" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="26" y="583.5" width="306" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-hpc-note-2" value="(QNX), the hypervisor, the safety island and the companion MCU. That&lt;br&gt;companion MCU runs CP." style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="26" y="597" width="306" height="26" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Bottom takeaway (orange, full width) ===================== -->
+    <mxCell id="sdt-bottom" value="Every outcome meets the same fleet contracts: UDS/DoIP (de-facto; CARB mandates OBDonUDS from MY2027), UN R155/R156, eCall, SOVD. Telemetry is always an&lt;br&gt;OEM/cloud choice." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="12" y="649" width="936" height="46" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Gloss footnotes (gray) ===================== -->
+    <mxCell id="sdt-gloss1" value="ASIL = Automotive Safety Integrity Level (ISO 26262; QM &lt; A &lt; B &lt; C &lt; D) · QM = Quality Managed, no safety rating · RFQ = request for quotation · OEM = the vehicle maker · MCU = microcontroller · HPC = High-Performance Computer · SoC =" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="700" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss2" value="System-on-Chip" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="711.5" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss3" value="CP = Classic Platform · AP = Adaptive Platform · ARXML = AUTOSAR XML configuration format · OSEK = the 1990s automotive RTOS standard behind CP's OS · MCAL = Microcontroller Abstraction Layer (vendor-supplied drivers) · UDS / COM /" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="723" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss4" value="NvM = the diagnostics, signal and storage module families · MMU = Memory Management Unit" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="734.5" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss5" value="PSE51 = IEEE 1003.13 minimal POSIX profile · STL = C++ Standard Library · ara::com / DM / UCM = AP communication / diagnostics / update clusters · SOVD = Service-Oriented Vehicle Diagnostics (ISO 17978) · S-CORE = Eclipse Safe Open" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="746" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss6" value="Vehicle Core · exida / TÜV SÜD = safety certification bodies" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="757.5" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss7" value="UDS = Unified Diagnostic Services (ISO 14229) · DoIP = Diagnostics over IP (ISO 13400) · OBDonUDS = SAE J1979-2, the US emissions standard rebuilt on UDS · MY = model year · R155/R156 = UN cyber-security / software-update" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="769" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss8" value="management-system regulations" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="780.5" width="940" height="14" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
