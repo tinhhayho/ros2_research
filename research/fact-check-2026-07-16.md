@@ -141,6 +141,60 @@ the Agenda (slides 3–6 · 46–50). Apex.AI was deliberately left out of the A
   C3 (AP vendors Vector/EB corbos/ETAS RTA-VRTE/Qorix; OS = separate procurement),
   C4 (S32Z/E lockstep R52 zonal CP targets; S32K-class = CP or bare-metal).
 
+## Run 5 — the 20-minute compact deck + two annotated adaptation diagrams
+
+**Context.** User needs a 20-minute meeting version (plus 10 min Q&A). Built
+`autosar/slides/autosar-compact-deck.md` → `autosar-compact.html` (new `run.sh` target
+`slides-autosar-compact`): **16 slides**, per-slide presenter notes with second budgets
+totalling **20.2 min**. Licensing constraint honored: spec figures may NOT be annotated
+("without any modification"), so the two "annotated" visuals are **original house-style
+redraws** — `vfb-relocation-annotated.svg` (after CP_TR_VFB Fig 2.2) and
+`aracom-bindings-annotated.svg` (after AP_SWS_CM Fig 7.1) — each with a "Redrawn and
+annotated after…" source line + drawio mirrors; two spec PNGs reused unmodified
+(Fig 4.1, Fig 3.2). Independent review: verdict **ship**, 4 NITs. Compact content is
+fact-parity with the full deck (reviewer diffed every number/date/hedge).
+
+**Fact-check on the genuinely new items** (`wf_a07b3510-aca`): **3 claims — 1 ✅ · 2 ⚠️.**
+- **C1 ✅** UDS 0x34/0x36/0x37 = RequestDownload / TransferData / RequestTransferExit.
+- **C2 ⚠️ (fixed)** "Cooperate on standards, compete on implementation" has real AUTOSAR
+  provenance (Heinecke et al., Euroforum 2006, Core-Partner authors; still echoed on
+  partner decks hosted on autosar.org in 2025) but is **absent from AUTOSAR's current
+  official pages** — not the current official slogan. Slide 2 + presenter note now
+  attribute it as "a founding-era phrase (Heinecke et al., 2006)".
+- **C3 ⚠️ (fixed)** SOME/IP rides UDP **and** TCP (per-message deployment choice);
+  SOME/IP-SD is **UDP-only but not multicast-only** (multicast offers/finds + unicast
+  subscribes, PRS_SOMEIPSD_00220). Fixes: diagram column label "TCP/IP" → "UDP/TCP · IP"
+  (SVG + drawio mirror), and the FULL deck's binding-choice slide "SD runs over UDP
+  multicast only" → "SD runs over UDP only (multicast offer/find announcements + unicast
+  subscribes)". Both decks rebuilt.
+
+## Run 6 (2026-07-17) — compact deck grows to 18 slides: code slide + POSIX-OS slide
+
+**Context.** Developer-audience request: (a) slide 11 "The shape of the code" — verbatim
+transplant of the two verified snippets (langroodi @866d158, ara-rs @3bb2a86 — re-fetched
+and byte-diffed a 4th time) plus the spec-verbatim event API names from Doc 717
+§8.4.2.2.2 (verified against the local PDF); (b) slide 8 "AP runs only on a POSIX OS" —
+the PSE51+STL requirement with its requirement ID ([RS_OSI_00100], Doc 719, verified
+against the local PDF) and a two-sided OS capability table. Deck now **18 slides,
+20.9 min** of presenter-note budget.
+
+**Fact-check on the six new OS-table claims** (`wf_ec5b0b54-772`, 8 agents, ~432k):
+**4 ✅ · 2 ⚠️ · 0 ❌ — both fixed on the slide.**
+- **C1 ⚠️** QNX: genuinely PSE52-certified in the 2008 era (SDP 6.4.0; Neutrino 6.6
+  statement on file) but **absent from the Open Group's current live register** — today's
+  register lists 4× Green Hills INTEGRITY, and for PSE52: VxWorks 7, ZTE Automotive OS
+  V3.0, Xiaomi Vela OS V5.0. QNX's own page now says "compliant/conforms to", not
+  certified. Cell reworded to "PSE52-certified in the 2008 era, advertised today as
+  conformance"; gloss carries the register trivia.
+- **C6 ⚠️** NuttX: default builds have no process isolation, but an optional MMU
+  "kernel build" implements per-task address spaces ("very much like Linux processes"
+  per its docs) while still lacking fork/exec/mmap — cell now acknowledges it; still
+  MCU-class, still not AP-capable.
+- Clean: INTEGRITY (POSIX + MMU separation), PikeOS (POSIX personality), VxWorks
+  (POSIX + RTP user processes), Zephyr (subset layer, no MMU multi-process, cannot
+  host AP). FreeRTOS/SAFERTOS rows rest on the two dedicated research notes
+  (`freertos-posix-2026-07.md`, `safertos-2026-07.md`).
+
 ## Addendum — main research deck synced to previously-verified facts (2026-07-16)
 
 Three edits to `slides/research-deck.md`, all restating claims already verified in the

@@ -562,7 +562,7 @@ open an SWS only when you implement. (Every filename below verified live against
 - **SOME/IP** — the automotive-native option: compact serialization + **SOME/IP-SD** service
   discovery. Connection- and ID-oriented (Service ID / Instance ID / Event ID / Eventgroup) —
   familiar from CAN/UDS thinking. Subscription granularity is the **eventgroup**; SD runs **over
-  UDP multicast only**
+  UDP only** (multicast offer/find announcements + unicast subscribes)
 - **DDS binding — present since R18-03** (published 23 Apr 2018; *not* R18-10, a folklore
   correction this repo already made). **Data-centric**: publish to a Topic, matched by type +
   QoS + name, no explicit peer connection. Mapping: events/triggers → **Topic + DataWriter**;

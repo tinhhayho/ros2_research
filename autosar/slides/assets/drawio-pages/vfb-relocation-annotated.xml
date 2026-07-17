@@ -1,0 +1,143 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="620" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="vra-title" value="The relocation trick &#8212; one SWC, any ECU, only the RTE is regenerated" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="60" y="18" width="840" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Top band section label -->
+    <mxCell id="vra-designtime" value="Design time &#8212; logical, no ECU chosen yet" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="140" y="51" width="400" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- SWC boxes -->
+    <mxCell id="vra-swc1" value="&lt;b&gt;SWC 1&lt;/b&gt;&lt;br&gt;ports (SR &#183; CS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="44" y="72" width="130" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-swc2" value="&lt;b&gt;SWC 2&lt;/b&gt;&lt;br&gt;ports (SR &#183; CS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="190" y="72" width="130" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-swc3" value="&lt;b&gt;SWC 3&lt;/b&gt;&lt;br&gt;ports (SR &#183; CS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="336" y="72" width="130" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-swc-ellipsis" value="&#8230;" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="471" y="94" width="30" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-swcn" value="&lt;b&gt;SWC n&lt;/b&gt;&lt;br&gt;ports (SR &#183; CS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="506" y="72" width="130" height="52" as="geometry" />
+    </mxCell>
+
+    <!-- Ports on the VFB bar -->
+    <mxCell id="vra-port1a" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="85" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port1b" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="103" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port1c" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="121" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port2a" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="231" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port2b" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="249" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port2c" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="267" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port3a" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="377" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port3b" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="395" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port3c" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="413" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-portna" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="547" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-portnb" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="565" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-portnc" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="583" y="126" width="12" height="12" as="geometry" /></mxCell>
+
+    <!-- VFB bar -->
+    <mxCell id="vra-vfb" value="Virtual Functional Bus (VFB) &#8212; a logical bus spanning ECUs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f9dc9;strokeColor=#5f82b8;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="138" width="600" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow VFB -> tool -->
+    <mxCell id="vra-arrow-vfb-tool" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="340" y="172" as="sourcePoint" /><mxPoint x="340" y="206" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- ARXML doc icon -->
+    <mxCell id="vra-arxml" value="&lt;b&gt;ARXML&lt;/b&gt;&lt;br&gt;descriptions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.3;fontSize=9.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="212" width="94" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-arrow-arxml-tool" style="endArrow=classic;html=1;rounded=0;strokeColor=#E0A96D;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="134" y="236" as="sourcePoint" /><mxPoint x="150" y="236" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- Tool box -->
+    <mxCell id="vra-tool" value="&lt;b&gt;AUTOSAR tooling&lt;/b&gt;&lt;br&gt;reads ARXML descriptions &#183; generates the RTE per deployment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="208" width="380" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Bottom band section label -->
+    <mxCell id="vra-deploytime" value="Deploy time &#8212; same SWCs mapped onto real ECUs" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="140" y="272" width="400" height="16" as="geometry" />
+    </mxCell>
+    <!-- Arrow tool -> ECUs -->
+    <mxCell id="vra-arrow-tool-ecu" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="340" y="286" as="sourcePoint" /><mxPoint x="340" y="298" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- ECU I -->
+    <mxCell id="vra-ecu1-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="40" y="300" width="178" height="152" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-hdr" value="ECU I" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1"><mxGeometry x="52" y="310" width="80" height="18" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-swc1" value="SWC 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.3;fontSize=11;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="50" y="326" width="78" height="52" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-swc2" value="SWC 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.3;fontSize=11;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="132" y="326" width="78" height="52" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-rte" value="RTE (generated)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.3;fontSize=10.5;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="50" y="384" width="160" height="24" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-bsw" value="Basic Software (BSW)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.3;fontSize=10;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="50" y="412" width="160" height="32" as="geometry" /></mxCell>
+
+    <!-- ECU II -->
+    <mxCell id="vra-ecu2-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="232" y="300" width="178" height="152" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu2-hdr" value="ECU II" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1"><mxGeometry x="244" y="310" width="80" height="18" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu2-swc3" value="SWC 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.3;fontSize=11;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="250" y="326" width="142" height="52" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu2-rte" value="RTE (generated)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.3;fontSize=10.5;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="250" y="384" width="142" height="24" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu2-bsw" value="Basic Software (BSW)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.3;fontSize=10;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="250" y="412" width="142" height="32" as="geometry" /></mxCell>
+
+    <mxCell id="vra-ecu-ellipsis" value="&#8230;" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#444444;" vertex="1" parent="1"><mxGeometry x="420" y="372" width="30" height="20" as="geometry" /></mxCell>
+
+    <!-- ECU n -->
+    <mxCell id="vra-ecun-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="460" y="300" width="178" height="152" as="geometry" /></mxCell>
+    <mxCell id="vra-ecun-hdr" value="ECU n" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1"><mxGeometry x="472" y="310" width="80" height="18" as="geometry" /></mxCell>
+    <mxCell id="vra-ecun-swcn" value="SWC n" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.3;fontSize=11;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="478" y="326" width="142" height="52" as="geometry" /></mxCell>
+    <mxCell id="vra-ecun-rte" value="RTE (generated)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.3;fontSize=10.5;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="478" y="384" width="142" height="24" as="geometry" /></mxCell>
+    <mxCell id="vra-ecun-bsw" value="Basic Software (BSW)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.3;fontSize=10;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="478" y="412" width="142" height="32" as="geometry" /></mxCell>
+
+    <!-- Bus line joining the ECUs -->
+    <mxCell id="vra-bus-stub1" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="89" y="444" as="sourcePoint" /><mxPoint x="89" y="470" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-bus-stub2" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="321" y="444" as="sourcePoint" /><mxPoint x="321" y="470" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-bus-stub3" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="549" y="444" as="sourcePoint" /><mxPoint x="549" y="470" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-bus-line" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=2.2;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="70" y="470" as="sourcePoint" /><mxPoint x="610" y="470" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-bus-node1" value="" style="ellipse;html=1;fillColor=#333333;strokeColor=#333333;" vertex="1" parent="1"><mxGeometry x="85" y="466" width="8" height="8" as="geometry" /></mxCell>
+    <mxCell id="vra-bus-node2" value="" style="ellipse;html=1;fillColor=#333333;strokeColor=#333333;" vertex="1" parent="1"><mxGeometry x="317" y="466" width="8" height="8" as="geometry" /></mxCell>
+    <mxCell id="vra-bus-node3" value="" style="ellipse;html=1;fillColor=#333333;strokeColor=#333333;" vertex="1" parent="1"><mxGeometry x="545" y="466" width="8" height="8" as="geometry" /></mxCell>
+    <mxCell id="vra-bus-label" value="vehicle network &#8212; CAN &#183; FlexRay &#183; Ethernet" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1"><mxGeometry x="200" y="478" width="280" height="16" as="geometry" /></mxCell>
+
+    <!-- Callout 1 -->
+    <mxCell id="vra-c1-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="660" y="150" as="sourcePoint" /><mxPoint x="642" y="156" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-c1-box" value="Develop every SWC against the&lt;br&gt;virtual bus &#8212; no ECU decided yet.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Code references only ports and Rte_*&lt;br&gt;symbols, never a bus or a driver.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;spacingLeft=24;" vertex="1" parent="1">
+      <mxGeometry x="660" y="74" width="286" height="92" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-c1-badge" value="1" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="670" y="84" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Callout 2 -->
+    <mxCell id="vra-c2-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="660" y="240" as="sourcePoint" /><mxPoint x="532" y="236" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-c2-box" value="The tool maps SWCs to ECUs&lt;br&gt;from the ARXML descriptions.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Deployment is a late-binding config decision.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;spacingLeft=24;" vertex="1" parent="1">
+      <mxGeometry x="660" y="206" width="286" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-c2-badge" value="2" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="670" y="216" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Callout 3 -->
+    <mxCell id="vra-c3-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="660" y="388" as="sourcePoint" /><mxPoint x="640" y="382" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-c3-box" value="Same unchanged SWCs, new&lt;br&gt;ECU layout &#8212; only the generated&lt;br&gt;RTE differs.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Moving a SWC changes only what the RTE&lt;br&gt;generator emits &#8212; no code changes.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;spacingLeft=24;" vertex="1" parent="1">
+      <mxGeometry x="660" y="330" width="286" height="104" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-c3-badge" value="3" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="670" y="340" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Footnote / gloss -->
+    <mxCell id="vra-gloss" value="SWC = Software Component &#183; VFB = Virtual Functional Bus &#183; RTE = Runtime Environment &#183; BSW = Basic Software &#183; ARXML = AUTOSAR XML &#183; SR = sender-receiver &#183; CS = client-server" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="554" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-source" value="Redrawn and annotated after AUTOSAR CP_TR_VFB, R25-11, Fig. 2.2 &#8212; original unmodified figure in the full deck and autosar/specs/." style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#777777;" vertex="1" parent="1">
+      <mxGeometry x="20" y="574" width="920" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

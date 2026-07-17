@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="960" height="620" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 z" fill="#444"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="480" y="38" text-anchor="middle" font-size="26" font-weight="700" fill="#1b2b4a">The relocation trick — one SWC, any ECU, only the RTE is regenerated</text>
+
+  <!-- ===================== Top band: SWCs on the VFB ===================== -->
+  <text x="340" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#444">Design time — logical, no ECU chosen yet</text>
+
+  <!-- SWC boxes -->
+  <rect x="44" y="72" width="130" height="52" rx="6" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="109" y="94" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">SWC 1</text>
+  <text x="109" y="112" text-anchor="middle" font-size="8.5" fill="#223344">ports (SR · CS)</text>
+
+  <rect x="190" y="72" width="130" height="52" rx="6" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="255" y="94" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">SWC 2</text>
+  <text x="255" y="112" text-anchor="middle" font-size="8.5" fill="#223344">ports (SR · CS)</text>
+
+  <rect x="336" y="72" width="130" height="52" rx="6" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="401" y="94" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">SWC 3</text>
+  <text x="401" y="112" text-anchor="middle" font-size="8.5" fill="#223344">ports (SR · CS)</text>
+
+  <text x="486" y="104" text-anchor="middle" font-size="14" font-weight="700" fill="#444">…</text>
+
+  <rect x="506" y="72" width="130" height="52" rx="6" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.5"/>
+  <text x="571" y="94" text-anchor="middle" font-size="13" font-weight="700" fill="#223344">SWC n</text>
+  <text x="571" y="112" text-anchor="middle" font-size="8.5" fill="#223344">ports (SR · CS)</text>
+
+  <!-- Ports sitting on the VFB bar -->
+  <rect x="85" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="103" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="121" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="231" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="249" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="267" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="377" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="395" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="413" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="547" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="565" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+  <rect x="583" y="126" width="12" height="12" fill="#ffffff" stroke="#5f82b8" stroke-width="1.2"/>
+
+  <!-- VFB bar -->
+  <rect x="40" y="138" width="600" height="34" rx="6" fill="#7f9dc9" stroke="#5f82b8" stroke-width="1.5"/>
+  <text x="340" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">Virtual Functional Bus (VFB) — a logical bus spanning ECUs</text>
+
+  <!-- Arrow VFB -> tool -->
+  <line x1="340" y1="172" x2="340" y2="206" stroke="#444" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- ===================== Middle: tooling step ===================== -->
+  <!-- ARXML doc icon -->
+  <rect x="40" y="212" width="94" height="48" rx="4" fill="#ffffff" stroke="#E0A96D" stroke-width="1.3"/>
+  <text x="87" y="232" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6B4A2B">ARXML</text>
+  <text x="87" y="246" text-anchor="middle" font-size="8.5" fill="#6B4A2B">descriptions</text>
+  <line x1="134" y1="236" x2="150" y2="236" stroke="#E0A96D" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Tool box -->
+  <rect x="150" y="208" width="380" height="56" rx="8" fill="#FCE8D5" stroke="#E0A96D" stroke-width="1.5"/>
+  <text x="340" y="230" text-anchor="middle" font-size="13" font-weight="700" fill="#6B4A2B">AUTOSAR tooling</text>
+  <text x="340" y="248" text-anchor="middle" font-size="9.5" fill="#6B4A2B">reads ARXML descriptions · generates the RTE per deployment</text>
+
+  <!-- ===================== Bottom band: ECUs ===================== -->
+  <text x="340" y="282" text-anchor="middle" font-size="11" font-weight="700" fill="#444">Deploy time — same SWCs mapped onto real ECUs</text>
+
+  <!-- Arrow tool -> ECUs -->
+  <line x1="340" y1="286" x2="340" y2="298" stroke="#444" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- ECU I -->
+  <rect x="40" y="300" width="178" height="152" rx="8" fill="#F4F4F4" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="52" y="320" text-anchor="start" font-size="12" font-weight="700" fill="#333">ECU I</text>
+  <rect x="50" y="326" width="78" height="52" rx="5" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.3"/>
+  <text x="89" y="356" text-anchor="middle" font-size="11" font-weight="700" fill="#223344">SWC 1</text>
+  <rect x="132" y="326" width="78" height="52" rx="5" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.3"/>
+  <text x="171" y="356" text-anchor="middle" font-size="11" font-weight="700" fill="#223344">SWC 2</text>
+  <rect x="50" y="384" width="160" height="24" rx="4" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.3"/>
+  <text x="130" y="400" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">RTE (generated)</text>
+  <rect x="50" y="412" width="160" height="32" rx="4" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.3"/>
+  <text x="130" y="432" text-anchor="middle" font-size="10" fill="#333">Basic Software (BSW)</text>
+
+  <!-- ECU II -->
+  <rect x="232" y="300" width="178" height="152" rx="8" fill="#F4F4F4" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="244" y="320" text-anchor="start" font-size="12" font-weight="700" fill="#333">ECU II</text>
+  <rect x="250" y="326" width="142" height="52" rx="5" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.3"/>
+  <text x="321" y="356" text-anchor="middle" font-size="11" font-weight="700" fill="#223344">SWC 3</text>
+  <rect x="250" y="384" width="142" height="24" rx="4" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.3"/>
+  <text x="321" y="400" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">RTE (generated)</text>
+  <rect x="250" y="412" width="142" height="32" rx="4" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.3"/>
+  <text x="321" y="432" text-anchor="middle" font-size="10" fill="#333">Basic Software (BSW)</text>
+
+  <text x="435" y="382" text-anchor="middle" font-size="14" font-weight="700" fill="#444">…</text>
+
+  <!-- ECU n -->
+  <rect x="460" y="300" width="178" height="152" rx="8" fill="#F4F4F4" stroke="#B0B0B0" stroke-width="1.5"/>
+  <text x="472" y="320" text-anchor="start" font-size="12" font-weight="700" fill="#333">ECU n</text>
+  <rect x="478" y="326" width="142" height="52" rx="5" fill="#EAF1FB" stroke="#9BBCE0" stroke-width="1.3"/>
+  <text x="549" y="356" text-anchor="middle" font-size="11" font-weight="700" fill="#223344">SWC n</text>
+  <rect x="478" y="384" width="142" height="24" rx="4" fill="#DFF0D8" stroke="#8FBF8F" stroke-width="1.3"/>
+  <text x="549" y="400" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">RTE (generated)</text>
+  <rect x="478" y="412" width="142" height="32" rx="4" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.3"/>
+  <text x="549" y="432" text-anchor="middle" font-size="10" fill="#333">Basic Software (BSW)</text>
+
+  <!-- Bus line joining the ECUs -->
+  <line x1="89" y1="444" x2="89" y2="470" stroke="#333" stroke-width="1.6"/>
+  <line x1="321" y1="444" x2="321" y2="470" stroke="#333" stroke-width="1.6"/>
+  <line x1="549" y1="444" x2="549" y2="470" stroke="#333" stroke-width="1.6"/>
+  <line x1="70" y1="470" x2="610" y2="470" stroke="#333" stroke-width="2.2"/>
+  <circle cx="89" cy="470" r="4" fill="#333"/>
+  <circle cx="321" cy="470" r="4" fill="#333"/>
+  <circle cx="549" cy="470" r="4" fill="#333"/>
+  <text x="340" y="488" text-anchor="middle" font-size="10" font-weight="700" fill="#333">vehicle network — CAN · FlexRay · Ethernet</text>
+
+  <!-- ===================== Annotation callouts (right rail) ===================== -->
+  <!-- Callout 1 -->
+  <line x1="660" y1="150" x2="642" y2="156" stroke="#9B7FC0" stroke-width="1.4" stroke-dasharray="5,3"/>
+  <rect x="660" y="74" width="286" height="92" rx="8" fill="#EFE7F7" stroke="#9B7FC0" stroke-width="1.5"/>
+  <circle cx="682" cy="96" r="12" fill="#6E4A9E"/>
+  <text x="682" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">1</text>
+  <text x="704" y="94" text-anchor="start" font-size="10.5" font-weight="700" fill="#4A2E6B">Develop every SWC against the</text>
+  <text x="672" y="112" text-anchor="start" font-size="10.5" font-weight="700" fill="#4A2E6B">virtual bus — no ECU decided yet.</text>
+  <text x="672" y="134" text-anchor="start" font-size="9" fill="#4A2E6B">Code references only ports and Rte_*</text>
+  <text x="672" y="148" text-anchor="start" font-size="9" fill="#4A2E6B">symbols, never a bus or a driver.</text>
+
+  <!-- Callout 2 -->
+  <line x1="660" y1="240" x2="532" y2="236" stroke="#9B7FC0" stroke-width="1.4" stroke-dasharray="5,3"/>
+  <rect x="660" y="206" width="286" height="70" rx="8" fill="#EFE7F7" stroke="#9B7FC0" stroke-width="1.5"/>
+  <circle cx="682" cy="228" r="12" fill="#6E4A9E"/>
+  <text x="682" y="232" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">2</text>
+  <text x="704" y="226" text-anchor="start" font-size="10.5" font-weight="700" fill="#4A2E6B">The tool maps SWCs to ECUs</text>
+  <text x="672" y="244" text-anchor="start" font-size="10.5" font-weight="700" fill="#4A2E6B">from the ARXML descriptions.</text>
+  <text x="672" y="264" text-anchor="start" font-size="9" fill="#4A2E6B">Deployment is a late-binding config decision.</text>
+
+  <!-- Callout 3 -->
+  <line x1="660" y1="388" x2="640" y2="382" stroke="#9B7FC0" stroke-width="1.4" stroke-dasharray="5,3"/>
+  <rect x="660" y="330" width="286" height="104" rx="8" fill="#EFE7F7" stroke="#9B7FC0" stroke-width="1.5"/>
+  <circle cx="682" cy="352" r="12" fill="#6E4A9E"/>
+  <text x="682" y="356" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">3</text>
+  <text x="704" y="350" text-anchor="start" font-size="10.5" font-weight="700" fill="#4A2E6B">Same unchanged SWCs, new</text>
+  <text x="672" y="368" text-anchor="start" font-size="10.5" font-weight="700" fill="#4A2E6B">ECU layout — only the generated</text>
+  <text x="672" y="384" text-anchor="start" font-size="10.5" font-weight="700" fill="#4A2E6B">RTE differs.</text>
+  <text x="672" y="406" text-anchor="start" font-size="9" fill="#4A2E6B">Moving a SWC changes only what the RTE</text>
+  <text x="672" y="420" text-anchor="start" font-size="9" fill="#4A2E6B">generator emits — no code changes.</text>
+
+  <!-- ===================== Footnote / gloss ===================== -->
+  <text x="480" y="562" text-anchor="middle" font-size="9.5" fill="#555555">SWC = Software Component · VFB = Virtual Functional Bus · RTE = Runtime Environment · BSW = Basic Software · ARXML = AUTOSAR XML · SR = sender-receiver · CS = client-server</text>
+  <text x="480" y="582" text-anchor="middle" font-size="9" font-style="italic" fill="#777">Redrawn and annotated after AUTOSAR CP_TR_VFB, R25-11, Fig. 2.2 — original unmodified figure in the full deck and autosar/specs/.</text>
+</svg>

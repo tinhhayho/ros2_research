@@ -56,6 +56,12 @@ slides_autosar() {
     "$MARP" autosar.md -o autosar.html --html
   echo "==> autosar/slides/autosar.html built (AUTOSAR Classic vs Adaptive deck)."
 }
+slides_autosar_compact() {
+  python3 scripts/build_slides.py --dir autosar/slides --deck autosar-compact-deck.md --out autosar-compact.md
+  docker run --rm -v "$PWD/autosar/slides:/home/marp/app" -e MARP_USER="$(id -u):$(id -g)" \
+    "$MARP" autosar-compact.md -o autosar-compact.html --html
+  echo "==> autosar/slides/autosar-compact.html built (20-minute AUTOSAR deck)."
+}
 slides_pdf() {
   python3 scripts/build_slides.py
   docker run --rm -v "$PWD/slides:/home/marp/app" -e MARP_USER="$(id -u):$(id -g)" \
@@ -125,6 +131,7 @@ Usage: ./run.sh <target>   (or: make <target>)
   slides      Build slides/slides.html (the committed deliverable)
   slides-research  Build slides/research.html (deep-research findings deck)
   slides-autosar   Build autosar/slides/autosar.html (AUTOSAR Classic vs Adaptive deck)
+  slides-autosar-compact  Build autosar/slides/autosar-compact.html (20-minute version)
   slides-pdf  Also export slides/slides.pdf (optional)
   slides-pptx Text-only slides/research.pptx (paste images by hand; optional)
   test        Run all verify scripts
@@ -143,6 +150,7 @@ case "${1:-help}" in
   slides) slides ;;
   slides-research) slides_research ;;
   slides-autosar) slides_autosar ;;
+  slides-autosar-compact) slides_autosar_compact ;;
   slides-pdf) slides_pdf ;;
   slides-pptx) shift; slides_pptx "$@" ;;
   test) test_all ;;

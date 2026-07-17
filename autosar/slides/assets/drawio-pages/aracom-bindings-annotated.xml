@@ -1,0 +1,93 @@
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="620" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="acb-title" value="ara::com &#8212; one API, several bindings underneath" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="18" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Layer 1: Adaptive Application -->
+    <mxCell id="acb-app" value="&lt;b&gt;Adaptive Application&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;codes against proxies (client-side) and skeletons (server-side)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=14;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="66" width="600" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-arrow-app-api" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="480" y="124" as="sourcePoint" /><mxPoint x="480" y="134" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- Layer 2: ara::com API line -->
+    <mxCell id="acb-api" value="ara::com &#8212; one application communication API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f9dc9;strokeColor=#5f82b8;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="136" width="600" height="34" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-arrow-api-bind" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="480" y="170" as="sourcePoint" /><mxPoint x="480" y="180" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- Layer 3: binding layer -->
+    <mxCell id="acb-bind" value="&lt;b&gt;Language binding (C++) + Communication binding&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;compiled into the app binary &#183; integrator picks the wire binding in the deployment manifest&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="182" width="600" height="46" as="geometry" />
+    </mxCell>
+
+    <!-- Grouping labels -->
+    <mxCell id="acb-group-std" value="the three standardized ara::com bindings" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=9.5;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="238" width="446" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-group-impl" value="implementation-level" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=9.5;fontStyle=1;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="642" y="238" width="138" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Arrows binding -> columns -->
+    <mxCell id="acb-arrow-col-a" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="249" y="228" as="sourcePoint" /><mxPoint x="249" y="264" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-arrow-col-b" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="403" y="228" as="sourcePoint" /><mxPoint x="403" y="264" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-arrow-col-c" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="557" y="228" as="sourcePoint" /><mxPoint x="557" y="264" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-arrow-col-d" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;dashed=1;dashPattern=6 4;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="711" y="228" as="sourcePoint" /><mxPoint x="711" y="264" as="targetPoint" /></mxGeometry></mxCell>
+
+    <!-- Column A: SOME/IP over TCP/IP over Ethernet -->
+    <mxCell id="acb-someip" value="&lt;b&gt;SOME/IP&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;+ SOME/IP-SD discovery&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="266" width="138" height="44" as="geometry" /></mxCell>
+    <mxCell id="acb-arrow-someip-tcp" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="249" y="310" as="sourcePoint" /><mxPoint x="249" y="320" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-tcpip" value="UDP/TCP &#183; IP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="322" width="138" height="34" as="geometry" /></mxCell>
+    <mxCell id="acb-arrow-tcp-eth" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="249" y="356" as="sourcePoint" /><mxPoint x="249" y="366" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-ethernet" value="Ethernet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="368" width="138" height="34" as="geometry" /></mxCell>
+
+    <!-- Column B: DDS -->
+    <mxCell id="acb-dds" value="&lt;b&gt;DDS&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;data-centric &#8212;&lt;br&gt;Topic + type + QoS&lt;br&gt;&lt;br&gt;QoS is manifest-driven&lt;br&gt;&lt;br&gt;&lt;i&gt;present since R18-03&lt;/i&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="334" y="266" width="138" height="136" as="geometry" /></mxCell>
+
+    <!-- Column C: Signal-Based -->
+    <mxCell id="acb-signal" value="&lt;b&gt;Signal-Based&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;signal-oriented&lt;br&gt;wire binding&lt;br&gt;&lt;br&gt;&lt;i&gt;standardized binding&lt;/i&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="488" y="266" width="138" height="136" as="geometry" /></mxCell>
+
+    <!-- Column D: local IPC -->
+    <mxCell id="acb-ipc" value="&lt;b&gt;local IPC&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;intra-machine only&lt;br&gt;implementation-specific,&lt;br&gt;not an inter-vendor&lt;br&gt;protocol&lt;br&gt;&lt;br&gt;&lt;i&gt;e.g. Eclipse iceoryx (zero-copy)&lt;/i&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="642" y="266" width="138" height="136" as="geometry" /></mxCell>
+
+    <!-- Callout a -->
+    <mxCell id="acb-ca-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="170" y="150" as="sourcePoint" /><mxPoint x="180" y="153" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-ca-box" value="Your application&lt;br&gt;code never changes.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;The API is protocol-agnostic.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="14" y="118" width="156" height="72" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-ca-badge" value="a" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="24" y="128" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Callout b -->
+    <mxCell id="acb-cb-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="790" y="205" as="sourcePoint" /><mxPoint x="780" y="205" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-cb-box" value="The transport swaps&lt;br&gt;here, per deployment&lt;br&gt;manifest.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;No recompile of the app logic.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="790" y="170" width="156" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-cb-badge" value="b" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="800" y="180" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Bottom takeaway -->
+    <mxCell id="acb-takeaway" value="The application API is protocol-agnostic; the binding is swappable underneath &#8212;&lt;br&gt;exactly like ROS 2's rmw / DDS layering." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="430" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote / gloss -->
+    <mxCell id="acb-gloss1" value="ara::com = the Adaptive communication-management API &#183; proxy = client-side stub &#183; skeleton = server-side stub &#183; SOME/IP = Scalable service-Oriented MiddlewarE over IP" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="554" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-gloss2" value="SD = Service Discovery &#183; DDS = Data Distribution Service &#183; QoS = Quality of Service &#183; IPC = Inter-Process Communication &#183; manifest = the deployment config that fixes the binding" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="568" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-source" value="Redrawn and annotated after AUTOSAR AP_SWS_CommunicationManagement, R25-11, Fig. 7.1 &#8212; original unmodified figure in the full deck and autosar/specs/." style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#777777;" vertex="1" parent="1">
+      <mxGeometry x="20" y="588" width="920" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
