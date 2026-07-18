@@ -41,6 +41,12 @@ The full deck carries the references.
 
 ## Why AUTOSAR exists — one standard, many competitors
 
+<style scoped>
+  section { font-size: 22px; }
+  li { margin-bottom: 6px; }
+  .gloss { font-size: 15px; line-height: 1.32; margin-top: 10px; padding-top: 5px; }
+</style>
+
 - AUTOSAR is **a worldwide development partnership**. The founding talks happened in **2002**,
   and the Development Agreement was signed in **July 2003**. It has **~360 partners today** across
   the industry. The specs are free to read, but you need a license to build from them.
@@ -49,9 +55,9 @@ The full deck carries the references.
   sell their own conformant stacks built from it.
 - **The business rule that predicts adoption**: AUTOSAR value scales with how many organizational
   boundaries your software crosses. Tier-1 suppliers implement it to win OEM RFQs. A
-  vertically-integrated OEM such as **Rivian** skips it and builds its own.
+  vertically-integrated OEM such as **Rivian** skips it and builds its own ([Sonatus interview](https://www.sonatus.com/resources/vidya-rajagopalan-of-rivian/)).
 
-<div class="gloss">Tier-1 = the supplier who builds an ECU for the OEM · OEM = original equipment manufacturer (the vehicle maker) · RFQ = request for quotation · the partnership shares specifications and competes on the implementations built from them</div>
+<div class="gloss">Tier-1 = the supplier who builds an ECU for the OEM · OEM = original equipment manufacturer (the vehicle maker) · RFQ = request for quotation · the partnership shares specifications and competes on the implementations built from them · founding dates and partner count: autosar.org</div>
 
 <!-- ~75s | say: AUTOSAR is a partnership, not a product. The talks began in 2002, the agreement came in July 2003, and there are about 360 partners today. Remember the founding-era phrase: cooperate on standards, compete on implementation. One shared spec and schema, many vendors selling conformant stacks. One rule predicts who adopts it. The value scales with how many organizational boundaries your software crosses. Tier-1 suppliers implement it to win OEM contracts. A vertically-integrated maker like Rivian just skips it. -->
 
@@ -81,7 +87,7 @@ The full deck carries the references.
 - **The OS comes from OSEK.** AUTOSAR OS is an OSEK/VDX superset. It is packaged as **Scalability Classes SC1–SC4**, which add timing and memory protection.
 - **Classic owns the mature ASIL-D path.** Its determinism comes from making everything static. The first AUTOSAR implementation certified to ISO 26262 up to ASIL D appeared in 2016.
 
-<div class="gloss">OSEK/VDX = the 1990s automotive RTOS standard AUTOSAR OS descends from · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · ECU = Electronic Control Unit</div>
+<div class="gloss">OSEK/VDX = the 1990s automotive RTOS standard AUTOSAR OS descends from · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · ECU = Electronic Control Unit · first ASIL-D certification = Vector MICROSAR Safe, certified by exida in 2016</div>
 
 <!-- ~70s | say: Classic in one slide. Everything is static and decided at build time. The task set, memory map and communication matrix are all frozen in ARXML, then generated into one ECU binary. The OS comes from OSEK heritage. It is packaged as scalability classes SC1 through SC4, which add timing and memory protection. Classic also owns the mature ASIL-D path. The first AUTOSAR implementation certified to ISO 26262 up to ASIL D appeared in 2016. -->
 
@@ -263,7 +269,7 @@ classic-platform/  (master @ 09433770, 2049 tree entries)
 
 <div class="gloss">OSEK = the 1990s automotive RTOS standard AUTOSAR OS descends from · AUTOSAR OS = the OSEK-derived static real-time kernel · BSW = Basic Software (CP's generated C layer, built statically, no heap) · COM = the AUTOSAR signal-packing communication module (not a serial port) · PDU = Protocol Data Unit · I-PDU = Interaction-layer PDU (the packed frame COM builds from signals) · PduR = PDU Router (routes PDUs between COM and the bus interfaces) · CanIf = CAN Interface (hardware-independent CAN) · CanTp = CAN Transport Protocol (ISO 15765-2 segmentation) · CAN = Controller Area Network (the automotive serial bus) · HW = hardware · UDS = Unified Diagnostic Services (ISO 14229) · Dcm = Diagnostic Communication Manager (the UDS server) · Dem = Diagnostic Event Manager (the fault store) · DTC = Diagnostic Trouble Code · ECU = Electronic Control Unit · EcuM = ECU Manager · BswM = Basic Software Mode Manager · SchM = BSW Scheduler · MCU = Microcontroller · CP = Classic Platform · GNU make = the GNU project build tool · GPL-2.0 = GNU General Public License version 2 (an open-source licence)</div>
 
-<!-- ~65s | say: This is the Classic Platform repository, the one open and complete Classic AUTOSAR stack worth reading. Start at the top makefile. It is a recursive GNU make build. You pick a target board and the module directories to compile, and the OS kernel is always built. Then open Os dot h. It is the public header for the OSEK-derived kernel, and it declares the task, alarm, counter and event calls. Com underscore Com dot c is the communication module, where Com send signal packs an application signal into an I-PDU. The diagnostic folder holds Dcm, the UDS server, and Dem, the fault store. To build it, you cross-compile for one of about forty-five boards. There is no host application to run, because the build produces firmware for a microcontroller. Two honest limits. The main branch has been dormant since 2020, and the example applications the makefile mentions are not in the tree. Read it for the shape. -->
+<!-- ~65s | say: This is the Classic Platform repository, the one open and complete Classic AUTOSAR stack worth reading. Start at the top makefile. It is a recursive GNU make build. You pick a target board and the module directories to compile, and the OS kernel is always built. Then open Os dot h. It is the public header for the OSEK-derived kernel, and it declares the task, alarm, counter and event calls. Com underscore Com dot c is the communication module, where Com send signal packs an application signal into an I-PDU. The diagnostic folder holds Dcm, the UDS server, and Dem, the fault store. To build it, you cross-compile for one of about forty boards. There is no host application to run, because the build produces firmware for a microcontroller. Two honest limits. The main branch has been dormant since 2020, and the example applications the makefile mentions are not in the tree. Read it for the shape. -->
 
 ---
 
@@ -641,7 +647,7 @@ vsomeip/  (tag 3.7.4)
 
 <p class="attr"><a href="https://github.com/COVESA/vsomeip/blob/7bcc1e06f16a774e70931ed641f475fbba9c8c64/examples/request-sample.cpp#L126-L132">COVESA/vsomeip @ 7bcc1e0 — examples/request-sample.cpp</a></p>
 
-<div class="gloss"><b>What to notice:</b> The first snippet is the SOME/IP service coming up. <code>init()</code> attaches the application to the vsomeip routing with <code>app_->init()</code>, then <code>register_message_handler</code> for one service, instance and method triple, so every incoming request for that triple is dispatched to <code>on_message</code>. <code>register_state_handler</code> installs a second callback that fires when the app reaches <code>ST_REGISTERED</code>, which is the cue to actually offer the service on the network. The second snippet is the client firing the request. Once the availability handler reports the service is up, it calls <code>app_->send(request_)</code> on the message it pre-addressed with set_service, set_instance and set_method. vsomeip stamps the outgoing message with a client id and a session id, printed in the log line, and the matching response arrives later in the client's own <code>on_message</code> handler. · vsomeip = COVESA's open SOME/IP stack · COVESA = Connected Vehicle Systems Alliance · SOME/IP = Scalable service-Oriented MiddlewarE over IP · id = identifier · <code>ara::com</code> = AP's Communication Management API · AP = Adaptive Platform · CAPI = Common Adaptive Platform Implementation</div>
+<div class="gloss"><b>What to notice:</b> The first snippet is the SOME/IP service coming up. <code>init()</code> attaches the application to the vsomeip routing with <code>app_->init()</code>, then <code>register_message_handler</code> for one service, instance and method triple, so every incoming request for that triple is dispatched to <code>on_message</code>. <code>register_state_handler</code> installs a second callback that fires when the app reaches <code>ST_REGISTERED</code>, which is the cue to actually offer the service on the network. The second snippet is the client firing the request. Once the availability handler reports the service is up, it calls <code>app_->send(request_)</code> on the message it pre-addressed with set_service, set_instance and set_method. vsomeip stamps the outgoing message with a client id and a session id, printed in the log line, and the matching response arrives later in the client's own <code>on_message</code> handler. · vsomeip = COVESA's open SOME/IP stack · COVESA = Connected Vehicle Systems Alliance · SOME/IP = Scalable service-Oriented MiddlewarE over IP · id = identifier · <code>ara::com</code> = AP's Communication Management API · AP = Adaptive Platform · CAPI = Common Adaptive Platform Implementation · CAPI partner-gated (AUTOSAR partners only): autosar.org/capi</div>
 
 <p class="boundary"><b>The honest boundary: building blocks and teaching code are open. A complete, conformant, open AP stack does not exist. The one complete official implementation, CAPI, is partner-gated.</b></p>
 
@@ -702,7 +708,7 @@ vsomeip/  (tag 3.7.4)
 | **Updates** | reflash the **whole ECU** via bootloader/UDS (0x34/0x36/0x37) | **UCM**: install or update individual **Software Clusters**, OTA-native |
 | **Safety** | mature ISO 26262 **up to ASIL D** (first ASIL-D AUTOSAR impl certified **2016**) | "up to ASIL D" on paper, harder in practice. **ASIL-B shipping, ASIL-D underway** |
 
-<div class="gloss">CP is <b>not CAN-only</b> — a standardized SOME/IP Transformer has shipped since <b>4.2.1 (Oct 2014)</b>, years before AP's first release · MMU = Memory Management Unit · PSE51 = minimal single-process POSIX profile · SOVD = Service-Oriented Vehicle Diagnostics · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · DCM = Diagnostic Communication Manager · DEM = Diagnostic Event Manager · DM = AP's Diagnostic Manager (`ara::diag`) · DoCAN = Diagnostics over CAN (ISO 15765-2) · DoIP = Diagnostics over IP (ISO 13400) · the ASIL hedge, exactly: no fully-certified end-to-end ASIL-D AP middleware ships as of mid-2026 — ASIL-D lives in the OS (QNX) + hypervisor + vendor safety case, and a "developed to ASIL-x" process claim ≠ a "certified at ASIL-x" claim</div>
+<div class="gloss">CP is <b>not CAN-only</b> — a standardized SOME/IP Transformer has shipped since <b>4.2.1 (Oct 2014)</b>, years before AP's first release · MMU = Memory Management Unit · PSE51 = minimal single-process POSIX profile · SOVD = Service-Oriented Vehicle Diagnostics · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · DCM = Diagnostic Communication Manager · DEM = Diagnostic Event Manager · DM = AP's Diagnostic Manager (`ara::diag`) · DoCAN = Diagnostics over CAN (ISO 15765-2) · DoIP = Diagnostics over IP (ISO 13400) · the ASIL hedge, exactly: no fully-certified end-to-end ASIL-D AP middleware ships as of mid-2026 — ASIL-D lives in the OS (QNX) + hypervisor + vendor safety case, and a "developed to ASIL-x" process claim ≠ a "certified at ASIL-x" claim · first cert = Vector MICROSAR Safe, exida, 2016 · ASIL status is our reading as of mid-2026; sources are in the full deck references · DoIP-only standardized transport rule: AP_SWS_Diagnostics (Doc ID 723) R25-11 §7.1 (UDS Transport Layer); DoIP (ISO 13400-2) is the only network transport the spec details, and custom UDS transports are permitted through the Transport Protocol API</div>
 
 <!-- ~75s | say: The split that matters has seven rows. Target: MCUs versus HPC SoCs. OS: AUTOSAR OS versus POSIX PSE51, and Adaptive is not a new OS. Model: fully static C versus dynamic C++. Comms: signals versus services. Diagnostics: DCM-plus-DEM versus one DM cluster. Note that DoIP is the only standardized transport, though a custom one is permitted. Updates: whole-ECU reflash versus per-cluster UCM. Safety: Classic is mature up to ASIL D since 2016, and Adaptive is ASIL-B shipping with ASIL-D underway. And Classic is not CAN-only. It has had a SOME/IP transformer since 4.2.1, in October 2014. -->
 
@@ -770,7 +776,7 @@ This is the whole deck in one procurement table. It shows what runs where, and w
 | **Zonal / domain MCUs**: NXP S32Z/E · AURIX · RH850 | **CP** | Tier-1 Classic stacks (MICROSAR, EB tresos class) |
 | **Small edge ECUs**: S32K class | **CP** or bare-metal/RTOS | Tier-1 stacks or in-house |
 
-**The business rule underneath:** AUTOSAR value scales with how many organizational boundaries your software crosses. Vertically-integrated OEMs such as Rivian skip it. Tier-1s implement it to win OEM RFQs.
+**The business rule underneath:** AUTOSAR value scales with how many organizational boundaries your software crosses. Vertically-integrated OEMs such as Rivian skip it ([Sonatus interview](https://www.sonatus.com/resources/vidya-rajagopalan-of-rivian/)). Tier-1s implement it to win OEM RFQs.
 
 <div class="gloss">FSI = Functional Safety Island (dedicated lockstep silicon on DRIVE/IGX Thor) · AFW = the Vector-built AUTOSAR firmware NVIDIA ships for its companion MCUs · RFQ = request for quotation · examples only — the vendor cells repeat facts verified elsewhere, not an exhaustive market list · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · S32Z/E = NXP zonal-controller family (lockstep Cortex-R52) · ECU = Electronic Control Unit</div>
 
@@ -825,7 +831,7 @@ This is the whole deck in one procurement table. It shows what runs where, and w
 3. **Find your silicon row on the decision map.** Then you know the **stack**, the OS question,
    and **who sells it.**
 
-<div class="gloss">CP = Classic Platform · AP = Adaptive Platform · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · HPC = High-Performance Computer</div>
+<div class="gloss">CP = Classic Platform · AP = Adaptive Platform · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · HPC = High-Performance Computer · first cert = Vector MICROSAR Safe, exida, 2016</div>
 
 <!-- ~65s | say: Three takeaways. One: AUTOSAR is a supply-chain standard, and ASIL comes from ISO 26262, not from AUTOSAR. Two: two platforms, coexisting by design. Classic is static and certified on MCUs, and Adaptive is a service platform on HPCs. Three: find your silicon row on the decision map, and you know the stack, the OS question, and who sells it. -->
 
