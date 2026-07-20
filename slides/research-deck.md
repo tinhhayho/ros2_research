@@ -862,7 +862,7 @@ picture, and why E/E consolidation makes all of it easier.
 | | **AUTOSAR Classic** | **AUTOSAR Adaptive** |
 |---|---|---|
 | Target | deeply embedded hard-RT ECUs | HPC — central + zonal computers |
-| OS | **AUTOSAR OS** (OSEK superset, SC1–SC4) | POSIX — QNX or Linux (apps see **PSE51**) |
+| OS | **AUTOSAR OS** (static real-time, SC1–SC4) | POSIX — QNX or Linux (apps see **PSE51**) |
 | Model | signal-based, **static** — all wired at build time (ARXML) | **service-oriented** — discovery at runtime; production builds pin it down |
 | Comms | CAN/LIN/FlexRay **+ Ethernet/SOME/IP since 4.2.1 (Oct 2014)** · **DDS added at R25-11** | Ethernet-native: SOME/IP · **DDS binding** |
 | Diagnostics | **DCM + DEM** (BSW modules) | **DM** (`ara::diag`) — **DoIP = the only *standardized* transport** |
@@ -871,7 +871,7 @@ picture, and why E/E consolidation makes all of it easier.
 
 They **coexist** in one vehicle — Classic on the MCUs, Adaptive on the big computers.
 
-<div class="gloss">Two persistent myths, corrected: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (Oct 2014), years <i>before</i> Adaptive's first release (R17-03, March 2017); R25-11 even adds a <b>DDS Transformer</b> to Classic (standard-level — no shipping vendor implementation verified yet) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD (2019 program assessment, not a completed cert) · OSEK = the 1990s automotive RTOS standard Classic's OS descends from · POSIX = Portable Operating System Interface (IEEE 1003) · PSE51 = its minimal real-time profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3</div>
+<div class="gloss">Two persistent myths, corrected: "Classic can't do Ethernet" — the SOME/IP Transformer landed in Classic 4.2.1 (Oct 2014), years <i>before</i> Adaptive's first release (R17-03, March 2017); R25-11 even adds a <b>DDS Transformer</b> to Classic (standard-level — no shipping vendor implementation verified yet) · "Adaptive = low ASIL" — Vector ships MICROSAR Adaptive Safe at ASIL-B, Wind River's Adaptive safety concept assessed ASIL-D-suitable by TÜV SÜD (2019 program assessment, not a completed cert) · POSIX = Portable Operating System Interface (IEEE 1003) · PSE51 = its minimal real-time profile (IEEE 1003.13) · ARXML = AUTOSAR's build-time XML config · <code>ara::</code> = the Adaptive Runtime (ARA) C++ namespace · UCM = Update <i>and</i> Configuration Management · SC = scalability class · full expansions: glossary 3/3</div>
 
 ---
 
@@ -1295,7 +1295,6 @@ A lookup slide — don't read it, screenshot it. Every abbreviation from the rob
 - **CDD** — Complex Device Driver: the sanctioned bypass lane for drivers that don't fit the BSW layering
 - **NvM / WdgM / COM** — Classic BSW services: non-volatile memory · watchdog manager · signal communication
 - **ARXML** — AUTOSAR XML: the build-time configuration format everything is generated from
-- **OSEK/VDX** — the 1990s European automotive RTOS standard; AUTOSAR OS is its backward-compatible superset
 - **AUTOSAR OS / SC1–SC4** — Classic's statically configured RTOS; scalability classes add memory/timing protection
 - **ARA / `ara::`** — AUTOSAR Runtime for Adaptive: the platform's C++ API namespace (`ara::com`, `ara::diag`, `ara::ucm`, `ara::exec`…)
 - **POSIX** — Portable Operating System Interface (IEEE 1003): the standard OS API family Adaptive builds on

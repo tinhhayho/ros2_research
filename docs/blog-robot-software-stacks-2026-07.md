@@ -631,7 +631,7 @@ the two can be compared row by row. Sources and corrections:
 `research/automotive-stack-autosar-2026-07.md`, manifest rows A1–A12.
 
 Reading bottom-up: the vehicle's zonal/domain ECUs and the board safety MCU are
-**AUTOSAR Classic land** — the statically configured, OSEK-heritage stack for deeply
+**AUTOSAR Classic land** — the statically configured real-time stack for deeply
 embedded MCUs. The proof is in NVIDIA's own firmware naming: the safety MCU ships with
 Vector's "**AFW**" — *AUTOSAR firmware* — on the AURIX (Orin generation) and on the
 **Renesas RH850U2A16** that replaced it on DRIVE Thor boards. Connecting the ECUs to the
@@ -759,9 +759,9 @@ cloud-facing REST/JSON API layered on top.
 **Classic** is the stack on the small ECUs — the door controllers, the safety MCU next
 to the Thor SoC. Reading bottom-up: **MCAL** (*Microcontroller Abstraction Layer*) is
 the vendor HAL you already know (CAN, ADC, PWM drivers); the **ECU Abstraction Layer**
-hides the board wiring; the **Services Layer** holds AUTOSAR OS (a backward-compatible
-superset of OSEK OS, the 1990s European automotive RTOS standard — adding memory/timing
-protection, multicore, scalability classes SC1–SC4), communication stacks, NvM
+hides the board wiring; the **Services Layer** holds AUTOSAR OS (a static, fixed-priority
+real-time kernel, adding memory and timing protection, multicore, scalability classes
+SC1–SC4), communication stacks, NvM
 (non-volatile memory management), and the two diagnostic modules we'll meet again below:
 **DCM** (*Diagnostic Communication Manager* — service dispatch, sessions, security) and
 **DEM** (*Diagnostic Event Manager* — fault memory). Above it all, the **RTE** (*Runtime

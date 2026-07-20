@@ -3477,7 +3477,7 @@
     </mxCell>
 
     <!-- Row 1: Vehicle ECUs (bottom) -->
-    <mxCell id="sa-ecu-box" value="&lt;b&gt;Vehicle ECUs &#8212; zonal/domain MCUs + board safety MCU &#8594; AUTOSAR Classic land&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11.5px&quot;&gt;safety MCU: AURIX (Orin gen) &#8594; Renesas RH850 (DRIVE Thor), flashed with Vector AUTOSAR firmware (&quot;AFW&quot;)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11.5px&quot;&gt;steer/brake-by-wire &#183; OSEK-heritage RTOS&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=13.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="sa-ecu-box" value="&lt;b&gt;Vehicle ECUs &#8212; zonal/domain MCUs + board safety MCU &#8594; AUTOSAR Classic land&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:11.5px&quot;&gt;safety MCU: AURIX (Orin gen) &#8594; Renesas RH850 (DRIVE Thor), flashed with Vector AUTOSAR firmware (&quot;AFW&quot;)&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:11.5px&quot;&gt;steer/brake-by-wire &#183; static real-time RTOS&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=13.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="150" y="456" width="620" height="62" as="geometry" />
     </mxCell>
 
@@ -3672,7 +3672,7 @@
     </mxCell>
 
     <!-- Sub-row 1: Services Layer -->
-    <mxCell id="sac-services-box" value="Services Layer &#8212; AUTOSAR OS (OSEK-heritage) &#183; COM &#183; NvM &#183; WdgM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="sac-services-box" value="Services Layer &#8212; AUTOSAR OS (static real-time) &#183; COM &#183; NvM &#183; WdgM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=10.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="160" y="256" width="600" height="60" as="geometry" />
     </mxCell>
 
@@ -3739,7 +3739,7 @@
     </mxCell>
 
     <!-- Footnote -->
-    <mxCell id="sac-footnote" value="AUTOSAR OS is a backward-compatible superset of OSEK OS &#8212; memory/timing protection, multicore, scalability classes SC1&#8211;SC4" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+    <mxCell id="sac-footnote" value="AUTOSAR OS is a static, fixed-priority real-time kernel with memory and timing protection, multicore, scalability classes SC1&#8211;SC4" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="60" y="566" width="840" height="18" as="geometry" />
     </mxCell>
 

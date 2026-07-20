@@ -62,7 +62,7 @@
   <rect x="150" y="456" width="620" height="62" rx="8" fill="#ECECEC" stroke="#B0B0B0" stroke-width="1.5"/>
   <text x="460" y="476" text-anchor="middle" font-size="13.5" font-weight="700" fill="#333">Vehicle ECUs — zonal/domain MCUs + board safety MCU → AUTOSAR Classic land</text>
   <text x="460" y="493" text-anchor="middle" font-size="11.5" fill="#333">safety MCU: AURIX (Orin gen) → Renesas RH850 (DRIVE Thor), flashed with Vector AUTOSAR firmware ("AFW")</text>
-  <text x="460" y="509" text-anchor="middle" font-size="11.5" fill="#333">steer/brake-by-wire · OSEK-heritage RTOS</text>
+  <text x="460" y="509" text-anchor="middle" font-size="11.5" fill="#333">steer/brake-by-wire · static real-time RTOS</text>
 
   <!-- ===================== Right side bracket ===================== -->
   <path d="M 786,396 L 800,396 L 800,518 L 786,518" fill="none" stroke="#2E5FAC" stroke-width="2"/>

@@ -585,7 +585,7 @@ Slide 4 mình có stack của robot — đây là **bản đối xứng cho xe**
 sánh từng tầng, và trả lời luôn câu hỏi "AUTOSAR nằm đâu trong stack NVIDIA".
 
 Đọc từ dưới lên như bên robot: đáy là **các ECU trên xe** — MCU zonal/domain và safety
-MCU trên board — đây là **đất của AUTOSAR Classic**, stack tĩnh gốc OSEK. Bằng chứng cụ
+MCU trên board — đây là **đất của AUTOSAR Classic**, stack tĩnh, kernel real-time ưu tiên cố định. Bằng chứng cụ
 thể: firmware safety MCU trên board NVIDIA tên là **AFW — AUTOSAR firmware của Vector**;
 thế hệ Orin là AURIX, sang Thor đổi sang **Renesas RH850** — đổi vendor, kiểm chứng từ
 docs và forum flash. Nối ECU với máy tính AD là hàng **mạng trong xe** — chính là hàng
@@ -664,7 +664,7 @@ Renesas RH850, Infineon AURIX, NXP S32K.
 
 Ba điều đóng khung: một binary, một ECU, hard real-time; mọi thứ được cấu hình tĩnh lúc
 build qua **ARXML** — không có gì tự khám phá lúc chạy; và AUTOSAR OS không phải hàng tự
-chế — nó là superset tương thích ngược của **OSEK OS**, cộng thêm bảo vệ bộ nhớ/thời gian
+chế — nó là một kernel real-time tĩnh, ưu tiên cố định, có thêm bảo vệ bộ nhớ và thời gian,
 và multicore qua các scalability class SC1–SC4.
 
 ## Slide 45 — Diagram: AUTOSAR Adaptive *(~2 phút)*
@@ -687,8 +687,8 @@ lớp Thor, các HPC domain/zonal — khác hẳn MCU nhỏ của Classic.
 
 ## Slide 46 — Classic vs Adaptive: đặt cạnh nhau *(~2.5 phút)*
 
-Giờ đặt hai bảng cạnh nhau. Đọc theo hàng, không đọc hết ô: OS — Classic là AUTOSAR OS gốc
-OSEK; Adaptive là POSIX, app thấy PSE51. Model — Classic tĩnh, dây hết lúc build qua
+Giờ đặt hai bảng cạnh nhau. Đọc theo hàng, không đọc hết ô: OS — Classic là AUTOSAR OS;
+Adaptive là POSIX, app thấy PSE51. Model — Classic tĩnh, dây hết lúc build qua
 ARXML; Adaptive service-oriented nhưng production pin cứng lại. Diagnostics — Classic
 dùng DCM+DEM là BSW module; Adaptive dùng DM qua `ara::diag`, và DM **chỉ đi DoIP**,
 không có đường CAN. Updates — Classic reflash toàn bộ qua bootloader bằng UDS
