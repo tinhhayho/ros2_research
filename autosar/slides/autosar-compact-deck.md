@@ -333,6 +333,98 @@ void SwcWriterInit() {
 
 ---
 
+## ArcCore and Arctic Core: a short history
+
+<style scoped>
+  section { font-size: 20px; padding-top: 30px; }
+  h2 { font-size: 30px; margin: 0 0 16px; }
+  ul { line-height: 1.42; }
+  li { margin-bottom: 14px; }
+  li b { color: #2E5FAC; }
+  .gloss { font-size: 15px; line-height: 1.34; margin-top: 20px; padding-top: 6px; }
+</style>
+
+- **ArcCore AB (ARCCORE)** was founded in 2006 in Gothenburg, Sweden, and from 2009 it focused on the AUTOSAR standard. Its product was **Arctic Core**, an open-source Classic AUTOSAR Basic Software stack written in C, sold next to **Arctic Studio**, the commercial configuration toolchain that generates the RTE. The licensing was open-core, which means a GPL-2.0 core plus commercial licences. The source lived in a Mercurial repository at my.arccore.com.
+- In **2018, Vector Informatik (Stuttgart, Germany) acquired ARCCORE, effective July 11, 2018**. ARCCORE had about 80 employees at the time, and its chief executive and co-founder was Michael Svenstam.
+- Today the original ARCCORE servers are offline, checked on 2026-07-20. The open-source code survives only as dormant community mirrors on GitHub. The largest is **openAUTOSAR/classic-platform** (GPL-2.0, 664 stars, last code push August 2024). This deck reads **Fang717/arccore-core-21**, a 2024 re-upload of the version 21.0.0 snapshot, which is predominantly 4.0.3-era, mixed-vintage code with no real development history.
+
+<div class="gloss">AUTOSAR = AUTomotive Open System ARchitecture · CP = Classic Platform · ArcCore AB / ARCCORE = the Swedish embedded-software company (Gothenburg) that made the stack · Arctic Core = ARCCORE's open-source Classic AUTOSAR Basic Software stack · Arctic Studio = ARCCORE's commercial configuration and code-generation toolchain · BSW = Basic Software (CP's generated C layer, built statically, no heap) · RTE = Runtime Environment (the generated glue between components and BSW) · open-core = a model where an open-source core is sold alongside commercial licences · GPL-2.0 = GNU General Public License version 2 (an open-source licence) · Mercurial = a version-control system (like Git) whose repositories are served over hg</div>
+
+<!-- ~50s | say: A quick history. A Swedish company called ArcCore, in Gothenburg, was founded in two thousand six, and from two thousand nine it focused on AUTOSAR. Its product was Arctic Core, an open-source Classic stack in C, sold next to Arctic Studio, the commercial tool that generates the runtime environment. In two thousand eighteen, Vector, based in Stuttgart, acquired ArcCore, effective the eleventh of July. ArcCore had about eighty people, and its chief executive and co-founder was Michael Svenstam. Today the original servers are offline, and the code survives only as dormant GitHub mirrors, the largest being openAUTOSAR classic-platform. The one this deck reads is a re-upload of the version twenty-one snapshot, predominantly four-oh-three era code. -->
+
+---
+
+## Reading repo 1/3: what the tree gives you, and what stays your job
+
+<style scoped>
+  section { font-size: 15px; padding: 14px 40px 10px; }
+  h2 { font-size: 22px; margin: 0 0 8px; }
+  .cols { display: flex; gap: 22px; align-items: flex-start; }
+  .tree { flex: 0 0 44%; }
+  .tree pre { font-size: 11px; line-height: 1.3; margin: 0; background: #f6f8fc; }
+  .tree pre code { font-size: 11px; background: transparent; }
+  .pin { font-family: monospace; font-size: 11.5px; color: #445; margin: 8px 0 0; }
+  .info { flex: 1 1 56%; }
+  .info h3 { font-size: 13.5px; margin: 0 0 3px; }
+  .info .reuse h3 { color: #2e7d32; }
+  .info .build h3 { color: #b45309; }
+  .info ul { margin: 0 0 9px; padding-left: 16px; }
+  .info li { margin: 0 0 4px; line-height: 1.26; font-size: 12.5px; }
+  .info code { font-size: 11.5px; background: #eef2f8; }
+  .info .build { margin-top: 2px; }
+  .gloss { font-size: 10px; margin-top: 7px; line-height: 1.3; }
+</style>
+
+Read this actual tree as two lists: the directories you can reuse as they stand, and the work that stays yours.
+
+<div class="cols">
+<div class="tree">
+
+```text
+core/
+├── communication/   Com, PduR, CanIf, CanTp, SoAd
+│   └── lwip-2.0.3/   bundled TCP/IP stack
+├── system/          Os (static RTOS), EcuM, BswM, SchM
+├── diagnostic/      Dem, Dcm, Det
+├── mcal/            Can, Adc, Spi, Pwm, Wdg drivers
+│   └── arch/         mpc5xxx, rh850_x, stm32, tms570
+├── arch/            generic (linux sim), transceivers
+└── boards/          mpc5xxx, rh850, jacinto, s32k
+examples/            HelloWorld, LedBlinker, LinSimple
+```
+
+<p class="pin">Fang717/arccore-core-21 · Arctic Core 21.0.0</p>
+
+</div>
+<div class="info">
+<div class="reuse">
+<h3>You can reuse</h3>
+<ul>
+<li><code>communication/</code>, <code>system/</code> and <code>diagnostic/</code> are the hardware-independent upper Basic Software. They sit above the MCAL line, so they are portable and give you a working reference on any silicon.</li>
+<li><code>mcal/</code> and <code>mcal/arch/</code> are driver skeletons. You reuse them directly if your part is a listed family (mpc5xxx, rh850_x, stm32, tms570). If it is not, they are the exact contract your own driver must meet.</li>
+<li><code>arch/</code> generic (linux sim) lets you run the upper stack on a PC for early bring-up, before any silicon driver exists.</li>
+<li><code>boards/</code> and <code>examples/</code> are integration templates. They show config to build to run for a real ECU.</li>
+</ul>
+</div>
+<div class="build">
+<h3>You must still build</h3>
+<ul>
+<li>The MCAL for your own silicon when it is not a listed family: Mcu, Port, Dio, Can, Adc, Spi, Pwm, Wdg and Gpt written against your registers.</li>
+<li>Your board and ECU configuration in ARXML (clock tree, pin multiplexing, memory map, ECU extract), which is not in this tree.</li>
+<li>RTE and BSW generation and integration, an Arctic Studio equivalent, because the tree is source, not a generated system.</li>
+<li>The port-forward from this 4.0.3-era snapshot to a current release (R21-11, R22-11, R24-11).</li>
+<li>The functional-safety case plus licence and intellectual-property clearance, because this is GPL, uncertified and anonymously sourced. Reaching ASIL-D means a certified stack or carrying the whole ISO 26262 case yourself, and the GPL-2.0 copyleft, the missing LICENSE file and unknown provenance are yours to resolve.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="gloss">Com = the AUTOSAR signal-packing communication module · PduR = PDU Router (routes PDUs between COM and the bus interfaces) · PDU = Protocol Data Unit · CanIf = CAN Interface (hardware-independent CAN) · CanTp = CAN Transport Protocol (ISO 15765-2 segmentation) · SoAd = Socket Adaptor (the Ethernet and IP transport interface) · CAN = Controller Area Network (the automotive serial bus) · LIN = Local Interconnect Network · lwip = lightweight IP (a small open-source TCP/IP stack) · TCP/IP = the standard internet transport and network protocols · Os = the static real-time AUTOSAR OS kernel · RTOS = Real-Time Operating System · EcuM = ECU Manager · BswM = Basic Software Mode Manager · SchM = BSW Scheduler · Dem = Diagnostic Event Manager (the fault store) · Dcm = Diagnostic Communication Manager (the UDS server) · Det = Default Error Tracer (AUTOSAR's development-time error hook) · UDS = Unified Diagnostic Services (ISO 14229) · MCAL = Microcontroller Abstraction Layer (the lowest driver layer) · Mcu = the microcontroller-unit driver (clocks, reset, core modes) · Port = the pin-multiplexing driver · Dio = Digital Input/Output driver · Can = the CAN driver · Adc = Analog-to-Digital Converter driver · Spi = Serial Peripheral Interface driver · Pwm = Pulse-Width Modulation driver · Wdg = Watchdog driver · Gpt = General-Purpose Timer driver · mpc5xxx, rh850_x, rh850, stm32, tms570, jacinto and s32k = microcontroller and board family identifiers this stack already has ports for (s32k = the NXP S32K automotive microcontroller family) · linux sim = a Linux host target that simulates the hardware · transceivers = the physical-layer bus-driver interfaces · BSW = Basic Software (CP's generated C layer, built statically, no heap) · CP = Classic Platform · RTE = Runtime Environment (the generated glue between components and BSW) · ARXML = AUTOSAR XML (the standard XML configuration format) · ECU extract = the per-ECU slice of the system ARXML used to configure one control unit · Arctic Studio = ARCCORE's commercial configuration and code-generation toolchain · R21-11 / R22-11 / R24-11 = AUTOSAR Classic Platform release versions, named by year and month · GPL-2.0 = GNU General Public License version 2 (a copyleft open-source licence) · copyleft = a licence rule that requires derived works to keep the same open-source licence · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · ISO 26262 = the international road-vehicle functional-safety standard · ECU = Electronic Control Unit · MCU = Microcontroller · PC = personal computer (a desktop or host machine)</div>
+
+<!-- ~60s | say: Now the practical question for a chip or ECU team, read straight off the tree. On the reuse side, the communication, system and diagnostic folders are the hardware-independent upper Basic Software. They sit above the driver line, so they are portable, a working reference on any silicon. The mcal folders are driver skeletons: if your part is a listed family you adapt them directly, and if it is not, they are the exact contract your own driver must meet. The generic Linux target runs the upper stack on a PC for early bring-up, and the boards and examples are integration templates from config to build to run. On the build side, you still write the driver layer for your own silicon, your board and ECU configuration in ARXML, and the generation and integration step, an Arctic Studio equivalent, because the tree is source, not a generated system. You port it forward from this four-oh-three era snapshot to a current release, and you own the safety case and the licensing, because this code is GPL, uncertified and anonymously sourced. Read it as a reference, not a finished product. -->
+
+---
+
 ## Inside the repo 2/3: `autoas/as`
 
 <style scoped>
