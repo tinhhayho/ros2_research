@@ -74,8 +74,8 @@ reflashing — and are new to automotive software platforms. Release-stamped to
 - **Foundation (FO)** — the cross-platform glue: common requirements, the **meta-model and
   single XML schema**, methodology, and shared wire protocols (SOME/IP, time-sync, DoIP, E2E,
   SecOC). FO is what lets a Classic ECU and an Adaptive machine live in one vehicle project
-- **Classic Platform (CP)** — statically-configured, real-time, **OSEK-heritage** stack for
-  deeply embedded microcontrollers. First released 1.0 in **2005**
+- **Classic Platform (CP)** — statically-configured, real-time stack for deeply embedded
+  microcontrollers, built on a **fixed-priority preemptive kernel**. First released 1.0 in **2005**
 - **Adaptive Platform (AP)** — **POSIX**-based, service-oriented, dynamically-deployed stack
   for high-performance compute. First released **17-03 (March 2017)**
 - **The naming trap**: the **R19-11 unification** (Nov 2019) merged CP's `4.x.y` and AP's
@@ -85,7 +85,7 @@ reflashing — and are new to automotive software platforms. Release-stamped to
   **RS/SRS** (requirements), **SWS** (the detailed testable module spec), **TPS** (templates),
   **PRS** (wire-protocol requirements)
 
-<div class="gloss">OSEK = the 1990s European automotive RTOS standard CP's OS descends from · POSIX = Portable Operating System Interface (IEEE 1003) · SOME/IP = Scalable service-Oriented MiddlewarE over IP · DoIP = Diagnostics over IP (ISO 13400) · E2E = End-to-End protection · SecOC = Secure Onboard Communication · SWS = Software Specification</div>
+<div class="gloss">POSIX = Portable Operating System Interface (IEEE 1003) · SOME/IP = Scalable service-Oriented MiddlewarE over IP · DoIP = Diagnostics over IP (ISO 13400) · E2E = End-to-End protection · SecOC = Secure Onboard Communication · SWS = Software Specification</div>
 
 ---
 
@@ -128,7 +128,7 @@ open an SWS only when you implement. (Every filename below verified live against
 ## What Classic is, and where it runs
 
 - **A statically-configured software stack for deeply embedded ECUs** — single
-  microcontrollers, no MMU-class OS, hard real-time, safety-critical. The OSEK-heritage half
+  microcontrollers, no MMU-class OS, hard real-time, safety-critical. The static real-time half
 - **Hold onto this one property**: a CP ECU builds to **one statically configured binary** —
   fixed task set, fixed communication matrix, fixed memory map, all decided at design time.
   *"All tasks that will ever execute … are allocated when the executable image is built."*
@@ -219,16 +219,25 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
-## AUTOSAR OS — OSEK heritage, plus scalability classes
+## AUTOSAR OS — a static real-time kernel with scalability classes
 
-- AUTOSAR OS is a **backward-compatible superset of OSEK/VDX OS (ISO 17356-3)** — *not* "= OSEK".
-  It keeps OSEK's core: static tasks, fixed-priority preemptive scheduling, priority-ceiling
-  resources, events, alarms, counters, Cat-1 vs Cat-2 ISRs. **Know OSEK → you know ~70% of it**
+<style scoped>
+  section { font-size: 21px; }
+  li { margin-bottom: 4px; }
+  table { font-size: 18px; }
+  th, td { padding: 3px 8px; }
+  .gloss { font-size: 15px; margin-top: 8px; padding-top: 4px; line-height: 1.3; }
+</style>
+
+- AUTOSAR OS is a **static, fixed-priority real-time kernel**. Its whole task set is fixed at
+  build time, and it provides fixed-priority preemptive scheduling, priority-ceiling resources,
+  events, alarms, counters, and Cat-1 vs Cat-2 ISRs, all with no heap. **If you already know a
+  statically configured RTOS, you know most of it**, but it is stricter.
 - What AUTOSAR bundled on top, as **Scalability Classes**:
 
 | Class | = | Adds |
 |---|---|---|
-| **SC1** | OSEK OS + | **Schedule Tables** (time-triggered, sync to global time), stack monitoring |
+| **SC1** | base OS + | **Schedule Tables** (time-triggered, sync to global time), stack monitoring |
 | **SC2** | SC1 + | **Timing Protection** (execution / inter-arrival budgets) + global time sync |
 | **SC3** | SC1 + | **Memory Protection** + OS-Applications + trusted/non-trusted functions |
 | **SC4** | SC2+SC3 | both timing and memory protection |
@@ -237,7 +246,7 @@ open an SWS only when you implement. (Every filename below verified live against
   **IOC** (Inter-OS-Application Communication) — a spinlock-protected shared-memory ring for
   data crossing a core/partition boundary
 
-<div class="gloss">OSEK/VDX = the 1990s automotive RTOS standard · ISR = interrupt service routine (Cat-1 = no OS calls, lowest latency; Cat-2 = may call OS services) · SC = Scalability Class · IOC = Inter-OS-Application Communication · exact SC1–SC4 wording is medium-confidence (structure high) — see references</div>
+<div class="gloss">ISR = interrupt service routine (Cat-1 = no OS calls, lowest latency; Cat-2 = may call OS services) · SC = Scalability Class · IOC = Inter-OS-Application Communication · exact SC1–SC4 wording is medium-confidence (structure high) — see references</div>
 
 ---
 
@@ -764,7 +773,7 @@ Four repositories are worth your time. This is what is inside each one. This is 
 
 ```text
 classic-platform/  (master @ 09433770, 2049 tree entries)
-├── system/Os/rtos/          OSEK/AUTOSAR OS kernel
+├── system/Os/rtos/          AUTOSAR OS kernel (static real-time)
 │   ├── inc/Os.h             public OS API (tasks, alarms, events)
 │   └── src/os_task.c, os_alarm.c, os_counter.c, os_sched_table.c
 ├── communication/           BSW comm stack
@@ -785,17 +794,17 @@ classic-platform/  (master @ 09433770, 2049 tree entries)
 </div>
 <div class="info">
 <h3>Start reading here</h3>
-<p>The top-level <code>makefile</code> is the build entry. It is a recursive GNU make build where you pick a target board with <code>BOARDDIR</code> and the module directories to compile with <code>BDIR</code>. The OS kernel is always built. <code>system/Os/rtos/inc/Os.h</code> is the public header for the OSEK/AUTOSAR OS kernel, and it declares the task, alarm, counter and event API. <code>communication/Com/src/Com_Com.c</code> is the COM signal input and output, where <code>Com_SendSignal</code> and <code>Com_ReceiveSignal</code> pack and unpack signals into an I-PDU. <code>diagnostic/Dcm/src/Dcm.c</code> is the UDS server and <code>diagnostic/Dem/src/Dem.c</code> is the fault and DTC store.</p>
+<p>The top-level <code>makefile</code> is the build entry. It is a recursive GNU make build where you pick a target board with <code>BOARDDIR</code> and the module directories to compile with <code>BDIR</code>. The OS kernel is always built. <code>system/Os/rtos/inc/Os.h</code> is the public header for the AUTOSAR OS kernel, and it declares the task, alarm, counter and event API. <code>communication/Com/src/Com_Com.c</code> is the COM signal input and output, where <code>Com_SendSignal</code> and <code>Com_ReceiveSignal</code> pack and unpack signals into an I-PDU. <code>diagnostic/Dcm/src/Dcm.c</code> is the UDS server and <code>diagnostic/Dem/src/Dem.c</code> is the fault and DTC store.</p>
 <h3>What you can do</h3>
 <p>Cross-compile for a board with <code>make BOARDDIR=&lt;board&gt; BDIR=&lt;dir&gt; CROSS_COMPILE=&lt;gcc&gt; all</code>. This builds the OS kernel, which is always built, plus the module directories you select, for one of about 45 boards. <code>scripts/build_example.sh</code> is a thin wrapper around the same build. There is no graphical development environment and no host application to run. The build produces an embedded firmware image for an MCU target. A gnulinux board also exists for host builds.</p>
 <h3>Know the limits</h3>
-<p>The default branch is dormant. Its last commit on <code>master</code> is from 2020-04-02, with the message "Remove GPLv2 violating files". The repository shows a later push date of 2024-08-06, but that reflects other branches, not <code>master</code>. There is no <code>examples/</code> directory at this commit, so the OSEK example applications the makefile mentions are not present here. This is a continuation of the Arctic Core codebase, a full Classic AUTOSAR basic-software stack in C across about 45 MCU board targets. Read it for the shape of a real Classic stack, not to run it.</p>
+<p>The default branch is dormant. Its last commit on <code>master</code> is from 2020-04-02, with the message "Remove GPLv2 violating files". The repository shows a later push date of 2024-08-06, but that reflects other branches, not <code>master</code>. There is no <code>examples/</code> directory at this commit, so the example applications the makefile mentions are not present here. This is a continuation of the Arctic Core codebase, a full Classic AUTOSAR basic-software stack in C across about 45 MCU board targets. Read it for the shape of a real Classic stack, not to run it.</p>
 </div>
 </div>
 
-<div class="gloss">OSEK = the 1990s automotive RTOS standard AUTOSAR OS descends from · AUTOSAR OS = the OSEK-derived static real-time kernel · BSW = Basic Software (CP's generated C layer, built statically, no heap) · COM = the AUTOSAR signal-packing communication module (not a serial port) · PDU = Protocol Data Unit · I-PDU = Interaction-layer PDU (the packed frame COM builds from signals) · PduR = PDU Router (routes PDUs between COM and the bus interfaces) · CanIf = CAN Interface (hardware-independent CAN) · CanTp = CAN Transport Protocol (ISO 15765-2 segmentation) · CAN = Controller Area Network (the automotive serial bus) · HW = hardware · UDS = Unified Diagnostic Services (ISO 14229) · Dcm = Diagnostic Communication Manager (the UDS server) · Dem = Diagnostic Event Manager (the fault store) · DTC = Diagnostic Trouble Code · ECU = Electronic Control Unit · EcuM = ECU Manager · BswM = Basic Software Mode Manager · SchM = BSW Scheduler · MCU = Microcontroller · CP = Classic Platform · GNU make = the GNU project build tool · GPL-2.0 = GNU General Public License version 2 (an open-source licence)</div>
+<div class="gloss">AUTOSAR OS = CP's static real-time kernel (fixed-priority, no heap) · BSW = Basic Software (CP's generated C layer, built statically, no heap) · COM = the AUTOSAR signal-packing communication module (not a serial port) · PDU = Protocol Data Unit · I-PDU = Interaction-layer PDU (the packed frame COM builds from signals) · PduR = PDU Router (routes PDUs between COM and the bus interfaces) · CanIf = CAN Interface (hardware-independent CAN) · CanTp = CAN Transport Protocol (ISO 15765-2 segmentation) · CAN = Controller Area Network (the automotive serial bus) · HW = hardware · UDS = Unified Diagnostic Services (ISO 14229) · Dcm = Diagnostic Communication Manager (the UDS server) · Dem = Diagnostic Event Manager (the fault store) · DTC = Diagnostic Trouble Code · ECU = Electronic Control Unit · EcuM = ECU Manager · BswM = Basic Software Mode Manager · SchM = BSW Scheduler · MCU = Microcontroller · CP = Classic Platform · GNU make = the GNU project build tool · GPL-2.0 = GNU General Public License version 2 (an open-source licence)</div>
 
-<!-- ~65s | say: This is the Classic Platform repository, the one open and complete Classic AUTOSAR stack worth reading. Start at the top makefile. It is a recursive GNU make build. You pick a target board and the module directories to compile, and the OS kernel is always built. Then open Os dot h. It is the public header for the OSEK-derived kernel, and it declares the task, alarm, counter and event calls. Com underscore Com dot c is the communication module, where Com send signal packs an application signal into an I-PDU. The diagnostic folder holds Dcm, the UDS server, and Dem, the fault store. To build it, you cross-compile for one of about forty-five boards. There is no host application to run, because the build produces firmware for a microcontroller. Two honest limits. The main branch has been dormant since 2020, and the example applications the makefile mentions are not in the tree. Read it for the shape. -->
+<!-- ~65s | say: This is the Classic Platform repository, the one open and complete Classic AUTOSAR stack worth reading. Start at the top makefile. It is a recursive GNU make build. You pick a target board and the module directories to compile, and the OS kernel is always built. Then open Os dot h. It is the public header for the AUTOSAR OS kernel, and it declares the task, alarm, counter and event calls. Com underscore Com dot c is the communication module, where Com send signal packs an application signal into an I-PDU. The diagnostic folder holds Dcm, the UDS server, and Dem, the fault store. To build it, you cross-compile for one of about forty-five boards. There is no host application to run, because the build produces firmware for a microcontroller. Two honest limits. The main branch has been dormant since 2020, and the example applications the makefile mentions are not in the tree. Read it for the shape. -->
 
 ---
 
@@ -842,9 +851,9 @@ void Dem_ReportErrorStatus( Dem_EventIdType eventId, Dem_EventStatusType eventSt
 
 <p class="attr"><a href="https://github.com/openAUTOSAR/classic-platform/blob/09433770bebb8f27a7b480d7c96d814c68ffed3e/diagnostic/Dem/src/Dem.c#L7458-L7465">openAUTOSAR/classic-platform @ 09433770 — diagnostic/Dem/src/Dem.c</a></p>
 
-<div class="gloss"><b>What to notice:</b> <code>Com_SendSignal</code> is the COM service a task calls to publish an application signal, later packed into an I-PDU on the bus. Before it does any work it checks the module state. If COM is not initialized, it reports a development-time error through the DET and returns a service-not-available code. The <code>/* @req COM334 */</code> comment ties this line to a numbered requirement in the AUTOSAR COM specification, and that traceability tag is the signature style of the whole codebase. <code>Dem_ReportErrorStatus</code> is the entry any basic-software module calls to report a fault as passed or failed by numeric event id. The two <code>VALIDATE_NO_RV</code> macros are the standard guard: they reject calls made before init or with an out-of-range status by reporting to the DET. <code>SchM_Enter_Dem_EA_0()</code> then opens a named exclusive area, so the fault-status update that follows is atomic against task preemption on the ECU. Both patterns, the requirement tags and the init-and-exclusive-area guards, are the OSEK-heritage Classic idiom. · COM = the AUTOSAR signal-packing communication module (not a serial port) · DET = Default Error Tracer (AUTOSAR's development-time error hook) · PDU = Protocol Data Unit · I-PDU = Interaction-layer PDU (the packed frame COM builds from signals) · DEM = Diagnostic Event Manager · BSW = Basic Software (CP's generated C layer) · SchM = BSW Scheduler; the <code>SchM_Enter</code>/<code>SchM_Exit</code> pair brackets an exclusive area (EA), an atomic section against preemption · OSEK = the 1990s automotive RTOS standard AUTOSAR OS descends from · id = identifier · ECU = Electronic Control Unit</div>
+<div class="gloss"><b>What to notice:</b> <code>Com_SendSignal</code> is the COM service a task calls to publish an application signal, later packed into an I-PDU on the bus. Before it does any work it checks the module state. If COM is not initialized, it reports a development-time error through the DET and returns a service-not-available code. The <code>/* @req COM334 */</code> comment ties this line to a numbered requirement in the AUTOSAR COM specification, and that traceability tag is the signature style of the whole codebase. <code>Dem_ReportErrorStatus</code> is the entry any basic-software module calls to report a fault as passed or failed by numeric event id. The two <code>VALIDATE_NO_RV</code> macros are the standard guard: they reject calls made before init or with an out-of-range status by reporting to the DET. <code>SchM_Enter_Dem_EA_0()</code> then opens a named exclusive area, so the fault-status update that follows is atomic against task preemption on the ECU. Both patterns, the requirement tags and the init-and-exclusive-area guards, are the static-kernel Classic idiom. · COM = the AUTOSAR signal-packing communication module (not a serial port) · DET = Default Error Tracer (AUTOSAR's development-time error hook) · PDU = Protocol Data Unit · I-PDU = Interaction-layer PDU (the packed frame COM builds from signals) · DEM = Diagnostic Event Manager · BSW = Basic Software (CP's generated C layer) · SchM = BSW Scheduler; the <code>SchM_Enter</code>/<code>SchM_Exit</code> pair brackets an exclusive area (EA), an atomic section against preemption · id = identifier · ECU = Electronic Control Unit</div>
 
-<!-- ~65s | say: These are two real functions from the Classic stack, and they show the house style. The first is Com send signal, the service a task calls to publish an application signal. Before it does any work, it checks that the module was initialized. If it was not, it reports a development-time error through the Default Error Tracer and returns a service-not-available code. The comment tagged requirement COM three three four links that line to a numbered requirement in the AUTOSAR COM specification. The second function is Dem report error status. Any basic-software module calls it to report a fault as passed or failed, using a numeric event id. The two validate macros are the standard guard. They reject calls made before init or with a bad status. Then SchM enter opens a named exclusive area, so the fault update that follows cannot be interrupted by another task. Requirement tags and state guards on every entry point are the OSEK-heritage Classic idiom. -->
+<!-- ~65s | say: These are two real functions from the Classic stack, and they show the house style. The first is Com send signal, the service a task calls to publish an application signal. Before it does any work, it checks that the module was initialized. If it was not, it reports a development-time error through the Default Error Tracer and returns a service-not-available code. The comment tagged requirement COM three three four links that line to a numbered requirement in the AUTOSAR COM specification. The second function is Dem report error status. Any basic-software module calls it to report a fault as passed or failed, using a numeric event id. The two validate macros are the standard guard. They reject calls made before init or with a bad status. Then SchM enter opens a named exclusive area, so the fault update that follows cannot be interrupted by another task. Requirement tags and state guards on every entry point are the static-kernel Classic idiom. -->
 
 ---
 
@@ -1264,7 +1273,7 @@ vsomeip/  (tag 3.7.4)
 
 | Dimension | **Classic Platform (CP)** | **Adaptive Platform (AP)** |
 |---|---|---|
-| **OS / kernel** | AUTOSAR OS — OSEK superset (SC1–SC4, no MMU) | not a new OS: an **OS Interface** on POSIX **PSE51** over Linux/QNX/PikeOS |
+| **OS / kernel** | AUTOSAR OS — static real-time kernel (SC1–SC4, no MMU) | not a new OS: an **OS Interface** on POSIX **PSE51** over Linux/QNX/PikeOS |
 | **Language & API** | C; RTE-generated `Rte_Read/Write/Call` | C++14 (C++17 via MISRA C++:2023 merge); `ara::*` |
 | **Config time** | fully **static** — fixed pre-build (ECUC) → one binary | **dynamic** — manifests bound late; discovery + start/stop at runtime |
 | **Communication** | **signal**-oriented — COM packs signals→I-PDUs on CAN/LIN/FlexRay/Ethernet | **service**-oriented — `ara::com` proxy/skeleton over **SOME/IP or DDS** |
@@ -1543,7 +1552,7 @@ The org-boundary rule scales up to four buildable paths:
   p { margin: 2px 0 2px 0; font-size: 13.5px; }
 </style>
 
-*(Extends the main deck's three-slide glossary — SWC/RTE/BSW/MCAL/CDD/ARXML/OSEK/AUTOSAR-OS/ARA/POSIX/PSE51/UDS/DoCAN/DoIP/DCM/DEM/UCM/SOVD are defined there.)*
+*(Extends the main deck's three-slide glossary — SWC/RTE/BSW/MCAL/CDD/ARXML/AUTOSAR-OS/ARA/POSIX/PSE51/UDS/DoCAN/DoIP/DCM/DEM/UCM/SOVD are defined there.)*
 
 - **FO / CP / AP** — Foundation / Classic Platform / Adaptive Platform: the three members of one AUTOSAR standard set
 - **VFB** — Virtual Functional Bus: the logical bus SWCs talk over; the RTE implements it per ECU
@@ -1579,7 +1588,7 @@ The org-boundary rule scales up to four buildable paths:
 
 - **Release / structure**: [autosar.org/news-events/release-event](https://www.autosar.org/news-events/release-event) · [.../detail/release-r25-11-is-now-available](https://www.autosar.org/news-events/detail/release-r25-11-is-now-available) · [CP_TR_ReleaseOverview](https://www.autosar.org/fileadmin/standards/R25-11/CP/AUTOSAR_CP_TR_ReleaseOverview.pdf) (R25-11, DDS-on-CP, removed specs, schema) · [autosar.org/about/history](https://www.autosar.org/about/history)
 - **Classic architecture**: [CP_EXP_LayeredSoftwareArchitecture](https://www.autosar.org/fileadmin/standards/R25-11/CP/AUTOSAR_CP_EXP_LayeredSoftwareArchitecture.pdf) (R25-11) · [FO_EXP_SWArchitecturalDecisions](https://www.autosar.org/fileadmin/standards/R25-11/FO/AUTOSAR_FO_EXP_SWArchitecturalDecisions.pdf) (R25-11, Doc 1078, dynamic memory) · [TR_Methodology](https://www.autosar.org/fileadmin/standards/R22-11/CP/AUTOSAR_TR_Methodology.pdf) (R22-11) · RTE/VFB: [hpi.de Naumann RTE_VFB](https://hpi.de/fileadmin/user_upload/fachgebiete/giese/Ausarbeitungen_AUTOSAR0809/NicoNaumann_RTE_VFB.pdf) · embetronicx.com RTE tutorial · [mxhelp.danlawinc.com](https://mxhelp.danlawinc.com/autosar_reference.htm)
-- **Classic OS / comms**: [Vector AUTOSAR_Task_Scheduling](https://cdn.vector.com/cms/content/know-how/_technical-articles/AUTOSAR/AUTOSAR_Task_Scheduling_VU_201507_PressArticle_EN.pdf) (SC1–SC4) · [osek-vdx.org OS 2.2.3](https://www.osek-vdx.org/mirror/os223.pdf) · [SWS_ServiceDiscovery](https://www.autosar.org/fileadmin/standards/R22-11/CP/AUTOSAR_SWS_ServiceDiscovery.pdf) (R22-11) · [PRS_E2EProtocol](https://www.autosar.org/fileadmin/standards/R19-03/FO/AUTOSAR_PRS_E2EProtocol.pdf) (R19-03) · [FO_PRS_SecOcProtocol](https://www.autosar.org/fileadmin/standards/R24-11/FO/AUTOSAR_FO_PRS_SecOcProtocol.pdf) (R24-11) · [PRS_NetworkManagementProtocol](https://www.autosar.org/fileadmin/standards/R22-11/FO/AUTOSAR_PRS_NetworkManagementProtocol.pdf) (R22-11) · [eenews CAN-FD-vs-FlexRay](https://www.eenewseurope.com/en/infineon-can-fd-success-goes-at-the-expense-of-flexray/)
+- **Classic OS / comms**: [Vector AUTOSAR_Task_Scheduling](https://cdn.vector.com/cms/content/know-how/_technical-articles/AUTOSAR/AUTOSAR_Task_Scheduling_VU_201507_PressArticle_EN.pdf) (SC1–SC4) · [SWS_ServiceDiscovery](https://www.autosar.org/fileadmin/standards/R22-11/CP/AUTOSAR_SWS_ServiceDiscovery.pdf) (R22-11) · [PRS_E2EProtocol](https://www.autosar.org/fileadmin/standards/R19-03/FO/AUTOSAR_PRS_E2EProtocol.pdf) (R19-03) · [FO_PRS_SecOcProtocol](https://www.autosar.org/fileadmin/standards/R24-11/FO/AUTOSAR_FO_PRS_SecOcProtocol.pdf) (R24-11) · [PRS_NetworkManagementProtocol](https://www.autosar.org/fileadmin/standards/R22-11/FO/AUTOSAR_PRS_NetworkManagementProtocol.pdf) (R22-11) · [eenews CAN-FD-vs-FlexRay](https://www.eenewseurope.com/en/infineon-can-fd-success-goes-at-the-expense-of-flexray/)
 - **Classic services / safety**: [CP_SWS_DiagnosticEventManager](https://www.autosar.org/fileadmin/standards/R24-11/CP/AUTOSAR_CP_SWS_DiagnosticEventManager.pdf) (R24-11) · [CP_SWS_DiagnosticCommunicationManager](https://www.autosar.org/fileadmin/standards/R24-11/CP/AUTOSAR_CP_SWS_DiagnosticCommunicationManager.pdf) (R24-11) · [SWS_NVRAMManager](https://www.autosar.org/fileadmin/standards/R22-11/CP/AUTOSAR_SWS_NVRAMManager.pdf) (R22-11) · [EXP_ModeManagementGuide](https://www.autosar.org/fileadmin/standards/R22-11/CP/AUTOSAR_EXP_ModeManagementGuide.pdf) (R22-11) · [CP_SWS_WatchdogManager](https://www.autosar.org/fileadmin/standards/R23-11/CP/AUTOSAR_CP_SWS_WatchdogManager.pdf) (R23-11) · [SWS_SynchronizedTimeBaseManager](https://www.autosar.org/fileadmin/standards/R22-11/CP/AUTOSAR_SWS_SynchronizedTimeBaseManager.pdf) (R22-11) · [EXP_FunctionalSafetyMeasures](https://www.autosar.org/fileadmin/standards/R22-11/CP/AUTOSAR_EXP_FunctionalSafetyMeasures.pdf) (R22-11, Doc 664)
 - **Vendors / silicon**: [vector.com MICROSAR Classic Safe ASIL-D recert](https://www.vector.com/us/en/news/news/vector-autosar-basic-software-successfully-re-certified-additional-modules-available-in-asil-d-2/) (exida) · [developer.nvidia.com DRIVE safety-MCU](https://developer.nvidia.com/docs/drive/drive-os/6.0.9/public/drive-os-linux-sdk/common/topics/mcu_setup_usage/mcu_setup_and_usage1.html) (Orin=AURIX TC397X / Thor=RH850U2A16, repo-verified) · [btc-embedded.com Classic vs Adaptive](https://www.btc-embedded.com/autosar-classic-vs-adaptive)
 

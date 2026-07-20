@@ -32,7 +32,7 @@
   <text x="598.0" y="84.0" text-anchor="start" font-size="12" font-weight="700" fill="#223344">Buy Classic (CP), pre-certified</text>
   <text x="598.0" y="102.0" text-anchor="start" font-size="8.5" fill="#223344">In practice this path is forced: OEM RFQs demand AUTOSAR plus ASIL evidence.</text>
   <text x="598.0" y="114.5" text-anchor="start" font-size="8.5" fill="#223344">The pre-certified base: Vector MICROSAR Safe, exida ASIL D since 2016.</text>
-  <text x="598.0" y="127.0" text-anchor="start" font-size="8.5" fill="#223344"><tspan font-weight="700">SW:</tspan> static ARXML config, C, OSEK task model.</text>
+  <text x="598.0" y="127.0" text-anchor="start" font-size="8.5" fill="#223344"><tspan font-weight="700">SW:</tspan> static ARXML config, C, fixed-priority task model.</text>
   <rect x="586.0" y="148.0" width="358.0" height="58.5" rx="8" fill="#DCE9F7" stroke="#7f9dc9" stroke-width="1.5"/>
   <text x="598.0" y="166.0" text-anchor="start" font-size="12" font-weight="700" fill="#223344">Buy Classic (CP) anyway</text>
   <text x="598.0" y="184.0" text-anchor="start" font-size="8.5" fill="#223344">Nothing forces it, but it is the low-risk default.</text>
@@ -80,7 +80,7 @@
   <text x="480.0" y="685.0" text-anchor="middle" font-size="11" font-weight="700" fill="#6B4A2B">OEM/cloud choice.</text>
   <text x="480.0" y="711.0" text-anchor="middle" font-size="8.5" fill="#555555">ASIL = Automotive Safety Integrity Level (ISO 26262; QM &lt; A &lt; B &lt; C &lt; D) · QM = Quality Managed, no safety rating · RFQ = request for quotation · OEM = the vehicle maker · MCU = microcontroller · HPC = High-Performance Computer · SoC =</text>
   <text x="480.0" y="722.5" text-anchor="middle" font-size="8.5" fill="#555555">System-on-Chip</text>
-  <text x="480.0" y="734.0" text-anchor="middle" font-size="8.5" fill="#555555">CP = Classic Platform · AP = Adaptive Platform · ARXML = AUTOSAR XML configuration format · OSEK = the 1990s automotive RTOS standard behind CP's OS · MCAL = Microcontroller Abstraction Layer (vendor-supplied drivers) · UDS / COM /</text>
+  <text x="480.0" y="734.0" text-anchor="middle" font-size="8.5" fill="#555555">CP = Classic Platform · AP = Adaptive Platform · ARXML = AUTOSAR XML configuration format · MCAL = Microcontroller Abstraction Layer (vendor-supplied drivers) · UDS / COM /</text>
   <text x="480.0" y="745.5" text-anchor="middle" font-size="8.5" fill="#555555">NvM = the diagnostics, signal and storage module families · MMU = Memory Management Unit</text>
   <text x="480.0" y="757.0" text-anchor="middle" font-size="8.5" fill="#555555">PSE51 = IEEE 1003.13 minimal POSIX profile · STL = C++ Standard Library · ara::com / DM / UCM = AP communication / diagnostics / update clusters · SOVD = Service-Oriented Vehicle Diagnostics (ISO 17978) · S-CORE = Eclipse Safe Open</text>
   <text x="480.0" y="768.5" text-anchor="middle" font-size="8.5" fill="#555555">Vehicle Core · exida / TÜV SÜD = safety certification bodies</text>

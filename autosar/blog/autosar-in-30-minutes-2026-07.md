@@ -46,8 +46,10 @@ communication matrix are frozen in ARXML (AUTOSAR XML) and generated into one EC
 no `malloc`, no runtime task creation, and no service negotiation. Safety firmware already follows
 this discipline by hand; CP makes it formal and generates the connecting code for you.
 
-AUTOSAR OS is a backward-compatible superset of OSEK/VDX, the automotive RTOS standard from the
-1990s, packaged as Scalability Classes SC1 through SC4, which add timing and memory protection.
+AUTOSAR OS is a static, fixed-priority real-time kernel. Its whole task set is fixed at build time,
+it uses fixed-priority preemptive scheduling with priority-ceiling resources, and it has no heap,
+much like a statically configured RTOS you already know, but stricter. It is packaged as Scalability
+Classes SC1 through SC4, which add timing and memory protection.
 Because everything is static, CP has the mature safety path. The first AUTOSAR implementation
 certified to ISO 26262 up to ASIL D was released in 2016. ASIL D is the highest Automotive Safety
 Integrity Level.
@@ -114,10 +116,10 @@ The following cannot host AP:
 | Cannot host AP | why not |
 |---|---|
 | **FreeRTOS** (+Labs POSIX) | partial pthread subset. Its own README says a POSIX app *"cannot be ported... using only this wrapper"*. No processes |
-| **SAFERTOS** | no POSIX at all (ships an OSEK layer instead); single static image |
+| **SAFERTOS** | no POSIX personality; ships as a single static image |
 | **Zephyr** | POSIX subset layer, single-image kernel, no MMU processes |
 | **NuttX** | the most POSIX-faithful MCU RTOS (an optional MMU "kernel build" exists, but no `fork`/`exec`); still MCU-class |
-| **AUTOSAR OS (OSEK)** | no POSIX by design; this is CP's OS |
+| **AUTOSAR OS (CP's kernel)** | no POSIX by design; this is CP's OS |
 
 The test is one question: does the OS support PSE51 *and* run MMU-isolated processes? If yes to both,
 it can host AP. Any task-model RTOS stays on the MCU side with Classic.
@@ -160,7 +162,7 @@ Inside it, `core/communication/` holds the communication chain: the COM signal-p
 PDU Router (PduR), the CAN Interface (CanIf), the CAN Transport Protocol (CanTp) for segmentation,
 and the Socket Adaptor (SoAd) for Ethernet, together with a bundled lwip 2.0.3 stack, which is a
 small open-source Transmission Control Protocol and Internet Protocol (TCP/IP) implementation.
-`core/system/` holds the OSEK-style operating-system kernel plus the state managers EcuM, BswM, and
+`core/system/` holds the static real-time operating-system kernel plus the state managers EcuM, BswM, and
 SchM, and `core/diagnostic/` holds the diagnostic modules Dem, Dcm, and Det, which are the fault
 store, the UDS server, and the development-time error tracer. The modules stamp themselves as
 AUTOSAR 4.0.3 in release macros; `Com.h`, for example, sets `COM_AR_RELEASE` to 4/0/3. Hardware
@@ -210,7 +212,7 @@ purpose, all of the BSWs are developed by me alone according to AUTOSAR 4.4." It
 a communication stack (Com, PduR, CanIf, CanTp, plus SOME/IP, its service discovery, and a LIN
 interface), the diagnostic modules (Dcm, Dem, and Det), memory services for non-volatile storage
 (NvM, Fee, and Ea), cryptographic services, the Microcontroller Abstraction Layer (MCAL) drivers
-(Can, Dio, Fls, and more), and an OSEK-style operating-system kernel with tasks, alarms, counters,
+(Can, Dio, Fls, and more), and a static real-time operating-system kernel with tasks, alarms, counters,
 and resources under `infras/system/kernel/os/`. Unlike a bare stack, it also ships desktop tooling
 alongside the code that runs on the microcontroller. `tools/generator/` is a per-module Python
 configuration generator, and `tools/asone/` is a Qt graphical tool for Com, Dcm, and the flash
@@ -252,7 +254,7 @@ reject an uninitialized module, an out-of-range signal identifier, and a NULL da
 signal is then fetched by index from a generated, read-only configuration table,
 `COM_CONFIG->SignalConfigs`, which is the configuration-driven pattern again. The same repository
 also lets you read the operating system underneath. Here is a slice from inside its `GetResource()`,
-the OSEK priority-ceiling protocol:
+the priority-ceiling protocol:
 
 ```c
   if (E_OK == ercd) {
@@ -270,7 +272,7 @@ the OSEK priority-ceiling protocol:
 [autoas/as @ bfe1805 — infras/system/kernel/os/kernel/resource.c#L74-L83](https://github.com/autoas/as/blob/bfe1805f3cf61ddf0685aa981d64260bf9349cee/infras/system/kernel/os/kernel/resource.c#L74-L83)
 
 Taking a resource raises the running task's priority up to the resource's statically configured
-ceiling, which is how OSEK prevents priority inversion and deadlock without ever blocking at runtime.
+ceiling, which is how the kernel prevents priority inversion and deadlock without ever blocking at runtime.
 The previous priority and the previously held resource are saved first, so nested resource pairs
 unwind like a stack, strictly last-in first-out. The whole update runs inside `EnterCritical()` and
 `ExitCritical()` with interrupts masked, because it changes shared scheduler state, and it applies
@@ -332,7 +334,7 @@ Seven rows show the contrast:
 | | **Classic Platform (CP)** | **Adaptive Platform (AP)** |
 |---|---|---|
 | **Target** | deeply-embedded MCUs: Infineon AURIX, NXP S32K, Renesas RH850 | HPC SoCs: NVIDIA Orin/Thor, Qualcomm, NXP S32G, Renesas R-Car |
-| **OS** | AUTOSAR OS, an OSEK superset (SC1–SC4, no MMU) | not a new OS: an OS Interface on POSIX PSE51 over Linux/QNX/PikeOS |
+| **OS** | AUTOSAR OS, a static real-time kernel (SC1–SC4, no MMU) | not a new OS: an OS Interface on POSIX PSE51 over Linux/QNX/PikeOS |
 | **Model** | fully static: C, RTE-generated `Rte_Read/Write/Call`, one binary | dynamic: C++14, `ara::*`, manifests bound late; discovery plus start/stop at runtime |
 | **Comms** | signal-oriented: COM packs signals → I-PDUs on CAN/LIN/FlexRay/Ethernet | service-oriented: `ara::com` proxy/skeleton over SOME/IP or DDS |
 | **Diagnostics** | DCM plus DEM: UDS over DoCAN/DoIP | DM (`ara::diag`): UDS server *and* SOVD; DoIP the only standardized transport (custom permitted) |

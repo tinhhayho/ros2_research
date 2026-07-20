@@ -69,19 +69,19 @@
 
 ## Slide 4 — Classic in one slide
 
-**Thời lượng mục tiêu: ~70 giây.** Ba ý trụ của Classic: static, OS gốc OSEK, và đường ASIL-D chín muồi.
+**Thời lượng mục tiêu: ~70 giây.** Ba ý trụ của Classic: static, OS là kernel real-time tĩnh, và đường ASIL-D chín muồi.
 
 **Mở đầu, mọi thứ đều static (~22 giây):**
 "Classic trong một slide. Nguyên tắc số một: mọi thứ đều static và được quyết ngay lúc build. Tập task, memory map và communication matrix đều bị đóng băng trong ARXML. Rồi tool sinh tất cả những cái đó ra thành đúng một binary cho một ECU."
 
-**OS gốc OSEK (~20 giây):**
-"OS thì đến từ dòng OSEK. AUTOSAR OS là một superset của OSEK/VDX. Nó được đóng gói thành các Scalability Class từ SC1 đến SC4, các class cao thêm dần phần bảo vệ timing và bảo vệ bộ nhớ."
+**OS là kernel real-time tĩnh (~20 giây):**
+"OS ở đây là một kernel real-time tĩnh. Toàn bộ task được chốt lúc build, lịch ưu tiên cố định, không có heap, giống một RTOS cấu hình tĩnh mà bạn đã quen nhưng chặt hơn. Nó được đóng gói thành các Scalability Class từ SC1 đến SC4, các class cao thêm dần phần bảo vệ timing và bảo vệ bộ nhớ."
 
 **Đường ASIL-D chín muồi (~20 giây):**
 "Và Classic nắm con đường ASIL-D đã chín muồi. Tính tất định của nó đến từ chính việc mọi thứ đều static. Bản triển khai AUTOSAR đầu tiên được chứng nhận theo ISO 26262 lên tới mức ASIL D xuất hiện năm 2016. Cụ thể là Vector MICROSAR Safe, do exida chứng nhận."
 
 **Chốt (~8 giây):**
-"Static, OS gốc OSEK, và ASIL-D chín. Ba trụ đó là toàn bộ tinh thần của Classic."
+"Static, OS là kernel real-time tĩnh, và ASIL-D chín. Ba trụ đó là toàn bộ tinh thần của Classic."
 
 **Chuyển slide:**
 "Slide sau tôi sẽ chỉ một cái mẹo. Đây là ý tưởng thật sự mới với dân bare-metal."
@@ -164,7 +164,7 @@
 "Hai yêu cầu đó phân loại mọi kernel thành hai nhóm. Bên đỡ được AP, cặp production là QNX và Linux. QNX Neutrino là default production, POSIX đầy đủ, từng được chứng nhận PSE52 hồi khoảng 2008, và ASIL-D đến qua QNX OS for Safety. Linux và AGL thì POSIX-conformant nhưng chưa được chứng nhận chính thức, dùng cho dev và bản QM. Nhóm capable-class còn có Green Hills INTEGRITY, PikeOS và VxWorks."
 
 **Bên không đỡ được (~15 giây):**
-"Bên không đỡ được AP là tất cả những gì có task model: FreeRTOS, README của chính nó nói một app POSIX 'cannot be ported... using only this wrapper'; SAFERTOS thì không có POSIX, nó ship một lớp OSEK; Zephyr và NuttX là các RTOS lớp MCU; và AUTOSAR OS gốc OSEK, vốn là OS của Classic."
+"Bên không đỡ được AP là tất cả những gì có task model: FreeRTOS, README của chính nó nói một app POSIX 'cannot be ported... using only this wrapper'; SAFERTOS thì không có POSIX, nó là một static safety RTOS, chỉ một image tĩnh duy nhất; Zephyr và NuttX là các RTOS lớp MCU; và AUTOSAR OS, vốn là kernel real-time tĩnh của Classic."
 
 **Chốt, một câu test (~5 giây):**
 "Test chỉ một câu: OS này có nói PSE51 và có chạy được process cô lập bằng MMU không? Cả hai đều có thì mới đỡ được AP."
@@ -227,7 +227,7 @@
 "Đây là repo đầu tiên trong ba repo đáng đọc, một stack Classic Platform viết bằng C. Nó là Arctic Core, một stack basic-software đầy đủ của một vendor. README của nó tự mô tả: 'Arctic Core is an open-source implementation of the AUTOSAR (Automotive Open System Architecture) standard, designed for the development of automotive Electronic Control Units (ECUs).'"
 
 **Cấu trúc cây thư mục (~26 giây):**
-"Nhìn cây thư mục. Thư mục core/communication chứa chuỗi giao tiếp: Com, PduR tức PDU router, CanIf tức CAN interface, CanTp tức transport protocol, và SoAd, kèm luôn một stack TCP/IP nhẹ là lwip-2.0.3. Thư mục core/system chứa OS kernel gốc OSEK cùng các service hệ thống EcuM, BswM, SchM. Thư mục core/diagnostic chứa ba module UDS là Dem, Dcm, Det. Các module tự đóng dấu AUTOSAR 4.0.3 trong release macro, ví dụ Com.h đặt COM_AR_RELEASE thành 4/0/3. Phần hỗ trợ phần cứng rất rộng, các port MCU nằm dưới core/mcal/arch."
+"Nhìn cây thư mục. Thư mục core/communication chứa chuỗi giao tiếp: Com, PduR tức PDU router, CanIf tức CAN interface, CanTp tức transport protocol, và SoAd, kèm luôn một stack TCP/IP nhẹ là lwip-2.0.3. Thư mục core/system chứa OS kernel real-time tĩnh cùng các service hệ thống EcuM, BswM, SchM. Thư mục core/diagnostic chứa ba module UDS là Dem, Dcm, Det. Các module tự đóng dấu AUTOSAR 4.0.3 trong release macro, ví dụ Com.h đặt COM_AR_RELEASE thành 4/0/3. Phần hỗ trợ phần cứng rất rộng, các port MCU nằm dưới core/mcal/arch."
 
 **Phần trung thực, cảnh báo provenance (~22 giây):**
 "Giờ tới phần trung thực, phải nói thẳng. Đây là một bản re-upload ẩn danh, người dùng GitHub tên Fang717, của một snapshot vendor thời thương mại, Arctic Core phiên bản 21.0.0. Nó không có lịch sử phát triển thật. Toàn bộ 8.481 file mã nguồn được thêm trong đúng một commit 'Initial commit' hồi tháng Sáu năm 2024, và không có commit nào sau đó động vào code. README nói GPL-2.0, nhưng không có file LICENSE ở gốc, GitHub API báo không có license, còn header từng file lại mang một notice kép: hoặc là commercial ArcCore license, hoặc là GPL version 2. Bản thân code cũng cũ. Copyright từng file ghi năm 2013 và 2014, nên dù nhãn là 21.0.0 và upload năm 2024, đây vẫn là code thời AUTOSAR 4.0.3."
@@ -267,7 +267,7 @@
 "Repo thứ hai là autoas trên as, một stack Classic rất khác. Chỗ Arctic Core là bản re-upload ẩn danh của một snapshot thương mại, thì cái này được viết từ đầu bởi đúng một người, là một stack basic-software Classic AUTOSAR 4.4, chủ yếu bằng C, các module nằm dưới infras. README của tác giả nói thẳng: 'This project is only free to be used for evaluation and study purpose, all of the BSWs are developed by me alone according to AUTOSAR 4.4.'"
 
 **Phạm vi và tooling (~33 giây):**
-"Phạm vi khá rộng: chuỗi communication gồm Com, PduR, CanIf, CanTp, và cả SomeIp lẫn Sd tức service discovery, LinIf; phần diagnostic gồm Dcm, Dem, Det; các memory service NvM, Fee, Ea; crypto là Csm; các driver MCAL như Can, Dio, Fls, Lin, Port; và một OS kernel kiểu OSEK với task, alarm, counter, resource nằm dưới infras/system/kernel/os. Khác với một stack trần, cái này còn có tooling desktop đi kèm. tools/generator là bộ sinh cấu hình bằng Python cho từng module, kiểu Com.py, Dcm.py, CanTp.py và chừng bốn chục cái nữa. tools/asone là một công cụ đồ họa QT cho Com, Dcm và flash loader. Nó còn có một bootloader và các trình mô phỏng bus CAN hoặc LIN qua socket IP. Cả cây build bằng SCons."
+"Phạm vi khá rộng: chuỗi communication gồm Com, PduR, CanIf, CanTp, và cả SomeIp lẫn Sd tức service discovery, LinIf; phần diagnostic gồm Dcm, Dem, Det; các memory service NvM, Fee, Ea; crypto là Csm; các driver MCAL như Can, Dio, Fls, Lin, Port; và một OS kernel real-time tĩnh với task, alarm, counter, resource nằm dưới infras/system/kernel/os. Khác với một stack trần, cái này còn có tooling desktop đi kèm. tools/generator là bộ sinh cấu hình bằng Python cho từng module, kiểu Com.py, Dcm.py, CanTp.py và chừng bốn chục cái nữa. tools/asone là một công cụ đồ họa QT cho Com, Dcm và flash loader. Nó còn có một bootloader và các trình mô phỏng bus CAN hoặc LIN qua socket IP. Cả cây build bằng SCons."
 
 **Phần trung thực, license mâu thuẫn (~16 giây):**
 "Phần cần nói thẳng. Đây là dự án của một người. Lịch sử chỉ có một maintainer, và README nói các module 'developed by me alone'. Cái nhãn AUTOSAR 4.4 là tuyên bố của tác giả, không phải kết quả được kiểm chứng hay chứng nhận, nên hãy coi là AUTOSAR-style chứ không phải compliant. License cũng tự mâu thuẫn bên trong. File LICENSE khai dual GPLv3 hoặc commercial, trong khi README lại giới hạn chỉ cho evaluation và study, còn GitHub thì báo license là 'Other'. Một số nhánh vẫn còn dở dang."
@@ -287,7 +287,7 @@
 "Cùng ý tưởng, nhưng ở stack viết từ đầu. Hàm đầu vẫn là Com_SendSignal, nhưng viết độc lập. Vì là một dịch vụ AUTOSAR public, nó trả về Std_ReturnType, tức hợp đồng chuẩn E_OK hoặc E_NOT_OK, và nó đặt biến ret thành lỗi trước, cụ thể là E_NOT_OK, để người gọi thấy lỗi trừ khi cú gửi thật sự thành công. Ba dòng DET_VALIDATE là các development-error guard của Classic, cả ba gắn service id của COM là 0x0A. Chúng lần lượt loại module chưa init, qua điều kiện NULL khác COM_CONFIG trả COM_E_UNINIT; loại signal id vượt phạm vi, qua SignalId nhỏ hơn COM_CONFIG->numOfSignals trả COM_E_PARAM; và loại con trỏ dữ liệu NULL, trả COM_E_PARAM_POINTER. Vướng cái nào là return sớm cái đó. Rồi signal được tra theo index từ một bảng cấu hình chỉ đọc được sinh ra, là COM_CONFIG->SignalConfigs. Lại đúng cái pattern hướng cấu hình."
 
 **Lát cắt priority-ceiling trong GetResource (~35 giây):**
-"Đoạn thứ hai là một lát cắt bên trong hàm GetResource của OS kernel, và nó chính là priority-ceiling protocol. Khi nhận một resource, priority của task đang chạy được nâng lên tới cái ceiling được cấu hình static của resource đó: nếu RunningVar->priority nhỏ hơn ResourceConstArray[ResID].ceilPrio thì gán priority bằng ceilPrio. Đây là cách OSEK ngăn priority inversion và deadlock mà không hề block lúc runtime. Priority cũ và resource đang giữ trước đó được lưu lại trước, qua prevPrio và prevRes, để các cặp resource lồng nhau tháo ra như một ngăn xếp, đúng kiểu last-in first-out. Cả đoạn cập nhật này chạy bên trong EnterCritical và ExitCritical với interrupt bị mask, vì nó thay đổi trạng thái scheduler dùng chung, và nó chỉ áp dụng trong ngữ cảnh task, qua điều kiện TCL_TASK bằng CallLevel, chứ không trong một interrupt handler."
+"Đoạn thứ hai là một lát cắt bên trong hàm GetResource của OS kernel, và nó chính là priority-ceiling protocol. Khi nhận một resource, priority của task đang chạy được nâng lên tới cái ceiling được cấu hình static của resource đó: nếu RunningVar->priority nhỏ hơn ResourceConstArray[ResID].ceilPrio thì gán priority bằng ceilPrio. Đây là cách kernel ngăn priority inversion và deadlock mà không hề block lúc runtime. Priority cũ và resource đang giữ trước đó được lưu lại trước, qua prevPrio và prevRes, để các cặp resource lồng nhau tháo ra như một ngăn xếp, đúng kiểu last-in first-out. Cả đoạn cập nhật này chạy bên trong EnterCritical và ExitCritical với interrupt bị mask, vì nó thay đổi trạng thái scheduler dùng chung, và nó chỉ áp dụng trong ngữ cảnh task, qua điều kiện TCL_TASK bằng CallLevel, chứ không trong một interrupt handler."
 
 **Chuyển slide:**
 "Đó là hết bên Classic. Giờ sang repo thứ ba, một codebase dạy học của Adaptive."
@@ -361,7 +361,7 @@
 **Thời lượng mục tiêu: ~75 giây.** Slide bảng bảy hàng. Đọc theo cặp đối chiếu, giữ nhịp, đừng sa đà một hàng.
 
 **Mở đầu, ba hàng đầu (~28 giây):**
-"Đây là bảng phân định quan trọng nhất, gồm bảy hàng. Hàng Target: một bên là MCU deeply-embedded như Infineon AURIX, NXP S32K, Renesas RH850; bên kia là HPC SoC như NVIDIA Orin và Thor, Qualcomm, NXP S32G, Renesas R-Car. Hàng OS: một bên là AUTOSAR OS, superset của OSEK, các class SC1 tới SC4, không MMU; bên kia không phải một OS mới, mà là một OS Interface trên POSIX PSE51, chạy trên Linux, QNX hoặc PikeOS. Hàng Model: một bên fully static, C, các hàm Rte_Read/Write/Call được sinh ra, một binary; bên kia dynamic, C++14, các namespace ara::, manifest bind trễ, có discovery và start/stop lúc runtime."
+"Đây là bảng phân định quan trọng nhất, gồm bảy hàng. Hàng Target: một bên là MCU deeply-embedded như Infineon AURIX, NXP S32K, Renesas RH850; bên kia là HPC SoC như NVIDIA Orin và Thor, Qualcomm, NXP S32G, Renesas R-Car. Hàng OS: một bên là AUTOSAR OS, một kernel real-time tĩnh, các class SC1 tới SC4, không MMU; bên kia không phải một OS mới, mà là một OS Interface trên POSIX PSE51, chạy trên Linux, QNX hoặc PikeOS. Hàng Model: một bên fully static, C, các hàm Rte_Read/Write/Call được sinh ra, một binary; bên kia dynamic, C++14, các namespace ara::, manifest bind trễ, có discovery và start/stop lúc runtime."
 
 **Bốn hàng sau (~35 giây):**
 "Hàng Comms: một bên signal-oriented, COM đóng signal vào I-PDU trên CAN, LIN, FlexRay hoặc Ethernet; bên kia service-oriented, ara::com proxy/skeleton trên SOME/IP hoặc DDS. Hàng Diagnostics: một bên là DCM cộng DEM, UDS trên DoCAN hoặc DoIP; bên kia là một cluster DM tức ara::diag, vừa là UDS server vừa có SOVD, và DoIP là transport chuẩn hóa duy nhất, tuy cho phép transport tùy biến. Hàng Updates: một bên reflash nguyên cả ECU qua bootloader và UDS, tức 0x34, 0x36, 0x37; bên kia là UCM, cài hoặc cập nhật từng Software Cluster riêng lẻ, OTA-native. Hàng Safety: một bên ISO 26262 chín muồi lên tới ASIL D, bản đầu tiên được chứng nhận năm 2016; bên kia 'up to ASIL D' trên giấy, thực tế khó hơn, hiện ASIL-B đang ship, còn ASIL-D đang trên đường."

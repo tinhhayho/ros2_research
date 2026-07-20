@@ -170,7 +170,7 @@
     <mxCell id="sdt-leaf1-2" value="The pre-certified base: Vector MICROSAR Safe, exida ASIL D since 2016." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
       <mxGeometry x="598" y="103.5" width="340" height="15" as="geometry" />
     </mxCell>
-    <mxCell id="sdt-leaf1-3" value="&lt;b&gt;SW:&lt;/b&gt; static ARXML config, C, OSEK task model." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+    <mxCell id="sdt-leaf1-3" value="&lt;b&gt;SW:&lt;/b&gt; static ARXML config, C, fixed-priority task model." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
       <mxGeometry x="598" y="116" width="340" height="15" as="geometry" />
     </mxCell>
 
@@ -279,7 +279,7 @@
     <mxCell id="sdt-gloss2" value="System-on-Chip" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="10" y="711.5" width="940" height="14" as="geometry" />
     </mxCell>
-    <mxCell id="sdt-gloss3" value="CP = Classic Platform · AP = Adaptive Platform · ARXML = AUTOSAR XML configuration format · OSEK = the 1990s automotive RTOS standard behind CP's OS · MCAL = Microcontroller Abstraction Layer (vendor-supplied drivers) · UDS / COM /" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+    <mxCell id="sdt-gloss3" value="CP = Classic Platform · AP = Adaptive Platform · ARXML = AUTOSAR XML configuration format · MCAL = Microcontroller Abstraction Layer (vendor-supplied drivers) · UDS / COM /" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="10" y="723" width="940" height="14" as="geometry" />
     </mxCell>
     <mxCell id="sdt-gloss4" value="NvM = the diagnostics, signal and storage module families · MMU = Memory Management Unit" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
