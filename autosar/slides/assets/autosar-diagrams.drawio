@@ -1,0 +1,888 @@
+<mxfile host="app.diagrams.net" type="device" agent="hand-maintained (autosar/slides/assets/drawio-pages assembler)">
+  <diagram id="page-aracom-bindings-annotated" name="aracom-bindings-annotated">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="620" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="acb-title" value="ara::com &#8212; one API, several bindings underneath" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="18" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Layer 1: Adaptive Application -->
+    <mxCell id="acb-app" value="&lt;b&gt;Adaptive Application&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;codes against proxies (client-side) and skeletons (server-side)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=14;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="66" width="600" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-arrow-app-api" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="480" y="124" as="sourcePoint" /><mxPoint x="480" y="134" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- Layer 2: ara::com API line -->
+    <mxCell id="acb-api" value="ara::com &#8212; one application communication API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f9dc9;strokeColor=#5f82b8;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="136" width="600" height="34" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-arrow-api-bind" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="480" y="170" as="sourcePoint" /><mxPoint x="480" y="180" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- Layer 3: binding layer -->
+    <mxCell id="acb-bind" value="&lt;b&gt;Language binding (C++) + Communication binding&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;compiled into the app binary &#183; integrator picks the wire binding in the deployment manifest&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="182" width="600" height="46" as="geometry" />
+    </mxCell>
+
+    <!-- Grouping labels -->
+    <mxCell id="acb-group-std" value="the three standardized ara::com bindings" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=9.5;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="238" width="446" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-group-impl" value="implementation-level" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=9.5;fontStyle=1;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="642" y="238" width="138" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Arrows binding -> columns -->
+    <mxCell id="acb-arrow-col-a" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="249" y="228" as="sourcePoint" /><mxPoint x="249" y="264" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-arrow-col-b" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="403" y="228" as="sourcePoint" /><mxPoint x="403" y="264" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-arrow-col-c" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="557" y="228" as="sourcePoint" /><mxPoint x="557" y="264" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-arrow-col-d" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;dashed=1;dashPattern=6 4;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="711" y="228" as="sourcePoint" /><mxPoint x="711" y="264" as="targetPoint" /></mxGeometry></mxCell>
+
+    <!-- Column A: SOME/IP over TCP/IP over Ethernet -->
+    <mxCell id="acb-someip" value="&lt;b&gt;SOME/IP&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;+ SOME/IP-SD discovery&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="266" width="138" height="44" as="geometry" /></mxCell>
+    <mxCell id="acb-arrow-someip-tcp" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="249" y="310" as="sourcePoint" /><mxPoint x="249" y="320" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-tcpip" value="UDP/TCP &#183; IP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="322" width="138" height="34" as="geometry" /></mxCell>
+    <mxCell id="acb-arrow-tcp-eth" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="249" y="356" as="sourcePoint" /><mxPoint x="249" y="366" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-ethernet" value="Ethernet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=11.5;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="180" y="368" width="138" height="34" as="geometry" /></mxCell>
+
+    <!-- Column B: DDS -->
+    <mxCell id="acb-dds" value="&lt;b&gt;DDS&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;data-centric &#8212;&lt;br&gt;Topic + type + QoS&lt;br&gt;&lt;br&gt;QoS is manifest-driven&lt;br&gt;&lt;br&gt;&lt;i&gt;present since R18-03&lt;/i&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="334" y="266" width="138" height="136" as="geometry" /></mxCell>
+
+    <!-- Column C: Signal-Based -->
+    <mxCell id="acb-signal" value="&lt;b&gt;Signal-Based&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;signal-oriented&lt;br&gt;wire binding&lt;br&gt;&lt;br&gt;&lt;i&gt;standardized binding&lt;/i&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="488" y="266" width="138" height="136" as="geometry" /></mxCell>
+
+    <!-- Column D: local IPC -->
+    <mxCell id="acb-ipc" value="&lt;b&gt;local IPC&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;intra-machine only&lt;br&gt;implementation-specific,&lt;br&gt;not an inter-vendor&lt;br&gt;protocol&lt;br&gt;&lt;br&gt;&lt;i&gt;e.g. Eclipse iceoryx (zero-copy)&lt;/i&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=12;fontColor=#555555;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="642" y="266" width="138" height="136" as="geometry" /></mxCell>
+
+    <!-- Callout a -->
+    <mxCell id="acb-ca-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="170" y="150" as="sourcePoint" /><mxPoint x="180" y="153" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-ca-box" value="Your application&lt;br&gt;code never changes.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;The API is protocol-agnostic.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="14" y="118" width="156" height="72" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-ca-badge" value="a" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="24" y="128" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Callout b -->
+    <mxCell id="acb-cb-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="790" y="205" as="sourcePoint" /><mxPoint x="780" y="205" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="acb-cb-box" value="The transport swaps&lt;br&gt;here, per deployment&lt;br&gt;manifest.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;No recompile of the app logic.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="790" y="170" width="156" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-cb-badge" value="b" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=12;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="800" y="180" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Bottom takeaway -->
+    <mxCell id="acb-takeaway" value="The application API is protocol-agnostic; the binding is swappable underneath &#8212;&lt;br&gt;exactly like ROS 2's rmw / DDS layering." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="180" y="430" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote / gloss -->
+    <mxCell id="acb-gloss1" value="ara::com = the Adaptive communication-management API &#183; proxy = client-side stub &#183; skeleton = server-side stub &#183; SOME/IP = Scalable service-Oriented MiddlewarE over IP" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="554" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-gloss2" value="SD = Service Discovery &#183; DDS = Data Distribution Service &#183; QoS = Quality of Service &#183; IPC = Inter-Process Communication &#183; manifest = the deployment config that fixes the binding" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="568" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="acb-source" value="Redrawn and annotated after AUTOSAR AP_SWS_CommunicationManagement, R25-11, Fig. 7.1 &#8212; original unmodified figure in the full deck and autosar/specs/." style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#777777;" vertex="1" parent="1">
+      <mxGeometry x="20" y="588" width="920" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page-autosar-timeline" name="autosar-timeline">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="620" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="atl-title" value="AUTOSAR at a glance &#8212; three release lines that merged into one" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontColor=#1b2b4a;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="30" y="20" width="900" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Founding column (left) -->
+    <mxCell id="atl-founding-header" value="Founding 2002&#8211;2003" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#444444;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="10" y="50" width="188" height="17" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-founding-box1" value="&lt;b&gt;2002 &#8212; founding discussions&lt;/b&gt;&lt;br&gt;&amp; kick-off workshop&lt;br&gt;BMW &#183; Bosch &#183; Continental &#183;&lt;br&gt;DaimlerChrysler &#183; VW;&lt;br&gt;Siemens VDO soon after" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=8;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="10" y="68" width="188" height="68" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-founding-box2" value="Jul 2003 &#8212; Initial Development&lt;br&gt;Agreement signed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=8;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="10" y="142" width="188" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-founding-box3" value="Sep 2003 &#8212; public debut, VDI&lt;br&gt;Conference, Baden-Baden" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.2;fontSize=8;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="10" y="184" width="188" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- Swimlane: Classic -->
+    <mxCell id="atl-classic-lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="200" y="70" width="440" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-classic-chip" value="&lt;b&gt;Classic&lt;/b&gt;&lt;br&gt;Platform (CP)&lt;br&gt;&lt;i&gt;from 2005&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f9dc9;strokeColor=#5f82b8;strokeWidth=1.2;fontSize=9.5;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="204" y="74" width="92" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-cp-10" value="&lt;b&gt;1.0&lt;/b&gt;&lt;br&gt;May 2005&lt;br&gt;first CP release" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="304" y="80" width="76" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-cp-40" value="&lt;b&gt;4.0&lt;/b&gt;&lt;br&gt;Dec 2009" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="388" y="80" width="76" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-cp-421" value="&lt;b&gt;4.2.1&lt;/b&gt;&lt;br&gt;Oct 2014&lt;br&gt;SOME/IP Xf std." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="472" y="80" width="76" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-cp-440" value="&lt;b&gt;4.4.0&lt;/b&gt;&lt;br&gt;Oct 2018&lt;br&gt;last CP before the unified line" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="556" y="80" width="76" height="48" as="geometry" />
+    </mxCell>
+
+    <!-- Swimlane: Foundation -->
+    <mxCell id="atl-fo-lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECF6EC;strokeColor=#8FBF8F;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="200" y="142" width="440" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-fo-chip" value="&lt;b&gt;Foundation&lt;/b&gt;&lt;br&gt;(FO)&lt;br&gt;&lt;i&gt;from 2016&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8FBF8F;strokeColor=#6fa06f;strokeWidth=1.2;fontSize=9.5;fontColor=#1f3d1f;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="204" y="146" width="92" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-fo-r100" value="&lt;b&gt;R1.0.0 &#8212; Nov 2016&lt;/b&gt;&lt;br&gt;first Foundation;&lt;br&gt;carries shared meta-model/schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=8;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="390" y="150" width="118" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-fo-151" value="&lt;b&gt;1.5.1 &#8212; Mar 2019&lt;/b&gt;&lt;br&gt;last FO before the unified line" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=9;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="516" y="150" width="118" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- Swimlane: Adaptive -->
+    <mxCell id="atl-ap-lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDF1E6;strokeColor=#E0A96D;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="200" y="208" width="440" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-ap-chip" value="&lt;b&gt;Adaptive&lt;/b&gt;&lt;br&gt;Platform (AP)&lt;br&gt;&lt;i&gt;from 2017&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0A96D;strokeColor=#c98a4f;strokeWidth=1.2;fontSize=9.5;fontColor=#5a3d22;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="204" y="212" width="92" height="56" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-ap-1703" value="&lt;b&gt;17-03 &#8212; Mar 2017&lt;/b&gt;&lt;br&gt;first AP release" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=9;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="306" y="214" width="102" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-ap-1803" value="&lt;b&gt;18-03 &#8212; Mar 2018&lt;/b&gt;&lt;br&gt;DDS network binding&lt;br&gt;&lt;i&gt;(not 18-10)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=8;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="416" y="214" width="102" height="50" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-ap-1903" value="&lt;b&gt;19-03 &#8212; Mar 2019&lt;/b&gt;&lt;br&gt;last AP before the unified line" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=9;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="526" y="214" width="102" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- Convergence arrows to R19-11 -->
+    <mxCell id="atl-arrow-cp" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="640" y="102" as="sourcePoint" />
+        <mxPoint x="672" y="150" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="atl-arrow-fo" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="640" y="171" as="sourcePoint" />
+        <mxPoint x="672" y="174" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="atl-arrow-ap" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.8;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="640" y="240" as="sourcePoint" />
+        <mxPoint x="672" y="200" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- R19-11 unification node -->
+    <mxCell id="atl-r1911-box" value="&lt;b&gt;R19-11 &#8212; Nov 2019&lt;/b&gt;&lt;br&gt;&lt;b&gt;&lt;font color=&quot;#5b3a8a&quot;&gt;UNIFICATION&lt;/font&gt;&lt;/b&gt;&lt;br&gt;one naming R{yy}-11 &#183; one&lt;br&gt;November cadence &#183; one&lt;br&gt;AUTOSAR_000nn schema&lt;br&gt;across CP + AP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E4E4EE;strokeColor=#6b6f8f;strokeWidth=2;fontSize=9.5;fontColor=#2b2f55;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="674" y="116" width="238" height="116" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-r1911-note" value="CP internal version never reset &#8212; R25-11 is internally R4.11.0,&lt;br&gt;so &quot;AUTOSAR 4.x&quot; is still alive" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="643" y="239" width="300" height="29" as="geometry" />
+    </mxCell>
+
+    <!-- Elbow connector to unified track -->
+    <mxCell id="atl-elbow" style="endArrow=classic;html=1;rounded=0;strokeColor=#6b6f8f;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="880" y="232" as="sourcePoint" />
+        <mxPoint x="60" y="338" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="880" y="290" />
+          <mxPoint x="60" y="290" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="atl-merged-note" value="the single merged release line &#8212; continues every November &#8595;" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="260" y="273" width="360" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- Unified bottom track -->
+    <mxCell id="atl-unified-lane" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E2E2EA;strokeColor=#9a9fb0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="48" y="340" width="852" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-label" value="&lt;b&gt;unified R{yy}-11 line &#8212;&lt;/b&gt;&lt;br&gt;one release + one schema, every November" style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="66" y="350" width="300" height="33" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2011" value="R20-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="332" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2111" value="R21-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="392" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2211" value="R22-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="452" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2311" value="R23-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="512" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-r2411" value="R24-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="572" y="360" width="48" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-unified-ellipsis" value="&#8230;" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#333333;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="626" y="358" width="40" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- R25-11 end node -->
+    <mxCell id="atl-r2511-box" value="&lt;b&gt;R25-11&lt;/b&gt;&lt;br&gt;2025-11-27 &#183; internal R4.11.0&lt;br&gt;&lt;b&gt;current release&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=2;fontSize=10;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="684" y="326" width="242" height="78" as="geometry" />
+    </mxCell>
+
+    <!-- Callout tags -->
+    <mxCell id="atl-callout-leader" style="endArrow=none;html=1;rounded=0;strokeColor=#8FBF8F;strokeWidth=1.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="760" y="404" as="sourcePoint" />
+        <mxPoint x="712" y="414" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="atl-callout-dds" value="&lt;b&gt;NEW: DDS Transformer on Classic&lt;/b&gt;&lt;br&gt;&lt;i&gt;standard-level concept in R25-11 &#8212; no shipping vendor impl yet&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=9;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="498" y="414" width="428" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-callout-removed" value="&lt;b&gt;CP removed Fls &#183; Eep &#183; TTCAN &#183; LdCom&lt;/b&gt;&lt;br&gt;Fls/Eep &#8594; Mem/MemAcc &#183; LdCom absorbed into Com" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=9;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="498" y="458" width="428" height="44" as="geometry" />
+    </mxCell>
+
+    <!-- Schematic honesty note (lower left) -->
+    <mxCell id="atl-schematic-note" value="Schematic overview &#8212; milestone nodes are shown in chronological&lt;br&gt;order within each track, not on a linear time scale. The dated&lt;br&gt;labels are the load-bearing facts." style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="20" y="419" width="360" height="43" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote / gloss -->
+    <mxCell id="atl-gloss" value="One AUTOSAR standard set, published once a year each November since R19-11." style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#555555;fontStyle=2;" vertex="1" parent="1">
+      <mxGeometry x="60" y="544" width="840" height="17" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-abbrev" value="CP = Classic Platform &#183; AP = Adaptive Platform &#183; FO = Foundation &#183; SOME/IP = Scalable service-Oriented MiddlewarE over IP &#183; DDS = Data Distribution Service &#183; Xf = Transformer" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="562" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="atl-sources" value="Sources: autosar.org/about/history &#183; CP/AP Release Overviews R25-11 &#183; DDS on AP since R18-03 (rti.com) &#183; FO R1.0.0 doc date 2016-11-30 (history page: Oct 2016)" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="578" width="920" height="16" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page-cp-signal-path" name="cp-signal-path">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="620" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="csp-title" value="Classic Platform &#8212; signal &#8594; PDU &#8594; frame, frozen at build time" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="18" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Left call-out band: K-matrix -->
+    <mxCell id="csp-band-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="14" y="72" width="150" height="414" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-head" value="Statically generated&lt;br&gt;from the communication&lt;br&gt;matrix (K-matrix)" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontStyle=1;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="84" width="150" height="44" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-p1" value="Every frame/PDU, signal,&lt;br&gt;sender, receivers, byte&lt;br&gt;layout, timing &amp; encoding&lt;br&gt;are fixed at BUILD TIME." style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="133" width="150" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-p2" value="Imported from DBC / LDF /&lt;br&gt;FIBEX, carried as ARXML." style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="195" width="150" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-p3" value="A given ECU only ever&lt;br&gt;sees the PDUs configured&lt;br&gt;for it." style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="229" width="150" height="42" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-band-config" value="&#8594; configures every layer" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontStyle=2;fontColor=#6B4A2B;" vertex="1" parent="1">
+      <mxGeometry x="14" y="461" width="150" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- TX arrow (left of column) -->
+    <mxCell id="csp-tx-arrow" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="186" y="80" as="sourcePoint" />
+        <mxPoint x="186" y="440" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="csp-tx-label" value="TX" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="156" y="57" width="60" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-tx-vlabel" value="application &#8594; CAN wire" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontStyle=1;fontColor=#666666;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="103" y="251" width="150" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- RX arrow (right of column) -->
+    <mxCell id="csp-rx-arrow" style="endArrow=classic;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=2.2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="584" y="440" as="sourcePoint" />
+        <mxPoint x="584" y="80" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="csp-rx-label" value="RX (mirror)" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#5f82b8;" vertex="1" parent="1">
+      <mxGeometry x="524" y="57" width="120" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-rx-vlabel" value="CAN wire &#8594; application" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontStyle=1;fontColor=#7f9dc9;rotation=-90;" vertex="1" parent="1">
+      <mxGeometry x="521" y="251" width="150" height="18" as="geometry" />
+    </mxCell>
+
+    <!-- Main column: SW-C / RTE -->
+    <mxCell id="csp-swc-box" value="&lt;b&gt;SW-C / RTE&lt;/b&gt;&lt;br&gt;application writes a value; RTE calls Com_SendSignal()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="72" width="360" height="54" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-swc-com" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="126" as="sourcePoint" />
+        <mxPoint x="386" y="138" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Main column: COM -->
+    <mxCell id="csp-com-box" value="&lt;b&gt;COM&lt;/b&gt;&lt;br&gt;packs the signal into an I-PDU &#8212; bit position, length,&lt;br&gt;endianness, sign extension all resolved at BUILD TIME&lt;br&gt;applies TX modes (periodic / on-change) + minimum delay" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="138" width="360" height="74" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-com-pdur" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="212" as="sourcePoint" />
+        <mxPoint x="386" y="224" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- COM transformer side box -->
+    <mxCell id="csp-com-xf-line" style="endArrow=classic;html=1;rounded=0;strokeColor=#8FBF8F;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="566" y="176" as="sourcePoint" />
+        <mxPoint x="606" y="176" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="csp-com-xf-box" value="&lt;b&gt;Transformer chain (inside COM)&lt;/b&gt;&lt;br&gt;E2E protection &#8212; CRC + counter + Data ID&lt;br&gt;SecOC &#8212; MAC + freshness (no encryption)&lt;br&gt;SomeIpXf &#8212; SOME/IP serialization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.5;fontSize=11;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="606" y="132" width="340" height="88" as="geometry" />
+    </mxCell>
+
+    <!-- Main column: PduR -->
+    <mxCell id="csp-pdur-box" value="&lt;b&gt;PduR &#8212; PDU Router&lt;/b&gt;&lt;br&gt;static routing table forwards the I-PDU to CanIf&lt;br&gt;(or to CanTp first if large); also bus-to-bus gateway routing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="224" width="360" height="58" as="geometry" />
+    </mxCell>
+
+    <!-- CanTp conditional side box (dashed) -->
+    <mxCell id="csp-cantp-line" style="endArrow=classic;html=1;rounded=0;strokeColor=#7f9dc9;strokeWidth=1.5;dashed=1;dashPattern=6 4;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="566" y="254" as="sourcePoint" />
+        <mxPoint x="606" y="254" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="csp-cantp-box" value="&lt;b&gt;CanTp &#8212; only if PDU &gt; one frame&lt;/b&gt;&lt;br&gt;segments into First Frame / Consecutive Frames&lt;br&gt;with flow control (ISO 15765-2)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;dashed=1;dashPattern=6 4;fontSize=11;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="606" y="228" width="340" height="64" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-pdur-canif" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="282" as="sourcePoint" />
+        <mxPoint x="386" y="294" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Main column: CanIf -->
+    <mxCell id="csp-canif-box" value="&lt;b&gt;CanIf &#8212; ECU Abstraction&lt;/b&gt;&lt;br&gt;maps the abstract PDU to a hardware transmit handle /&lt;br&gt;mailbox; manages controller &amp; PDU mode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="296" width="360" height="58" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-canif-candrv" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="354" as="sourcePoint" />
+        <mxPoint x="386" y="366" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Main column: CanDrv -->
+    <mxCell id="csp-candrv-box" value="&lt;b&gt;CanDrv &#8212; MCAL&lt;/b&gt;&lt;br&gt;writes the CAN / CAN FD frame; transmit confirmation&lt;br&gt;propagates back up (CanIf &#8594; PduR &#8594; COM &#8594; RTE)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;fontSize=12.5;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="366" width="360" height="60" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-arrow-candrv-bus" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2;" edge="1" parent="1">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <mxPoint x="386" y="426" as="sourcePoint" />
+        <mxPoint x="386" y="444" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Bus bar -->
+    <mxCell id="csp-bus-box" value="CAN / CAN FD bus" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=12.5;fontStyle=1;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="206" y="446" width="360" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- RX note -->
+    <mxCell id="csp-rx-note-box" value="&lt;b&gt;RX mirrors TX (wire &#8594; application)&lt;/b&gt;&lt;br&gt;CanDrv ISR &#8594; CanIf indication &#8594; PduR &#8594;&lt;br&gt;(CanTp reassembly) &#8594; COM unpacks bytes into&lt;br&gt;signals + reception deadline monitoring &#8594;&lt;br&gt;RTE delivers to the SW-C" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;fontSize=10.5;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="606" y="322" width="340" height="118" as="geometry" />
+    </mxCell>
+
+    <!-- Footnote / gloss -->
+    <mxCell id="csp-foot1" value="SW-C = Software Component &#183; RTE = Runtime Environment &#183; COM = signal-packing module &#183; I-PDU = Interaction-layer Protocol Data Unit &#183; PduR = PDU Router &#183; CanTp = CAN Transport Layer" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="549" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-foot2" value="CanIf = CAN Interface &#183; MCAL = Microcontroller Abstraction Layer &#183; E2E = End-to-End protection &#183; SecOC = Secure Onboard Communication &#183; SomeIpXf = SOME/IP Transformer" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="565" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="csp-foot3" value="Synthesized from the AUTOSAR CP SWS documents: COM &#183; PduR &#183; CanTp &#183; CanIf" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="583" width="920" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page-stack-decision-tree" name="stack-decision-tree">
+<mxGraphModel dx="1000" dy="820" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="804" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="sdt-title" value="Which stack? Two questions, six outcomes" style="text;html=1;align=center;verticalAlign=middle;fontSize=25;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="80" y="15" width="800" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Connectors (drawn first) ===================== -->
+    <!-- Q1 -> Q2a (deeply-embedded MCU) -->
+    <mxCell id="sdt-e-q1-q2a" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="341.2" as="sourcePoint" />
+        <mxPoint x="252" y="221.4" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="191" y="221.4" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q1 -> Q2b (HPC SoC) -->
+    <mxCell id="sdt-e-q1-q2b" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="130" y="357.2" as="sourcePoint" />
+        <mxPoint x="252" y="477" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="191" y="477" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2a -> Leaf1 (ASIL A-D, sold to an OEM) -->
+    <mxCell id="sdt-e-q2a-l1" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="209.7" as="sourcePoint" />
+        <mxPoint x="586" y="101.5" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="544" y="101.5" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2a -> fork stem (ASIL A-D, your own product) -->
+    <mxCell id="sdt-e-q2a-fork" style="endArrow=none;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="221.4" as="sourcePoint" />
+        <mxPoint x="548" y="221.4" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+    <!-- fork -> Leaf2 (Buy Classic anyway) -->
+    <mxCell id="sdt-e-fork-l2" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="548" y="221.4" as="sourcePoint" />
+        <mxPoint x="586" y="177.2" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="576" y="177.2" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- fork -> Leaf3 (Certified non-AUTOSAR RTOS) -->
+    <mxCell id="sdt-e-fork-l3" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="548" y="221.4" as="sourcePoint" />
+        <mxPoint x="586" y="259.2" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="576" y="259.2" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2a -> Leaf4 (QM, no safety rating) -->
+    <mxCell id="sdt-e-q2a-l4" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="233.1" as="sourcePoint" />
+        <mxPoint x="586" y="341.2" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="544" y="341.2" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2b -> Leaf5 (yes -> Buy an AP stack) -->
+    <mxCell id="sdt-e-q2b-l5" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="465.5" as="sourcePoint" />
+        <mxPoint x="586" y="436" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="544" y="436" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Q2b -> Leaf6 (no -> S-CORE or build your own) -->
+    <mxCell id="sdt-e-q2b-l6" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=1.6;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="432" y="488.5" as="sourcePoint" />
+        <mxPoint x="586" y="518" as="targetPoint" />
+        <Array as="points">
+          <mxPoint x="544" y="518" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <!-- Fork dot -->
+    <mxCell id="sdt-fork-dot" value="" style="ellipse;html=1;fillColor=#444444;strokeColor=none;" vertex="1" parent="1">
+      <mxGeometry x="544.8" y="218.2" width="6.4" height="6.4" as="geometry" />
+    </mxCell>
+    <!-- Dashed tie-line: Q2b HPC region -> HPC ASIL note -->
+    <mxCell id="sdt-e-hpc-note" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <mxPoint x="185" y="481" as="sourcePoint" />
+        <mxPoint x="106" y="573.5" as="targetPoint" />
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ===================== Q1 root (purple decision) ===================== -->
+    <mxCell id="sdt-q1" value="Q1: Where does this&lt;br&gt;function run?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="10" y="326.7" width="120" height="45" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Q2a (purple decision, MCU side) ===================== -->
+    <mxCell id="sdt-q2a" value="Q2: What safety level (ASIL)&lt;br&gt;must this ECU carry, and who is&lt;br&gt;the customer?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="252" y="192.1" width="180" height="58.5" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Q2b (purple decision, HPC side) ===================== -->
+    <mxCell id="sdt-q2b" value="Q2: Do you need standardized&lt;br&gt;service endpoints and supplier&lt;br&gt;interop (ara::com, DM/SOVD,&lt;br&gt;UCM)?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="252" y="441" width="180" height="72" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Level-1 edge labels ===================== -->
+    <mxCell id="sdt-l1a-head" value="deeply-embedded MCU" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="116" y="187" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-l1a-gloss" value="no MMU, task-model RTOS:&lt;br&gt;AURIX / S32K / S32Z / RH850" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="116" y="199" width="150" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-l1b-head" value="HPC SoC" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+      <mxGeometry x="116" y="443" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-l1b-gloss" value="MMU, A-class cores:&lt;br&gt;Orin / Thor / S32G / R-Car" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="116" y="455" width="150" height="26" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Level-2 edge labels (answers, purple) ===================== -->
+    <mxCell id="sdt-a1" value="ASIL A-D, sold to an OEM" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="87" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a2-head" value="ASIL A-D, your own product" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="207" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a2-gloss" value="both are valid;&lt;br&gt;choose by team" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="221" width="150" height="26" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a3" value="QM, no safety rating" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="327" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a4" value="yes" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="421" width="150" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-a5" value="no" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="434" y="503" width="150" height="14" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 1: Buy Classic (CP), pre-certified ===================== -->
+    <mxCell id="sdt-leaf1-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="66" width="358" height="71" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf1-h" value="Buy Classic (CP), pre-certified" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="72" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf1-1" value="In practice this path is forced: OEM RFQs demand AUTOSAR plus ASIL evidence." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="91" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf1-2" value="The pre-certified base: Vector MICROSAR Safe, exida ASIL D since 2016." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="103.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf1-3" value="&lt;b&gt;SW:&lt;/b&gt; static ARXML config, C, OSEK task model." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="116" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 2: Buy Classic (CP) anyway ===================== -->
+    <mxCell id="sdt-leaf2-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="148" width="358" height="58.5" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf2-h" value="Buy Classic (CP) anyway" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="154" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf2-1" value="Nothing forces it, but it is the low-risk default." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="173" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf2-2" value="You get a certified base, vendor MCAL drivers, and solved UDS / COM / NvM modules." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="185.5" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 3: Certified non-AUTOSAR RTOS ===================== -->
+    <mxCell id="sdt-leaf3-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="217.5" width="358" height="83.5" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-h" value="Certified non-AUTOSAR RTOS, your own safety case" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="223.5" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-1" value="A certified RTOS exists outside AUTOSAR: SAFERTOS, TÜV SÜD, ISO 26262 ASIL D." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="242.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-2" value="You carry the whole ISO 26262 safety case. Rivian ships this way: in-house layers on" style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="255" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-3" value="FreeRTOS." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="267.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf3-4" value="UDS, COM and NvM are not included. Build or buy them separately." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="280" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 4: QM: free choice ===================== -->
+    <mxCell id="sdt-leaf4-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="312" width="358" height="58.5" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf4-h" value="QM: free choice" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="318" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf4-1" value="No certificate is needed here." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="337" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf4-2" value="Bare-metal, any RTOS, or CP if its ready-made modules save time." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="349.5" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 5: Buy an AP stack ===================== -->
+    <mxCell id="sdt-leaf5-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="400.5" width="358" height="71" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf5-h" value="Buy an AP stack" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="406.5" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf5-1" value="&lt;b&gt;HW:&lt;/b&gt; an MMU multi-process SoC, required by [SWS_OSI_01010]." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="425.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf5-2" value="&lt;b&gt;SW:&lt;/b&gt; a POSIX OS (QNX or Linux) plus PSE51 and the C++ STL, per [RS_OSI_00100]." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="438" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf5-3" value="Still yours: the OS, the hypervisor and the ASIL-D safety case." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="450.5" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Leaf 6: S-CORE or build your own ===================== -->
+    <mxCell id="sdt-leaf6-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCE9F7;strokeColor=#7f9dc9;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="586" y="482.5" width="358" height="71" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf6-h" value="S-CORE or build your own" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="488.5" width="340" height="18" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf6-1" value="&lt;b&gt;SW:&lt;/b&gt; Linux or QNX plus open or in-house middleware (Tesla, Rivian)." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="507.5" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf6-2" value="S-CORE is an open core stack, not an AP implementation. You integrate and certify." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="520" width="340" height="15" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-leaf6-3" value="You re-implement every wire contract and own ISO 26262." style="text;html=1;align=left;verticalAlign=middle;fontSize=8.5;fontColor=#223344;" vertex="1" parent="1">
+      <mxGeometry x="598" y="532.5" width="340" height="15" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== HPC ASIL note (purple call-out) ===================== -->
+    <mxCell id="sdt-hpc-note-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;" vertex="1" parent="1">
+      <mxGeometry x="16" y="573.5" width="322" height="55.5" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-hpc-note-1" value="The HPC's ASIL story lives outside the middleware: in the certified OS" style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="26" y="583.5" width="306" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-hpc-note-2" value="(QNX), the hypervisor, the safety island and the companion MCU. That&lt;br&gt;companion MCU runs CP." style="text;html=1;align=left;verticalAlign=middle;fontSize=9;fontColor=#4A2E6B;" vertex="1" parent="1">
+      <mxGeometry x="26" y="597" width="306" height="26" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Bottom takeaway (orange, full width) ===================== -->
+    <mxCell id="sdt-bottom" value="Every outcome meets the same fleet contracts: UDS/DoIP (de-facto; CARB mandates OBDonUDS from MY2027), UN R155/R156, eCall, SOVD. Telemetry is always an&lt;br&gt;OEM/cloud choice." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=11;fontStyle=1;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="12" y="649" width="936" height="46" as="geometry" />
+    </mxCell>
+
+    <!-- ===================== Gloss footnotes (gray) ===================== -->
+    <mxCell id="sdt-gloss1" value="ASIL = Automotive Safety Integrity Level (ISO 26262; QM &lt; A &lt; B &lt; C &lt; D) · QM = Quality Managed, no safety rating · RFQ = request for quotation · OEM = the vehicle maker · MCU = microcontroller · HPC = High-Performance Computer · SoC =" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="700" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss2" value="System-on-Chip" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="711.5" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss3" value="CP = Classic Platform · AP = Adaptive Platform · ARXML = AUTOSAR XML configuration format · OSEK = the 1990s automotive RTOS standard behind CP's OS · MCAL = Microcontroller Abstraction Layer (vendor-supplied drivers) · UDS / COM /" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="723" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss4" value="NvM = the diagnostics, signal and storage module families · MMU = Memory Management Unit" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="734.5" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss5" value="PSE51 = IEEE 1003.13 minimal POSIX profile · STL = C++ Standard Library · ara::com / DM / UCM = AP communication / diagnostics / update clusters · SOVD = Service-Oriented Vehicle Diagnostics (ISO 17978) · S-CORE = Eclipse Safe Open" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="746" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss6" value="Vehicle Core · exida / TÜV SÜD = safety certification bodies" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="757.5" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss7" value="UDS = Unified Diagnostic Services (ISO 14229) · DoIP = Diagnostics over IP (ISO 13400) · OBDonUDS = SAE J1979-2, the US emissions standard rebuilt on UDS · MY = model year · R155/R156 = UN cyber-security / software-update" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="769" width="940" height="14" as="geometry" />
+    </mxCell>
+    <mxCell id="sdt-gloss8" value="management-system regulations" style="text;html=1;align=center;verticalAlign=middle;fontSize=8.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="10" y="780.5" width="940" height="14" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+  <diagram id="page-vfb-relocation-annotated" name="vfb-relocation-annotated">
+<mxGraphModel dx="1000" dy="700" grid="0" page="1" pageScale="1" pageWidth="960" pageHeight="620" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- Title -->
+    <mxCell id="vra-title" value="The relocation trick &#8212; one SWC, any ECU, only the RTE is regenerated" style="text;html=1;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#1b2b4a;" vertex="1" parent="1">
+      <mxGeometry x="60" y="18" width="840" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- Top band section label -->
+    <mxCell id="vra-designtime" value="Design time &#8212; logical, no ECU chosen yet" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="140" y="51" width="400" height="16" as="geometry" />
+    </mxCell>
+
+    <!-- SWC boxes -->
+    <mxCell id="vra-swc1" value="&lt;b&gt;SWC 1&lt;/b&gt;&lt;br&gt;ports (SR &#183; CS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="44" y="72" width="130" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-swc2" value="&lt;b&gt;SWC 2&lt;/b&gt;&lt;br&gt;ports (SR &#183; CS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="190" y="72" width="130" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-swc3" value="&lt;b&gt;SWC 3&lt;/b&gt;&lt;br&gt;ports (SR &#183; CS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="336" y="72" width="130" height="52" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-swc-ellipsis" value="&#8230;" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="471" y="94" width="30" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-swcn" value="&lt;b&gt;SWC n&lt;/b&gt;&lt;br&gt;ports (SR &#183; CS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.5;fontSize=13;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="506" y="72" width="130" height="52" as="geometry" />
+    </mxCell>
+
+    <!-- Ports on the VFB bar -->
+    <mxCell id="vra-port1a" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="85" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port1b" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="103" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port1c" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="121" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port2a" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="231" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port2b" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="249" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port2c" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="267" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port3a" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="377" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port3b" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="395" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-port3c" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="413" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-portna" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="547" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-portnb" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="565" y="126" width="12" height="12" as="geometry" /></mxCell>
+    <mxCell id="vra-portnc" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=#5f82b8;strokeWidth=1.2;" vertex="1" parent="1"><mxGeometry x="583" y="126" width="12" height="12" as="geometry" /></mxCell>
+
+    <!-- VFB bar -->
+    <mxCell id="vra-vfb" value="Virtual Functional Bus (VFB) &#8212; a logical bus spanning ECUs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7f9dc9;strokeColor=#5f82b8;strokeWidth=1.5;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="138" width="600" height="34" as="geometry" />
+    </mxCell>
+
+    <!-- Arrow VFB -> tool -->
+    <mxCell id="vra-arrow-vfb-tool" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="340" y="172" as="sourcePoint" /><mxPoint x="340" y="206" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- ARXML doc icon -->
+    <mxCell id="vra-arxml" value="&lt;b&gt;ARXML&lt;/b&gt;&lt;br&gt;descriptions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.3;fontSize=9.5;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="40" y="212" width="94" height="48" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-arrow-arxml-tool" style="endArrow=classic;html=1;rounded=0;strokeColor=#E0A96D;strokeWidth=1.5;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="134" y="236" as="sourcePoint" /><mxPoint x="150" y="236" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- Tool box -->
+    <mxCell id="vra-tool" value="&lt;b&gt;AUTOSAR tooling&lt;/b&gt;&lt;br&gt;reads ARXML descriptions &#183; generates the RTE per deployment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D5;strokeColor=#E0A96D;strokeWidth=1.5;fontSize=13;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+      <mxGeometry x="150" y="208" width="380" height="56" as="geometry" />
+    </mxCell>
+
+    <!-- Bottom band section label -->
+    <mxCell id="vra-deploytime" value="Deploy time &#8212; same SWCs mapped onto real ECUs" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#444444;" vertex="1" parent="1">
+      <mxGeometry x="140" y="272" width="400" height="16" as="geometry" />
+    </mxCell>
+    <!-- Arrow tool -> ECUs -->
+    <mxCell id="vra-arrow-tool-ecu" style="endArrow=classic;html=1;rounded=0;strokeColor=#444444;strokeWidth=2.2;" edge="1" parent="1">
+      <mxGeometry relative="1" as="geometry"><mxPoint x="340" y="286" as="sourcePoint" /><mxPoint x="340" y="298" as="targetPoint" /></mxGeometry>
+    </mxCell>
+
+    <!-- ECU I -->
+    <mxCell id="vra-ecu1-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="40" y="300" width="178" height="152" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-hdr" value="ECU I" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1"><mxGeometry x="52" y="310" width="80" height="18" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-swc1" value="SWC 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.3;fontSize=11;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="50" y="326" width="78" height="52" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-swc2" value="SWC 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.3;fontSize=11;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="132" y="326" width="78" height="52" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-rte" value="RTE (generated)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.3;fontSize=10.5;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="50" y="384" width="160" height="24" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu1-bsw" value="Basic Software (BSW)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.3;fontSize=10;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="50" y="412" width="160" height="32" as="geometry" /></mxCell>
+
+    <!-- ECU II -->
+    <mxCell id="vra-ecu2-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="232" y="300" width="178" height="152" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu2-hdr" value="ECU II" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1"><mxGeometry x="244" y="310" width="80" height="18" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu2-swc3" value="SWC 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.3;fontSize=11;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="250" y="326" width="142" height="52" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu2-rte" value="RTE (generated)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.3;fontSize=10.5;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="250" y="384" width="142" height="24" as="geometry" /></mxCell>
+    <mxCell id="vra-ecu2-bsw" value="Basic Software (BSW)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.3;fontSize=10;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="250" y="412" width="142" height="32" as="geometry" /></mxCell>
+
+    <mxCell id="vra-ecu-ellipsis" value="&#8230;" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#444444;" vertex="1" parent="1"><mxGeometry x="420" y="372" width="30" height="20" as="geometry" /></mxCell>
+
+    <!-- ECU n -->
+    <mxCell id="vra-ecun-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F4F4F4;strokeColor=#B0B0B0;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="460" y="300" width="178" height="152" as="geometry" /></mxCell>
+    <mxCell id="vra-ecun-hdr" value="ECU n" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1"><mxGeometry x="472" y="310" width="80" height="18" as="geometry" /></mxCell>
+    <mxCell id="vra-ecun-swcn" value="SWC n" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#9BBCE0;strokeWidth=1.3;fontSize=11;fontStyle=1;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="478" y="326" width="142" height="52" as="geometry" /></mxCell>
+    <mxCell id="vra-ecun-rte" value="RTE (generated)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DFF0D8;strokeColor=#8FBF8F;strokeWidth=1.3;fontSize=10.5;fontStyle=1;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="478" y="384" width="142" height="24" as="geometry" /></mxCell>
+    <mxCell id="vra-ecun-bsw" value="Basic Software (BSW)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECECEC;strokeColor=#B0B0B0;strokeWidth=1.3;fontSize=10;fontColor=#333333;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="478" y="412" width="142" height="32" as="geometry" /></mxCell>
+
+    <!-- Bus line joining the ECUs -->
+    <mxCell id="vra-bus-stub1" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="89" y="444" as="sourcePoint" /><mxPoint x="89" y="470" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-bus-stub2" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="321" y="444" as="sourcePoint" /><mxPoint x="321" y="470" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-bus-stub3" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=1.6;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="549" y="444" as="sourcePoint" /><mxPoint x="549" y="470" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-bus-line" style="endArrow=none;html=1;rounded=0;strokeColor=#333333;strokeWidth=2.2;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="70" y="470" as="sourcePoint" /><mxPoint x="610" y="470" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-bus-node1" value="" style="ellipse;html=1;fillColor=#333333;strokeColor=#333333;" vertex="1" parent="1"><mxGeometry x="85" y="466" width="8" height="8" as="geometry" /></mxCell>
+    <mxCell id="vra-bus-node2" value="" style="ellipse;html=1;fillColor=#333333;strokeColor=#333333;" vertex="1" parent="1"><mxGeometry x="317" y="466" width="8" height="8" as="geometry" /></mxCell>
+    <mxCell id="vra-bus-node3" value="" style="ellipse;html=1;fillColor=#333333;strokeColor=#333333;" vertex="1" parent="1"><mxGeometry x="545" y="466" width="8" height="8" as="geometry" /></mxCell>
+    <mxCell id="vra-bus-label" value="vehicle network &#8212; CAN &#183; FlexRay &#183; Ethernet" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#333333;" vertex="1" parent="1"><mxGeometry x="200" y="478" width="280" height="16" as="geometry" /></mxCell>
+
+    <!-- Callout 1 -->
+    <mxCell id="vra-c1-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="660" y="150" as="sourcePoint" /><mxPoint x="642" y="156" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-c1-box" value="Develop every SWC against the&lt;br&gt;virtual bus &#8212; no ECU decided yet.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Code references only ports and Rte_*&lt;br&gt;symbols, never a bus or a driver.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;spacingLeft=24;" vertex="1" parent="1">
+      <mxGeometry x="660" y="74" width="286" height="92" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-c1-badge" value="1" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="670" y="84" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Callout 2 -->
+    <mxCell id="vra-c2-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="660" y="240" as="sourcePoint" /><mxPoint x="532" y="236" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-c2-box" value="The tool maps SWCs to ECUs&lt;br&gt;from the ARXML descriptions.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Deployment is a late-binding config decision.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;spacingLeft=24;" vertex="1" parent="1">
+      <mxGeometry x="660" y="206" width="286" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-c2-badge" value="2" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="670" y="216" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Callout 3 -->
+    <mxCell id="vra-c3-line" style="endArrow=none;html=1;rounded=0;strokeColor=#9B7FC0;strokeWidth=1.4;dashed=1;dashPattern=5 3;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="660" y="388" as="sourcePoint" /><mxPoint x="640" y="382" as="targetPoint" /></mxGeometry></mxCell>
+    <mxCell id="vra-c3-box" value="Same unchanged SWCs, new&lt;br&gt;ECU layout &#8212; only the generated&lt;br&gt;RTE differs.&lt;br&gt;&lt;span style=&quot;font-weight:normal&quot;&gt;Moving a SWC changes only what the RTE&lt;br&gt;generator emits &#8212; no code changes.&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFE7F7;strokeColor=#9B7FC0;strokeWidth=1.5;fontSize=10.5;fontStyle=1;fontColor=#4A2E6B;align=center;verticalAlign=middle;spacingLeft=24;" vertex="1" parent="1">
+      <mxGeometry x="660" y="330" width="286" height="104" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-c3-badge" value="3" style="ellipse;html=1;fillColor=#6E4A9E;strokeColor=none;fontSize=13;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="670" y="340" width="24" height="24" as="geometry" /></mxCell>
+
+    <!-- Footnote / gloss -->
+    <mxCell id="vra-gloss" value="SWC = Software Component &#183; VFB = Virtual Functional Bus &#183; RTE = Runtime Environment &#183; BSW = Basic Software &#183; ARXML = AUTOSAR XML &#183; SR = sender-receiver &#183; CS = client-server" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+      <mxGeometry x="20" y="554" width="920" height="16" as="geometry" />
+    </mxCell>
+    <mxCell id="vra-source" value="Redrawn and annotated after AUTOSAR CP_TR_VFB, R25-11, Fig. 2.2 &#8212; original unmodified figure in the full deck and autosar/specs/." style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#777777;" vertex="1" parent="1">
+      <mxGeometry x="20" y="574" width="920" height="16" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+  </diagram>
+</mxfile>

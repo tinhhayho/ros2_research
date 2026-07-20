@@ -19,7 +19,7 @@ new names.
 ## Why AUTOSAR exists
 
 AUTOSAR is a worldwide development partnership, not a product. The first talks began in 2002. The
-Development Agreement was signed in July 2003. About 360 partners belong to it today. The
+Development Agreement was signed in July 2003. About 340 partners belong to it today (339 at the end of 2025). The
 specifications are free to read, and you license them to build a product.
 
 One founding-era phrase captures the model: *cooperate on standards, compete on implementation*
@@ -122,15 +122,15 @@ The following cannot host AP:
 The test is one question: does the OS support PSE51 *and* run MMU-isolated processes? If yes to both,
 it can host AP. Any task-model RTOS stays on the MCU side with Classic.
 
-## Twenty function clusters, four that matter
+## Twenty functional clusters, four that matter
 
-R25-11 defines 20 function clusters. Read the platform diagram as a map, not a checklist. Four
+R25-11 defines 20 functional clusters. Read the platform diagram as a map, not a checklist. Four
 clusters matter most for the rest of this article:
 Communication Management (`ara::com`), Execution Management (`ara::exec`), Diagnostic Management
 (`ara::diag`), and Update & Configuration Management (`ara::ucm`). The `ara::` prefix is the C++
 namespace under ARA where each cluster's API lives.
 
-<!-- suggested figure: spec-ap-architecture-logical-view - the AP logical architecture with all function clusters; AUTOSAR AP_EXP_PlatformDesign, R25-11, Figure 4.1, (c) AUTOSAR -->
+<!-- suggested figure: spec-ap-architecture-logical-view - the AP logical architecture with all functional clusters; AUTOSAR AP_EXP_PlatformDesign, R25-11, Figure 4.1, (c) AUTOSAR -->
 
 ## ara::com: one API, swappable bindings
 
@@ -147,17 +147,39 @@ System 2).
 
 ## The open-source projects
 
-Four repositories are worth your time. Together they cover both platforms: the first is a complete
-Classic stack, and the other three show pieces of the Adaptive side. All repository states were
-verified 2026-07-16.
+Three repositories are worth your time. Together they cover both platforms. The first two are open
+Classic Platform stacks written in C, and the third shows the Adaptive side. Every repository state
+below was verified on 2026-07-20, and each one is pinned to a specific commit: 7874929 for the
+first, bfe1805 for the second, and 866d158 for the third.
 
-The first is `openAUTOSAR/classic-platform` at commit 09433770, under GPL-2.0 (GNU General Public License version 2). Its README calls it a
-fork of the Arctic Core, the open-source AUTOSAR embedded platform, so it carries that lineage.
-Inside it, `system/Os/rtos/` holds the OSEK-derived OS kernel, `communication/Com/` holds the COM
-module that packs signals into I-PDUs, and `diagnostic/Dem/` holds the fault store. The `master`
-branch has not changed since 2020-04-02, so read it as a textbook, not to run it. The
-`Com_SendSignal` and `Dem_ReportErrorStatus` functions both sit in the tree with stable permalinks.
-Here is the start of the first one:
+The first is `Fang717/arccore-core-21` at commit 7874929. It is a full Classic AUTOSAR
+basic-software stack written in C, and it is the Arctic Core embedded platform, version 21.0.0. Its
+README describes it as "an open-source implementation of the AUTOSAR (Automotive Open System
+Architecture) standard, designed for the development of automotive Electronic Control Units (ECUs)."
+Inside it, `core/communication/` holds the communication chain: the COM signal-packing module, the
+PDU Router (PduR), the CAN Interface (CanIf), the CAN Transport Protocol (CanTp) for segmentation,
+and the Socket Adaptor (SoAd) for Ethernet, together with a bundled lwip 2.0.3 stack, which is a
+small open-source Transmission Control Protocol and Internet Protocol (TCP/IP) implementation.
+`core/system/` holds the OSEK-style operating-system kernel plus the state managers EcuM, BswM, and
+SchM, and `core/diagnostic/` holds the diagnostic modules Dem, Dcm, and Det, which are the fault
+store, the UDS server, and the development-time error tracer. The modules stamp themselves as
+AUTOSAR 4.0.3 in release macros; `Com.h`, for example, sets `COM_AR_RELEASE` to 4/0/3. Hardware
+support is broad. The microcontroller ports live under `core/mcal/arch/` (armv7_m, jacinto, mpc5xxx,
+rh850_x, stm32, tcxxx, tms570, and zynq), with matching board configurations under `core/boards/`.
+Note that `core/arch/` itself only holds a generic host target, which is a Linux simulation, plus
+CAN transceivers. Read it for the shape of a real, complete Classic stack, and read the runnable
+programs under `examples/` for the application and Runtime Environment layer above the module
+internals.
+
+There is one important caveat about what this repository actually is. It is an anonymous re-upload,
+by the GitHub user Fang717, of a commercial-era vendor snapshot. It has no genuine development
+history: all 8,481 source files were added in a single bulk "Initial commit" in June 2024, and no
+later commit touches the code. The README states GPL-2.0 (GNU General Public License version 2), but
+there is no top-level LICENSE file, the GitHub Application Programming Interface (API) reports no
+license, and the per-file headers instead carry a dual notice, either a commercial ArcCore licence
+or GPL version 2. The code is also old. The per-file copyright reads 2013 and 2014, so despite the
+21.0.0 label and the 2024 upload, it is AUTOSAR 4.0.3-era code. Here is the start of its
+`Com_SendSignal`, the service a task calls to publish an application signal:
 
 ```c
 uint8 Com_SendSignal(Com_SignalIdType SignalId, const void *SignalDataPtr) {
@@ -171,28 +193,108 @@ uint8 Com_SendSignal(Com_SignalIdType SignalId, const void *SignalDataPtr) {
     }
 ```
 
-[openAUTOSAR/classic-platform @ 09433770 — communication/Com/src/Com_Com.c#L44-L52](https://github.com/openAUTOSAR/classic-platform/blob/09433770bebb8f27a7b480d7c96d814c68ffed3e/communication/Com/src/Com_Com.c#L44-L52)
+[Fang717/arccore-core-21 @ 7874929 — core/communication/Com/src/Com_Com.c#L44-L52](https://github.com/Fang717/arccore-core-21/blob/7874929df54e45530720f15441cb3bc20479cebd/core/communication/Com/src/Com_Com.c#L44-L52)
 
-The second is `langroodi/Adaptive-AUTOSAR` at commit 866d158, under MIT. It is a teaching codebase,
-and its README says the goal is to implement the interfaces defined by the standard for educational
-purposes. It gives you seven `ara::` clusters, which are com, core, diag, exec, log, phm, and sm, in
-one readable C++ tree. The code composes the platform from an abstract SOME/IP `RpcClient` and an
-Execution Management server built on top of it. This repository is dormant, and its last source
-commit was on 2023-06-22, so you should read it to learn the structure, not to run it.
+Notice the vendor-typedef argument and return types, `Com_SignalIdType` and `uint8` rather than bare
+C types, so the module behaves the same on every microcontroller. Before it does any work, it checks
+that COM was initialized; if it was not, it reports a development-time error through the Default
+Error Tracer (DET) and returns a service-not-available code, rather than touching uninitialized
+configuration. The `/* @req COM334 */` tag links this exact line to a numbered clause in the AUTOSAR
+COM specification, and that requirement-to-code traceability runs through the whole stack.
 
-The third is Eclipse S-CORE's communication module, nicknamed LoLa, at commit 6acba35, under
-Apache-2.0. Its README describes a partial `ara::com` implementation, based on the Adaptive AUTOSAR
-Communication Management specification. But its namespace is `score::mw::com`, not `ara::com`. It
-ships a tutorial with a matching provider and consumer pair, and they follow the same skeleton and
-proxy idioms as `ara::com`. Its README states that it is ASIL-B qualified.
+The second is `autoas/as` at commit bfe1805, and it is a very different Classic stack. Where Arctic
+Core is an anonymous re-upload of a commercial snapshot, this one is written from scratch by a single
+person as a Classic AUTOSAR 4.4 basic-software stack, mostly in C, with the modules under `infras/`.
+Its README states the terms plainly: "This project is only free to be used for evaluation and study
+purpose, all of the BSWs are developed by me alone according to AUTOSAR 4.4." It covers a broad set:
+a communication stack (Com, PduR, CanIf, CanTp, plus SOME/IP, its service discovery, and a LIN
+interface), the diagnostic modules (Dcm, Dem, and Det), memory services for non-volatile storage
+(NvM, Fee, and Ea), cryptographic services, the Microcontroller Abstraction Layer (MCAL) drivers
+(Can, Dio, Fls, and more), and an OSEK-style operating-system kernel with tasks, alarms, counters,
+and resources under `infras/system/kernel/os/`. Unlike a bare stack, it also ships desktop tooling
+alongside the code that runs on the microcontroller. `tools/generator/` is a per-module Python
+configuration generator, and `tools/asone/` is a Qt graphical tool for Com, Dcm, and the flash
+loader. It also provides a bootloader and CAN or LIN bus simulators over Internet Protocol sockets,
+and the whole tree builds with the SCons build tool.
 
-The fourth is COVESA `vsomeip` at tag 3.7.4, under MPL-2.0 (Mozilla Public License). It is the SOME/IP wire binding that sits
-under `ara::com`, and it is never the `ara::com` API itself. The repository ships runnable request
-and response examples. It is the transport layer, not the Adaptive API.
+Know the limits here too. This is one person's project. The history shows a single maintainer, and
+the README says the modules were "developed by me alone." The AUTOSAR 4.4 conformance is the
+author's own claim, not a verified or certified result, so treat it as AUTOSAR-style rather than
+compliant. The licence is internally inconsistent as well: the LICENSE file declares a dual GPLv3
+(GNU General Public License version 3) or commercial grant, while the README restricts use to
+evaluation and study only, and GitHub reports the licence as "Other." Some paths are still works in
+progress. What makes this repository worth reading next to Arctic Core is that it implements the same
+public services independently. Here is its own `Com_SendSignal`:
+
+```c
+Std_ReturnType Com_SendSignal(Com_SignalIdType SignalId, const void *SignalDataPtr) {
+  Std_ReturnType ret = E_NOT_OK;
+  const Com_SignalConfigType *signal;
+
+  DET_VALIDATE(NULL != COM_CONFIG, 0x0A, COM_E_UNINIT, return E_NOT_OK);
+  DET_VALIDATE(SignalId < COM_CONFIG->numOfSignals, 0x0A, COM_E_PARAM, return E_NOT_OK);
+  DET_VALIDATE(NULL != SignalDataPtr, 0x0A, COM_E_PARAM_POINTER, return E_NOT_OK);
+
+  signal = &COM_CONFIG->SignalConfigs[SignalId];
+  ret = comSendSignal(signal, SignalDataPtr);
+
+  return ret;
+}
+```
+
+[autoas/as @ bfe1805 — infras/communication/Com/Com.c#L457-L469](https://github.com/autoas/as/blob/bfe1805f3cf61ddf0685aa981d64260bf9349cee/infras/communication/Com/Com.c#L457-L469)
+
+It is the same COM publish service you just saw in Arctic Core, written by a different author. It
+returns `Std_ReturnType`, the standard `E_OK` or `E_NOT_OK` contract, and it sets the result to
+failure first, so the caller sees an error unless the send really succeeds. The three `DET_VALIDATE`
+lines are the Classic development-error guards, all tagged with COM's service identifier 0x0A: they
+reject an uninitialized module, an out-of-range signal identifier, and a NULL data pointer. The
+signal is then fetched by index from a generated, read-only configuration table,
+`COM_CONFIG->SignalConfigs`, which is the configuration-driven pattern again. The same repository
+also lets you read the operating system underneath. Here is a slice from inside its `GetResource()`,
+the OSEK priority-ceiling protocol:
+
+```c
+  if (E_OK == ercd) {
+    if (TCL_TASK == CallLevel) {
+      EnterCritical();
+      ResourceVarArray[ResID].prevRes = RunningVar->currentResource;
+      ResourceVarArray[ResID].prevPrio = RunningVar->priority;
+      RunningVar->currentResource = ResID;
+      if (RunningVar->priority < ResourceConstArray[ResID].ceilPrio) {
+        RunningVar->priority = ResourceConstArray[ResID].ceilPrio;
+      }
+      ExitCritical();
+```
+
+[autoas/as @ bfe1805 — infras/system/kernel/os/kernel/resource.c#L74-L83](https://github.com/autoas/as/blob/bfe1805f3cf61ddf0685aa981d64260bf9349cee/infras/system/kernel/os/kernel/resource.c#L74-L83)
+
+Taking a resource raises the running task's priority up to the resource's statically configured
+ceiling, which is how OSEK prevents priority inversion and deadlock without ever blocking at runtime.
+The previous priority and the previously held resource are saved first, so nested resource pairs
+unwind like a stack, strictly last-in first-out. The whole update runs inside `EnterCritical()` and
+`ExitCritical()` with interrupts masked, because it changes shared scheduler state, and it applies
+only in task context, not in an interrupt handler.
+
+The third is `langroodi/Adaptive-AUTOSAR` at commit 866d158, under the MIT open-source license. It is
+a teaching codebase, and its README says, "The goal of this project is to implement the interfaces
+defined by the standard for educational purposes." It gives you seven `ara::` clusters, which are
+com, core, diag, exec, log, phm, and sm, in one readable C++ tree. The entry point in `src/main.cpp`
+is about fifty-five lines: it builds Execution Management, spins a polling loop, and passes in the
+manifests. The code composes the platform from an abstract SOME/IP `RpcClient` and an Execution
+Management server built on top of it. You configure and build it with CMake, using the GCC or Clang
+compiler, then run the unit tests with `ctest`, and launch the simulation by passing four `.arxml`
+manifest files to the executable. Two honest limits go with it. The demo is not offline: it needs a
+Volvo API key, an OAuth 2.0 (Open Authorization) token, and live network access to the Volvo
+Extended Vehicle REST (Representational State Transfer) web API. And the code stops at the SOME/IP
+transport level, with no generated `ara::com` Proxy or Skeleton facade above it. The repository is
+dormant, and its last source commit was on 2023-06-22, so read it to learn the structure, not to run
+it.
 
 So here is the boundary. The building blocks and the teaching code are open. A complete, conformant,
-open AP stack does not exist. The one complete official implementation, CAPI (Common Adaptive Platform Implementation), is partner-gated.
-iceoryx, Fast DDS, and CommonAPI are covered too, on the full deck's building-blocks slides.
+open AP stack does not exist. The one complete official implementation, CAPI (Common Adaptive
+Platform Implementation), is gated to AUTOSAR partners. iceoryx, Fast DDS, and CommonAPI are covered
+too, on the full deck's building-blocks slides.
 
 ## The shape of the code
 

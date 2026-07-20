@@ -38,7 +38,7 @@
     <mxCell id="atl-cp-421" value="&lt;b&gt;4.2.1&lt;/b&gt;&lt;br&gt;Oct 2014&lt;br&gt;SOME/IP Xf std." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="472" y="80" width="76" height="48" as="geometry" />
     </mxCell>
-    <mxCell id="atl-cp-440" value="&lt;b&gt;4.4.0&lt;/b&gt;&lt;br&gt;Oct 2018&lt;br&gt;last standalone CP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="atl-cp-440" value="&lt;b&gt;4.4.0&lt;/b&gt;&lt;br&gt;Oct 2018&lt;br&gt;last CP before the unified line" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7f9dc9;strokeWidth=1.2;fontSize=9;fontColor=#223344;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="556" y="80" width="76" height="48" as="geometry" />
     </mxCell>
 
@@ -49,10 +49,10 @@
     <mxCell id="atl-fo-chip" value="&lt;b&gt;Foundation&lt;/b&gt;&lt;br&gt;(FO)&lt;br&gt;&lt;i&gt;from 2016&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8FBF8F;strokeColor=#6fa06f;strokeWidth=1.2;fontSize=9.5;fontColor=#1f3d1f;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="204" y="146" width="92" height="50" as="geometry" />
     </mxCell>
-    <mxCell id="atl-fo-r100" value="&lt;b&gt;R1.0.0 &#8212; Oct 2016&lt;/b&gt;&lt;br&gt;first Foundation;&lt;br&gt;carries shared meta-model/schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=8;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="atl-fo-r100" value="&lt;b&gt;R1.0.0 &#8212; Nov 2016&lt;/b&gt;&lt;br&gt;first Foundation;&lt;br&gt;carries shared meta-model/schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=8;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="390" y="150" width="118" height="44" as="geometry" />
     </mxCell>
-    <mxCell id="atl-fo-151" value="&lt;b&gt;1.5.1 &#8212; Mar 2019&lt;/b&gt;&lt;br&gt;last standalone FO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=9;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="atl-fo-151" value="&lt;b&gt;1.5.1 &#8212; Mar 2019&lt;/b&gt;&lt;br&gt;last FO before the unified line" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#8FBF8F;strokeWidth=1.2;fontSize=9;fontColor=#2d5a2d;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="516" y="150" width="118" height="44" as="geometry" />
     </mxCell>
 
@@ -69,7 +69,7 @@
     <mxCell id="atl-ap-1803" value="&lt;b&gt;18-03 &#8212; Mar 2018&lt;/b&gt;&lt;br&gt;DDS network binding&lt;br&gt;&lt;i&gt;(not 18-10)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=8;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="416" y="214" width="102" height="50" as="geometry" />
     </mxCell>
-    <mxCell id="atl-ap-1903" value="&lt;b&gt;19-03 &#8212; Mar 2019&lt;/b&gt;&lt;br&gt;last standalone AP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=9;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
+    <mxCell id="atl-ap-1903" value="&lt;b&gt;19-03 &#8212; Mar 2019&lt;/b&gt;&lt;br&gt;last AP before the unified line" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#E0A96D;strokeWidth=1.2;fontSize=9;fontColor=#6B4A2B;align=center;verticalAlign=middle;" vertex="1" parent="1">
       <mxGeometry x="526" y="214" width="102" height="50" as="geometry" />
     </mxCell>
 
@@ -173,7 +173,7 @@
     <mxCell id="atl-abbrev" value="CP = Classic Platform &#183; AP = Adaptive Platform &#183; FO = Foundation &#183; SOME/IP = Scalable service-Oriented MiddlewarE over IP &#183; DDS = Data Distribution Service &#183; Xf = Transformer" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="20" y="562" width="920" height="16" as="geometry" />
     </mxCell>
-    <mxCell id="atl-sources" value="Sources: autosar.org/about/history &#183; CP/AP Release Overviews R25-11 &#183; DDS on AP since R18-03 (rti.com)" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
+    <mxCell id="atl-sources" value="Sources: autosar.org/about/history &#183; CP/AP Release Overviews R25-11 &#183; DDS on AP since R18-03 (rti.com) &#183; FO R1.0.0 doc date 2016-11-30 (history page: Oct 2016)" style="text;html=1;align=center;verticalAlign=middle;fontSize=9.5;fontColor=#555555;" vertex="1" parent="1">
       <mxGeometry x="20" y="578" width="920" height="16" as="geometry" />
     </mxCell>
   </root>

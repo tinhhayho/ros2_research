@@ -52,7 +52,8 @@
   <rect x="556" y="80" width="76" height="48" rx="5" fill="#ffffff" stroke="#7f9dc9" stroke-width="1.2"/>
   <text x="594" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#223344">4.4.0</text>
   <text x="594" y="111" text-anchor="middle" font-size="9" fill="#223344">Oct 2018</text>
-  <text x="594" y="123" text-anchor="middle" font-size="7" fill="#223344">last standalone CP</text>
+  <text x="594" y="119" text-anchor="middle" font-size="6" fill="#223344">last CP before</text>
+  <text x="594" y="126" text-anchor="middle" font-size="6" fill="#223344">the unified line</text>
 
   <!-- ===================== Swimlane: Foundation ===================== -->
   <rect x="200" y="142" width="440" height="58" rx="8" fill="#ECF6EC" stroke="#8FBF8F" stroke-width="1.5"/>
@@ -62,13 +63,14 @@
   <text x="250" y="192" text-anchor="middle" font-size="8.5" font-style="italic" fill="#274a27">from 2016</text>
 
   <rect x="390" y="150" width="118" height="44" rx="5" fill="#ffffff" stroke="#8FBF8F" stroke-width="1.2"/>
-  <text x="449" y="167" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">R1.0.0 — Oct 2016</text>
+  <text x="449" y="167" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">R1.0.0 — Nov 2016</text>
   <text x="449" y="180" text-anchor="middle" font-size="8" fill="#2d5a2d">first Foundation;</text>
   <text x="449" y="190" text-anchor="middle" font-size="7.5" fill="#2d5a2d">carries shared meta-model/schema</text>
 
   <rect x="516" y="150" width="118" height="44" rx="5" fill="#ffffff" stroke="#8FBF8F" stroke-width="1.2"/>
-  <text x="575" y="169" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">1.5.1 — Mar 2019</text>
-  <text x="575" y="184" text-anchor="middle" font-size="8.5" fill="#2d5a2d">last standalone FO</text>
+  <text x="575" y="167" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2d5a2d">1.5.1 — Mar 2019</text>
+  <text x="575" y="181" text-anchor="middle" font-size="8" fill="#2d5a2d">last FO before</text>
+  <text x="575" y="191" text-anchor="middle" font-size="8" fill="#2d5a2d">the unified line</text>
 
   <!-- ===================== Swimlane: Adaptive ===================== -->
   <rect x="200" y="208" width="440" height="64" rx="8" fill="#FDF1E6" stroke="#E0A96D" stroke-width="1.5"/>
@@ -87,8 +89,9 @@
   <text x="467" y="257" text-anchor="middle" font-size="7.5" font-style="italic" fill="#6B4A2B">(not 18-10)</text>
 
   <rect x="526" y="214" width="102" height="50" rx="5" fill="#ffffff" stroke="#E0A96D" stroke-width="1.2"/>
-  <text x="577" y="234" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6B4A2B">19-03 — Mar 2019</text>
-  <text x="577" y="249" text-anchor="middle" font-size="8.5" fill="#6B4A2B">last standalone AP</text>
+  <text x="577" y="232" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6B4A2B">19-03 — Mar 2019</text>
+  <text x="577" y="246" text-anchor="middle" font-size="8" fill="#6B4A2B">last AP before</text>
+  <text x="577" y="257" text-anchor="middle" font-size="8" fill="#6B4A2B">the unified line</text>
 
   <!-- ===================== Convergence funnel to R19-11 ===================== -->
   <line x1="640" y1="102" x2="672" y2="150" stroke="#444" stroke-width="1.8" marker-end="url(#arr)"/>
@@ -146,5 +149,5 @@
   <!-- Footnote / gloss -->
   <text x="480" y="556" text-anchor="middle" font-size="11" font-style="italic" fill="#555">One AUTOSAR standard set, published once a year each November since R19-11.</text>
   <text x="480" y="574" text-anchor="middle" font-size="9.5" fill="#555555">CP = Classic Platform · AP = Adaptive Platform · FO = Foundation · SOME/IP = Scalable service-Oriented MiddlewarE over IP · DDS = Data Distribution Service · Xf = Transformer</text>
-  <text x="480" y="590" text-anchor="middle" font-size="9.5" fill="#555555">Sources: autosar.org/about/history · CP/AP Release Overviews R25-11 · DDS on AP since R18-03 (rti.com)</text>
+  <text x="480" y="590" text-anchor="middle" font-size="9.5" fill="#555555">Sources: autosar.org/about/history · CP/AP Release Overviews R25-11 · DDS on AP since R18-03 (rti.com) · FO R1.0.0 doc date 2016-11-30 (history page: Oct 2016)</text>
 </svg>

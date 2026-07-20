@@ -43,7 +43,7 @@ reflashing — and are new to automotive software platforms. Release-stamped to
 
 1. **One org, three standards** — history, governance, the FO / CP / AP split, the release timeline
 2. **Classic Platform** — the statically-configured RTOS stack you half-know: RTE/VFB, AUTOSAR OS, ARXML, the signal path, E2E/SecOC, DCM/DEM, NvM/WdgM, functional safety
-3. **Adaptive Platform** — the POSIX/C++ service platform on the "big chip": function clusters, EM/SM, `ara::com`, SOME/IP vs DDS, UCM OTA, DM/SOVD, PHM, vendors & ASIL reality, the open-source AP landscape
+3. **Adaptive Platform** — the POSIX/C++ service platform on the "big chip": functional clusters, EM/SM, `ara::com`, SOME/IP vs DDS, UCM OTA, DM/SOVD, PHM, vendors & ASIL reality, the open-source AP landscape
 4. **Head-to-head & coexistence** — one vehicle running both, the R25-11 convergence, where ROS 2 sits, what it means for our team
 
 **Manager fast path (~10 min):** slides 3–6 (what AUTOSAR is and why) · 46–50 (which stack on which silicon: the split, coexistence, fleet, decision map)
@@ -68,8 +68,8 @@ reflashing — and are new to automotive software platforms. Release-stamped to
 ## One standard set, three members: FO · CP · AP
 
 - **The org, in one line**: a **worldwide development partnership** (founding talks 2002,
-  Development Agreement July 2003), governed top-down by ~10 **Core Partners**; **~360
-  partners today, Asia-led** (Jan 2025: Asia 174 > Europe 140 > NA 41). Jan 2026: DENSO, Huawei and
+  Development Agreement July 2003), governed top-down by ~10 **Core Partners**; **about 340
+  partners today (339 at the end of 2025), Asia-led** (status Apr 2026: Asia 164 > Europe 128 > NA 41). Jan 2026: DENSO, Huawei and
   Vector promoted to Core. Specs are **free to read, license-to-build**
 - **Foundation (FO)** — the cross-platform glue: common requirements, the **meta-model and
   single XML schema**, methodology, and shared wire protocols (SOME/IP, time-sync, DoIP, E2E,
@@ -110,7 +110,7 @@ open an SWS only when you implement. (Every filename below verified live against
 | CP comm stack (our diagram) | `CP_SWS_COM` · `CP_SWS_PDURouter` · `CP_SWS_CANTransportLayer` · `CP_SWS_CANInterface` |
 | CP diagnostics & services | `CP_SWS_DiagnosticEventManager` (DEM) · `CP_SWS_DiagnosticCommunicationManager` (DCM) · `CP_SWS_NVRAMManager` · `CP_EXP_ModeManagementGuide` · `CP_SWS_WatchdogManager` |
 | CP functional safety | `CP_EXP_FunctionalSafetyMeasures` |
-| AP function clusters | one SWS each: `AP_SWS_ExecutionManagement` · `…StateManagement` · `…CommunicationManagement` (`ara::com`, SOME/IP + DDS bindings) · `…Diagnostics` · `…UpdateAndConfigurationManagement` (+ `…VehicleUpdateAndConfigurationManagement`) · `…PlatformHealthManagement` · `…Persistency` · `…OperatingSystemInterface` (PSE51) — plus `AP_TPS_ManifestSpecification` |
+| AP functional clusters | one SWS each: `AP_SWS_ExecutionManagement` · `…StateManagement` · `…CommunicationManagement` (`ara::com`, SOME/IP + DDS bindings) · `…Diagnostics` · `…UpdateAndConfigurationManagement` (+ `…VehicleUpdateAndConfigurationManagement`) · `…PlatformHealthManagement` · `…Persistency` · `…OperatingSystemInterface` (PSE51) — plus `AP_TPS_ManifestSpecification` |
 | wire protocols (CP + AP share) | `FO_PRS_SOMEIPProtocol` · `FO_PRS_SOMEIPServiceDiscoveryProtocol` · `FO_PRS_E2EProtocol` · `FO_PRS_SecOCProtocol` · `FO_PRS_NetworkManagementProtocol` |
 | what changed this year | `CP_TR_ReleaseOverview` · `AP_TR_ReleaseOverview` |
 
@@ -482,19 +482,19 @@ open an SWS only when you implement. (Every filename below verified live against
   OS, an OS-level container or any other virtualized"* environment — AP presents a consistent view
 - AAs code against the **`ara::` C++ namespaces** — `ara::com`, `ara::exec`, `ara::core`,
   `ara::log`, `ara::crypto`, `ara::diag`, `ara::per`, `ara::phm`
-- The building-block view groups the function clusters into **seven technical categories** —
+- The building-block view groups the functional clusters into **seven technical categories** —
   Runtime, Communication, Storage, Security, Safety, Configuration, Diagnostics
 
 <div class="gloss">AA = Adaptive Application · ARA = AUTOSAR Runtime for Adaptive Applications (the `ara::` C++ API surface) · PSE51 = IEEE 1003.13's minimal single-process real-time POSIX profile · `fork`/`exec` = the POSIX process-creation calls PSE51 omits</div>
 
 ---
 
-## The R25-11 function-cluster inventory (this list changes)
+## The R25-11 functional-cluster inventory (this list changes)
 
-- R25-11 defines **20 function clusters across seven categories** — each its own SWS document.
+- R25-11 defines **20 functional clusters across seven categories** — each its own SWS document.
   **A "canonical list" must always be release-stamped:**
 
-| Category | Function clusters (R25-11) |
+| Category | Functional clusters (R25-11) |
 |---|---|
 | **Runtime (5)** | Execution Mgmt · State Mgmt · Log & Trace · Core · OS Interface (PSE51) |
 | **Communication (5)** | Communication Mgmt (`ara::com`) · Raw Data Stream · Network Mgmt · Time Sync · Automotive API Gateway *(R24-11)* |
@@ -511,13 +511,13 @@ open an SWS only when you implement. (Every filename below verified live against
 
 ---
 
-## The AP function clusters — as the spec draws it
+## The AP functional clusters — as the spec draws it
 
 {{image:spec-ap-architecture-logical-view}}
 
 <div class="figsrc">Source: AUTOSAR AP_EXP_PlatformDesign, R25-11, Figure 4.1 — © AUTOSAR.</div>
 
-<div class="gloss">AP = Adaptive Platform · each 'ara::…' box is one Function Cluster (FC) · PSE51 = the minimal single-process real-time POSIX profile exposed by the OS Interface · C++ STL = C++ Standard Template Library (each cluster's full name is printed above its ara:: namespace)</div>
+<div class="gloss">AP = Adaptive Platform · each 'ara::…' box is one Functional Cluster (FC) · PSE51 = the minimal single-process real-time POSIX profile exposed by the OS Interface · C++ STL = C++ Standard Template Library (each cluster's full name is printed above its ara:: namespace)</div>
 
 ---
 
@@ -539,7 +539,7 @@ open an SWS only when you implement. (Every filename below verified live against
 - **Five manifest kinds**: **Execution** (per-executable), **Service Instance** (service→transport
   mapping), **Machine** (the machine with no apps), **Raw Data Stream**, **Software Distribution**
 
-<div class="gloss">EM = Execution Management · SM = State Management · FC = Function Cluster · Function Group = a named set of processes with states · Manifest = ARXML authored at integration time, read at startup · systemd = the Linux service manager (the tempting-but-wrong analogy)</div>
+<div class="gloss">EM = Execution Management · SM = State Management · FC = Functional Cluster · Function Group = a named set of processes with states · Manifest = ARXML authored at integration time, read at startup · systemd = the Linux service manager (the tempting-but-wrong analogy)</div>
 
 ---
 
@@ -1555,7 +1555,7 @@ The org-boundary rule scales up to four buildable paths:
 - **FFI** — Freedom From Interference: ISO 26262 spatial/temporal isolation between mixed-ASIL software
 - **AA** — Adaptive Application: a POSIX process (C++, PSE51) linked against ARA
 - **EM / SM** — Execution Management (starts/stops processes — the enforcer) / State Management (decides which run — the brain)
-- **Function Group / Function Cluster** — AP's unit of composition (a set of processes with states) / a platform building block (`ara::…`)
+- **Function Group / Functional Cluster** — AP's unit of composition (a set of processes with states) / a platform building block (`ara::…`)
 - **Manifest** — ARXML deployment config (Execution / Service-Instance / Machine / Raw-Data-Stream / Software-Distribution)
 - **`ara::com`** — the one AP communication API (proxy/skeleton), bound to SOME/IP or DDS in the manifest
 - **event / trigger / method / field** — the four `ara::com` service-element kinds (trigger = a data-less event)

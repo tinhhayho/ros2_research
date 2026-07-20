@@ -13,7 +13,7 @@ tags:
 A colleague on my team — firmware, CAN, an RTOS, bare-metal reflashing, and
 zero automotive-platform-software experience — cornered me after a slide review.
 Every diagram of the AUTOSAR Adaptive Platform (AP) looks the same: boxes labelled
-`ara::com`, `ara::exec`, Execution Management, function clusters. "Fine," they said, "but
+`ara::com`, `ara::exec`, Execution Management, functional clusters. "Fine," they said, "but
 show me the *code*. What can I actually clone and read?"
 
 That is a fair and surprisingly awkward question, so I spent a research day on it.
