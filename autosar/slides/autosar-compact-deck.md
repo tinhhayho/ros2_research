@@ -781,6 +781,27 @@ This is the whole deck in one procurement table. It shows what runs where, and w
 
 ---
 
+## UDS (ISO 14229): one language, two transports, two platforms
+
+<style scoped>
+  section { font-size: 20px; padding-top: 14px; }
+  img { display:block; margin: 4px auto 6px; max-height: 288px; width:auto; }
+  li { margin-bottom: 4px; }
+  .gloss { font-size: 11.5px; margin-top: 6px; line-height: 1.28; }
+</style>
+
+{{diagram:uds-diag-stack}}
+
+- **UDS is the request and response diagnostic language.** It is defined by ISO 14229-1, and both AUTOSAR platforms speak it. A workshop tester, or a fleet backend reaching in through a gateway, sends the same service bytes to any target.
+- **The same service bytes ride two transports.** DoCAN carries them with CanTp (ISO 15765-2) over CAN or CAN FD. DoIP (ISO 13400) carries them over automotive Ethernet.
+- **Diagnostics have two platform homes.** On Classic the DCM dispatches the services and the DEM stores the DTCs. On Adaptive the Diagnostic Manager (ara::diag) serves DoIP only, with one diagnostic server per Software Cluster. So `22 F1 90` reads the VIN on a small body ECU over CAN or on a central computer over Ethernet.
+
+<div class="gloss">UDS = Unified Diagnostic Services · ISO 14229 = the standard that defines the UDS services · DoCAN = Diagnostics over CAN (ISO 15765-2) · DoIP = Diagnostics over IP (ISO 13400) · CanTp = the CAN transport-protocol module (ISO 15765-2 segmentation) · DID = Data Identifier (a numeric address for one data item, for example 0xF190 = VIN) · DTC = Diagnostic Trouble Code (a stored fault code) · DCM = Diagnostic Communication Manager (Classic's UDS server) · DEM = Diagnostic Event Manager (Classic's fault store) · NvM = the Non-volatile Memory manager (keeps fault codes across power cycles) · DM = Diagnostic Manager (Adaptive's diagnostic functional cluster) · ara::diag = the Adaptive C++ API of the Diagnostic Manager · VIN = Vehicle Identification Number · SWC = Software Component (Classic) · ECU = Electronic Control Unit</div>
+
+<!-- ~70s | say: UDS is one diagnostic language, and both AUTOSAR platforms speak it. It is a request and response protocol, defined by ISO 14229. A workshop tester, or a fleet backend reaching in through a gateway, sends the same service bytes to any target. Those same bytes ride two transports. DoCAN carries them over CAN, using the CanTp transport. DoIP carries them over automotive Ethernet. The platform underneath decides who answers. On Classic the DCM dispatches the services and the DEM stores the fault codes. On Adaptive the Diagnostic Manager, ara::diag, serves DoIP only, with one diagnostic server per Software Cluster. The point to remember is that two two, F one ninety, reads the VIN on a small body ECU over CAN or on a central computer over Ethernet, using the very same bytes. -->
+
+---
+
 ## Fleet and diagnostics in one picture
 
 <style scoped>
@@ -796,6 +817,27 @@ This is the whole deck in one procurement table. It shows what runs where, and w
 <div class="gloss">DoCAN = Diagnostics over CAN (ISO 15765-2) — the CanTp transport shown in the diagram · SOME/IP = Scalable service-Oriented MiddlewarE over IP</div>
 
 <!-- ~75s | say: Here is fleet and diagnostics in one picture. Outside the car, the backend speaks SOVD, which is REST and JSON over HTTPS, plus MQTT telemetry. It never uses raw UDS. The entry point is the TCU. Inside, the central gateway is a DoIP router plus firewall. It routes DoIP and UDS on the backbone. It re-transports DoIP to DoCAN down to the Classic branches. Raw UDS is never exposed to the internet. -->
+
+---
+
+## Fleet standards: robots vs cars
+
+<style scoped>
+  section { font-size: 20px; padding-top: 14px; }
+  img { display:block; margin: 4px auto 6px; max-height: 288px; width:auto; }
+  li { margin-bottom: 4px; }
+  .gloss { font-size: 11.5px; margin-top: 6px; line-height: 1.28; }
+</style>
+
+{{diagram:fleet-standards-map}}
+
+- **Robots standardized fleet orchestration.** VDA 5050 is the wire protocol between a fleet manager and mobile robots, Open-RMF is the coordinator above it, and MassRobotics covers cross-fleet state sharing. Cars leave dispatch operator-proprietary, with no cross-maker standard.
+- **Cars standardized diagnostics, updates and the platform.** UDS (ISO 14229), SOVD (ISO 17978), UCM and AUTOSAR all come from the car world. Robots leave these to ROS 2 conventions and vendor tooling.
+- **Each side built the standard the other one skipped.** And the two industries share one gap: neither has a UDS-DID-style way to discover, in a semantic form, what a machine can actually sense and do.
+
+<div class="gloss">VDA 5050 = the standard fleet-manager-to-robot wire protocol (MQTT and JSON) · AMR = Autonomous Mobile Robot · AGV = Automated Guided Vehicle · Open-RMF = the Open Robotics Middleware Framework fleet coordinator · SOVD = Service-Oriented Vehicle Diagnostics · ISO 17978 = the standard that defines SOVD · UDS = Unified Diagnostic Services (ISO 14229) · UCM = AUTOSAR Update and Configuration Management · OTA = over-the-air software update · ISO 3691-4 = the safety standard for driverless industrial trucks · ISO 26262 = the road-vehicle functional-safety standard · ASIL = Automotive Safety Integrity Level (QM < A < B < C < D, ISO 26262) · DID = UDS Data Identifier (a numeric address for one data item)</div>
+
+<!-- ~70s | say: This is the bridge back to the robotics world you come from. Read it as an asymmetry, not a scoreboard. Robots standardized fleet orchestration. VDA 5050 is the wire protocol between a fleet manager and mobile robots, Open-RMF is the coordinator above it, and MassRobotics covers cross-fleet state sharing. Cars leave that dispatch layer operator-proprietary, with no cross-maker standard. Cars standardized the other half, which is diagnostics, over-the-air updates and the platform itself, with UDS, SOVD, UCM and AUTOSAR. Robots leave those to ROS 2 conventions and vendor tooling. So each side built the standard the other one skipped. And here is the gap they share. Neither side has a UDS data-identifier style dictionary for semantic capability and sensor discovery, a standard way to ask what a machine can actually sense and do. -->
 
 ---
 
